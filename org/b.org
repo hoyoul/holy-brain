@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       9982E3C1-236F-4532-A8A9-6DE033DA6F9B
+:END:
+#+TITLE: b
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: 2023-04-25
+* b
+[[file:a.org][a파일]]
+
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec
+hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam
+nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis
+natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non
+turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum
+accumsan nisl.
+

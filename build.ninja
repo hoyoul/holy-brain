@@ -1,0 +1,16 @@
+
+rule org2md
+  command = emacsclient -ne "(holy/publish_md \"$in\")"
+  description = org2md $in
+    
+build content/about-these-notes.md: org2md /Users/holy/MyProjects/holy-brain/org/about-these-notes.org
+
+build content/a.md: org2md /Users/holy/MyProjects/holy-brain/org/a.org
+
+build content/hello-again.md: org2md /Users/holy/MyProjects/holy-brain/org/hello-again.org
+
+build content/c.md: org2md /Users/holy/MyProjects/holy-brain/org/c.org
+
+build content/b.md: org2md /Users/holy/MyProjects/holy-brain/org/b.org
+
+build content/temp.md: org2md /Users/holy/MyProjects/holy-brain/org/temp.org

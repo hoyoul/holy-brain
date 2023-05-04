@@ -1,0 +1,16 @@
+{{ define "main" }}
+
+<div class="container">
+    <div class="page">
+      <div class="content">
+      <a href="{{ .Permalink}}" alt="list" class="permalink"><h1>List pages</h1></a>      
+      <p>Here are all {{ len .Site.AllPages }} notes that exist at the moment:</p>
+      <ul>
+	{{ range where .Site.RegularPages "Section" "eq" "posts" }}
+	<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+	{{ end }}
+      </ul>
+      </div>
+    </div>
+</div>
+{{ end }}

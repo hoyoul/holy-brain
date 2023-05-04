@@ -1,0 +1,20 @@
+#+TITLE: this is image test
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: 2023-04-25
+* this is image test
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec
+hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam
+nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis
+natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non
+turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum
+accumsan nisl.
+
+#+CAPTION: this is image
+#+NAME: this is image
+#+attr_html: :width 200px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[./images/mylogo.png]]
+

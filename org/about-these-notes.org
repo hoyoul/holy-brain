@@ -1,0 +1,14 @@
+#+TITLE: About these notes
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: 2023-04-25
+
+Hey, I'm [[https://frege2godel.me][holy frege]] and these are my notes.
+
+I try to collect my knowledge and I'm adding new notes almost every day.
+
+Check out the [[/index][Index]] with all notes, alternatively here's a small selection of good entrypoints:
+
+The source of this wiki is available on GitHub: [[https://github.com/hoyoul/holy-brain][holy-brain]] If
+you want a personal wiki like this but don't know how to build it, let
+me know, I'll happily help you find a solution: [[mailto:hoyoul.park@gamil.com][hoyoul.park@gmail.com]]

@@ -1,0 +1,7 @@
+#+TITLE: pdf test
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: 2023-04-25
+* pdf test
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+[[file:~/MyProjects/holy-brain/static/pdfs/test_img.pdf][pdf파일]]
