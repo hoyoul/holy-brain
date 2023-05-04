@@ -9,5 +9,5 @@
 <link rel="shortcut icon" href="./images/favicon.ico" type="image/x-icon">
 <link rel="icon" href="./images/favicon.ico" type="image/x-icon">    
 <!-- css -->
-{{ $main := resources.Get "css/main.css" | resources.Minify | resources.Fingerprint }}
-<link rel="stylesheet" href="{{ $main.Permalink }}"/>
+<link rel="stylesheet" href="{{ "css/main.css" | relURL }}">
+
