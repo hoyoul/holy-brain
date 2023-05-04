@@ -2,7 +2,7 @@
 title = "pdf test"
 author = ["holy"]
 date = 2023-04-25
-lastmod = 2023-05-04T16:08:55+09:00
+lastmod = 2023-05-04T16:24:28+09:00
 draft = false
 +++
 
