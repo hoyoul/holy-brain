@@ -12,16 +12,22 @@ function unStackPages(column) {
 }
 
 
+function updateBreadCrums() {
+  links = Array.prototype.slice.call(document.querySelectorAll("a"));
+  links.forEach(function (e) {
+      if (rendered_pages.indexOf(e.getAttribute("href")) > -1) {
+	  if (e.getAttribute("href") != "/")
+	      e.classList.add("active");
+      } else {
+	  e.classList.remove("active");
+      }
+  });
+}
+
 function renderPageWhenClick(href, column){
-    // if (rendered_pages.indexOf(href) > -1){
-    // 	alert("이미 보여진 page에요");
-    // 	return;
-    // }    
     column = Number(column) || rendered_pages.length;
-    // alert("현재 page의 column은?");
-    // alert(column);
     const request = new Request(href);
-     fetch(request)
+    fetch(request)
 	.then((response) => response.text())
 	.then((text) => {
 	    let container = document.querySelector(".container");
@@ -36,7 +42,8 @@ function renderPageWhenClick(href, column){
 		function(element,column){
 		    element.dataset.column = column + 1;
 		    rendered_pages.push(href);	    
-		    addLinksToHandlerFromPage(element,element.dataset.column)
+		    addLinksToHandlerFromPage(element,element.dataset.column);
+		    updateBreadCrums();	    	    		    
 		    element.scrollIntoView({behavior: "smooth"});		    
 		}.bind(null,element,column),
 		10
@@ -64,7 +71,8 @@ function addLinksToHandlerFromPage(page,column) {
 			e.preventDefault();
 			renderPageWhenClick(element.getAttribute("href"),page.dataset.column)
 		    }
-		});		
+		});
+	    // updateBreadCrums();	    	    
 	    }
 	}});
 };
