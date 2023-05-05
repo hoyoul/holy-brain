@@ -6,7 +6,7 @@
 Hey, I'm [[https://frege2godel.me][holy frege]] and these are my notes.
 
 I try to collect my knowledge and I'm adding new notes almost every day.
-
+1
 Check out the [[/index][Index]] with all notes, alternatively here's a small selection of good entrypoints:
 
 The source of this wiki is available on GitHub: [[https://github.com/hoyoul/holy-brain][holy-brain]] If
