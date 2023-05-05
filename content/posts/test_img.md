@@ -2,7 +2,6 @@
 title = "this is image test"
 author = ["holy"]
 date = 2023-04-25
-lastmod = 2023-05-04T16:53:18+09:00
 draft = false
 +++
 

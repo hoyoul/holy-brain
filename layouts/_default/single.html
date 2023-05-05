@@ -1,11 +1,11 @@
 {{define "main"}}
 <div class="container">
-  <div class="page">
-    <div class="content">
-      <a href="{{ .Permalink}}" alt="{{ .Title }}" class="permalink"><h1>{{ .Title }}</h1></a>      
-      {{ .Content }}      
+    <div class="page">
+      <div class="content">
+	<a href="{{ .Permalink}}" alt="{{ .Title }}" class="permalink"><h1>{{ .Title }}</h1></a>      
+	{{ .Content }}      
+      </div>
+      {{ partial "backlinks.html" . }}
     </div>
-    {{ partial "backlinks.html" . }}
-  </div>
-</div>
+</div>  
 {{end}}

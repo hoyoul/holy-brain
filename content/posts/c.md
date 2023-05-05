@@ -2,7 +2,6 @@
 title = "c"
 author = ["holy"]
 date = 2023-04-25
-lastmod = 2023-05-04T16:53:16+09:00
 draft = false
 +++
 
