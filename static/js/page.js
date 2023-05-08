@@ -1,5 +1,35 @@
 let rendered_pages = [];
 
+function updateCollapsedState() {
+  const pages = document.querySelectorAll('.page');
+  const width = pages[0].offsetWidth;
+  const titleWidth = 40; // px
+
+  for (let i = 0; i < pages.length; i++) {
+      const offsetWidth = (width * (i+1));
+      const collapsedWidth = pages[i].offsetLeft + titleWidth;
+      alert(i+" page's offsetLeft is" + pages[i].offsetLeft);
+      
+      if (offsetWidth < collapsedWidth) {
+	  alert('page' + i );
+	  pages[i].classList.add("collapsed");
+      }
+    //   pages[i].classList.add("collapsed");
+    //   pages[i].classList.remove("collapsing");
+    //   continue
+    // } else {
+    //   pages[i].classList.remove("collapsed");
+    // }
+
+    // if (offsetWidth < collapsedWidth + 2) {
+    //   pages[i].classList.add("collapsing");
+    // } else {
+    //   pages[i].classList.remove("collapsing");
+    // }
+  }
+}
+
+
 function unStackPages(column) {
   let container = document.querySelector(".container");
   let children = Array.prototype.slice.call(container.children);
@@ -10,7 +40,6 @@ function unStackPages(column) {
   }
   rendered_pages = rendered_pages.slice(0, column);
 }
-
 
 function updateBreadCrums() {
   links = Array.prototype.slice.call(document.querySelectorAll("a"));
@@ -37,14 +66,14 @@ function renderPageWhenClick(href, column){
 	    
 	    unStackPages(column);
 	    container.appendChild(element);
-	    
+	    // updateCollapsedState();	    
 	    setTimeout(
 		function(element,column){
 		    element.dataset.column = column + 1;
 		    rendered_pages.push(href);	    
 		    addLinksToHandlerFromPage(element,element.dataset.column);
 		    updateBreadCrums();	    	    		    
-		    element.scrollIntoView({behavior: "smooth"});		    
+		    element.scrollIntoView({behavior: "smooth"});	     
 		}.bind(null,element,column),
 		10
 	    );

@@ -1,8 +1,8 @@
 baseURL = "http://braindump.frege2godel.me/"
 # baseURL = "http://localhost:1313/"
-languageCode = "en-us"
+# languageCode = "en-us"
 title = "Holy Frege"
-hasCJKLanguage = true
+# hasCJKLanguage = true
 email = "hoyoul.park@gmail.com"
 footer = "Built with Org-mode and Hugo."
 
