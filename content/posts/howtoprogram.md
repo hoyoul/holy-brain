@@ -5,6 +5,9 @@ date = 2023-04-25
 draft = false
 +++
 
+[골드마크 참조]({{< relref "goldmark" >}})
+
+
 ## programming? {#programming}
 
 -   Programming(프로그래밍을 짠다는 것)은 여러 방법으로 설명할 수

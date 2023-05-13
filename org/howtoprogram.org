@@ -5,6 +5,8 @@
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: 2023-04-25
+[[file:goldmark.org][골드마크 참조]]
+
 * programming?
 - Programming(프로그래밍을 짠다는 것)은 여러 방법으로 설명할 수
   있다. 여기선, 내가 이해하는 practical한 의미에서의 programming을
