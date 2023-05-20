@@ -3,7 +3,7 @@
   <div class="page">
     <h1 class="collapsed-title">{{ .Title }}</h1>    
       <div class="content">
-	<a href="{{ .Permalink}}" alt="{{ .Title }}" class="permalink"><h1>{{ .Title }}</h1></a>      
+	<a href="{{ .Permalink}}" alt="{{ .Title }}" class="permalink" data-singlepage="yes" ><h1>{{ .Title }}</h1></a>      
 	{{ .Content }}      
       </div>
       {{ partial "backlinks.html" . }}
