@@ -4,8 +4,8 @@
   <div class="page">
     <h1 class="collapsed-title">List Page</h1>            
       <div class="content">
-      <a href="{{ .Permalink}}" alt="list" class="permalink"><h1>List pages</h1></a>      
-      <p>Here are all {{ len .Site.AllPages }} notes that exist at the moment:</p>
+      <a href="{{ .Permalink}}" alt="list" class="permalink"><h1>List pages</h1></a>     
+      <p>Here are all {{ len $.Site.RegularPages }} notes that exist at the moment:</p> 
       <ul>
 	{{ range where .Site.RegularPages "Section" "eq" "posts" }}
 	<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>

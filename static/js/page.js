@@ -38,22 +38,22 @@ window.addEventListener("popstate", function (event) {
 
 });
 
-function createURL(href){
-    rendered_pages.push(href);
-    const query = new URLSearchParams(window.location.search);
-    v= rendered_pages.slice(1, rendered_pages.length)
-    query.set("stackedPages", v);
-    const uri = window.location.origin + window.location.pathname + '?' + query.toString();
+// function createURL(href){
+//     rendered_pages.push(href);
+//     const query = new URLSearchParams(window.location.search);
+//     v= rendered_pages.slice(1, rendered_pages.length)
+//     query.set("stackedPages", v);
+//     const uri = window.location.origin + window.location.pathname + '?' + query.toString();
 
-}
-function pushURLHistoryStack(uri){
-    state = { page: uri };
-    window.history.pushState(state, "", uri);
-}
+// }
+// function pushURLHistoryStack(uri){
+//     state = { page: uri };
+//     window.history.pushState(state, "", uri);
+// }
 
 function pushPageToHistoryStack(flag){
-    // rendered_pages.push(href);
     const query = new URLSearchParams(window.location.search);
+    // alert("query: " + query);
     v= rendered_pages.slice(0, rendered_pages.length)
     query.set("stackedPages", v);
     const uri = window.location.origin + window.location.pathname + '?' + query.toString();
@@ -352,12 +352,27 @@ window.onload = function () {
 	// restore_url = false;
 	// rendered_pages.push(window.location.pathname);    
 	page = document.querySelector(".page");
+	title = page.querySelector(".collapsed-title");
+	// alert(title.innerText);
 	page.dataset.column = 0;
 	rendered_pages.push(window.location.pathname);
 	// alert("rendered_pages" + rendered_pages);	
 	pushPageToHistoryStack(false);
 	// checkStackHistory();
-	addHandlerLinksFromPage(page,page.dataset.column);
+	if(title.innerText == 'Root Page'){
+	    // alert("this is root page");
+	    addHandlerLinksFromPage(page,page.dataset.column);
+	}else{
+	    page.classList.remove("page");
+	    page.classList.add("newPage");
+	    var firstChild = page.querySelector('.content').firstElementChild;
+	    if (firstChild.tagName === 'A') {
+		firstChild.removeAttribute('href');
+		firstChild.onclick = function(event) {
+		    event.preventDefault();
+		};
+	    }	    
+	}
     }
 };
 
