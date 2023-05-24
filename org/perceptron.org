@@ -7,6 +7,7 @@
 #+LANGUAGE: Korean
 #+DATE: <2022-03-06 Sun>
 [[file:howtoprogram.org][test]]
+
 * (1) Perceptron
   #+CAPTION: perceptron
   #+NAME: perceptron

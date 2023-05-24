@@ -7,6 +7,6 @@
     {{- partial "header.html" . -}}
     {{- block "main" . }}{{- end }}
     {{- partial "scripts.html" . -}}
-    {{- partial "localstorage.html" . -}}    
+    {{- partial "localstorage.html" . -}}        
   </body>
 </html>

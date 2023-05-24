@@ -1,0 +1,19 @@
+<script>
+window.store = {
+   {{ range where .Site.RegularPages "Section" "eq" "posts" }}   
+    "{{ .Permalink }}": {
+        "title": "{{ .Title  }}",
+        "tags": [{{ range .Params.Tags }}"{{ . }}",{{ end }}],
+        "content": {{ .Content | plainify }}, // Strip out HTML tags
+        "url": "{{ .Permalink }}"
+    },
+    {{ end }}
+ }
+</script>
+<!-- for searching korean word added utf-8 -->
+<script src="https://unpkg.com/lunr/lunr.js" charset="utf-8"></script>
+<script src="https://unpkg.com/lunr-languages/lunr.stemmer.support.js"></script>
+<script src="https://unpkg.com/lunr-languages/lunr.ko.js"></script>
+
+{{ $searchjs :="js/search.js" }}
+<script src="{{$searchjs | relURL}}" type="text/javascript" charset="utf-8"></script>
