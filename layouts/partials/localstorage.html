@@ -11,12 +11,14 @@ window.store = {
  }
 </script>
 <!-- for searching korean word added utf-8 -->
-<script src="https://unpkg.com/lunr/lunr.js" charset="utf-8"></script>
-<script src="https://unpkg.com/lunr-languages/lunr.stemmer.support.js" charset="utf-8"></script>
-<script src="https://unpkg.com/lunr-languages/tinyseg.js" charset="utf-8"></script>
-<script src="https://unpkg.com/lunr-languages/lunr.ko.js" charset="utf-8"></script>
+{{ $lunrjs :="js/lunr.min.js" }}
+<script src="{{$lunrjs | relURL}}" type="text/javascript" charset="utf-8"></script>
 
+{{ $stemmerjs :="js/lunr.stemmer.support.js" }}
+<script src="{{$stemmerjs | relURL}}" type="text/javascript" charset="utf-8"></script>
 
+{{ $lunrkojs :="js/lunr.ko.js" }}
+<script src="{{$lunrkojs | relURL}}" type="text/javascript" charset="utf-8"></script>
 
 {{ $searchjs :="js/search.js" }}
 <script src="{{$searchjs | relURL}}" type="text/javascript" charset="utf-8"></script>

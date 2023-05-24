@@ -1,11 +1,20 @@
-{{ define "main" }}
-<div class="container">
-  <div class="page wide">
-    <ul id="results">
-      <li>
-        Enter a keyword above to search this site.
-      </li>
-    </ul>
-  </div>
-</div>
-{{ end }}
+<!DOCTYPE html>
+<html>
+  <head>
+    {{- partial "head.html" . -}}
+  </head>
+  <body>
+    {{- partial "header.html" . -}}
+    <div class="container">
+      <div class="page wide">
+	<ul id="results">
+	  <li>
+            Enter a keyword above to search this site.
+	  </li>
+	</ul>
+      </div>
+    </div>    
+    {{- partial "scripts.html" . -}}
+    {{- partial "localstorage.html" . -}}    
+  </body>
+</html>
