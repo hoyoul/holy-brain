@@ -1,7 +1,7 @@
 <form id="search"
 	  action='{{ with .GetPage "/search" }}{{.Permalink}}{{end}}' method="get">  
   <input type="text" id="search-input" name="query"
-	 placeholder="미완성">
+	 placeholder="미완성" autocomplete="on">
   <input type="submit" value="search">
 </form>
 
