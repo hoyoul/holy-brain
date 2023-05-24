@@ -1,4 +1,4 @@
-baseURL = "http://braindump.frege2godel.me/"
+baseURL = "https://braindump.frege2godel.me/"
 # baseURL = "http://localhost:1313/"
 # languageCode = "en-us"
 title = "Holy Frege"
