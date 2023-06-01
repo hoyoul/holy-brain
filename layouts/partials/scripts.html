@@ -1,3 +1,49 @@
+<script>
+ graph_objects = []; 
+
+ {{ range where .Site.RegularPages "Section" "eq" "posts" }}
+     {{ $backlinks := slice }}
+     graph_node_object = {
+     {{$currentpage := .File.BaseFileName}}   
+     "label": "{{ .Title }}",
+     "url": "{{ .Permalink }}",
+     "id": "{{ $currentpage}}",
+     {{ range where .Site.RegularPages "Section" "eq" "posts" }}
+         {{ if and (findRE ( printf "{{< relref \"%s\" >}}" $currentpage ) .RawContent) (ne $currentpage .File.BaseFileName) }}
+              {{ $backlinks = $backlinks | append .File.BaseFileName }}
+         {{end}}
+     {{end}}
+     "backlinks": {{$backlinks}}
+   }
+ sessionStorage.setItem("{{ .File.BaseFileName }}",JSON.stringify(graph_node_object)); 
+ graph_objects.push(graph_node_object);
+ {{end}}
+
+ 
+ function getNode(filename){
+   var storedObject = JSON.parse(sessionStorage.getItem(filename));
+   alert("label: " + storedObject.node_label);
+   alert("url: " + storedObject.node_url);
+   alert("backlinks: " + storedObject.backlinks);   
+ }
+ 
+ function getLinks(){
+   links = []
+   for (i = 0; i< graph_objects.length; i++)
+   {
+     let link_object;
+     gno = graph_objects[i];
+     blinks = gno.backlinks;
+     for(j=0;j< blinks.length;j++){
+       link_object = { source:gno.id, target:blinks[j]}
+       links.push(link_object);
+     }
+   }
+   return links;
+ }
+
+</script>
+
 <script src="{{ "js/URI.js" | relURL}}" type="text/javascript"></script>
 <script src="{{ "js/page.js" | relURL }}" type="text/javascript"></script>
 <!-- <script src="https://kit.fontawesome.com/83117e78c3.js" crossorigin="anonymous"></script> -->

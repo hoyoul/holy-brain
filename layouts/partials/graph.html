@@ -1,0 +1,35 @@
+<script>
+ graph_objects = []; 
+ {{ $backlinks := slice }}
+ {{ range where .Site.RegularPages "Section" "eq" "posts" }}
+ graph_node_object = { 
+       "label": "{{ .Title }}",
+       "url": "{{ .Permalink }}",
+       {{$currentpage := .FileBaseFileName}}
+       {{ range where .Site.RegularPages "Section" "eq" "posts" }}
+           {{ if and (findRE ( printf "{{< relref \"%s\" >}}" $currentpage ) .RawContent) (ne $currentpage .File.BaseFileName) }}
+              {{ $backlinks = $backlinks | append . }}
+           {{end}}
+       {{end}}
+   "backlinks": "{{$backlinks}}"
+ }
+ sessionStorage.setItem("{{ .File.BaseFileName }}",JSON.stringify(graph_node_object)); 
+ graph_objects.push(graph_node_object);
+ {{end}}
+
+ function getNode(filename)
+ {
+   var storedObject = JSON.parse(sessionStorage.getItem(filename));
+   alert("label: " + storedObject.node_label);
+   alert("url: " + storedObject.node_url);
+   alert("backlinks: " + storedObject.backlinks);   
+ }
+ 
+ function getFullNodes()
+ {
+   return graph_objects;
+ }
+ function getFullLinks(){
+   
+ }
+</script>
