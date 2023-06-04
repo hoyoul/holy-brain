@@ -681,7 +681,10 @@ function renderPage(page,page_column,href){
 	addHandlerLinksFromPage(page,new_page_column);	
 	updateBreadCrumbs();
     }
-    
+    //page를 붙이는과정을 끝내고 마지막으로 수식 rendering을 해준다.
+    if (window.MathJax) {
+	window.MathJax.typeset();
+    }
 
 }
 
@@ -692,8 +695,13 @@ function fetchPage(href,page_column){
 	.then((text) => {
 	    let fragment = document.createElement("template");
 	    fragment.innerHTML = text;
+	    
+        
+
 	    let page = fragment.content.querySelector(".page");
-	    renderPage(page,page_column,href);
+	    renderPage(page,page_column,href);		
+	    // let page = fragment.content.querySelector(".page");
+	    // renderPage(page,page_column,href);
 	});
 }
 

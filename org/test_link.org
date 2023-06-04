@@ -1,6 +1,0 @@
-#+TITLE: link test title
-#+AUTHOR: holy
-#+EMAIL: hoyoul.park@gmail.com
-#+DATE: 2023-04-25
-* link test head
-[[https://www.naver.com/][네이버]] test
