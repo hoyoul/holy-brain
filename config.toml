@@ -6,6 +6,11 @@ title = "Holy Frege"
 email = "hoyoul.park@gmail.com"
 footer = "Built with Org-mode and Hugo."
 
+pygmentsStyle = "onedark"
+pygmentsUseClasses = true
+pygmentsCodeFences = true
+pygmentsCodefencesGuessSyntax = true
+
 [markup]
   [markup.goldmark]
     [markup.goldmark.extensions]
@@ -23,14 +28,19 @@ footer = "Built with Org-mode and Hugo."
       hardWraps = false
       unsafe = true
       xHTML = false
-
-  [markup.highlight]
-    codeFences = true
-    guessSyntax = false
-    hl_Lines = ""
-    lineNoStart = 1
-    lineNos = false
-    lineNumbersInTable = true
-    noClasses = true
-    style = "friendly"
-    tabWidth = 4
+    # [markup.goldmark.renderer.highlight]
+    #   codeFences = true
+    #   guessSyntax = true
+    #   lineNumbers = true
+    #   style = "monokai" # 적용할 스타일을 선택
+  # [markup.highlight]
+    # codeFences = true
+    # guessSyntax = false
+    # hl_Lines = ""
+    # lineNoStart = 1
+    # lineNos = false
+    # lineNumbersInTable = true
+    # noClasses = true
+    # style = "friendly"
+    # tabWidth = 4
+ 

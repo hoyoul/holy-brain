@@ -8,6 +8,7 @@ I am [holy frege](https://frege2godel.me). My real name is Hoyoul Park and from 
 
 - GitHub: [holy-brain](https://github.com/hoyoul/holy-brain) 
 - My Email: [hoyoul.park@gmail.com](mailto:hoyoul.park@gamil.com)
+- My Personal Homepage: [holy-homepage](https://frege2godel.me)
 
 !Please Check out the [Index](/posts/index.html) with all notes.
 
