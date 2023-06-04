@@ -2,6 +2,7 @@
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: 2023-04-25
+#+DESCRIPTION: 이 문서는 org-mode의 기능을 요약하고 설명합니다.
 #+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
 org에서 사용되는 요소들
 

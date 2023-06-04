@@ -4,5 +4,8 @@
 :ctime:    20230416172404
 :END:
 #+title: [web] hugo로 blog만들기 - goldmark md parser
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: 2023-04-25
 * 
 

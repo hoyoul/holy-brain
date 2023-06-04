@@ -1,6 +1,7 @@
 +++
 title = "org mode test"
 author = ["holy"]
+description = "이 문서는 org-mode의 기능을 요약하고 설명합니다."
 date = 2023-04-25
 draft = false
 +++
