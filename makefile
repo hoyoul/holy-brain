@@ -5,7 +5,10 @@ ORG_FILES := $(wildcard $(ORG_DIR)/*.org)
 MD_FILES := $(patsubst $(ORG_DIR)/%.org, $(TEMP_DIR)/%.md, $(ORG_FILES))
 
 .PHONY: all
-all: $(MD_FILES)
+all: clean $(MD_FILES)
+
+clean:
+	rm -rf $(CURDIR)/content/posts
 
 $(TEMP_DIR)/%.md: $(ORG_DIR)/%.org
 	@if [ ! -e $@ ] || [ $< -nt $@ ]; then \

@@ -1,5 +1,5 @@
 +++
-title = "python_2"
+title = "lecture2_variable_and_operator"
 author = ["holy"]
 description = "python 2장 요약정리"
 date = 2023-06-04T00:00:00+09:00

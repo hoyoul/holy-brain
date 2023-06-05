@@ -1,0 +1,17 @@
+#+TITLE: web scraping1
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-05 Mon>
+#+DESCRIPTION: web scraping 
+#+HUGO_DRAFT: true
+* 개요
+#+CAPTION: web scraping book
+#+NAME: web scraping book
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[./img/webscrapingbook.png]]
+
+집에 돌아다니는 읽어보지 않은 책이 있다. 라이언 미첼이라는 사람이 쓴
+건데, web scraping 그리고 web crawling에 관한 책이다. 한번 읽어 보고
+정리하기로 한다.

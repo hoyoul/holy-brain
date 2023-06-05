@@ -1,0 +1,9 @@
+#+TITLE: folding test2
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-05 Mon>
+#+DESCRIPTION: link를 계속 누르면 page가 넘어가는 경우 folding을 처리하는거 test page2
+#+HUGO_DRAFT: false
+* folding test
+아래를 누르세요.
+[[file:folding_test.org][folding test1]]
