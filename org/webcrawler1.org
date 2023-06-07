@@ -2,7 +2,7 @@
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-06-05 Mon>
-#+DESCRIPTION: web scraping 
+#+DESCRIPTION: <web scraping 
 #+HUGO_DRAFT: true
 * 개요
 #+CAPTION: web scraping book

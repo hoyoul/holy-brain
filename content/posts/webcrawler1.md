@@ -1,7 +1,7 @@
 +++
 title = "web scraping1"
 author = ["holy"]
-description = "web scraping"
+description = "<web scraping"
 date = 2023-06-05T00:00:00+09:00
 draft = true
 +++

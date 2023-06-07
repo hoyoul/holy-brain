@@ -12,6 +12,10 @@ pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
 
 [markup]
+  [markup.highlight]
+    lineNoStart = 1
+    # lineNos = true
+    # tabWidth = 4
   [markup.goldmark]
     [markup.goldmark.extensions]
       definitionList = true
