@@ -4,5 +4,10 @@
 :ctime:    20230607162549
 :END:
 #+title: test_page1
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-07 Wed>
+#+DESCRIPTION:test
+#+HUGO_DRAFT: true
 * test
 this is test
