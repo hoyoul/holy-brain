@@ -3,7 +3,7 @@ title = "[정리]python 기초1"
 author = ["holy"]
 description = "python을 사용할때마다 googling하거나 기억나는것만 사용한다. 정리할 필요를 느꼈다. 그래서 python의 기초를 정리해 본다. 그냥 정리하는게 아니라, 재해석을 하려고 한다. 내가 바라보는 언어는 기본적으로 lisp의 관점이다. church의 생각이라고 말할 수도 있다. 그런데 python을 정리할 때는, lisp의 관점뿐 아니라 von neumann의 생각으로 바라볼 필요를 느낀다. 중언 부언이긴 해도, 지금 현재에서 내 생각을 쓰려고 한다."
 date = 2023-06-06T00:00:00+09:00
-draft = true
+draft = false
 +++
 
 ## python이란? {#python이란}
