@@ -1,0 +1,19 @@
+:PROPERTIES:
+:ID:       FDA01D2D-EDDA-4973-8C2D-76F8D92664CE
+:mtime:    20230607174508
+:ctime:    20230607174508
+:END:
+#+title: hugo korean encoding problem
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-07 Wed>
+#+DESCRIPTION: hugo에서 website로 만들때, 한글문제가 있다.
+#+HUGO_DRAFT: true
+* org-roam과 한글
+org-roam에서 title을 한글로 하면 한글명의 org파일이 만들어지고,
+ox-hugo를 실행하면 contents/posts에 md파일이 만들어진다. 이 상태에서
+hugo를 사용해서 md파일을 html로 만들게 된다. md파일을 전처리 하는
+과정에서 title이름의 폴더를 만들고 index.html을 만들게 된다. 따라서
+title을 한글로 만들면, public폴더에는 한글 폴더가 있게 된다.
+* hugo의 문제
+development환경에서는 

@@ -9,7 +9,7 @@ pygmentsStyle = "onedark"
 pygmentsUseClasses = true
 pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
-[[environment.production]]
+
 languageCode = "ko"
 hasCJKLanguage = true
 
