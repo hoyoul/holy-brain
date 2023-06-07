@@ -1,7 +1,6 @@
 baseURL = "https://braindump.frege2godel.me/"
 # baseURL = "http://localhost:1313/"
 title = "Holy Frege"
-
 email = "hoyoul.park@gmail.com"
 footer = "Built with Org-mode and Hugo."
 
@@ -49,4 +48,3 @@ hasCJKLanguage = true
     # noClasses = true
     # style = "friendly"
     # tabWidth = 4
- 
