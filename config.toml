@@ -1,8 +1,7 @@
 baseURL = "https://braindump.frege2godel.me/"
 # baseURL = "http://localhost:1313/"
-# languageCode = "en-us"
 title = "Holy Frege"
-# hasCJKLanguage = true
+
 email = "hoyoul.park@gmail.com"
 footer = "Built with Org-mode and Hugo."
 
@@ -10,6 +9,9 @@ pygmentsStyle = "onedark"
 pygmentsUseClasses = true
 pygmentsCodeFences = true
 pygmentsCodefencesGuessSyntax = true
+[[environment.production]]
+languageCode = "ko"
+hasCJKLanguage = true
 
 [markup]
   [markup.highlight]
