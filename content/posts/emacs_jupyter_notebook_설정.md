@@ -1,5 +1,5 @@
 +++
-title = "[emacs] jupyter notebook 설정"
+title = "[emacs] jupyter notebook settings"
 author = ["holy"]
 description = "jupyter notebook을 emacs에서 사용하는 방법, 그리고 colab연결"
 date = 2023-06-06T00:00:00+09:00
