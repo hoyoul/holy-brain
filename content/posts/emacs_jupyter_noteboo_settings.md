@@ -18,7 +18,7 @@ code가 입력이 되고, 입력된 code가 python interpreter에 전해져서
 
 <a id="figure--python 동작구조"></a>
 
-{{< figure src="/img/jupyter/python_working.png" caption="<span class=\"figure-number\">Figure 1: </span>python 동작구조" width="500px" >}}
+{{< figure src="/img/jupyter/python_working.png" caption="<span class=\"figure-number\">Figure 1: </span>python 동작구조" width="600px" >}}
 
 shell과 python은 local system에서 수행된다.
 
@@ -61,7 +61,7 @@ client가 되어서 browser내에서 code cell을 입력하거나 notebook을
 
 <a id="figure--jupyter working"></a>
 
-{{< figure src="/img/jupyter/jupyter_working.png" caption="<span class=\"figure-number\">Figure 2: </span>jupyter working" width="400px" >}}
+{{< figure src="/img/jupyter/jupyter_working.png" caption="<span class=\"figure-number\">Figure 2: </span>jupyter working" width="600px" >}}
 
 
 ### Google colab {#google-colab}
@@ -85,17 +85,17 @@ colab은 아래 그림을 보면 직관적으로 이해할 수 있다. 우선 py
 
 <a id="figure--python"></a>
 
-{{< figure src="/img/jupyter/python1.png" caption="<span class=\"figure-number\">Figure 3: </span>python" width="500px" >}}
+{{< figure src="/img/jupyter/python1.png" caption="<span class=\"figure-number\">Figure 3: </span>python" width="600px" >}}
 
 <a id="figure--jupyter notebook explorer"></a>
 
-{{< figure src="/img/jupyter/jupyter_notebook1.png" caption="<span class=\"figure-number\">Figure 4: </span>jupyter notebook explorer" width="500px" >}}
+{{< figure src="/img/jupyter/jupyter_notebook1.png" caption="<span class=\"figure-number\">Figure 4: </span>jupyter notebook explorer" width="600px" >}}
 
 browser에서 notebook을 선택할 수 있다.
 
 <a id="figure--jupyter notebook"></a>
 
-{{< figure src="/img/jupyter/jupyter_notebook2.png" caption="<span class=\"figure-number\">Figure 5: </span>jupyter notebook" width="500px" >}}
+{{< figure src="/img/jupyter/jupyter_notebook2.png" caption="<span class=\"figure-number\">Figure 5: </span>jupyter notebook" width="600px" >}}
 
 notebook을 선택하면 위와 같이 code와 text가 섞여있는 문서가
 나온다. 실행할 수 있는 code block을 cell이라고 부르며 cell을 실행하면
@@ -168,7 +168,7 @@ emacs에게 전달해주고 emacs는 보여줄 뿐이다. 따라서 emacs에서 
 
 <a id="figure--ein notebook"></a>
 
-{{< figure src="/img/jupyter/ein_ipynb.png" caption="<span class=\"figure-number\">Figure 6: </span>ein notebook" width="500px" >}}
+{{< figure src="/img/jupyter/ein_ipynb.png" caption="<span class=\"figure-number\">Figure 6: </span>ein notebook" width="600px" >}}
 
 ```emacs-lisp
 (use-package ein

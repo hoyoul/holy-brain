@@ -34,16 +34,16 @@ package들을 묶은 환경이 필요하다. project기준으로 봐야
 가상환경을 만들려면, shell에서 conda명령어를 이용한다.
 
 ```text
-conda create -n [가상환경이름]
-conda create -n [가상환경이름] python=3.7
+$ conda create -n [가상환경이름]
+$ conda create -n [가상환경이름] python=3.7
 ```
 
 
 #### 가상환경 선택하기(활성화하기,비활성화하기) {#가상환경-선택하기--활성화하기-비활성화하기}
 
 ```text
-conda activate [가상환경이름]
-conda deactivate
+$ conda activate [가상환경이름]
+$ conda deactivate
 ```
 
 
@@ -52,21 +52,21 @@ conda deactivate
 현재 선택된 가상환경 목록 보기
 
 ```emacs-lisp
-
+$ conda info
 ```
 
 
 #### 가상환경 목록보기 {#가상환경-목록보기}
 
 ```text
-conda info --envs
+$ conda info --envs
 ```
 
 
 #### 가상환경 삭제하기 {#가상환경-삭제하기}
 
 ```text
-conda remove --name [가상환경이름]
+$ conda remove --name [가상환경이름]
 ```
 
 

@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       1D86C6E0-1CB7-46DA-9067-F75F1B541398
-:mtime:    20230607204438 20230607160412 20230607144348 20230607124433 20230607112254 20230607102155 20230607040018 20230607023937 20230607002633 20230606212631 20230606191727 20230606174614 20230606155942 20230606142756
+:mtime:    20230608133809 20230607204438 20230607160412 20230607144348 20230607124433 20230607112254 20230607102155 20230607040018 20230607023937 20230607002633 20230606212631 20230606191727 20230606174614 20230606155942 20230606142756
 :ctime:    20230606142756
 :END:
 #+title: [emacs] jupyter notebook settings
@@ -18,7 +18,7 @@ code가 입력이 되고, 입력된 code가 python interpreter에 전해져서
 
 #+CAPTION: python 동작구조
 #+NAME: python 동작구조
-#+attr_html: :width 500px
+#+attr_html: :width 600px
 #+attr_latex: :width 100px
 #+ATTR_ORG: :width 100
 [[../static/img/jupyter/python_working.png]]
@@ -60,7 +60,7 @@ client가 되어서 browser내에서 code cell을 입력하거나 notebook을
 
 #+CAPTION: jupyter working
 #+NAME: jupyter working
-#+attr_html: :width 400px
+#+attr_html: :width 600px
 #+attr_latex: :width 100px
 #+ATTR_ORG: :width 100
 [[../static/img/jupyter/jupyter_working.png]]
@@ -84,13 +84,13 @@ colab은 아래 그림을 보면 직관적으로 이해할 수 있다. 우선 py
 
 #+CAPTION: python
 #+NAME: python
-#+attr_html: :width 500px
+#+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/jupyter/python1.png]]
 
 #+CAPTION: jupyter notebook explorer
 #+NAME: jupyter notebook explorer
-#+attr_html: :width 500px
+#+attr_html: :width 600px
 #+attr_latex: :width 100px
 #+ATTR_ORG: :width 100
 [[../static/img/jupyter/jupyter_notebook1.png]]
@@ -99,7 +99,7 @@ browser에서 notebook을 선택할 수 있다.
 
 #+CAPTION: jupyter notebook
 #+NAME: jupyter notebook
-#+attr_html: :width 500px
+#+attr_html: :width 600px
 #+attr_latex: :width 100px
 #+ATTR_ORG: :width 100
 [[../static/img/jupyter/jupyter_notebook2.png]]
@@ -167,7 +167,7 @@ emacs에게 전달해주고 emacs는 보여줄 뿐이다. 따라서 emacs에서 
 
 #+CAPTION: ein notebook
 #+NAME: ein notebook
-#+attr_html: :width 500px
+#+attr_html: :width 600px
 #+attr_latex: :width 100px
 #+ATTR_ORG: :width 100
 [[../static/img/jupyter/ein_ipynb.png]]

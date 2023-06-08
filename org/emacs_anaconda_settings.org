@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       7E014AE7-BE77-423A-B458-352AD5B313EE
-:mtime:    20230608113433 20230608103241 20230607223048
+:mtime:    20230608133119 20230608113433 20230608103241 20230607223048
 :ctime:    20230607223048
 :END:
 #+title: [emacs] anaconda settings
@@ -30,26 +30,26 @@ package들을 묶은 환경이 필요하다. project기준으로 봐야
 *** 가상환경 만들기
 가상환경을 만들려면, shell에서 conda명령어를 이용한다.
 #+BEGIN_SRC text
-  conda create -n [가상환경이름]
-  conda create -n [가상환경이름] python=3.7
+$ conda create -n [가상환경이름]
+$ conda create -n [가상환경이름] python=3.7
 #+END_SRC
 *** 가상환경 선택하기(활성화하기,비활성화하기)
 #+BEGIN_SRC text
-  conda activate [가상환경이름]
-  conda deactivate
+$ conda activate [가상환경이름]
+$ conda deactivate
 #+END_SRC
 *** 가상환경 정보보기
 현재 선택된 가상환경 목록 보기
 #+BEGIN_SRC emacs-lisp
-
+$ conda info
 #+END_SRC
 *** 가상환경 목록보기
 #+BEGIN_SRC text
-conda info --envs
+$ conda info --envs
 #+END_SRC
 *** 가상환경 삭제하기
 #+BEGIN_SRC text
-conda remove --name [가상환경이름]
+$ conda remove --name [가상환경이름]
 #+END_SRC
 * anaconda emacs 설정
 ** anaconda mode setting
