@@ -1,0 +1,112 @@
+:PROPERTIES:
+:ID:       7E014AE7-BE77-423A-B458-352AD5B313EE
+:mtime:    20230608113433 20230608103241 20230607223048
+:ctime:    20230607223048
+:END:
+#+title: [emacs] anaconda settings
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-07 Wed>
+#+DESCRIPTION: emacs에서 anaconda를 사용하는 방법
+#+HUGO_DRAFT: true
+* system 설정
+emacs에서 anaconda를 사용하기 위해선, mac에 anaconda를 설치한다.
+[[https://www.anaconda.com/][여기(from here)]]에서 다운받아서 설치하면 된다.
+** virtual environment
+*** 개요
+시스템에 하나의 python만 있으면 불편하다. 하나의 python에 여러
+package들이 설치된 후 project를 만들게 되는데, 매번 새로운 project를
+만들때마다 project에 맞는 package를 설치해야 하는데, 기존 설치된
+package때문에 충돌도 일어날 수 있다. 따라서 project에 필요한 python과
+package들을 묶은 환경이 필요하다. project기준으로 봐야
+한다. 기본적으로 anaconda을 설치하면 default 환경은 base다.
+#+CAPTION: 기본환경
+#+NAME: 기본환경
+#+attr_html: :width 500px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[../static/img/python/anaconda1.png]]
+
+*** 가상환경 만들기
+가상환경을 만들려면, shell에서 conda명령어를 이용한다.
+#+BEGIN_SRC text
+  conda create -n [가상환경이름]
+  conda create -n [가상환경이름] python=3.7
+#+END_SRC
+*** 가상환경 선택하기(활성화하기,비활성화하기)
+#+BEGIN_SRC text
+  conda activate [가상환경이름]
+  conda deactivate
+#+END_SRC
+*** 가상환경 정보보기
+현재 선택된 가상환경 목록 보기
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+*** 가상환경 목록보기
+#+BEGIN_SRC text
+conda info --envs
+#+END_SRC
+*** 가상환경 삭제하기
+#+BEGIN_SRC text
+conda remove --name [가상환경이름]
+#+END_SRC
+* anaconda emacs 설정
+** anaconda mode setting
+#+BEGIN_SRC emacs-lisp
+  (use-package anaconda-mode
+    :ensure t
+    )
+#+END_SRC
+** create new .py file
+#+BEGIN_SRC text
+  C-x C-f
+  HolaWorld.py RET  
+#+END_SRC
+** Add the code
+#+BEGIN_SRC text
+print ("Hola World from Emacs")
+#+END_SRC
+** running it
+#+BEGIN_SRC text
+  C-c C-p
+  C-c C-c
+#+END_SRC
+output
+#+CAPTION: anaconda2
+#+NAME: anaconda2
+#+attr_html: :width 500px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[../static/img/python/anaconda2.png]]
+
+* conda emacs설정
+** conda mode setting
+#+BEGIN_SRC emacs-lisp
+  (use-package conda
+    :ensure t
+    :init
+    (setq conda-anaconda-home "/Users/holy/opt/anaconda3")
+    (setq conda-env-home-directory "/Users/holy/opt/anaconda3/envs")
+    :config
+    (conda-env-autoactivate-mode t))
+#+END_SRC
+** check env list
+#+BEGIN_SRC text
+M-x conda-env-list RET
+#+END_SRC
+** activate env
+#+BEGIN_SRC text
+  M-x conda-activate RET
+#+END_SRC
+* company 설정
+ complete anything. 자동완성 기능
+** company setting
+ #+BEGIN_SRC emacs-lisp
+  (use-package company-anaconda
+    :ensure t
+    :config
+    (eval-after-load "company"
+      '(add-to-list 'company-backends '(company-anaconda :with company-capf))))
+
+ #+END_SRC

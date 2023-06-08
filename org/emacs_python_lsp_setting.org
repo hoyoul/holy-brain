@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       60D3E48B-4132-401F-B056-3D940CD73A12
+:mtime:    20230608122911
+:ctime:    20230608122911
+:END:
+#+title: [emacs] python lsp setting
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-08 Thu>
+#+DESCRIPTION: python lsp setting을 하려 한다. eglot(client), pyright(server)를 이용한다.
+#+HUGO_DRAFT: true
+* DOING pyright 설정
+** create env
+#+BEGIN_SRC text
+$ conda create -n pyright python=3.11 RET
+#+END_SRC
+** activate env
+#+BEGIN_SRC text
+$ conda activate pyright
+#+END_SRC
+** install pyright on pyright env
+#+BEGIN_SRC text
+$ conda install -c conda-forge pyright RET
+#+END_SRC
+

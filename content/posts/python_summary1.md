@@ -31,3 +31,6 @@ google colab과 연결해서 사용할 수도 있다. 짜증나지만, 많은 �
 python code를 작성하는 editor로 emacs를 사용한다. emacs에서 python을
 작성하기위한 setting이 필요하다. lsp를 사용해서 속시원하게 사용하는게
 추천되지만, 나는 2014년 맥북 사용자다. 분수에 맞게 코딩을 하자.
+jupyter notebook이나 google colab을 사용해서 ipython
+interpreter(kernel)을 이용하려면 다음 [설정을]({{< relref "emacs_jupyter_noteboo_settings" >}}) 참고하자. anaconda로
+작성하려면 [여기(from here)]({{< relref "emacs_anaconda_settings" >}})를 참조한다. 그래도 지금 대세인 lsp를 사용하겠다고 한다면
