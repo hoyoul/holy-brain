@@ -1,0 +1,49 @@
+:PROPERTIES:
+:ID:       4FD8CE39-CA31-4970-817C-81B6F380EAD0
+:mtime:    20230610100242
+:ctime:    20230610100242
+:END:
+#+title: [emacs] org-babel -python
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-10 Sat>
+#+DESCRIPTION: org-babel로 org문서에 code를 넣고 실행할 수 있다. literal programming이라고 하는데, python을 사용할때 setting과 사용법을 알아보자.
+#+HUGO_DRAFT: true
+* setting emacs init file
+#+BEGIN_SRC emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
+#+END_SRC
+* default usage
+다음과 같이 src code block을 만든다. 코드를 입력한다.
+ #+begin_verse
+#+BEGIN_SRC python
+a = 3
+#+END_SRC
+ #+end_verse
+ #+BEGIN_SRC python 
+   a=3
+ #+END_SRC
+
+ #+RESULTS:
+ : None
+
+
+그리고 =C-c c= 를 눌러서 실행한다. 그러면 None이라는 결과가
+나온다. code block은 함수와 같다. 위 함수를 실행해도 결과는
+None이다. a값을 출력하려면 어떻게 해야 할까?
+ #+BEGIN_SRC python 
+   a=3
+   return a
+ #+END_SRC
+
+return을 사용해서 return하면 된다. 그러면 다음 예를 보자.
+
+ #+begin_quote
+ #+BEGIN_SRC python
+   a = 3
+   print(a)
+ #+END_SRC
+ #+end_quote
+결과는 a값이 나올까? 나오지 않는다.

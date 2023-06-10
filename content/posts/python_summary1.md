@@ -1,7 +1,7 @@
 +++
 title = "python_summary1"
 author = ["holy"]
-description = "test orgroam 한글"
+description = "emacs에서 python의 설정과 python의 개념."
 date = 2023-06-07T00:00:00+09:00
 draft = true
 +++
@@ -26,11 +26,12 @@ google colab과 연결해서 사용할 수도 있다. 짜증나지만, 많은 �
 사용한다는 것은, `everything is possbile` 이다. 한계는 없다.
 
 
-### emacs {#emacs}
+### emacs 설정 {#emacs-설정}
 
 python code를 작성하는 editor로 emacs를 사용한다. emacs에서 python을
 작성하기위한 setting이 필요하다. lsp를 사용해서 속시원하게 사용하는게
 추천되지만, 나는 2014년 맥북 사용자다. 분수에 맞게 코딩을 하자.
 jupyter notebook이나 google colab을 사용해서 ipython
 interpreter(kernel)을 이용하려면 다음 [설정을]({{< relref "emacs_jupyter_noteboo_settings" >}}) 참고하자. anaconda로
-작성하려면 [여기(from here)]({{< relref "emacs_anaconda_settings" >}})를 참조한다. 그래도 지금 대세인 lsp를 사용하겠다고 한다면
+작성하려면 [여기(from here)]({{< relref "emacs_anaconda_settings" >}})를 참조한다. 그래도 지금 대세인 lsp를
+사용하겠다고 한다면 [여기(from here)]({{< relref "emacs_python_lsp_setting" >}})을 참조해라.
