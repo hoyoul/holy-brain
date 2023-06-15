@@ -11,10 +11,10 @@ draft = false
 
 ### python의 동작방식 {#python의-동작방식}
 
-python은 REPL(Read Evaluate Print Loop)로 동작한다. shell에서 입력받은
-code가 입력이 되고, 입력된 code가 python interpreter에 전해져서
-실행되고 실행된 결과가 shell에 전달되는 동작 구조로 이루어져
-있다. 그림으로 보면 다음과 같다.
+python은 interpreter와 compiler 두가지 모드가 있다. interpreter는
+REPL(Read Evaluate Print Loop)로 동작한다. shell에서 typing한 code가
+interpreter의 입력이 되고, 입력된 code는 실행되서 결과를 다시 shell로
+보낸다.
 
 <a id="figure--python 동작구조"></a>
 
@@ -26,12 +26,28 @@ shell과 python은 local system에서 수행된다.
 ### ipython과 ipython notebook {#ipython과-ipython-notebook}
 
 python이 개발된 이후에 ipython이란것도 비슷한 시기에 개발되었다.
-ipython이 기존 python과 차별화하는 2가지 특징이 있는데, 하나는 code를
-cell단위로 입력할 수 있고, server client구조를 가질 수 있다는
-것이다. Read는 notebook의 코드조각(cell)형태다. cell에 입력한 input이
-ipython에 전달되는데 ipython은 local에 있을 수도 원격에 있을 수도
-있다. 이러한 개념을 그대로 가져다 사용한게 jupyter와 google
-colab이다.
+ipython은 interactire python이라는 뜻인데, interactive는 주고
+받는다는 뜻이다. code를 python한테 주면 실행하고 그 결과를 다시 받는
+구조는 python의 interpreter의 동작방식과 다르지 않다. 차이가 있다면
+socket을 사용해서 원격에 있는 python interpreter와 주고 받을 수
+있다는 것이다. 그리고 입력방식도 차이가 있다. shell에서 입력받는
+code가 아니라, cell이라는 단위로 입력 받는다. 이렇게 한 이유는
+literate programming을 하기 위해서이다. literate programming은
+org모드에서 code-babel을 생각하면 된다. 그래서 notebook파일을
+제공한다. notebook 파일은 json구조로 되어 있어서, web page처럼
+browser에서 읽을 수 있다. code가 입력되는 cell과 text를 입력하는
+cell이 web page에 있다고 봐도 된다. org 파일의 웹버전 같은 느낌이다.
+
+여튼 요약하면 browser에서 notebook을 열고 notebook에 code를
+cell단위로 입력하고 원격에 있는 server에 연결해서 python을 실행시키는
+구조다. jupyter나 google colab이나 동일한 방식이다. colab은 server가
+google cloud에 있다. gpu가 있는 compute engine을 사용할 수
+있다. client는 local의 browser이지만, notebook은 google drive에 있는
+notebook을 사용한다. 반면 jupyter는 open source이고 범용적이라서
+default로 local의 server와 local의 file system에 notebook을
+사용한다. client로 browser를 이용하는건 동일하다.
+
+아래는 좀더 jupyter와 colab에 대해 적었는데, 동어반복 수준이다.
 
 
 ### jupyter와 jupyter notebook {#jupyter와-jupyter-notebook}
@@ -201,41 +217,3 @@ M-x ein:notebooklist-login
 
 url: https://colab.research.google.com
 ```
-
-
-## ox-ipynb사용 {#ox-ipynb사용}
-
-ein을 사용하면 emacs에서 notebook파일을 처리할 수 있다. notebook파일을
-다뤄야 하는 이유는 gpu를 사용하는 colab이 notebook만을 처리하기
-때문이다.  big data처리를 하거나 deep learning을 하는 python
-프로그램은 gpu를 사용한다. 따라서 gpu서버에서 프로그램을 돌리기 원하는
-emacs 사용자들은 ein의 도움을 받아서 emacs에서 notebook문서를 만들고
-사용하는게 당연해 보인다.emacs에서 notebook을 만들고 gpu가 있는
-colab에서 실행! 매우 당연해 보인다.  그런데 emacs에서는 notebook파일을
-자주 사용하지 않는다. 불편하다. emacs 문서 작성의 키 바인딩은
-org파일을 능숙하게 사용할 수 있게 되어 있다. notebook과 비슷한
-구조이기도 한 org파일을 그대로 사용할 수 없을까? 이런 아이디어로
-만들어진게 ox-ipynb다. org로 코드를 작성하고, 원격에 있는 gpu가 있는
-server(colab)에서 실행하기 위해서 notebook으로 변환하자는 것이다.
-
-
-#### 설정 {#설정}
-
-1.  jkitchin이 만든것을 lisp폴더에 다운 <https://github.com/jkitchin/ox-ipynb>
-2.  emacs에 설정
-    ```emacs-lisp
-    (add-to-list 'load-path "/Users/holy/.emacs.d/lisp/ox-ipynb")
-    (require 'ox-ipynb)
-    ```
-3.  export dispatcher에서 확인 (org-&gt;notebook)
-
-
-#### 사용법 {#사용법}
-
-org와 ipynb 사용예제가 다운 받은 ox-ipynb에 있다. example.org와
-변환된 example.ipynb가 sample로 있다.
-
-
-#### 문제점 {#문제점}
-
-org모드에서 사용되는 image가 ipynb로 변환될때, image size가 조절되지 않는다.

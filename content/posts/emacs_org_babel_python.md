@@ -90,3 +90,27 @@ interpreter에 의해서 evaluate되기 때문에 연관관계가 없다. 그런
 </div>
 
 위와 같이 하면 return문 없이도 a값이 출력된다.
+
+
+## exports {#exports}
+
+code block을 html로 변환시에 code는 출력이 되지만, 실행결과인 result는
+출력되지 않는다. 이것은 :exports code로 되어 있기
+때문이다. :exports라는 default argument에는 code와 results, both의
+값을 가질수 있는데, code로 세팅되어 있다. 그래서 보통 both를 해서
+사용한다.
+
+
+## 요약 {#요약}
+
+일반적인 code block은 다음과 같이 사용한다.
+
+<div class="verse">
+
+#+BEGIN_SRC python :results output :exports both<br>
+<br>
+\#+END_SRC<br>
+
+</div>
+
+나는 이것을 yasnippet에 추가했다.

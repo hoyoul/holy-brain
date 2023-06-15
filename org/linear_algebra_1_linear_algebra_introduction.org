@@ -1,8 +1,14 @@
-#+TITLE: linear_algebra1
+:PROPERTIES:
+:ID:       481C7F24-149B-46D2-A541-497A287C4CCB
+:mtime:    20230614105027
+:ctime:    20230614105027
+:END:
+#+title: [linear algebra-1] linear algebra introduction
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
-#+DATE: <2023-06-04 Sun>
-#+DESCRIPTION: linear algebra 정리 1
+#+DATE: <2023-06-14 Wed>
+#+DESCRIPTION: linear algebra의 생각
+#+HUGO_DRAFT: true
 * linear algebra에 대한 생각
 ** 인과 관계(causation)와 상관관계(correlation)
 어떤 변수와 다른 어떤 변수와의 연관성이 있을때 relation이 있다고
@@ -530,6 +536,7 @@ Matrix/vector에 대한 계산 방식을 알아야 한다. 그리고 vector는 �
      강사는 2개의 video를 참조영상으로 제공했다. mit 선형대수 강좌 18,19다.
      [[https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-18-properties-of-determinants/][여기1]]
      [[https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-19-determinant-formulas-and-cofactors/][여기2]]
+
      이게 무슨 의미인가? data를 사용해서 기계를 만들려고 할려면
      matrix곱을 풀어야 한다. 그런데, matrix곱형태의 계산은 어렵다는
      것이다. matrix곱 해결방법으로 흔히 쓰이는 inverse matrix로 양변에
@@ -702,5 +709,6 @@ data이지만 모양만 transpose한것이라면, 만들어지는 기계는 동�
 |           3 |           2 |       6 |
 |           7 |           3 |       8 |
 |           1 |           4 |      10 |
+
 
 

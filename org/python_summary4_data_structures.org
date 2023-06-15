@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       55C6984D-8B70-4909-84DB-A7EF5E554BA9
+:mtime:    20230614132123
+:ctime:    20230614132123
+:END:
+#+title: python_summary4_data structures
+

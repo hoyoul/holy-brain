@@ -1,0 +1,33 @@
+:PROPERTIES:
+:ID:       AC2158BF-85AE-4DDC-BF3C-BC0EE15F4437
+:mtime:    20230615084039
+:ctime:    20230615084039
+:END:
+#+title: [leetcode] beginning
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-15 Thu>
+#+DESCRIPTION: leetcode를 시작하기로 했다. 매일 한문제씩 풀기로 한다.
+#+HUGO_DRAFT: true
+* leet code
+leet code는 학습할 수있는 chapter를 제공한다. explorer -> learn은
+기초중의 기초다.
+#+CAPTION: leetcode explorer
+#+NAME: leet code
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[../static/img/leetcode/leetcode_beginning.png]]
+
+#+CAPTION: leetcode learn 
+#+NAME: leet code learn
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[../static/img/leetcode/leetcode_learn.png]]
+
+* The Leet Code Beginner's Guide
+- [[file:leetcode_1480_running_sum_of_1d_array.org][1st problem]] (1480. Running Sum of 1D Array)
+- [[file:leetcode_1672_richest_customer_wealth.org][2nd_problem]] (1672. Richest Customer Wealth)
+
+

@@ -1,0 +1,54 @@
+:PROPERTIES:
+:ID:       23BC3FA7-CEFC-4841-B155-00ACDFB77CC2
+:mtime:    20230615101336 20230615085432
+:ctime:    20230615085432
+:END:
+#+title: [kaggle] beginning 
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-15 Thu>
+#+DESCRIPTION: kaggle을 매일 1개씩 풀어볼려고 한다. 
+#+HUGO_DRAFT: true
+* kaggle
+kaggle은 초보자를 위한 guide를 제공한다. Learn이란 section이 있는데
+기본중에 기본을 다룬다. 그것을 먼저 알아볼 필요가 있고, 그것이
+기본기가 될 것이다.
+* Learn
+#+CAPTION: kaggle 시작
+#+NAME: kaggle 시작
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[../static/img/kaggle/kaggle_beginning.png]]
+
+kaggle의 Learn을 보면 courses와 guide가 나온다. 이것을 먼저 하기로
+한다. 물론 아주 기초적인 내용이라 이미 알고 있는게 있을것이다. 그래서
+사람들은 kaggle은 competition부터 바로 하라고 한다. 난 돌아가더라도
+처음부터 하기로 했다. 사람마다 공부하는 방식은 다 다른것이다.
+* courses
+** Intro to programming
+*** Arithmetic and variable
+
+*** Functions
+*** Data types
+*** Conditions and Conditional statement
+*** intro to Lists
+** Python
+*** hello python
+*** functions and getting help
+*** booleans and conditionals
+*** lists
+*** loops and list comprehensions
+*** string and dictionaries
+*** working with external libraries
+** Intro to Machine Learnings
+*** How models work
+*** Basic Data Exploration
+*** Your First Machine Learning model
+*** Model Validation
+*** Underfitting and overfitting
+*** Random Forests
+*** Machine Learning Competitions
+** Pandas
+*** Creating Reading and Writing
+*** Indexing, Selecting & Assigning

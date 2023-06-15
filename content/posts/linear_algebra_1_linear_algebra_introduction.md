@@ -1,9 +1,9 @@
 +++
-title = "linear_algebra1"
+title = "[linear algebra-1] linear algebra introduction"
 author = ["holy"]
-description = "linear algebra 정리 1"
-date = 2023-06-04T00:00:00+09:00
-draft = false
+description = "linear algebra의 생각"
+date = 2023-06-14T00:00:00+09:00
+draft = true
 +++
 
 ## linear algebra에 대한 생각 {#linear-algebra에-대한-생각}
@@ -658,6 +658,7 @@ matrix곱의 해는 무수히 많다. 즉 해는 무수히 많다.
 강사는 2개의 video를 참조영상으로 제공했다. mit 선형대수 강좌 18,19다.
 [여기1](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-18-properties-of-determinants/)
 [여기2](https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/resources/lecture-19-determinant-formulas-and-cofactors/)
+
 이게 무슨 의미인가? data를 사용해서 기계를 만들려고 할려면
 matrix곱을 풀어야 한다. 그런데, matrix곱형태의 계산은 어렵다는
 것이다. matrix곱 해결방법으로 흔히 쓰이는 inverse matrix로 양변에

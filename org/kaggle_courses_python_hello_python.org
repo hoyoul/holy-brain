@@ -1,0 +1,13 @@
+:PROPERTIES:
+:ID:       9617B2FE-39B4-4A64-AD3F-188EB200CAAE
+:mtime:    20230615092713
+:ctime:    20230615092713
+:END:
+#+title: [kaggle-courses-python] hello python
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-15 Thu>
+#+DESCRIPTION: kaggle learn python hello python
+#+HUGO_DRAFT: true
+* Hello python
+
