@@ -1,0 +1,822 @@
++++
+title = "[website] make main homepage"
+author = ["holy"]
+description = "main homepage 기록 노트, main homepage를 만들면서 기록한 노트다."
+date = 2023-06-16T00:00:00+09:00
+draft = true
++++
+
+## make blog {#make-blog}
+
+
+### 시작 {#시작}
+
+nmain blog를 만들기로 했다. holy2frege라는 github id를 만들었다. 2개의
+repo를 만들었다. main-blog라는 repo와
+holy2frege.github.io다. main-blog는 개발 repo고 holy2frege.github.io는
+publishing repo다. emacs에서 org파일을 만들고, ox-publish를 사용하면,
+org파일을 html로 변환해 public폴더에 publishing한다. 따라서 2개의
+repo가 필요하다.main-blog에는 org파일을 작성하는 개발 repo지만,
+publishing repo는 domain주소를 hosting하고 web service를 하기 때문에
+github에서 몇가지 설정을 해준다. domain 주소를 설정해준다.
+
+<div class="important">
+
+github-&gt;settings-&gt; pages -&gt; <https://frege2godel.me/>
+
+</div>
+
+2개의 repo를 local에 설치하자. 먼저 main-blog라는 repo를 설치하기
+위해서 MyProjects/main-blog라는 폴더를 만들고, github에서 지시하는
+대로 첫번째 commit을 만들어서 push한다. push할 때, 403에러가 발생할 수
+있다.
+
+
+#### 403 error {#403-error}
+
+pat
+
+<div class="important">
+
+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
+
+</div>
+
+push할때 에러가 나면, keychain에서 github검색후 type이 login을 지우고
+다시 push한다. id holy2frege, pw를 물어보면 pat를 입력한다.
+
+
+#### ssh처리 {#ssh처리}
+
+remote가 git주소일때는 ssh처리가 필요하다. 그런데 https를 사용한다면
+ssh처리는 상관없다. 위처럼 id와 pw로 pat를 사용하면 되기 때문이다.
+위에서 keychain에서 login type을 갖는 gihtub을 제거한 후 다시 push할때
+user,pw를 입력해도 제대로 안될 때가 있다. 이때 ssh key를 만들고
+system에 등록해야 한다.
+
+<div class="important">
+
+ssh-keygen -t rsa -b 4096 -C "holy2frege@gmail.com"
+
+</div>
+
+save할 이름을 id_rsa_holy2frege로 입력하고 enter를 계속 친다. 그러면,
+다음과 같은 메시지를 볼 수 있다.
+
+<div class="important">
+
+Your identification has been saved in id_rsa_holy2frege.
+Your public key has been saved in id_rsa_holy2frege.pub.
+
+</div>
+
+ssh public key는 github 계정마다 다르기 때문에 이름을 입력해서
+만들어줘야 한다. 그냥 enter만 입력하면 안된다.
+
+<div class="important">
+
+eval "$(ssh-agent -s)"
+
+</div>
+
+ssh-agent가 동작하는지 확인한다.
+
+<div class="important">
+
+ssh-add -K ~/.ssh/holy2frege
+
+</div>
+
+ssh-agent에 public key를 등록한다.
+
+git push를 할때는 ssh접속을 하는데, 이때 local과 github 사이에는
+ssh통신이 이루어진다. local에서는 ssh-agent가 local의 public key를
+보내고 github은 등록된 public key를 대조해서 접근허가를 해준다. 따라서
+ssh-agent에 public key를 등록한 것이다. 그 다음은 github에 public
+key를 저장해야 한다.
+
+
+#### git submodule {#git-submodule}
+
+403에러를 해결했고 main-blog repo를 local에 설치했으면
+holy2frege.github.io라는 repo를 mainblog/public폴더에 clone해야
+한다. clone이기 보다 submodule로 설치한다.
+
+<div class="important">
+
+git submodule add <https://github.com/holy2frege/holy2frege.github.io.git> public
+
+</div>
+
+이제 web site를 개발해보자. 내가 원하는 것은, emacs에서 org파일을
+만들고 M-x org-publish-all을 실행하면, 혹은 C-c C-e로 export시키면,
+작성된 org파일이 html로 변환되서 public폴더에 저장되는
+것이다. public폴더는 github hosting서비스와 연동되어서 domain주소를
+browser에서 접근가능한 것이다.
+전체적인 폴더 구조는 아래와 같다.
+
+<a id="figure--folders"></a>
+
+{{< figure src="./img/mainblog_folder.png" caption="<span class=\"figure-number\">Figure 1: </span>folders" width="400px" >}}
+
+
+### org-publish 설정 {#org-publish-설정}
+
+main-bolog에 org폴더를 만들고 작성한 org파일들이 public폴더의 html으로
+변환되는 것은 org-publish package를 사용하기 때문이다. 이 기능을
+사용하려면 emacs 설정 파일에서 org-publish project를 기술해야
+한다. project를 정의하면 source 폴더에서 target폴더로 이동만 시킬수도
+있고, 함수를 적용해서 결과 파일을 taget으로 이동 시킬 수 있다. 3개의
+project를 만들기로 한다.
+
+
+#### org-&gt; html project {#org-html-project}
+
+my-main-blog라는 project다. org파일을 html로 변환한다. source는
+base-directory에서 정하고 target은 publish-directory가 된다. 적용되는
+함수는 publishing-function이다. publish-function은 org의 요소들을
+html요소로 transcode한다. org의 요소와 html의 요소는 1:1 mapping되지
+않기 때문에 여러 편법이 사용된다는 것만 알고 넘어가자.
+
+```emacs-lisp
+  (require 'ox-publish)
+(setq org-publish-project-alist
+      '(
+	("my-main-blog"
+	 :base-directory "~/MyProjects/main-blog/org/"
+	 :base-extension "org"
+	 :publishing-directory "~/MyProjects/main-blog/public/"
+	 :publishing-function org-html-publish-to-html
+	 :recursive t
+	 :html-head "<link rel=\"stylesheet\" href=\"../css/styles.css\" type=\"text/css\"/>"
+	 )
+	))
+```
+
+:html-head는 출력되는 html head에 html tag를 넣을 수 있게 한다. 보통
+html head에 들어가는 css, java, meta tag를 넣는다. 여튼 이렇게 하고
+M-x org-publish-all이나 C-c C-e P f를 실행하자. 그러면 위의 project가
+실행된다.
+
+간단한 org파일을 만들고 M-x org-publish-all했을때 출력된 html파일은
+실망이다. 엄청나게 많은 tag로 이루어진 html이 만들어졌기
+때문이다. 고작 org문서에는 1st-level headline과 hello world라는
+문자열만 있는데도 변환된 html문서는 알아보기 힘들정도로 긴
+html파일이다.
+
+org-publish가 동작하는 방식은 option을 통해서 html의 특정요소를
+출력할지 안할지를 결정한다. 나만의 backend를 만들지 않고 publishing
+function을 사용하기 때문에 어쩔 수 없다. 나도 나만의 backend를 만들고
+싶었지만, 너무 복잡했다. 여튼 내가 원하는 html을 만들기 위해선
+불필요한 option을 모두 꺼야 한다. emacs의 설정파일에서 정의한
+project에서 option을 설정해야 한다. 아래 대충 정리를 했다.
+
+<!--list-separator-->
+
+-  publishing settings
+
+    1.  :section-numbers nil
+    2.  :with-toc nil
+    3.  :html-head-include-default-style nil
+        이것을 해야 불필요한 style tag가 없어진다.
+    4.  :html-postamble nil
+
+    더 많은 option들은 여기에 나와 있다.<https://orgmode.org/manual/Publishing-options.html>
+
+<!--list-separator-->
+
+-  org-publishing의 변환
+
+    위와 같은 설정을 하고 변환하면 대부분 이런식으로 변환된다.
+
+    <a id="figure--org-publish1"></a>
+
+    {{< figure src="./img/org-publish1.png" caption="<span class=\"figure-number\">Figure 2: </span>org-publish1" width="400px" >}}
+
+    -   title을 h1으로 시작한다.
+    -   1st level headline은 div+h2쌍으로 표시되고, 1st headline의 content는 div+p쌍으로
+        표시된다.
+    -   2nd level headline은 div+h3쌍으로 표시된다. 2nd headline의 content는
+        div+p 쌍으로 표시된다.
+
+<!--list-separator-->
+
+-  org to html publishing
+
+    org에서 사용되는 모든 요소들은 org-html-publish-to-html함수에서 html
+    tag로 변환되는데, 각각의 요소들이 어떻게 transcode되는지 살펴볼려면
+    다음을 파일을 변환해서 분석하면 된다.
+    <https://writequit.org/denver-emacs/presentations/files/example.org.html>
+
+<!--list-separator-->
+
+-  한계점
+
+    org를 구성하는 요소들과 html tag들이 1:1 mapping하지 않는다는 근본적인
+    문제가 있다. 예를 들어, 나는 html에 &lt;span&gt;test&lt;/span&gt;을 출력하고
+    싶은데, 이렇게 &lt;span&gt;만 출력하는 org요소가 없다. 그리고, org의
+    headline이 html로 conversion될 때, div+h조합으로 나오고,id와 class가
+    자동으로 만들어지는데, 이것을 내가 customize하기 어렵다. 정해진 값으로
+    나오고, 무조건 나온다고 보면 된다. org문서라는게 기본적으로
+    문서제목+문서내용이라는 block의 조합이라고 본다면 org의 headline이
+    div+h조합을 그대로 쓰는것도 나쁘지는 않다. 다만 css처리를 위해서 id에
+    대한 설정은 필요하다고 본다.
+
+    여튼 이런 문제를 해결하기 위해서 나는 2가지 편법을 사용하기로 했다. 하나는
+    property고 다른 하나는 org special block이다.
+
+    <!--list-separator-->
+
+    -  property 설정
+
+        id,class는 css와 js처리에 있어서 매우중요한데, 그것을 자유롭게
+        customize할 수 없다는것은 이 방식의 한계라고 볼 수있다. 하지만,
+        제한적이지만, class와 id를 설정할수 있는 방식이 존재한다. org문서의
+        headline이 html tag로 export될때, div+h tag는 그대로 놔두고, 왜냐면
+        id와 class를 설정하는것은 property를 사용하는 것이다. 2개의 property가
+        사용되는데, 다음과 같다. :CUSTOM_ID:, :HTML_HEADLINE_CLASS:이다. 나는
+        custom_id만 사용해서 css선택자로 사용하기로 했다. 왜냐하면, headline에
+        custom_id속성을 처리하면, html로 변환되었을 때,
+        outline-container-id이름, id이름, text-id이름으로 원하는 tag를
+        선택할수 있기 때문이다.
+
+        <div class="important">
+
+        -   hello
+
+        :CUSTOM_ID: hello-id
+        :HTML_HEADLINE_CLASS: hello-class
+
+        !hello world!
+
+        -   hi
+
+        :CUSTOM_ID: hi-id
+        :HTML_HEADLINE_CLASS: hi-class
+
+        </div>
+
+        이것만 보면 와 닿지 않기 때문에 mapping그림을 첨부한다.
+
+        <a id="figure--org-publish2"></a>
+
+        {{< figure src="./img/org-publish2.png" caption="<span class=\"figure-number\">Figure 3: </span>org-publish2" width="400px" >}}
+
+    <!--list-separator-->
+
+    -  org-special-blocks
+
+        org special block이라는게 있다. #+begin blah blah로 block을 만들어서
+        이것을 특정언어나 코드로 trans해준다. 이것을 customize해서 특정블록을
+        특정html code로 변환하는 special block을 만들어서 사용할 수도 있지만,
+        이미 있는 block중에 다음과 같은 것이 있다.
+
+        <div class="important">
+
+        <div>test</div>
+
+        </div>
+
+        이것은 org문서에서 html코드를 입력하면 html code로 trans시 그대로
+        출력된다.
+
+        이제 org문서를 설계하고 이를 바탕으로 css 설계를 하자.
+
+<!--list-separator-->
+
+-  org문서 organization
+
+    다음과 같은 구조로 page를 설계해보자.
+
+    <a id="figure--"></a>
+
+    {{< figure src="./img/mainblog-blueprint1.png" caption="<span class=\"figure-number\">Figure 4: </span>main blog" width="400px" >}}
+
+    page를 바탕으로 org파일을 만들어보자. 각각의 사각형은 headline을
+    뜻하고, 필기로 작성한것은 selector에 해당한다. headline은 제목과
+    내용으로 구성된다. 하지만, 위의 page에선 제목이 없는 경우도
+    있다.그것에 대한 처리는 별도로 했다. org를 작성할 때 고려한것은 다음과
+    같다.
+
+    -   org headline에 사각형 selector를 나타내기 위해 property의 custom_id 사용.
+        예외) aside와 page는 org에서 headline이지만, 내용은 쓰지
+        않는다. 왜냐면, selector만 사용할것이기 때문이다.
+    -   org에서 작성된 title과 subtitle은 html로 변환시 header tag안에 기술된다.
+    -   unordered list는 그냥 html로 구현했다.
+
+    <a id="figure--blog org"></a>
+
+    {{< figure src="./img/mainblog_org3.png" caption="<span class=\"figure-number\">Figure 5: </span>mainblog org" width="400px" >}}
+
+    M-x org-publish-all을 하거나, C-c C-e P f를 눌러서 publishing하면
+    아래와 같은 html파일이 만들어진다.
+
+    <a id="figure--mainblog html"></a>
+
+    {{< figure src="./img/mainblog_html1.png" caption="<span class=\"figure-number\">Figure 6: </span>mainblog html" width="400px" >}}
+
+    대략적인 문서의 구조를 org 파일로 구현했다. 이제 selector를 사용해서
+    css처리를 하자.
+
+
+#### css project {#css-project}
+
+css를 처리하기 위해선 org-publish의 css project를 만들어야 한다.
+
+```emacs-lisp
+("my-main-blog-css"
+	     :base-directory "~/MyProjects/main-blog/css"
+	     :base-extension "css\\|scss"
+	     :publishing-directory "~/MyProjects/main-blog/public/css/"
+	     :recursive t
+	     :publishing-function org-publish-attachment
+	    )
+```
+
+이것은 개발과정에서 사용되는 css파일을 public폴더로 이동해주는
+역할이다. 실제 html코드에서 css에서 참조할때는 public위치의 css를
+사용하게 해주면 된다. html코드에 삽입을 위해선, org project에서 명시해
+야한다. 일부만 가져왔지만, 아래보면 :html-head에 명시했다.
+
+```emacs-lisp
+(setq org-publish-project-alist
+      '(
+	("my-main-blog"
+	 :base-directory "~/MyProjects/main-blog/org/"
+	 :base-extension "org"
+	 :publishing-directory "~/MyProjects/main-blog/public/"
+	 :publishing-function org-html-publish-to-html
+	 :recursive t
+	 :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
+```
+
+이제 css파일을 설정하자.
+
+<!--list-separator-->
+
+-  prototype for css
+
+    <!--list-separator-->
+
+    -  font에 대한 처리
+
+        내가 주로 사용하는 font는 Inter라는 폰트다. 구글에서 제공하는
+        font다. client에서 해당 폰트가 없을 수 있기 때문에 @import로 해당
+        font를 다운받게 했다.
+
+        ```css
+        @import url('https://fonts.googleapis.com/css2?family=Inter');
+        ```
+
+        web page의 모든 text를 inter로 설정하기 위해선, font-family을 body에
+        설정하기로 한다. font-family는 글꼴을 설정하고 font는 글꼴이 가진
+        속성을 설정하기 때문에 font도 설정하기로 한다. 다음과 같이 설정했다.
+
+        ```css
+        @import url('https://fonts.googleapis.com/css2?family=Inter');
+
+        /* =============================================================================
+           elements
+           ========================================================================== */
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: Inter, sans-serif;
+            font: 14/1.5 Inter;
+        }
+        ```
+
+        폰트만 바꿔도 어느정도 차이가 난다.
+
+        <a id="figure--before-font"></a>
+
+        {{< figure src="./img/before_font.png" caption="<span class=\"figure-number\">Figure 7: </span>before_font" width="400px" >}}
+
+        <a id="figure--before-font"></a>
+
+        {{< figure src="./img/after_font.png" caption="<span class=\"figure-number\">Figure 8: </span>after_font" width="400px" >}}
+
+        그리고 나는 모든 글자의 색을 약간 흐릿하게 설정한다. 이렇게 했을때,
+        text별로 농도 조절이 dramatic한 효과를 낸다.
+
+        ```css
+        body {
+            width: 100%;
+            height: 100%;
+            font-family: Inter, sans-serif;
+            font: 13px/1.5 Inter;
+            color: #595959;
+        }
+        ```
+
+        일반적인 폰트 설정은 다음과 같다. system font를 사용하도록 설정한다는
+        것이다. 그래야 속도도 좋고 보기도 좋다고 한다.
+
+        ```css
+        body {
+          font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+            Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        }
+        ```
+
+        apple system과 BlinkMacSystemFont는 맥,
+        Segoe UI는 윈도우,
+        Roboto는 안드로이드 OS의 기본 폰트다.
+
+    <!--list-separator-->
+
+    -  icon의 적용
+
+        가장 많이 사용하는 font-awesome이 유료화로 되서 나는 google icon을
+        사용했다. <https://fonts.google.com/icons> 여기에서 icon을 검색할 수
+        있다. 여기에 보면 사용방법이 나오는데, cdn과 사용법이 명시되어
+        있다. cdn주소는 다음과 같다.
+
+        ```emacs-lisp
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0" />
+        ```
+
+        cdn을 html에 삽입하기 위해서 org project에서 다음과 같이 추가했다.
+
+        ```emacs-lisp
+        :html-head-extra "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0\" />"
+        ```
+
+        이렇게 cdn을 가져오고 사용하는 법은 google icon page에서 원하는 icon을
+        선택하면 span태그를 html에 삽입하라고 한다.
+
+        ```html
+        <span class="material-symbols-outlined">emoji_people</span>
+        ```
+
+        위와 같이 삽입하면 된다.
+
+<!--list-separator-->
+
+-  basic layout
+
+    <!--list-separator-->
+
+    -  layout에대한 상식
+
+        layout을 처리하려면, container가 필요하다. 그리고 container는 부모,
+        자식들의 관계를 따질 필요가 있다.
+
+    <!--list-separator-->
+
+    -  부모의 관계
+
+        container는 부모의 with와 height를 물려받아서 처리할 수 있다. 부모의
+        width:500px, height:500px이면, container는 width:100%, height:100%로
+        물려받을 수 있다. 어떤 자식은 부모의 dominance에서 벗어날 수도
+        있다. 그럴땐, container가 부모보다 큰 width와 height를 pixel로
+        기술하면 된다.
+
+    <!--list-separator-->
+
+    -  자식과의 관계
+
+        container가 자식에 대한 layout을 관리할 수도 있다. 이렇게 하기 위해선
+        display를 flex로 해서 자식들을 하나의 축으로 나열하는 방식을 쓸수
+        있다. 물론 다른 방법들이 있지만, 내경우 flex를 사용하려고 하기때문에
+        이렇게 생각한다.
+
+<!--list-separator-->
+
+-  basic layout의 구현
+
+    org-&gt;html로 변환했을 때, 크게 body&gt;content 아래 3개의 block이
+    있다. header, aside, page다. 만일 body&gt;content아래에 header와
+    content라는 2개의 block만 있다면 flex를 사용하기 용이했을
+    것이다. 그런데 content아래에 3개의 block이 있고, 3개의 block은 flex의
+    축을 정하기 어렵게 만든다. 그래서 org에서 page와 aside를 감싸는 빈
+    container를 하나 더 만들기로 한다. 내용없는 headline에 property를
+    추가하는 식으로 했다.
+
+    ```org
+
+    :PROPERTIES:
+    :CUSTOM_ID: main
+    :END:
+
+    ```
+
+    이제 body&gt; content&gt; header, main &gt; aside, page 형태로 css를 작성하자.
+
+    <!--list-separator-->
+
+    -  body css
+
+        ```css
+        body {
+            width: 100%;
+            height: 100%;
+            font-family:  -apple-system,Inter, sans-serif;
+            font: 13px/1.5 Inter;
+            color: #595959;
+        }
+        ```
+
+    <!--list-separator-->
+
+    -  content
+
+        content는 web page의 크기를 나타낸다고 보면 된다. 그래서 1200x820으로
+        했다.  자식으로 2개의 block이 있다. header와 main을 위 아래방향으로
+        하기위해서 column을 사용했다.
+
+        ```css
+        .content{
+            margin: 0px 0px 0px 0px;
+            padding-top: 50px;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: column;
+            height: 820px;
+        }
+        ```
+
+    <!--list-separator-->
+
+    -  header
+
+        ```css
+        header {
+            height: 5%;
+            widht: 100%;
+            align-items: center;
+            background: #fff;
+            border-bottom: 1px #ccc solid;
+            padding: 2px;
+         display: flex;
+        }
+        ```
+
+    <!--list-separator-->
+
+    -  main(#outline-container-main)
+
+        ```css
+        #outline-container-main {
+            height: 750px;
+            widht: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+        ```
+
+    <!--list-separator-->
+
+    -  aside(#outline-container-aside)
+
+    <!--list-separator-->
+
+    -  page(#outline-container-page)
+
+
+#### responsive web (지금은 뺐다) {#responsive-web--지금은-뺐다}
+
+viewport meta tag를 html head에 넣는다.
+
+```html
+<meta
+  name="viewport"
+  content="width=500, initial-scale=1"
+  user-scalable="yes"
+/>
+```
+
+위의 것은 어떻게 보면 필수로 넣는것이다.
+그 다음 css에서 처리를 해야한다.
+
+```css
+@media (max-width: 1010px) {
+    .wrapper>.page{
+	flex: calc(20%);
+	margin-right: 50px;
+    }
+}
+
+@media (max-width: 700px) {
+    .wrapper>.page{
+	flex: calc(20%);
+	margin-right: 50px;
+    }
+    .footer{
+	margin-top: 800px;
+    }
+}
+
+```
+
+화면이 왼쪽엔 header영역과 오른쪽엔 page영역으로 나눠져 있는데,
+토탈하면 1300px정도 width를 갖는다. 1010px아래로 줄어들기 시작하면
+어떤 처리를 하고, 계속 줄어들어 700px 이하로 width가 줄어들면 또다른
+처리를 하게 했다. 1010px은 desktop browser에서 화면이 줄어들때 글자가
+안보이기 때문에 이를 처리할려는 의도다. 700px은 핸드폰같은 mobile
+device에서 볼때 처리하기 위해서이다. flex:calc(20%)라는 코드가 있는데,
+만일 이것이 없다면 화면이 10100px보다 작아지면 오른쪽 page영역이
+header영역 아래로 바로 이동한다. 반면에 위 코드가 있기 때문에 바로
+page가 header영역 아래로 이동하지 않고, 20%정도 남았을때
+이동한다. 20%이상일때는 page의 size가 줄어들기만 한다. page안의 text가
+있는데, page가 줄어들면서 줄도 줄어들지만, header아래로 이동하지 않게
+된다.
+
+
+#### layout 설정 {#layout-설정}
+
+내가 원하는 blog의 디자인은 [다음](https://orderedlist.com/minimal/) 같았다. 이것에 맞추어 layout을
+design을 해보았다. css파일은 위에서 정의했듯이 css/style.css에서
+기술하면 된다.
+
+
+### org-publish를 사용하지 않고 backend사용법(중단) {#org-publish를-사용하지-않고-backend사용법--중단}
+
+
+#### org를 html로 변경(org-export-dispatcher) {#org를-html로-변경--org-export-dispatcher}
+
+emacs에서 org문서를 다른 문서로 만들려면 org-export-backend가
+필요하다. 우리가 C-c e를 누르면 org-export-dispatcher라는 메뉴가
+보이는데, 각각의 메뉴들은 backend를 나타낸다.
+
+<a id="figure--backend"></a>
+
+{{< figure src="./img/backend.png" caption="<span class=\"figure-number\">Figure 9: </span>backend" width="400px" >}}
+
+그러면 backend라는 것은 무엇인가? backend는 org문서를 구성하는
+여러 구성요소들이 어떤식으로 변환될것인가를 정의한 코드를 의미한다.
+
+예를 들어서, org문서를 html로 만드는 html backend는 다음과 같은 코드로
+되어 있다.
+
+<a id="figure--htmlbackend1"></a>
+
+{{< figure src="./img/html_backend.png" caption="<span class=\"figure-number\">Figure 10: </span>htmlbackend1" width="400px" >}}
+
+<a id="figure--html backend2"></a>
+
+{{< figure src="./img/html_backend2.png" caption="<span class=\"figure-number\">Figure 11: </span>html backend2" width="400px" >}}
+
+첫번째 부분은 html이란 이름의 backend를 정의하고, org문서를 구성하는
+요소들을 html의 구성요소로 변환시키는 함수를 지정하고 있다. 두번째
+이미지에서는 C-e C-c를 누를때 나오는 org-dispatcher의 menu를 만드는
+부분과, org문서에서 html관련 option을 지정할 수 있는데, 지정된
+option을 html에서 어떻게 처리할것인지 함수로
+정의해놓았다. backend에서는 이렇게 org의 모든 문법적요소들이 html의
+문법적 요소를 mapping하는 모든 것을 구성해야 한다.
+
+그런데 org문서에서 내 blog에 맞게 customize해서 html로 변환할 수도
+있다. 모든 문법적 요소를 위와같이 정의할 필요 없이 상속해서 사용할 수
+있다. 자신이 정의한 내용만 원하는대로 변환하고 나머지는 기존의 rule을
+따르는 것이다. 이럴때 사용하는 함수가
+org-export-define-derived-backend라는 함수다.아래는 my-backend를
+사용하고 'html을 상속받는다. 사용법은 다음과 같다.
+
+```emacs-lisp
+(org-export-define-derived-backend 'my-backend 'html
+  :menu-entry
+  '(?z "Test to My Backend" ((?H "As HTML buffer")
+				(?h "As HTML file")
+				(?o "As ODT file" my_func))))
+
+(defun my_func(a b c d)
+  (message "test"))
+
+```
+
+html backend를 상속하기 때문에 ox-html.el에 있는 html백엔드를 그대로
+사용한다. 다만 :menu-entry를 재정의한다. :menu-entry는 C-c C-e로
+보여지는 org-export-dispatcher의 메뉴를 의미한다. menu에 정해진 key를
+눌렀을때 함수가 호출하게 되어 있는데, 이함수를 사용자 정의함수로
+설정할 수 있다. 여기서는 my_func()를 사용한다. menu에서 z o를 누르면
+호출되는 my_func에는 4개의 인자가 전달된다.
+
+ASYNC, SUBTREEP, VISIBLE-ONLY and BODY-ONLY
+
+
+## main blog 사용법 {#main-blog-사용법}
+
+나는 ox-publish로 static website를 만들었지만, 이 방법은 그렇게
+추천하지 않는다. 좀 복잡하다. 그래도 언젠가 수정할 사항이 생기기
+때문에 어떻게 사용하는지는 적을 필요를 느꼈다.
+
+
+### 내용 변경 {#내용-변경}
+
+mainblog에 들어가는 내용은 index.org에 기술되어 있다. 그런데, 일반적
+org와 다르다. 왜냐하면, html tag로 변환할때 원하는 html tag로의 변환이
+안되기 때문에, property와 begin_export html과 같은 요소를 사용했기
+때문이다. 내용을 변경하려면 org파일에서 내용들을 변경하면
+된다. article을 추가하려면 3rd level headline을 작성하면 된다. 아니면
+삭제할 수도 있다. 여튼 수정이 됐다면...
+
+
+### M-x org-publish-all {#m-x-org-publish-all}
+
+나의 emacs-lisp설정파일(emacs.org)에 보면 org-publish-all이 수행하는
+project가 기술되어 있다. 3개의 project가 있는데, org,css,image에 대한
+처리를 한다. org를 html로 변경하고, css,image는 public 폴더로 이동한다.
+
+```emacs-lisp
+(require 'ox-publish)
+(setq org-publish-project-alist
+      '(
+	("my-main-blog"
+	 :base-directory "~/MyProjects/main-blog/org/"
+	 :base-extension "org"
+	 :publishing-directory "~/MyProjects/main-blog/public/"
+	 :publishing-function org-html-publish-to-html
+	 :recursive t
+	 :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>
+		     <link rel=\"shortcut icon\" href=\"./img/favicon.ico\" type=\"image/x-icon\">
+		     <link rel=\"icon\" href=\"./img/favicon.ico\" type=\"image/x-icon\">"
+	 :html-head-extra "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0\" />"
+	 :section-numbers nil
+	 :section-numbers nil
+	 :with-toc nil
+	 :html-head-include-default-style nil
+	 :html-postamble nil
+	 ;; :headline-levels 3
+	 ;; :html-tag-class-prefix "my-org-"
+	 :html-postamble "<div class=\"footer\">This project is maintained and Copyright © holyfrege
+			 2024. All rights reserved. <br> Hosted on GitHub Pages</div>"
+	 :html-indent t
+	 :html-doctype "html5"
+	 :html-html5-fancy t
+	 )
+	("my-main-blog-css"
+	  :base-directory "~/MyProjects/main-blog/css"
+	  :base-extension "css\\|scss"
+	  :publishing-directory "~/MyProjects/main-blog/public/css/"
+	  :recursive t
+	  :publishing-function org-publish-attachment
+	 )
+	("my-main-blog-img"
+	  :base-directory "~/MyProjects/main-blog/img"
+	  :base-extension "png\\|jpg\\|ico\\|mov\\|mp4"
+	  :publishing-directory "~/MyProjects/main-blog/public/img/"
+	  :recursive t
+	  :publishing-function org-publish-attachment
+	 )
+	))
+
+```
+
+
+### git에 반영 {#git에-반영}
+
+수정이 끝났으면 holy2frege github에 반영하면 된다. publc폴더부터
+반영하고, 그다음 개발 repo를 반영한다. 403에러가 나면 keychain에서
+login type github을 삭제한 후에 id(holy2frege), pw(pat)를
+입력한다. 반영후 frege2godel.me를 브라우저에서 확인해본다.
+
+
+## 수정 사항들 {#수정-사항들}
+
+
+### <span class="org-todo done DONE">DONE</span> 반응형 웹페이지 적용 {#반응형-웹페이지-적용}
+
+반응형 웹페이지는 meta태그가 필요하다.
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1>
+```
+
+그리고 mediaquery를 사용할 줄 알면
+된다. 참조:<https://www.youtube.com/watch?v=qe3nSIg2k3Y> 반응형 웹을
+고려할때 기기별, 핸드폰, 태블릿, 그리고 pc의 3가지를 생각해야
+한다. 핸드폰의 경우 세로버전,가로버전 2가지도 생각해야 한다. 나는 그냥
+나만 볼 예정이기 때문에, 700px이하, 즉 핸드폰 세로로 볼때, 700-1024는
+핸드폰 가로와 테블릿, 나머지는 pc로 생각해서 구현했다. 이게 맞는
+boundary인지는 모르겠다.
+
+```css
+/*
+  ##Device = Most of the Smartphones Mobiles (Portrait)
+  ##Screen = 320px에서 479px 사이, I'm just using 700px.
+*/
+  @media only screen and (max-width: 700px)
+  {
+
+  }
+  @media only screen and (max-width: 1024px) {
+
+  }
+
+```
+
+안에 들어가는 tag의 width설정과 height설정및 재배치는
+chrome개발자도구에서 width를 줄여가면서 보여지는 tag의 css를
+개발자도구에서 직접 수정해서 변화되는것을 보고 변경했다.  위에서
+생활코딩 동영상하고 거의 같은 방식으로 수정했다. 개발단계에서의 test는
+그렇게 편한것은 아니다. main-blog/css/style.css를 수정하고, M-x
+org-publish-all을 눌러서 publishing처리를 한다. 그런다음에
+public폴더의 index.html을 버퍼에 연 후 M-x impatient-mode로 default
+browser를 연다. 그다음 개발자도구에서 테스트를 한다. 개발자도구에서
+mobile device에서 iphone XR을 선택한다. 가로,세로를 테스트하는데
+제대로 안된다. 적용이 안되는 거 같다. 그래서 개발자도구 pane을 좌우로
+이동시켜서 테스트하고, 어느정도 만족하다 싶을때 git에 반영을 하는
+방식으로 처리했다. 설계당시부터 responsive website를 염두에 두고
+작성한다면, layout도 고민하고, 예를 들면, 어떤 해상도에서는 flex를
+쓰지만, 다른 해상도에선 block으로 바꿔야 할지, 그리고 layout의 size인
+pixel로 할지, 다른 단위로 할지도 고민할 거 같다. 여튼 완료는 되었다.

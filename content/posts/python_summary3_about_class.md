@@ -1,7 +1,7 @@
 +++
 title = "python_summary3 about class"
 author = ["holy"]
-description = "python의 class와 객체지향 개념"
+description = "python은 대량의 데이터를 처리하는 기능과 data를 simulate하는 기능이 있다. data를 simulate하는 것은 class다."
 date = 2023-06-14T00:00:00+09:00
 draft = true
 +++

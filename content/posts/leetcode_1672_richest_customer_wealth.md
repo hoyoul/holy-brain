@@ -1,7 +1,9 @@
 +++
 title = "[leetcode] 1672 Richest Customer Wealth"
-author = ["Holy Frege"]
-draft = false
+author = ["holy"]
+description = "leetcode의 explore에 있는 beginner문제다."
+date = 2023-06-17T00:00:00+09:00
+draft = true
 +++
 
 ## 문제 {#문제}
@@ -64,6 +66,12 @@ n =` accounts[i].length
 1 &lt;= accounts[i][j] &lt;= 100
 
 </div>
+
+
+## 생각 {#생각}
+
+account라는 data를 사람과 bank라는 2개의 data로 나타내는데 2d array를
+사용한다.
 
 
 ## 풀이 {#풀이}
