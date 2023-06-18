@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       0F39CF3B-FB3F-4C96-9127-5838559DCE01
-:mtime:    20230614143146 20230614133026
+:mtime:    20230617205441 20230614143146 20230614133026
 :ctime:    20230614133026
 :END:
 #+title: python_summary5 loop
@@ -141,9 +141,10 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
       : 3
 *** for
 **** 기본개념
-반복하는데 객체에서 값을 꺼내서 반복한다. 객체의 index가 아닌 값을
-꺼낸다. range객체는 값을 index형태로 만들어내기 때문에 for-loop에 많이
-사용된다.
+대용량 data인 list나 array를 처리하는 방법이다. 반복을 사용하는데, c나
+java와 달리, 객체에서 값을 꺼내서 반복한다. 객체의 index가 아닌 값을
+꺼낸다. 그래서 range라는 객체가 있다. range객체는 값을 index형태로
+만들어내기 때문에 for-loop에 많이 사용된다.
 **** enumerate의 사용
 for는 객체로부터 객체를 꺼내기 때문에 index처리를 할때 enumerate를
 사용해서 index를 꺼낸다. dictionary의 경우는 key:value로 되어 있기

@@ -1,9 +1,14 @@
 :PROPERTIES:
 :ID:       74FB4E33-0768-4E2E-A57F-1ECB6A6A0C2E
-:mtime:    20230614195447 20230614173003 20230614161120
+:mtime:    20230617092540 20230614195447 20230614173003 20230614161120
 :ctime:    20230614161120
 :END:
 #+title: [leetcode] 1672 Richest Customer Wealth
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-17 Sat>
+#+DESCRIPTION: leetcode의 explore에 있는 beginner문제다.
+#+HUGO_DRAFT: true
 * 문제
 [[https://leetcode.com/problems/richest-customer-wealth/][링크]]
 #+begin_important
@@ -47,6 +52,9 @@ n == accounts[i].length
 1 <= m, n <= 50
 1 <= accounts[i][j] <= 100
 #+end_important
+* 생각
+account라는 data를 사람과 bank라는 2개의 data로 나타내는데 2d array를
+사용한다.
 * 풀이
 #+BEGIN_SRC python :results output :exports both
 class Solution(object):

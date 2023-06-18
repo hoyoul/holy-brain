@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       95EA3B0E-4546-46C5-A954-3F79D773343E
+:mtime:    20230617105528
+:ctime:    20230617105528
+:END:
+#+title: python_summary6 function
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-17 Sat>
+#+DESCRIPTION:
+#+HUGO_DRAFT: true

@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       C2FA9C6E-D3CD-49ED-A8AB-FCECC8575338
+:mtime:    20230616162720 20230616140021 20230616124555
+:ctime:    20230616124555
+:END:
+#+title: [github] multi account github problem
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-06-16 Fri>
+#+DESCRIPTION: multiple github을 사용할때 git push,pull 안되는 경우
+#+HUGO_DRAFT: true
+* multi account github problem
+맥에서 여러개의 github을 사용할때 git push 403에러가 나는 경우가 있다.
+** 간단한 해결법
+- key chain에서 login type이 github을 삭제한다.
+#+CAPTION: delete github key
+#+NAME: delete github key
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+#+ATTR_ORG: :width 100
+[[../static/img/github/github_chain1.png]]
