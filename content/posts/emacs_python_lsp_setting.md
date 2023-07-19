@@ -6,7 +6,7 @@ date = 2023-06-08T00:00:00+09:00
 draft = true
 +++
 
-## <span class="org-todo todo DOING">DOING</span> pyright 설정 {#pyright-설정}
+## DOING pyright 설정 {#doing-pyright-설정}
 
 
 ### create env {#create-env}

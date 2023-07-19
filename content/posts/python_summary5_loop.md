@@ -195,7 +195,7 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
         ```python
         for i in [0,1,2,3,4]:
             if i % 2:
-        	print(i, "is odd")
+                print(i, "is odd")
         ```
 
         ```text

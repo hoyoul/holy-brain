@@ -53,9 +53,9 @@ parser.add_argument('-l', '--left', type= int)
 parser.add_argument('-r', '--right', type= int)
 
 parser.add_argument('--operation',
-		    dest='op',
-		    help='Set Operation',
-		    default='sum')
+                    dest='op',
+                    help='Set Operation',
+                    default='sum')
 args = parser.parse_args()
 print(args)
 
@@ -128,9 +128,9 @@ except <예외클래스>:
 ```python
 for i in range(-5,5):
     try:
-	print(10/i)
+        print(10/i)
     except ZeroDivisionError:
-	print("Zero Division, skip the number.")
+        print("Zero Division, skip the number.")
 ```
 
 i가 0이 되면 zero division error가 발생한다. try exception처리가
@@ -180,11 +180,11 @@ raise구문으로 예외를 발생시킬 수 있다. 그리고 as 구문으로 �
 ```python
 try:
     while True:
-	value = input("A,B,C중 하나를 입력하세요:")
-	if len(value) ==1 and value not in "ABC":
-	    raise ValueError("잘못된 입력입니다. 종료합니다.")
+        value = input("A,B,C중 하나를 입력하세요:")
+        if len(value) ==1 and value not in "ABC":
+            raise ValueError("잘못된 입력입니다. 종료합니다.")
 
-	print("선택된 옵션:", value)
+        print("선택된 옵션:", value)
 except ValueError as e:
     print(e)
 ```
@@ -303,24 +303,24 @@ finally구분은 모든 경우에 출력되는 것을 볼 수 있다.
 ```python
 for i in range(5,-5,-1):
     try:
-	value /= i
+        value /= i
 
     except NameError:
-	print("No value on Value: set 0")
-	value = 10
+        print("No value on Value: set 0")
+        value = 10
 
     except ZeroDivisionError:
-	print("Zero Division: Skip")
+        print("Zero Division: Skip")
 
     except Exception as e:
-	print(type(e),e)
-	raise e
+        print(type(e),e)
+        raise e
 
     else:
-	print(value)
+        print(value)
 
     finally:
-	print("step")
+        print("step")
 ```
 
 첫번째로 발생하는 error는 NameError다. NameError가 발생하는 이유는,

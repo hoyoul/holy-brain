@@ -25,11 +25,11 @@ draft = true
            elf.parcels = []
 
            def assign(self, parcel: str) -> None:
-    	  self.parcels.append(parcel)
+              self.parcels.append(parcel)
 
            def deliver(self) -> None:
-    	  for parcel in self.parcels:
-    	       print(parcel, "배달중")
+              for parcel in self.parcels:
+                   print(parcel, "배달중")
 
     ```
 
@@ -53,11 +53,11 @@ draft = true
            self.parcels = []
 
         def assign(self, parcel: str) -> None:
-    	self.parcels.append(parcel)
+            self.parcels.append(parcel)
 
         def deliver(self) -> None:
-    	for parcel in self.parcels:
-    	    print(parcel, "배달중")
+            for parcel in self.parcels:
+                print(parcel, "배달중")
 
     courier1 = Courier("김기사","경기도 성남시 정자동")
     print(courier1.name, "-", courier1.address, "근무중")
@@ -136,12 +136,12 @@ method를 수행하는 방식은 2가지가 있다. 하나는 class자체 객체
 class Holy(object):
     class_var = "temp"
     def __init__(self, name: str):
-	self.name = name
-	print("constructor")
+        self.name = name
+        print("constructor")
 
     def assign(self, newname:str) -> None:
-	self.name = newname
-	print(self.name,"assign method")
+        self.name = newname
+        print(self.name,"assign method")
 
 print(Holy.class_var)
 tempholy = Holy("holy")
@@ -233,29 +233,29 @@ object는 부모 class, Courier는 자식 class가 된다.
 ```python
 class Courier:
     def __init__(self, name:str):
-	print(self)
-	self.name = name
-	print("courier 생성자")
-	self.address = "부산"
-	self.parcels = []
+        print(self)
+        self.name = name
+        print("courier 생성자")
+        self.address = "부산"
+        self.parcels = []
 
     def assign(self, parcel: str) -> None:
-	self.parcels.append(parcel)
+        self.parcels.append(parcel)
 
     def deliver(self) -> None:
-	for parcel in self.parcels:
-	    print(parcel, "super 배달중 -", self.address)
+        for parcel in self.parcels:
+            print(parcel, "super 배달중 -", self.address)
 
 class JejuCourier(Courier):
     def __init__(self, name: str, ticket: int):
-	print("생성자juju")
-	# super().__init__(name)
-	super(name)
-	self.ticket = ticket
+        print("생성자juju")
+        # super().__init__(name)
+        super(name)
+        self.ticket = ticket
 
     def deliver(self) -> None:
-	print(self.ticket, "티켓으로 제주도 이동")
-	super().deliver()
+        print(self.ticket, "티켓으로 제주도 이동")
+        super().deliver()
 
 # courier = JejuCourier("김기사", 15)
 JejuCourier("김기사", 15)
@@ -377,15 +377,15 @@ class Number:
 
     @staticmethod
     def static_factory():
-	obj = Number()
-	obj.value = Number.Constant
-	return obj
+        obj = Number()
+        obj.value = Number.Constant
+        return obj
 
     @classmethod
     def class_factory(cls):
-	obj = cls()
-	obj.value = cls.Constant
-	return obj
+        obj = cls()
+        obj.value = cls.Constant
+        return obj
 
 number_static = Number.static_factory()
 number_class = Number.class_factory()
@@ -481,9 +481,9 @@ protected라고 일종의 규약처럼 사용되는데, 문법적 요소는 없�
 ```python
 class TestClass(object):
     def __init__(self):
-	self.attr = 1
-	self._attr = 2
-	self.__attr =3
+        self.attr = 1
+        self._attr = 2
+        self.__attr =3
 
 instance = TestClass()
 print(dir(instance))
@@ -526,13 +526,13 @@ getter라는 method도움없이 직접 입력하는 것과 같은 착시효과�
 class Circle(object):
     PI = 3.141592
     def __init__(self, radius=3.):
-	self.radius = radius
+        self.radius = radius
 
     def get_area(self):
-	return Circle.PI * self.radius ** 2
+        return Circle.PI * self.radius ** 2
 
     def set_area(self, value):
-	self.radius = (value / Circle.PI) ** .5
+        self.radius = (value / Circle.PI) ** .5
 
 circle = Circle(5.)
 print(circle.get_area())
@@ -560,14 +560,14 @@ private한 keyword가 없기 때문에 굳이 get함수를 사용할 필요는
 class Circle(object):
     PI = 3.141592
     def __init__(self, radius = 3.):
-	self.radius = radius
+        self.radius = radius
     @property
     def area(self):
-	return Circle.PI * self.radius **2
+        return Circle.PI * self.radius **2
 
     @area.setter
     def area(self,value):
-	self.radius = (value /Circle.PI) ** .5
+        self.radius = (value /Circle.PI) ** .5
 
 circle = Circle(5.)
 print(circle.area)
@@ -619,13 +619,13 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     ```python
     class DoubleMapper:
         def __init__(self):
-    	self.mapping = {}
+            self.mapping = {}
 
         def __getitem__(self, index):
-    	return self.mapping.get(index, index * 2)
+            return self.mapping.get(index, index * 2)
 
         def __setitem__(self, index, item):
-    	self.mapping[index] = item
+            self.mapping[index] = item
 
     mapper = DoubleMapper()
     print(mapper[10], mapper[1,2])
@@ -687,11 +687,11 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     해서 mapper객체의 값들은 {10:15, (1,2):(1,2,1,2)} 이렇게
     유지된다.
 
-    이렇게 __setitem__과 __getitem__을 사용한다면, index관련한
+    이렇게 <span class="underline"><span class="underline">setitem\__과 __getitem__을 사용한다면, index관련한
     처리를 재정의가 가능하다. dictionary와 tuple array, list같은
     index를 사용한 연산에서 index의 기능을 재정의하는게
     가능하다. 위에서도 index를 사용해서 값을 return받거나,
-    index에 값을 삽입하는 것을 <span class="underline"><span class="underline">getitem</span></span>, __setitem__을
+    index에 값을 삽입하는 것을 __getitem</span></span>, __setitem__을
     재정의하면 해당 method가 호출되는 것을 볼 수 있다.
 
     이런 형태가 pandas나 tensorflow에서 많이 보이는데, 안에
@@ -707,16 +707,16 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     ```python
     class Dataset:
         def __init__(self, data, times =3):
-    	self.data = data
-    	self.times = times
+            self.data = data
+            self.times = times
 
         def __len__(self):
-    	return len(self.data) * self.times
+            return len(self.data) * self.times
 
         def __getitem__(self, index):
-    	if index > len(self):
-    	    raise IndexError()
-    	return self.data[index % len(self.data)]
+            if index > len(self):
+                raise IndexError()
+            return self.data[index % len(self.data)]
 
     dataset = Dataset([10,2,5,2], times=5)
     print(len(dataset))
@@ -765,11 +765,11 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     ```python
     class Courier:
         def __init__(self, name: str, address: str):
-    	self.name = name
-    	self.address = address
+            self.name = name
+            self.address = address
 
         def __str__(self):
-    	return self.address + '담당' + self.name
+            return self.address + '담당' + self.name
 
     courier = Courier("김기사", "경기도 성남")
     text = str(courier)
@@ -785,10 +785,10 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     전달해서 str객체로 형변환한다고 생각한다. 또다른 예로, int객체
     3이 str생성자에 전달되어 str(3)은 str 객체로 변환된다고 생각한다.
     하지만, 이것은 int 클래스에 정의된 str dunder method의
-    호출이다. python에선 그렇다. int라는 class에 __str__메소드가
+    호출이다. python에선 그렇다. int라는 class에 <span class="underline"><span class="underline">str\__메소드가
     정의되어 있는것이다. 우리가 형변환이라고 부르는 int(courier)이나,
     float(courier), bool(courier) 모두 class의 dunder method로
-    정의되어 있다는 것이다. <span class="underline"><span class="underline">str</span></span> dunder method를 정의해서 편리하게
+    정의되어 있다는 것이다. __str</span></span> dunder method를 정의해서 편리하게
     쓰는 경우는 객체를 print할 때다. __str__메소드가 리턴하는 값이
     출력된다.
 
@@ -799,11 +799,11 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     ```python
     class Courier:
         def __init__(self, name: str, cid: int):
-    	self.name = name
-    	self.cid = cid
+            self.name = name
+            self.cid = cid
 
         def __lt__(self, other):
-    	return self.cid < other.cid
+            return self.cid < other.cid
 
     couriers = [
         Courier("김기사", 56),
@@ -825,7 +825,7 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     이전에도 보았듯이 couriers.sorted()의 객체 method가 아닌,
     sorted(couriers)형태가 나온다. 이것은 sorted가 dunder method임을
     말하고, class에 정의되어 있다. couriers객체의 type은
-    list이다. 즉 list에 __sorted__()가 정의 되어 있을
+    list이다. 즉 list에 <span class="underline"><span class="underline">sorted\__()가 정의 되어 있을
     것이다. __sorted__()의 내부 동작은 정확히 모르지만, 객체들의
     __lt__()를 사용해서 크기 비교를 하는것 같다. 예를 들면, a &lt; b,
     a&gt; c, 혹은 if a == b 와 같이 많은 비교를 할 것이다. sorted가
@@ -833,7 +833,7 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     class에서 __lt__()를 정의하고 있다면, a &lt; b라는 일견 평범한
     연산은, a.\__lt__(b)로 해석될 수 있는 것이다. 즉 python에서는
     모든 것은 객체고, 모든 operator는 method이기
-    때문이다. 마찬가지로 <span class="underline"><span class="underline">le</span></span>, <span class="underline"><span class="underline">gq</span></span>, <span class="underline"><span class="underline">ge</span></span>, __ne__등 많은 것이
+    때문이다. 마찬가지로 __le</span></span>, <span class="underline"><span class="underline">gq</span></span>, <span class="underline"><span class="underline">ge</span></span>, __ne__등 많은 것이
     존재한다.
 
 <!--list-separator-->
@@ -901,17 +901,17 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     ```python
     class MyComplex:
         def __init__(self, real, imaginary):
-    	self.real = real
-    	self.imaginary = imaginary
+            self.real = real
+            self.imaginary = imaginary
 
         def __str__(self):
-    	return str(self.real) + '+' + str(self.imaginary) + 'j'
+            return str(self.real) + '+' + str(self.imaginary) + 'j'
 
         def __add__(self, other):
-    	return MyComplex(
-    	    self.real + other.real,
-    	    self.imaginary + other.imaginary
-    	    )
+            return MyComplex(
+                self.real + other.real,
+                self.imaginary + other.imaginary
+                )
 
     a = MyComplex(3, -5)
     b = MyComplex(-6,7)
@@ -936,10 +936,10 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     ```python
     class AdditionNumber(object):
         def __init__(self, number: int):
-    	self.number = number
+            self.number = number
 
         def __call__(self, number: int):
-    	return number + self.number
+            return number + self.number
 
     addition_5 = AdditionNumber(5)
     print(addition_5(10))
@@ -979,9 +979,9 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     iterable = iter(seq)
     while True:
         try:
-    	elem = next(iterable)
+            elem = next(iterable)
         except StopIteration:
-    	break
+            break
         print(elem)
 
     ```
@@ -1001,16 +1001,16 @@ method는 __를 prefix와 postfix에 사용한다. 그리고 대부분이 object
     ```python
     class Courier:
         def __init__(self,name: str):
-    	self.name = name
+            self.name = name
 
         def __enter__(self):
-    	self.parcels = []
-    	return self
+            self.parcels = []
+            return self
 
         def __exit__(self,exec_type,exec_value, trace):
-    	for parcel in self.parcels:
-    	    print(parcel, "배달 실패")
-    	    # parcel.clear()
+            for parcel in self.parcels:
+                print(parcel, "배달 실패")
+                # parcel.clear()
 
     courier = Courier("김기사")
     with courier:

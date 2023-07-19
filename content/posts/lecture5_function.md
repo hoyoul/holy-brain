@@ -358,9 +358,9 @@ def name(arg1,arg2...):
 
     def factory(function, n):
          def closure(var):
-    	 for _ in range(n):
-    	     print("test")
-    	 return var
+             for _ in range(n):
+                 print("test")
+             return var
          return closure
 
     print(factory(add,4)(10))
@@ -460,9 +460,9 @@ def name(arg1,arg2...):
         def times_decorator_factory(times):
             def times_decorator(function):
                def closure(var):
-        	  for _ in range(times):
-        		var = function(var)
-        	 return var
+                  for _ in range(times):
+                        var = function(var)
+                 return var
                return closure
             return times_decorator
 

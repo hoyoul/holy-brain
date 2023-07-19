@@ -176,7 +176,7 @@ draft = false
             ```python
             for i in [0,1,2,3,4]:
                 if i % 2:
-            	print(i, "is odd")
+                    print(i, "is odd")
             ```
 
 <!--list-separator-->

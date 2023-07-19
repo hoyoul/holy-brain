@@ -82,7 +82,7 @@ continue를 사용해서 filtering효과를 낼수 있다. 즉 데이터에서 �
 arr = [9,8,7,6,5,4,3,2,1]
 for i in arr:
     if i % 2 == 0:
-	continue
+        continue
     print(i)
 ```
 
@@ -100,7 +100,7 @@ break를 사용해서 machine을 중간에 멈출 수도 있다.
 arr = [9,8,7,6,5,4,3,2,1]
 for i in arr:
     if i == 7:
-	break
+        break
     print(i)
 ```
 

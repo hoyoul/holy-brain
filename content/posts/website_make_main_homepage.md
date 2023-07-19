@@ -142,15 +142,15 @@ html요소로 transcode한다. org의 요소와 html의 요소는 1:1 mapping되
   (require 'ox-publish)
 (setq org-publish-project-alist
       '(
-	("my-main-blog"
-	 :base-directory "~/MyProjects/main-blog/org/"
-	 :base-extension "org"
-	 :publishing-directory "~/MyProjects/main-blog/public/"
-	 :publishing-function org-html-publish-to-html
-	 :recursive t
-	 :html-head "<link rel=\"stylesheet\" href=\"../css/styles.css\" type=\"text/css\"/>"
-	 )
-	))
+        ("my-main-blog"
+         :base-directory "~/MyProjects/main-blog/org/"
+         :base-extension "org"
+         :publishing-directory "~/MyProjects/main-blog/public/"
+         :publishing-function org-html-publish-to-html
+         :recursive t
+         :html-head "<link rel=\"stylesheet\" href=\"../css/styles.css\" type=\"text/css\"/>"
+         )
+        ))
 ```
 
 :html-head는 출력되는 html head에 html tag를 넣을 수 있게 한다. 보통
@@ -325,12 +325,12 @@ css를 처리하기 위해선 org-publish의 css project를 만들어야 한다.
 
 ```emacs-lisp
 ("my-main-blog-css"
-	     :base-directory "~/MyProjects/main-blog/css"
-	     :base-extension "css\\|scss"
-	     :publishing-directory "~/MyProjects/main-blog/public/css/"
-	     :recursive t
-	     :publishing-function org-publish-attachment
-	    )
+             :base-directory "~/MyProjects/main-blog/css"
+             :base-extension "css\\|scss"
+             :publishing-directory "~/MyProjects/main-blog/public/css/"
+             :recursive t
+             :publishing-function org-publish-attachment
+            )
 ```
 
 이것은 개발과정에서 사용되는 css파일을 public폴더로 이동해주는
@@ -341,13 +341,13 @@ css를 처리하기 위해선 org-publish의 css project를 만들어야 한다.
 ```emacs-lisp
 (setq org-publish-project-alist
       '(
-	("my-main-blog"
-	 :base-directory "~/MyProjects/main-blog/org/"
-	 :base-extension "org"
-	 :publishing-directory "~/MyProjects/main-blog/public/"
-	 :publishing-function org-html-publish-to-html
-	 :recursive t
-	 :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
+        ("my-main-blog"
+         :base-directory "~/MyProjects/main-blog/org/"
+         :base-extension "org"
+         :publishing-directory "~/MyProjects/main-blog/public/"
+         :publishing-function org-html-publish-to-html
+         :recursive t
+         :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>"
 ```
 
 이제 css파일을 설정하자.
@@ -592,18 +592,18 @@ viewport meta tag를 html head에 넣는다.
 ```css
 @media (max-width: 1010px) {
     .wrapper>.page{
-	flex: calc(20%);
-	margin-right: 50px;
+        flex: calc(20%);
+        margin-right: 50px;
     }
 }
 
 @media (max-width: 700px) {
     .wrapper>.page{
-	flex: calc(20%);
-	margin-right: 50px;
+        flex: calc(20%);
+        margin-right: 50px;
     }
     .footer{
-	margin-top: 800px;
+        margin-top: 800px;
     }
 }
 
@@ -676,8 +676,8 @@ org-export-define-derived-backend라는 함수다.아래는 my-backend를
 (org-export-define-derived-backend 'my-backend 'html
   :menu-entry
   '(?z "Test to My Backend" ((?H "As HTML buffer")
-				(?h "As HTML file")
-				(?o "As ODT file" my_func))))
+                                (?h "As HTML file")
+                                (?o "As ODT file" my_func))))
 
 (defun my_func(a b c d)
   (message "test"))
@@ -721,44 +721,44 @@ project가 기술되어 있다. 3개의 project가 있는데, org,css,image에 �
 (require 'ox-publish)
 (setq org-publish-project-alist
       '(
-	("my-main-blog"
-	 :base-directory "~/MyProjects/main-blog/org/"
-	 :base-extension "org"
-	 :publishing-directory "~/MyProjects/main-blog/public/"
-	 :publishing-function org-html-publish-to-html
-	 :recursive t
-	 :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>
-		     <link rel=\"shortcut icon\" href=\"./img/favicon.ico\" type=\"image/x-icon\">
-		     <link rel=\"icon\" href=\"./img/favicon.ico\" type=\"image/x-icon\">"
-	 :html-head-extra "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0\" />"
-	 :section-numbers nil
-	 :section-numbers nil
-	 :with-toc nil
-	 :html-head-include-default-style nil
-	 :html-postamble nil
-	 ;; :headline-levels 3
-	 ;; :html-tag-class-prefix "my-org-"
-	 :html-postamble "<div class=\"footer\">This project is maintained and Copyright © holyfrege
-			 2024. All rights reserved. <br> Hosted on GitHub Pages</div>"
-	 :html-indent t
-	 :html-doctype "html5"
-	 :html-html5-fancy t
-	 )
-	("my-main-blog-css"
-	  :base-directory "~/MyProjects/main-blog/css"
-	  :base-extension "css\\|scss"
-	  :publishing-directory "~/MyProjects/main-blog/public/css/"
-	  :recursive t
-	  :publishing-function org-publish-attachment
-	 )
-	("my-main-blog-img"
-	  :base-directory "~/MyProjects/main-blog/img"
-	  :base-extension "png\\|jpg\\|ico\\|mov\\|mp4"
-	  :publishing-directory "~/MyProjects/main-blog/public/img/"
-	  :recursive t
-	  :publishing-function org-publish-attachment
-	 )
-	))
+        ("my-main-blog"
+         :base-directory "~/MyProjects/main-blog/org/"
+         :base-extension "org"
+         :publishing-directory "~/MyProjects/main-blog/public/"
+         :publishing-function org-html-publish-to-html
+         :recursive t
+         :html-head "<link rel=\"stylesheet\" href=\"./css/style.css\" type=\"text/css\"/>
+                     <link rel=\"shortcut icon\" href=\"./img/favicon.ico\" type=\"image/x-icon\">
+                     <link rel=\"icon\" href=\"./img/favicon.ico\" type=\"image/x-icon\">"
+         :html-head-extra "<link rel=\"stylesheet\" href=\"https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0\" />"
+         :section-numbers nil
+         :section-numbers nil
+         :with-toc nil
+         :html-head-include-default-style nil
+         :html-postamble nil
+         ;; :headline-levels 3
+         ;; :html-tag-class-prefix "my-org-"
+         :html-postamble "<div class=\"footer\">This project is maintained and Copyright © holyfrege
+                         2024. All rights reserved. <br> Hosted on GitHub Pages</div>"
+         :html-indent t
+         :html-doctype "html5"
+         :html-html5-fancy t
+         )
+        ("my-main-blog-css"
+          :base-directory "~/MyProjects/main-blog/css"
+          :base-extension "css\\|scss"
+          :publishing-directory "~/MyProjects/main-blog/public/css/"
+          :recursive t
+          :publishing-function org-publish-attachment
+         )
+        ("my-main-blog-img"
+          :base-directory "~/MyProjects/main-blog/img"
+          :base-extension "png\\|jpg\\|ico\\|mov\\|mp4"
+          :publishing-directory "~/MyProjects/main-blog/public/img/"
+          :recursive t
+          :publishing-function org-publish-attachment
+         )
+        ))
 
 ```
 

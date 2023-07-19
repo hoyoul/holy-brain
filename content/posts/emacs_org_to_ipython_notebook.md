@@ -71,7 +71,7 @@ cell을 만들 수도 있다.
 
 <div class="verse">
 
-#+ipynb-newcell<br>
+#+ipynb-newcell<br />
 
 </div>
 

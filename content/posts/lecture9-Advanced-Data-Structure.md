@@ -166,7 +166,7 @@ characters ={}
 for char in text:
     count = characters.get(char, None)
     if count is None:
-	characters[char] = 0
+        characters[char] = 0
     characters[char] += 1
 print(characters)
 ```
@@ -415,21 +415,21 @@ print('a-b =', a-b)
 ```python
 class Coords3D:
     def __init__(self, x, y, z):
-	self._x = x
-	self._y = y
-	self._z = z
+        self._x = x
+        self._y = y
+        self._z = z
 
     @property
     def x(self):
-	return self._x
+        return self._x
 
     @property
     def y(self):
-	return self._y
+        return self._y
 
     @property
     def z(self):
-	return self._z
+        return self._z
 ```
 
 named tuple이란건 data만을 담기 위한 class라고 한다. 위의 예를
@@ -539,7 +539,7 @@ class Coords3D:
     z: float = 0
 
     def norm(self) -> float:
-	return (self.x ** 2 + self.y ** 2 + self.z **2) ** .5
+        return (self.x ** 2 + self.y ** 2 + self.z **2) ** .5
 
 point = Coords3D(10,20,z=30)
 print(point)
@@ -551,21 +551,21 @@ Data만을 저장하기 위해서 우리가 만들었던 class를 다시 한번 
 ```python
 class Coords3D:
     def __init__(self, x, y, z):
-	self._x = x
-	self._y = y
-	self._z = z
+        self._x = x
+        self._y = y
+        self._z = z
 
     @property
     def x(self):
-	return self._x
+        return self._x
 
     @property
     def y(self):
-	return self._y
+        return self._y
 
     @property
     def z(self):
-	return self._z
+        return self._z
 ```
 
 @dataclass라는게 class에 붙게되면, 형식이 좀 다르다. 일반적인

@@ -73,9 +73,9 @@ a
 
 <div class="verse">
 
-&nbsp;Traceback (most recent call last):<br>
-&nbsp;&nbsp;File "&lt;stdin&gt;", line 1, in &lt;module&gt;<br>
-NameError: name 'a' is not defined<br>
+&nbsp;Traceback (most recent call last):<br />
+&nbsp;&nbsp;File "&lt;stdin&gt;", line 1, in &lt;module&gt;<br />
+NameError: name 'a' is not defined<br />
 
 </div>
 
@@ -92,9 +92,9 @@ print(id(3))
 
 <div class="verse">
 
-#+RESULTS:<br>
-: 140712462129520<br>
-: 140712462129520<br>
+#+RESULTS:<br />
+: 140712462129520<br />
+: 140712462129520<br />
 
 </div>
 
@@ -225,11 +225,11 @@ assignment를 이해하기 위해선 cache, symbol table개념을 이해해야
 ```python
 class Person:
     def __init__(self, name, age):
-	self.name = name
-	self.age = age
+        self.name = name
+        self.age = age
 
     def __str__(self):
-	return self.name
+        return self.name
 
 # Person 클래스의 객체를 생성하고 값을 설정합니다.
 person = Person("John", 25)
@@ -245,9 +245,9 @@ print(locals())
 
 <div class="verse">
 
-#+RESULTS:<br>
-: Jane<br>
-: {'<span class="underline"><span class="underline">name</span></span>': '<span class="underline"><span class="underline">main</span></span>', '<span class="underline"><span class="underline">doc</span></span>': None, '<span class="underline"><span class="underline">package</span></span>': None, '<span class="underline"><span class="underline">loader</span></span>': &lt;class '_frozen_importlib.BuiltinImporter'&gt;, '<span class="underline"><span class="underline">spec</span></span>': None, '<span class="underline"><span class="underline">annotations</span></span>': {}, '<span class="underline"><span class="underline">builtins</span></span>': &lt;module 'builtins' (built-in)&gt;, '<span class="underline"><span class="underline">file</span></span>': '&lt;stdin&gt;', '<span class="underline"><span class="underline">cached</span></span>': None, 'Person': &lt;class '<span class="underline"><span class="underline">main</span></span>.Person'&gt;, 'person': &lt;\__main__.Person object at 0x7fd4312f57f0&gt;, 'a': 3}<br>
+#+RESULTS:<br />
+: Jane<br />
+: {'<span class="underline"><span class="underline">name</span></span>': '<span class="underline"><span class="underline">main</span></span>', '<span class="underline"><span class="underline">doc</span></span>': None, '<span class="underline"><span class="underline">package</span></span>': None, '<span class="underline"><span class="underline">loader</span></span>': &lt;class '_frozen_importlib.BuiltinImporter'&gt;, '<span class="underline"><span class="underline">spec</span></span>': None, '<span class="underline"><span class="underline">annotations</span></span>': {}, '<span class="underline"><span class="underline">builtins</span></span>': &lt;module 'builtins' (built-in)&gt;, '<span class="underline"><span class="underline">file</span></span>': '&lt;stdin&gt;', '<span class="underline"><span class="underline">cached</span></span>': None, 'Person': &lt;class '<span class="underline"><span class="underline">main</span></span>.Person'&gt;, 'person': &lt;\__main__.Person object at 0x7fd4312f57f0&gt;, 'a': 3}<br />
 
 </div>
 
@@ -269,8 +269,8 @@ print(locals())
 
 <div class="verse">
 
-#+RESULTS:<br>
-: {'<span class="underline"><span class="underline">name</span></span>': '<span class="underline"><span class="underline">main</span></span>', '<span class="underline"><span class="underline">doc</span></span>': None, '<span class="underline"><span class="underline">package</span></span>': None, '<span class="underline"><span class="underline">loader</span></span>': &lt;class '_frozen_importlib.BuiltinImporter'&gt;, '<span class="underline"><span class="underline">spec</span></span>': None, '<span class="underline"><span class="underline">annotations</span></span>': {}, '<span class="underline"><span class="underline">builtins</span></span>': &lt;module 'builtins' (built-in)&gt;, '<span class="underline"><span class="underline">file</span></span>': '&lt;stdin&gt;', '<span class="underline"><span class="underline">cached</span></span>': None, 'foo': &lt;function foo at 0x7f87b6dd50d0&gt;}<br>
+#+RESULTS:<br />
+: {'<span class="underline"><span class="underline">name</span></span>': '<span class="underline"><span class="underline">main</span></span>', '<span class="underline"><span class="underline">doc</span></span>': None, '<span class="underline"><span class="underline">package</span></span>': None, '<span class="underline"><span class="underline">loader</span></span>': &lt;class '_frozen_importlib.BuiltinImporter'&gt;, '<span class="underline"><span class="underline">spec</span></span>': None, '<span class="underline"><span class="underline">annotations</span></span>': {}, '<span class="underline"><span class="underline">builtins</span></span>': &lt;module 'builtins' (built-in)&gt;, '<span class="underline"><span class="underline">file</span></span>': '&lt;stdin&gt;', '<span class="underline"><span class="underline">cached</span></span>': None, 'foo': &lt;function foo at 0x7f87b6dd50d0&gt;}<br />
 
 </div>
 
@@ -313,6 +313,10 @@ print((15).to_bytes(2,byteorder="big"))
 print(id(15))
 ```
 
+```text
+['__abs__', '__add__', '__and__', '__class__', '__cmp__', '__coerce__', '__delattr__', '__div__', '__divmod__', '__doc__', '__float__', '__floordiv__', '__format__', '__getattribute__', '__getnewargs__', '__hash__', '__hex__', '__index__', '__init__', '__int__', '__invert__', '__long__', '__lshift__', '__mod__', '__mul__', '__neg__', '__new__', '__nonzero__', '__oct__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdiv__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'bit_length', 'conjugate', 'denominator', 'imag', 'numerator', 'real']
+```
+
 따라서 b와 15를 mapping해서 b:15를 symbol table에
 기록한다.  (3)의 경우는 evaluate하면 symbol table에서 b를 찾아서
 가져온다. 15를 가져오지만, 그 값은 쓰여지지 않는다. 이후 print를 해서 그
@@ -347,9 +351,9 @@ print(id(c))
 ```
 
 ```text
-140718475622072
-140718475622072
-140718475622072
+140343868672376
+140343868672376
+140343868672376
 ```
 
 반면에 아래의 예를 보자.
@@ -375,9 +379,9 @@ print(id(c))
 ```
 
 ```text
-4529135840
-4529197712
-4529259080
+4488118352
+4488200704
+4488274360
 ```
 
 매번 새로운 객체를 만든다.
@@ -419,8 +423,8 @@ a = 3
 
 class Person:
     def __init__(self, name, age):
-	self.name = name
-	self.age = age
+        self.name = name
+        self.age = age
 
 p = Person("holy",20)
 print(a)
@@ -431,9 +435,9 @@ print(eval('p'))
 
 ```text
 3
-<__main__.Person instance at 0x103e563f8>
+<__main__.Person instance at 0x10e95a368>
 3
-<__main__.Person instance at 0x103e563f8>
+<__main__.Person instance at 0x10e95a368>
 ```
 
 객체를 evaluate했을때, literal object와 일반 object의 차이를 설명하는
@@ -789,8 +793,8 @@ attach했다.
     ```
 
     ```text
-    4458201312
-    4458201312
+    4438081616
+    4438081616
     {'a': [1, 2, 3, 4], 'b': [1, 2, 3, 4], '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
@@ -814,8 +818,8 @@ attach했다.
     ```
 
     ```text
-    4442906848
-    4443030088
+    4462653520
+    4462809528
     {'a': [1, 2, 3, 4], 'b': [1, 2, 3], '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
@@ -946,8 +950,8 @@ attach했다.
     ```
 
     ```text
-    4315578592
-    4315640464
+    4565315664
+    4565398016
     True
     False
     ```

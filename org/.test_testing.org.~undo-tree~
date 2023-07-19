@@ -1,0 +1,23 @@
+(undo-tree-save-format-version . 1)
+"f92c4b42a03fa4fb802ba4fb7268e5bd44a13c3c"
+[nil nil nil nil (25784 11350 337934 0) 0 nil]
+([nil nil ((#("%?" 0 2 (wrap-prefix "" line-prefix "" fontified nil)) . -93) (95 . 95) (93 . 96) (apply -6 14 61 undo--wrap-and-run-primitive-undo 14 61 ((14 . 61) (#(":ID: BE3037EE-DF13-4732-9BBB-99FCE2A7B70D" 0 41 (isearch-open-invisible-temporary org-fold-core--isearch-show-temporary isearch-open-invisible org-fold-core--isearch-show org-fold--spec-org-fold-drawer-624152893344371973 org-fold-drawer wrap-prefix "" line-prefix "" fontified nil)) . -14))) (14 . 55) (14 . 15) (1 . 20) (1 . 26) (t . -1)) nil (25784 11350 337933 0) 0 nil])
+([nil nil ((93 . 94)) nil (25784 11350 337931 0) 0 nil])
+([nil nil ((94 . 107)) nil (25784 11350 337930 0) 0 nil])
+([nil nil ((apply -3 88 113 undo--wrap-and-run-primitive-undo 88 113 ((88 . 113) (#(":ctime: 20230720033254" 0 22 (isearch-open-invisible-temporary org-fold-core--isearch-show-temporary isearch-open-invisible org-fold-core--isearch-show org-fold--spec-org-fold-drawer-624152893344371973 org-fold-drawer wrap-prefix "" line-prefix "" fontified nil)) . -88))) (88 . 110) (88 . 89) (apply -3 62 87 undo--wrap-and-run-primitive-undo 62 87 ((62 . 87) (#(":mtime: 20230720033254" 0 22 (isearch-open-invisible-temporary org-fold-core--isearch-show-temporary isearch-open-invisible org-fold-core--isearch-show org-fold--spec-org-fold-drawer-624152893344371973 org-fold-drawer wrap-prefix "" line-prefix "" fontified nil)) . -62))) (62 . 84) (62 . 63)) nil (25784 11350 337927 0) 0 nil])
+([nil nil ((145 . 146) (t 25784 11350 344537 500000)) nil (25784 11452 85835 0) 0 nil])
+([nil nil ((#("
+" 0 1 (face org-document-title font-lock-fontified t wrap-prefix "" line-prefix "" fontified t)) . 144) (undo-tree-id8 . -1) (undo-tree-id9 . -1) (146 . 148)) nil (25784 11452 85835 0) 0 nil])
+([nil nil ((147 . 152)) nil (25784 11452 85832 0) 0 nil])
+([nil nil ((#("t" 0 1 (face org-level-1 wrap-prefix #("* " 0 2 (face org-indent)) line-prefix "" fontified t)) . -151) (undo-tree-id6 . -1) (undo-tree-id7 . -1) 152) nil (25784 11452 85832 0) 0 nil])
+([nil nil ((151 . 156)) nil (25784 11452 85829 0) 0 nil])
+([nil nil ((#("t" 0 1 (face org-level-1 wrap-prefix #("* " 0 2 (face org-indent)) line-prefix "" fontified t)) . -154) (undo-tree-id2 . -1) (undo-tree-id3 . -1) (#(" " 0 1 (face org-level-1 wrap-prefix #("* " 0 2 (face org-indent)) line-prefix "" fontified t)) . -155) (undo-tree-id4 . -1) (undo-tree-id5 . -1) 156) nil (25784 11452 85828 0) 0 nil])
+([nil nil ((154 . 159)) nil (25784 11452 85824 0) 0 nil])
+([nil nil ((144 . 145)) nil (25784 11452 85823 0) 0 nil])
+([nil nil ((145 . 146)) nil (25784 11452 85823 0) 0 nil])
+([nil nil ((#(";" 0 1 (font-lock-fontified t wrap-prefix "" line-prefix "" fontified t)) . -145) (undo-tree-id0 . -1) (undo-tree-id1 . -1) 146) nil (25784 11452 85821 0) 0 nil])
+([nil nil ((apply yas--take-care-of-redo #s(yas--snippet nil (#s(yas--field 1 215 215 nil nil nil t #s(yas--field 2 231 231 nil nil nil nil nil)) #s(yas--field 2 231 231 nil nil nil nil nil)) nil 9 nil #s(yas--field 1 215 215 nil nil nil t #s(yas--field 2 231 231 nil nil nil nil nil)) nil nil)) (145 . 234)) nil (25784 11452 85805 0) 0 nil])
+([nil nil ((199 . 215)) nil (25784 11452 85804 0) 0 nil])
+([nil nil ((apply yas--snippet-revive 145 250 #s(yas--snippet nil (#s(yas--field 1 215 215 nil nil nil t #s(yas--field 2 231 231 nil nil nil nil nil)) #s(yas--field 2 231 231 nil nil nil nil nil)) nil 9 nil #s(yas--field 1 215 215 nil nil nil t #s(yas--field 2 231 231 nil nil nil nil nil)) nil nil))) nil (25784 11452 85803 0) 0 nil])
+([nil current ((231 . 243)) nil (25784 11452 85800 0) 0 nil])
+nil

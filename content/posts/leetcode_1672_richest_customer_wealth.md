@@ -79,14 +79,14 @@ account라는 data를 사람과 bank라는 2개의 data로 나타내는데 2d ar
 ```python
 class Solution(object):
     def maximumWealth(self, accounts):
-	"""
-	:type accounts: List[List[int]]
-	:rtype: int
-	"""
-	output = []
-	for i,v in enumerate(accounts):
-	    output.append(sum(accounts[i]))
-	return max(output)
+        """
+        :type accounts: List[List[int]]
+        :rtype: int
+        """
+        output = []
+        for i,v in enumerate(accounts):
+            output.append(sum(accounts[i]))
+        return max(output)
 ```
 
 accept되긴 했다. 그런데 여기서 index를 얻어오기 위해서 enumerate 한것이

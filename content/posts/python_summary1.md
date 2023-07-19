@@ -48,12 +48,12 @@ class test2(name):
 
 <div class="verse">
 
-class test:<br>
-&nbsp;&nbsp;def test():<br>
-&nbsp;&nbsp;&nbsp;return 3+4<br>
-&nbsp;class test2(name):<br>
-&nbsp;&nbsp;&nbsp;__init__(self,name):<br>
-&nbsp;&nbsp;&nbsp;self.name = name<br>
+class test:<br />
+&nbsp;&nbsp;def test():<br />
+&nbsp;&nbsp;&nbsp;return 3+4<br />
+&nbsp;class test2(name):<br />
+&nbsp;&nbsp;&nbsp;__init__(self,name):<br />
+&nbsp;&nbsp;&nbsp;self.name = name<br />
 
 </div>
 

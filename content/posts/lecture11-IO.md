@@ -268,7 +268,7 @@ read()는 파일을 열고 한번에 읽는다.
 
     with open("./data/test.txt", "r") as f:
         for sentence in f:
-    	contents.append(sentence)
+            contents.append(sentence)
 
     print(contents)
     ```
@@ -308,7 +308,7 @@ read()는 파일을 열고 한번에 읽는다.
 ```python
 with open("./data/text.txt", "w") as fd:
     for i in range(10):
-	fd.write(f"{i+1}번째 문장\n")
+        fd.write(f"{i+1}번째 문장\n")
 ```
 
 open으로 file을 열고, write()를 사용해서 string을 쓴다. string을
@@ -490,14 +490,14 @@ import pickle
 
 class MyComplex:
     def __init__(self, real, imaginary):
-	self.real = real
-	self.imaginary = imaginary
+        self.real = real
+        self.imaginary = imaginary
 
     def __add__(self,other):
-	return MyComplex(
-	    self.real + other.real,
-	    self.imaginary + other.imaginary
-	    )
+        return MyComplex(
+            self.real + other.real,
+            self.imaginary + other.imaginary
+            )
 
 my_complex = MyComplex(3,5)
 
@@ -581,11 +581,11 @@ tab이나, 공백으로도 처리가 가능하기 때문에 확장자가 .tsv(ta
 
     with open('test/test.csv','r') as fd:
         reader = csv.reader(fd,
-    			delimiter=',',
-    			quotechar='"',
-    			quoting = csv.QUOTE_MINIMAL)
+                            delimiter=',',
+                            quotechar='"',
+                            quoting = csv.QUOTE_MINIMAL)
         for entry in reader:
-    	print(entry)
+            print(entry)
     ```
 
     csv의 reader()는 file에서 csv파일의 각줄을 읽고 구분자를 사용해서
@@ -649,10 +649,10 @@ import csv
 
 with open('test/test1.csv','w') as fd:
     writer = csv.writer(fd,
-			delimiter=',',
-			quotechar='"',
-			quoting = csv.QUOTE_MINIMAL
-			)
+                        delimiter=',',
+                        quotechar='"',
+                        quoting = csv.QUOTE_MINIMAL
+                        )
     writer.writerow(['id', 'label'])
     writer.writerows([I, f'label_{I}'] for I in range(10))
 
@@ -720,11 +720,11 @@ obj = {
     "ID": None,
     "bool": False,
     "bobbies": {
-	"sports": [
-	    "snowboard"
-	    "volley-ball"
-	    ]
-	}
+        "sports": [
+            "snowboard"
+            "volley-ball"
+            ]
+        }
     }
 with open("test/test2.json", 'w') as fd:
     json.dump(obj, fd)
@@ -834,9 +834,9 @@ conda install beautifulsoup4
 
     with open("test/test.xml", "r") as fd:
         soup = BeautifulSoup(
-    	fd.read(),
-    	'html.parser'
-    	)
+            fd.read(),
+            'html.parser'
+            )
 
     to_tag = soup.find(name='to')
     print(to_tag.string)

@@ -70,10 +70,10 @@ def test():
     nums = [1,2,3,4]
     output = []
     for index,value in enumerate(nums):
-	sum = value
-	for v in nums[0:index]:
-	    sum = sum + v
-	output.append(sum)
+        sum = value
+        for v in nums[0:index]:
+            sum = sum + v
+        output.append(sum)
     return output
 print(test())
 ```
@@ -118,9 +118,9 @@ accept되긴 했지만 찜찜하다.
 ```python
 class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:
-	for i in range(1, len(nums)):
-	    nums[i] += nums[i - 1]
-	return nums
+        for i in range(1, len(nums)):
+            nums[i] += nums[i - 1]
+        return nums
 ```
 
 for-loop을 한개만 사용했다. nums를 계산하는 과정이 흥미롭다. 이렇게도
@@ -151,7 +151,7 @@ from itertools import accumulate
 
 class Solution:
     def runningSum(self, nums: List[int]) -> List[int]:
-	return list(accumulate(nums))
+        return list(accumulate(nums))
 ```
 
 

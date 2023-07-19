@@ -21,9 +21,9 @@ draft = true
 
 <div class="verse">
 
-#+BEGIN_SRC python<br>
-a = 3<br>
-\#+END_SRC<br>
+#+BEGIN_SRC python<br />
+a = 3<br />
+\#+END_SRC<br />
 
 </div>
 
@@ -41,10 +41,10 @@ return문을 사용하면 함수의 결과가 return되고 return된 값을
 
 <div class="verse">
 
-#+BEGIN_SRC python<br>
-&nbsp;&nbsp;a = 3<br>
-&nbsp;&nbsp;print(a)<br>
-\#+END_SRC<br>
+#+BEGIN_SRC python<br />
+&nbsp;&nbsp;a = 3<br />
+&nbsp;&nbsp;print(a)<br />
+\#+END_SRC<br />
 
 </div>
 
@@ -56,10 +56,10 @@ return값이 아니기 때문이다. 즉 print를 실행한다고 해서 함수�
 
 <div class="verse">
 
-#+BEGIN_SRC python :results output<br>
-&nbsp;&nbsp;a = 3<br>
-&nbsp;&nbsp;print(a)<br>
-\#+END_SRC<br>
+#+BEGIN_SRC python :results output<br />
+&nbsp;&nbsp;a = 3<br />
+&nbsp;&nbsp;print(a)<br />
+\#+END_SRC<br />
 
 </div>
 
@@ -83,9 +83,9 @@ interpreter에 의해서 evaluate되기 때문에 연관관계가 없다. 그런
 
 <div class="verse">
 
-#+BEGIN_SRC python :session<br>
-&nbsp;&nbsp;a = 3<br>
-\#+END_SRC<br>
+#+BEGIN_SRC python :session<br />
+&nbsp;&nbsp;a = 3<br />
+\#+END_SRC<br />
 
 </div>
 
@@ -107,9 +107,9 @@ code block을 html로 변환시에 code는 출력이 되지만, 실행결과인 
 
 <div class="verse">
 
-#+BEGIN_SRC python :results output :exports both<br>
-<br>
-\#+END_SRC<br>
+#+BEGIN_SRC python :results output :exports both<br />
+<br />
+\#+END_SRC<br />
 
 </div>
 
