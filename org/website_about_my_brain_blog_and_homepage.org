@@ -135,7 +135,7 @@ fieldset legend로 css처리를 한다.
 #+attr_latex: :width 100px
 [[../static/img/blog_homepage/legend1.png]]
 **** headlevel
-headlevel은
+headlevel은 4개만 정의 했다.
 *** [step 4] make all
 terminal에서 make all을 하면 org파일이 모두 md로 바뀐다.
 *** [step 5] hugo -d
