@@ -148,8 +148,9 @@ git pull을 한다.
 
     </div>
 
-    git checkout main을 하고 git status를 하면 HEAD detach가 사라진다.
-    git pull을 한다.
+git checkout main을 하고 git status를 하면 HEAD detach가
+사라진다. 위에서 git checkout main만 해도 될듯한데, 잘 모르겠다. 그
+다음 git pull을 한다.
 
 
 #### [step3] 문서 작성및 수정 {#step3-문서-작성및-수정}

@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       3730AC1B-9357-47AE-A11C-38323D691649
-:mtime:    20230720175805 20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
+:mtime:    20230720191137 20230720175805 20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
 :ctime:    20230616103455
 :END:
 #+title: [website] about my braindump blog and homepage usage 
@@ -136,6 +136,7 @@ fieldset legend로 css처리를 한다.
 #+attr_latex: :width 100px
 [[../static/img/blog_homepage/legend1.png]]
 **** headlevel
+
 headlevel은 4개만 정의 했다.
 *** [step 4] make all
 terminal에서 make all을 하면 org파일이 모두 md로 바뀐다.
