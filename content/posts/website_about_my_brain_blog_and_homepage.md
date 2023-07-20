@@ -24,40 +24,58 @@ draft = true
 #### [step1] repo가져오기 (clone) {#step1-repo가져오기--clone}
 
 local에 repo가 clone되어 있지 않다면 main-blog를 clone부터
-한다. clone하면 아래와 같은 directory구조를 볼 수 있다.
+한다. clone할때는 ssh방식으로 한다. ssh를 하는 이유는 multiple
+account문제 때문이다. 관련된 글은 [여기]({{< relref "github_multi_account_github_problem" >}})를 참조한다.  clone하면 아래와
+같은 directory구조를 볼 수 있다.
 
 <a id="figure--main page"></a>
 
 {{< figure src="/img/blog_homepage/mainblog1.png" caption="<span class=\"figure-number\">Figure 1: </span>main page" width="600px" >}}
 
--   git pull: git pull을 해서 sync를 맞춘다.
+<!--list-separator-->
 
--   git submodule init, git submodule update: 이제 publishing repo를
-    가져와야 한다. publishing repo는 holy2frege.github.io다. 이 repo는
-    main-blog안에 public폴더와 mapping되어 있다. 현재는 비워져
-    있다. public폴더로 진입해서 git clone으로 가져와야 할까? 가져오지
-    않는다. mapping되어 있다는것은 main-blog에서 mapping정보를 가지고
-    있기 때문에, 다른 방법을 사용한다. mapping에 대한 정보는 main-blog의
-    .gitmodules에 있다. git submodule init과 git submodule update를
-    통해서 holy2.frege.github.io를 가져올 수 있다. 이렇게 가져온 repo는
-    HEAD가 detach되어 있다.
+-  git pull
 
--   git submodule foreach git checkout main: 그래서 git submodule
-    foreach git checkout main을 해준다. git status를 해도 detach되어
-    있다면 git checkout main을 다시 해준다. git submodule update
-    --remote --merge 해서 다시 update를 했다. 그런데도 detached head라서
-    git checkout main을 해주었다.
+    git pull을 해서 sync를 맞춘다.
 
--   git pull (in public): 그리고 public 폴더에서 git pull을 했다.
+<!--list-separator-->
+
+-  git submodule init &amp; git submodule update
+
+    이제 publishing repo를 가져와야 한다. publishing repo는
+    holy2frege.github.io다. 이 repo는 main-blog안에 public폴더와
+    mapping되어 있다. 현재는 비워져 있다. public폴더로 진입해서 git
+    clone으로 가져와야 할까? 가져오지 않는다. mapping되어 있다는것은
+    main-blog에서 mapping정보를 가지고 있기 때문에, 다른 방법을
+    사용한다. mapping에 대한 정보는 main-blog의 .gitmodules에 있다. git
+    submodule init과 git submodule update를 통해서
+    holy2.frege.github.io를 가져올 수 있다. 이렇게 가져온 repo는 HEAD가
+    detach되어 있다.
+
+<!--list-separator-->
+
+-  git checkout main
+
+    git submodule foreach git checkout main: 그래서 git submodule foreach
+    git checkout main을 해준다. git status를 해도 detach되어 있다면 git
+    checkout main을 다시 해준다. git submodule update --remote --merge
+    해서 다시 update를 했다. 그런데도 detached head라서 git checkout
+    main을 해주었다.
+
+<!--list-separator-->
+
+-  git pull
+
+    git pull (in public): 그리고 public 폴더에서 git pull을 했다.
 
 
 #### [step 2] article 수정 {#step-2-article-수정}
 
 이제 문서를 만들거나 수정하면 된다. org 폴더에 가면 index.org파일
- 하나밖에 없다.  2nd-level의 headline에 보면 'CUSTOM_ID: page'가
- 보일텐데, 그 headline이 articles를 모아놓은 page라고 보면
- 된다. 거기서 원하는 page를 생성하거나 수정하면 된다. 수정이 끝나면
- 다음 단계로 가자.
+하나밖에 없다.  2nd-level의 headline에 보면 'CUSTOM_ID: page'가
+보일텐데, 그 headline이 articles를 모아놓은 page라고 보면 된다. 거기서
+원하는 page를 생성하거나 수정하면 된다. 수정이 끝나면 다음 단계로
+가자.
 
 
 #### [step 3] m-x org-publish-all {#step-3-m-x-org-publish-all}
@@ -87,14 +105,6 @@ keychain이 만들어지고 push가 된다.
     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
 
     </div>
-
-
-#### #+begin_important {#plus-begin-important}
-
-<https://hoyoul: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@github.com>
-<https://holy2frege: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@github.com>
-<https://holytofrege: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@github.com>
- #+end_important
 
 
 ## My braindump blog {#my-braindump-blog}
@@ -188,7 +198,108 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
 -  headlevel
 
-    headlevel은 4개만 정의 했다.
+    headlevel은 4개만 정의 했다. org에서 headline을 그대로 사용한다.
+
+    -   level1
+
+        <a id="figure--level1"></a>
+
+        {{< figure src="/img/blog_homepage/headlevel1.png" caption="<span class=\"figure-number\">Figure 3: </span>level1" width="600px" >}}
+    -   level2
+
+        <a id="figure--level2"></a>
+
+        {{< figure src="/img/blog_homepage/headlevel2.png" caption="<span class=\"figure-number\">Figure 4: </span>level2" width="600px" >}}
+    -   level3
+
+        <a id="figure--level3"></a>
+
+        {{< figure src="/img/blog_homepage/headlevel3.png" caption="<span class=\"figure-number\">Figure 5: </span>level3" width="600px" >}}
+    -   level4
+
+        <a id="figure--level3"></a>
+
+        {{< figure src="/img/blog_homepage/headlevel4.png" caption="<span class=\"figure-number\">Figure 6: </span>level4" width="600px" >}}
+
+<!--list-separator-->
+
+-  underline
+
+    underline은 \_로 둘러싸게 하면 된다.
+
+    <a id="figure--underline"></a>
+
+    {{< figure src="/img/blog_homepage/underline.png" caption="<span class=\"figure-number\">Figure 7: </span>underline" width="600px" >}}
+
+<!--list-separator-->
+
+-  equal
+
+    eqaul 두개로 둘러 싸면 아래와 같은 모양이 나온다.
+
+    <a id="figure--equal"></a>
+
+    {{< figure src="/img/blog_homepage/equal.png" caption="<span class=\"figure-number\">Figure 8: </span>equal" width="600px" >}}
+
+<!--list-separator-->
+
+-  todo
+
+    todo는 org에서 C-c C-t로 만든다. 이것을 org에서 기술하면 아래와 같이
+    보인다.
+
+    <a id="figure--todo"></a>
+
+    {{< figure src="/img/blog_homepage/todo.png" caption="<span class=\"figure-number\">Figure 9: </span>todo" width="600px" >}}
+
+<!--list-separator-->
+
+-  verse
+
+    begin_verse로 시작되는 verse block 다음과 같이 보인다.
+
+    <a id="figure--verse"></a>
+
+    {{< figure src="/img/blog_homepage/verse.png" caption="<span class=\"figure-number\">Figure 10: </span>verse" width="600px" >}}
+
+<!--list-separator-->
+
+-  source &amp; example &amp; text
+
+    source block은 color가 지원되고, example과 text는 highlight를 지원하지
+    않는 차이가 있다.
+
+    <a id="figure--source"></a>
+
+    {{< figure src="/img/blog_homepage/source.png" caption="<span class=\"figure-number\">Figure 11: </span>source" width="600px" >}}
+
+    <a id="figure--example"></a>
+
+    {{< figure src="/img/blog_homepage/example.png" caption="<span class=\"figure-number\">Figure 12: </span>example" width="600px" >}}
+
+<!--list-separator-->
+
+-  기타 blocks
+
+    tip,warning,important,attention은 거의 비슷한 모양이다. 이것들 모두
+    yasnippet으로 정의했기 때문에 shortcut으로 사용하면 된다. 모양은
+    다음과 같다.
+
+    <a id="figure--tip"></a>
+
+    {{< figure src="/img/blog_homepage/tip.png" caption="<span class=\"figure-number\">Figure 13: </span>tip" width="600px" >}}
+
+    <a id="figure--warning"></a>
+
+    {{< figure src="/img/blog_homepage/warning.png" caption="<span class=\"figure-number\">Figure 14: </span>warning" width="600px" >}}
+
+    <a id="figure--important"></a>
+
+    {{< figure src="/img/blog_homepage/important.png" caption="<span class=\"figure-number\">Figure 15: </span>important" width="600px" >}}
+
+    <a id="figure--attention"></a>
+
+    {{< figure src="/img/blog_homepage/attention.png" caption="<span class=\"figure-number\">Figure 16: </span>attention" width="600px" >}}
 
 
 #### [step 4] make all {#step-4-make-all}

@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       3730AC1B-9357-47AE-A11C-38323D691649
-:mtime:    20230720191137 20230720175805 20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
+:mtime:    20230720233433 20230720191137 20230720175805 20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
 :ctime:    20230616103455
 :END:
 #+title: [website] about my braindump blog and homepage usage 
@@ -22,40 +22,45 @@
 ** 사용법
 *** [step1] repo가져오기 (clone)
 local에 repo가 clone되어 있지 않다면 main-blog를 clone부터
-한다. clone하면 아래와 같은 directory구조를 볼 수 있다.
+한다. clone할때는 ssh방식으로 한다. ssh를 하는 이유는 multiple
+account문제 때문이다. 관련된 글은 [[file:github_multi_account_github_problem.org][여기]]를 참조한다.  clone하면 아래와
+같은 directory구조를 볼 수 있다.
 #+CAPTION: main page
 #+NAME: main page
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 #+ATTR_ORG: :width 100
 [[../static/img/blog_homepage/mainblog1.png]]
+**** git pull
+ git pull을 해서 sync를 맞춘다.
+ 
+**** git submodule init & git submodule update
+ 이제 publishing repo를 가져와야 한다. publishing repo는
+ holy2frege.github.io다. 이 repo는 main-blog안에 public폴더와
+ mapping되어 있다. 현재는 비워져 있다. public폴더로 진입해서 git
+ clone으로 가져와야 할까? 가져오지 않는다. mapping되어 있다는것은
+ main-blog에서 mapping정보를 가지고 있기 때문에, 다른 방법을
+ 사용한다. mapping에 대한 정보는 main-blog의 .gitmodules에 있다. git
+ submodule init과 git submodule update를 통해서
+ holy2.frege.github.io를 가져올 수 있다. 이렇게 가져온 repo는 HEAD가
+ detach되어 있다.
+ 
+**** git checkout main
+git submodule foreach git checkout main: 그래서 git submodule foreach
+git checkout main을 해준다. git status를 해도 detach되어 있다면 git
+checkout main을 다시 해준다. git submodule update --remote --merge
+해서 다시 update를 했다. 그런데도 detached head라서 git checkout
+main을 해주었다.
 
-- git pull: git pull을 해서 sync를 맞춘다.
-
-- git submodule init, git submodule update: 이제 publishing repo를
-  가져와야 한다. publishing repo는 holy2frege.github.io다. 이 repo는
-  main-blog안에 public폴더와 mapping되어 있다. 현재는 비워져
-  있다. public폴더로 진입해서 git clone으로 가져와야 할까? 가져오지
-  않는다. mapping되어 있다는것은 main-blog에서 mapping정보를 가지고
-  있기 때문에, 다른 방법을 사용한다. mapping에 대한 정보는 main-blog의
-  .gitmodules에 있다. git submodule init과 git submodule update를
-  통해서 holy2.frege.github.io를 가져올 수 있다. 이렇게 가져온 repo는
-  HEAD가 detach되어 있다.
-
-- git submodule foreach git checkout main: 그래서 git submodule
-  foreach git checkout main을 해준다. git status를 해도 detach되어
-  있다면 git checkout main을 다시 해준다. git submodule update
-  --remote --merge 해서 다시 update를 했다. 그런데도 detached head라서
-  git checkout main을 해주었다.
-
-- git pull (in public): 그리고 public 폴더에서 git pull을 했다.
+**** git pull
+git pull (in public): 그리고 public 폴더에서 git pull을 했다.
 
 *** [step 2] article 수정
 이제 문서를 만들거나 수정하면 된다. org 폴더에 가면 index.org파일
- 하나밖에 없다.  2nd-level의 headline에 보면 'CUSTOM_ID: page'가
- 보일텐데, 그 headline이 articles를 모아놓은 page라고 보면
- 된다. 거기서 원하는 page를 생성하거나 수정하면 된다. 수정이 끝나면
- 다음 단계로 가자.
+하나밖에 없다.  2nd-level의 headline에 보면 'CUSTOM_ID: page'가
+보일텐데, 그 headline이 articles를 모아놓은 page라고 보면 된다. 거기서
+원하는 page를 생성하거나 수정하면 된다. 수정이 끝나면 다음 단계로
+가자.
 *** [step 3] m-x org-publish-all
 emacs의 설정파일에는 위 명령어를 수행하는 code가 이미 있다. html변환과
 css,js를 처리를 구현하고 있다. 따라서 수행하면 public/index.html이
@@ -76,12 +81,6 @@ keychain이 만들어지고 push가 된다.
    #+begin_important
    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
    #+end_important
-  
-*** #+begin_important
-https://hoyoul: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@github.com
-https://holy2frege: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@github.com
-https://holytofrege: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@github.com
- #+end_important
 
 * My braindump blog
 - homepage 운영주소: https://braindump.frege2godel.me/?stackedPages=%2F
@@ -136,8 +135,104 @@ fieldset legend로 css처리를 한다.
 #+attr_latex: :width 100px
 [[../static/img/blog_homepage/legend1.png]]
 **** headlevel
+headlevel은 4개만 정의 했다. org에서 headline을 그대로 사용한다.
+- level1
+  #+CAPTION: level1
+  #+NAME: level1
+  #+attr_html: :width 600px
+  #+attr_latex: :width 100px
+  [[../static/img/blog_homepage/headlevel1.png]]
+- level2
+  #+CAPTION: level2
+  #+NAME: level2
+  #+attr_html: :width 600px
+  #+attr_latex: :width 100px
+  [[../static/img/blog_homepage/headlevel2.png]]
+- level3
+  #+CAPTION: level3
+  #+NAME: level3
+  #+attr_html: :width 600px
+  #+attr_latex: :width 100px
+  [[../static/img/blog_homepage/headlevel3.png]]
+- level4
+    #+CAPTION: level4
+  #+NAME: level3
+  #+attr_html: :width 600px
+  #+attr_latex: :width 100px
+  [[../static/img/blog_homepage/headlevel4.png]]
+**** underline
+underline은 _로 둘러싸게 하면 된다.
+#+CAPTION: underline
+#+NAME: underline
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/underline.png]]
+**** equal
+eqaul 두개로 둘러 싸면 아래와 같은 모양이 나온다.
+#+CAPTION: equal
+#+NAME: equal
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/equal.png]]
+**** todo
+todo는 org에서 C-c C-t로 만든다. 이것을 org에서 기술하면 아래와 같이
+보인다.
+#+CAPTION: todo
+#+NAME: todo
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/todo.png]]
+**** verse
+ begin_verse로 시작되는 verse block 다음과 같이 보인다.
+#+CAPTION: verse
+#+NAME: verse
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/verse.png]]
+**** source & example & text
+source block은 color가 지원되고, example과 text는 highlight를 지원하지
+않는 차이가 있다.
+#+CAPTION: source
+#+NAME: source
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/source.png]]
 
-headlevel은 4개만 정의 했다.
+#+CAPTION: example
+#+NAME: example
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/example.png]]
+
+**** 기타 blocks
+tip,warning,important,attention은 거의 비슷한 모양이다. 이것들 모두
+yasnippet으로 정의했기 때문에 shortcut으로 사용하면 된다. 모양은
+다음과 같다.
+#+CAPTION: tip
+#+NAME: tip
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/tip.png]]
+
+#+CAPTION: warning
+#+NAME: warning
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/warning.png]]
+
+#+CAPTION: important
+#+NAME: important
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/important.png]]
+
+#+CAPTION: attention
+#+NAME: attention
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/attention.png]]
+ 
+
 *** [step 4] make all
 terminal에서 make all을 하면 org파일이 모두 md로 바뀐다.
 *** [step 5] hugo -d
