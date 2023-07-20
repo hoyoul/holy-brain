@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       3730AC1B-9357-47AE-A11C-38323D691649
-:mtime:    20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
+:mtime:    20230720175805 20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
 :ctime:    20230616103455
 :END:
 #+title: [website] about my braindump blog and homepage usage 
@@ -107,13 +107,14 @@ git pull을 한다.
  git submodule update
  #+end_important
 - public폴더로 들어가서 update한다.
-   #+begin_important
+ #+begin_important
     git submodule foreach git checkout main
     git submodule update --remote --merge
     git checkout main
-   #+end_important
-   git checkout main을 하고 git status를 하면 HEAD detach가 사라진다.
-   git pull을 한다.
+ #+end_important
+git checkout main을 하고 git status를 하면 HEAD detach가
+사라진다. 위에서 git checkout main만 해도 될듯한데, 잘 모르겠다. 그
+다음 git pull을 한다.
 *** [step3] 문서 작성및 수정
 org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로가
 맞는지 확인한다.
