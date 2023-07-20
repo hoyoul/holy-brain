@@ -9,7 +9,7 @@
 #+DATE: <2023-06-16 Fri>
 #+DESCRIPTION: homepage와 brain이란 blog를 만들었다. 이것의 사용법을 적어보려한다. 왜냐면 둘다 org파일들로 부터 page들을 만드는 복잡한 처리과정이라서 시간이 지나면 까먹을 수 있기 때문이다.
 #+HUGO_DRAFT: true
-* [My homepage]
+* [My homepage setting from scratch]
 ** 기본정보
 - 참조: [[file:website_make_main_homepage.org][from here]] (만들당시 기록한 note)
 - homepage 운영 주소: https://frege2godel.me/
@@ -85,7 +85,7 @@ keychain이 만들어지고 push가 된다.
    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
    #+end_verse
 
-* [My braindump blog]
+* [My braindump blog setting from scratch]
 ** 기본 정보
 - homepage 운영주소: https://braindump.frege2godel.me/?stackedPages=%2F
 - github source 주소: 
@@ -175,7 +175,7 @@ underline은 _로 둘러싸게 하면 된다.
 eqaul 두개로 둘러 싸면 아래와 같은 모양이 나온다.
 #+CAPTION: equal
 #+NAME: equal
-#+attr_html: :width 300px
+#+attr_html: :width 200px
 #+attr_latex: :width 100px
 [[../static/img/blog_homepage/equal.png]]
 **** todo
@@ -183,7 +183,7 @@ todo는 org에서 C-c C-t로 만든다. 이것을 org에서 기술하면 아래�
 보인다.
 #+CAPTION: todo
 #+NAME: todo
-#+attr_html: :width 600px
+#+attr_html: :width 400px
 #+attr_latex: :width 100px
 [[../static/img/blog_homepage/todo.png]]
 **** verse
@@ -246,20 +246,20 @@ public폴더에 들어가게 된다.
 *** [step 6] git push
 git add, commit, push를 한다. 다음과 같은 에러가 날 수 있다.
 
- #+begin_important
+#+begin_verse
 remote: Permission to hoyoul/holy-brain.git denied to holy2frege.
 fatal: unable to access 'https://github.com/hoyoul/holy-brain.git/': The requested URL returned error: 403
- #+end_important
+ #+end_verse
 이전에 사용했던 github 정보때문이다. holy2frege라는 user name으로
 push할려니 문제가 생기는 것이다. 우선 급한대로 다음과 같이 하자.
- #+begin_important
+ #+begin_verse
 git remote set-url origin https://hoyoul@github.com/hoyoul/holy-brain.git
- #+end_important
+ #+end_verse
 그리고 pw를 물어보면 아래 값을 넣자.
 - pat
-#+begin_important
+#+begin_verse
 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
-#+end_important
+#+end_verse
 
 - public folder: 이것도 마찬가지다.
 

@@ -6,7 +6,7 @@ date = 2023-06-16T00:00:00+09:00
 draft = true
 +++
 
-## [My homepage] {#my-homepage}
+## [My homepage setting from scratch] {#my-homepage-setting-from-scratch}
 
 
 ### 기본정보 {#기본정보}
@@ -114,7 +114,7 @@ keychain이 만들어지고 push가 된다.
     </div>
 
 
-## [My braindump blog] {#my-braindump-blog}
+## [My braindump blog setting from scratch] {#my-braindump-blog-setting-from-scratch}
 
 
 ### 기본 정보 {#기본-정보}
@@ -249,7 +249,7 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
     <a id="figure--equal"></a>
 
-    {{< figure src="/img/blog_homepage/equal.png" caption="<span class=\"figure-number\">Figure 8: </span>equal" width="300px" >}}
+    {{< figure src="/img/blog_homepage/equal.png" caption="<span class=\"figure-number\">Figure 8: </span>equal" width="200px" >}}
 
 <!--list-separator-->
 
@@ -260,7 +260,7 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
     <a id="figure--todo"></a>
 
-    {{< figure src="/img/blog_homepage/todo.png" caption="<span class=\"figure-number\">Figure 9: </span>todo" width="600px" >}}
+    {{< figure src="/img/blog_homepage/todo.png" caption="<span class=\"figure-number\">Figure 9: </span>todo" width="400px" >}}
 
 <!--list-separator-->
 
@@ -328,19 +328,19 @@ public폴더에 들어가게 된다.
 
 git add, commit, push를 한다. 다음과 같은 에러가 날 수 있다.
 
-<div class="important">
+<div class="verse">
 
-remote: Permission to hoyoul/holy-brain.git denied to holy2frege.
-fatal: unable to access 'https://github.com/hoyoul/holy-brain.git/': The requested URL returned error: 403
+remote: Permission to hoyoul/holy-brain.git denied to holy2frege.<br />
+fatal: unable to access 'https://github.com/hoyoul/holy-brain.git/': The requested URL returned error: 403<br />
 
 </div>
 
 이전에 사용했던 github 정보때문이다. holy2frege라는 user name으로
 push할려니 문제가 생기는 것이다. 우선 급한대로 다음과 같이 하자.
 
-<div class="important">
+<div class="verse">
 
-git remote set-url origin <https://hoyoul@github.com/hoyoul/holy-brain.git>
+git remote set-url origin <https://hoyoul@github.com/hoyoul/holy-brain.git><br />
 
 </div>
 
@@ -348,9 +348,9 @@ git remote set-url origin <https://hoyoul@github.com/hoyoul/holy-brain.git>
 
 -   pat
 
-<div class="important">
+<div class="verse">
 
-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
+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<br />
 
 </div>
 
