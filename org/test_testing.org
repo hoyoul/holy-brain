@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       BE3037EE-DF13-4732-9BBB-99FCE2A7B70D
-:mtime:    20230720033254
+:mtime:    20230720112754 20230720033254
 :ctime:    20230720033254
 :END:
 #+title: [test] testing!
@@ -11,3 +11,57 @@
 #+HUGO_DRAFT: true
 * this is test
 this is test!
+* head level test (level1)
+Nullam rutrum.  
+**  head level test (level2)
+Nullam eu ante vel est convallis dignissim.  
+***  head level test (level3)
+Phasellus lacus.  
+****  head level test (level4)
+Fusce commodo.
+* underline
+_test_
+* = test =
+=test= 
+* priority
+C-c ,
+** [#A] priority1
+** [#B] priority2
+* todo
+C-c C-t
+** TODO todo
+** DONE todo2
+
+* verse
+ #+begin_verse
+ this is verse
+ #+end_verse
+* note
+#+begin_note
+this is note
+#+end_note
+* source
+#+BEGIN_SRC emacs-lisp
+this is emacs lisp source
+#+END_SRC
+* tip
+ #+begin_tip
+ this is tip
+ #+end_tip
+* warning
+ #+begin_warning
+ this is warning
+ #+end_warning
+* important
+ #+begin_important
+ this is important
+ #+end_important
+* attention
+ #+begin_attention
+ this is attention
+ #+end_attention
+* example
+ #+begin_example
+this is example
+ #+end_example
+
