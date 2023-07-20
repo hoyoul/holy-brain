@@ -187,7 +187,7 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
 -  headlevel
 
-    headlevel은
+    headlevel은 4개만 정의 했다.
 
 
 #### [step 4] make all {#step-4-make-all}
