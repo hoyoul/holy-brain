@@ -12,7 +12,9 @@
 * this is test
 this is test!
 * head level test (level1)
-Nullam rutrum.  
+main.css에 정의 되어 있다. level3 까지만 css 설정함.  .page > .content
+에서 수정하면 됨, head level1은 .page> .content h2로 정의됨. level2는
+.page>.contents h3 등등
 **  head level test (level2)
 Nullam eu ante vel est convallis dignissim.  
 ***  head level test (level3)
@@ -20,6 +22,7 @@ Phasellus lacus.
 ****  head level test (level4)
 Fusce commodo.
 * underline
+orgmode.css에 정의되어 있다.
 _test_
 * = test =
 =test= 
