@@ -9,7 +9,8 @@
 #+DATE: <2023-06-16 Fri>
 #+DESCRIPTION: homepage와 brain이란 blog를 만들었다. 이것의 사용법을 적어보려한다. 왜냐면 둘다 org파일들로 부터 page들을 만드는 복잡한 처리과정이라서 시간이 지나면 까먹을 수 있기 때문이다.
 #+HUGO_DRAFT: true
-* My homepage
+* [My homepage]
+** 기본정보
 - 참조: [[file:website_make_main_homepage.org][from here]] (만들당시 기록한 note)
 - homepage 운영 주소: https://frege2godel.me/
 - github source 주소:
@@ -21,6 +22,7 @@
   
 ** 사용법
 *** [step1] repo가져오기 (clone)
+**** 기본 정보
 local에 repo가 clone되어 있지 않다면 main-blog를 clone부터
 한다. clone할때는 ssh방식으로 한다. ssh를 하는 이유는 multiple
 account문제 때문이다. 관련된 글은 [[file:github_multi_account_github_problem.org][여기]]를 참조한다.  clone하면 아래와
@@ -31,6 +33,7 @@ account문제 때문이다. 관련된 글은 [[file:github_multi_account_github_
 #+attr_latex: :width 100px
 #+ATTR_ORG: :width 100
 [[../static/img/blog_homepage/mainblog1.png]]
+
 **** git pull
  git pull을 해서 sync를 맞춘다.
  
@@ -78,11 +81,12 @@ git push를 한다. id: holy2frege와 아래 pat을 입력하면 새로운
 keychain이 만들어지고 push가 된다.
 
 - pat
-   #+begin_important
+   #+begin_verse
    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
-   #+end_important
+   #+end_verse
 
-* My braindump blog
+* [My braindump blog]
+** 기본 정보
 - homepage 운영주소: https://braindump.frege2godel.me/?stackedPages=%2F
 - github source 주소: 
 - github repo(dev,publish):holy-brain, hoyoul.github.io
@@ -90,36 +94,36 @@ keychain이 만들어지고 push가 된다.
 - github id: hoyoul
 - github email: hoyoul.park@gmail.com
 - pat:
-   #+begin_important
+   #+begin_verse
    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
-   #+end_important
+   #+end_verse
 ** 사용법
 *** [step1] repo 가져오기 clone
- #+begin_important
+ #+begin_verse
  git clone https://github.com/hoyoul/holy-brain.git
- #+end_important
+ #+end_verse
 git pull을 한다.
 *** [step2] submodule 가져오기
 - public과 mapping된 submodule을 가져온다.
- #+begin_important
+ #+begin_verse
  git submodule init
  git submodule update
- #+end_important
+ #+end_verse
 - public폴더로 들어가서 update한다.
- #+begin_important
+ #+begin_verse
     git submodule foreach git checkout main
     git submodule update --remote --merge
     git checkout main
- #+end_important
+ #+end_verse
 git checkout main을 하고 git status를 하면 HEAD detach가
 사라진다. 위에서 git checkout main만 해도 될듯한데, 잘 모르겠다. 그
 다음 git pull을 한다.
 *** [step3] 문서 작성및 수정
 org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로가
 맞는지 확인한다.
- #+begin_important
+ #+begin_verse
  (org-roam-directory "~/hoyoul_projects/holy-brain/org") ; replace with your path
- #+end_important
+ #+end_verse
 - C-c r f로 문서를 수정하거나 만든다. 만들때는 영어로 title을 만들어야 한다.
 - 만든 문서에는 org_head_for_blog라는 미리만든 yasnippet의 형식에 맞춰
   문서를 작성한다. 제목,날짜, description template을 채우는 것이다.
@@ -151,27 +155,27 @@ headlevel은 4개만 정의 했다. org에서 headline을 그대로 사용한다
 - level3
   #+CAPTION: level3
   #+NAME: level3
-  #+attr_html: :width 600px
+  #+attr_html: :width 300px
   #+attr_latex: :width 100px
   [[../static/img/blog_homepage/headlevel3.png]]
 - level4
     #+CAPTION: level4
   #+NAME: level3
-  #+attr_html: :width 600px
+  #+attr_html: :width 300px
   #+attr_latex: :width 100px
   [[../static/img/blog_homepage/headlevel4.png]]
 **** underline
 underline은 _로 둘러싸게 하면 된다.
 #+CAPTION: underline
 #+NAME: underline
-#+attr_html: :width 600px
+#+attr_html: :width 300px
 #+attr_latex: :width 100px
 [[../static/img/blog_homepage/underline.png]]
 **** equal
 eqaul 두개로 둘러 싸면 아래와 같은 모양이 나온다.
 #+CAPTION: equal
 #+NAME: equal
-#+attr_html: :width 600px
+#+attr_html: :width 300px
 #+attr_latex: :width 100px
 [[../static/img/blog_homepage/equal.png]]
 **** todo

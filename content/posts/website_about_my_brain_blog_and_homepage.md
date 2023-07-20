@@ -6,7 +6,10 @@ date = 2023-06-16T00:00:00+09:00
 draft = true
 +++
 
-## My homepage {#my-homepage}
+## [My homepage] {#my-homepage}
+
+
+### 기본정보 {#기본정보}
 
 -   참조: [from here]({{< relref "website_make_main_homepage" >}}) (만들당시 기록한 note)
 -   homepage 운영 주소: <https://frege2godel.me/>
@@ -23,14 +26,18 @@ draft = true
 
 #### [step1] repo가져오기 (clone) {#step1-repo가져오기--clone}
 
-local에 repo가 clone되어 있지 않다면 main-blog를 clone부터
-한다. clone할때는 ssh방식으로 한다. ssh를 하는 이유는 multiple
-account문제 때문이다. 관련된 글은 [여기]({{< relref "github_multi_account_github_problem" >}})를 참조한다.  clone하면 아래와
-같은 directory구조를 볼 수 있다.
+<!--list-separator-->
 
-<a id="figure--main page"></a>
+-  기본 정보
 
-{{< figure src="/img/blog_homepage/mainblog1.png" caption="<span class=\"figure-number\">Figure 1: </span>main page" width="600px" >}}
+    local에 repo가 clone되어 있지 않다면 main-blog를 clone부터
+    한다. clone할때는 ssh방식으로 한다. ssh를 하는 이유는 multiple
+    account문제 때문이다. 관련된 글은 [여기]({{< relref "github_multi_account_github_problem" >}})를 참조한다.  clone하면 아래와
+    같은 directory구조를 볼 수 있다.
+
+    <a id="figure--main page"></a>
+
+    {{< figure src="/img/blog_homepage/mainblog1.png" caption="<span class=\"figure-number\">Figure 1: </span>main page" width="600px" >}}
 
 <!--list-separator-->
 
@@ -100,14 +107,17 @@ keychain이 만들어지고 push가 된다.
 
 -   pat
 
-    <div class="important">
+    <div class="verse">
 
-    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
+    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<br />
 
     </div>
 
 
-## My braindump blog {#my-braindump-blog}
+## [My braindump blog] {#my-braindump-blog}
+
+
+### 기본 정보 {#기본-정보}
 
 -   homepage 운영주소: <https://braindump.frege2godel.me/?stackedPages=%2F>
 -   github source 주소:
@@ -117,9 +127,9 @@ keychain이 만들어지고 push가 된다.
 -   github email: hoyoul.park@gmail.com
 -   pat:
 
-    <div class="important">
+    <div class="verse">
 
-    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
+    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<br />
 
     </div>
 
@@ -129,9 +139,9 @@ keychain이 만들어지고 push가 된다.
 
 #### [step1] repo 가져오기 clone {#step1-repo-가져오기-clone}
 
-<div class="important">
+<div class="verse">
 
-git clone <https://github.com/hoyoul/holy-brain.git>
+git clone <https://github.com/hoyoul/holy-brain.git><br />
 
 </div>
 
@@ -142,19 +152,19 @@ git pull을 한다.
 
 -   public과 mapping된 submodule을 가져온다.
 
-    <div class="important">
+    <div class="verse">
 
-    git submodule init
-    git submodule update
+    git submodule init<br />
+    git submodule update<br />
 
     </div>
 -   public폴더로 들어가서 update한다.
 
-    <div class="important">
+    <div class="verse">
 
-    git submodule foreach git checkout main
-    git submodule update --remote --merge
-    git checkout main
+    git submodule foreach git checkout main<br />
+    git submodule update --remote --merge<br />
+    git checkout main<br />
 
     </div>
 
@@ -168,9 +178,9 @@ git checkout main을 하고 git status를 하면 HEAD detach가
 org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로가
 맞는지 확인한다.
 
-<div class="important">
+<div class="verse">
 
-(org-roam-directory "~/hoyoul_projects/holy-brain/org") ; replace with your path
+(org-roam-directory "~/hoyoul_projects/holy-brain/org") ; replace with your path<br />
 
 </div>
 
@@ -214,12 +224,12 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
         <a id="figure--level3"></a>
 
-        {{< figure src="/img/blog_homepage/headlevel3.png" caption="<span class=\"figure-number\">Figure 5: </span>level3" width="600px" >}}
+        {{< figure src="/img/blog_homepage/headlevel3.png" caption="<span class=\"figure-number\">Figure 5: </span>level3" width="300px" >}}
     -   level4
 
         <a id="figure--level3"></a>
 
-        {{< figure src="/img/blog_homepage/headlevel4.png" caption="<span class=\"figure-number\">Figure 6: </span>level4" width="600px" >}}
+        {{< figure src="/img/blog_homepage/headlevel4.png" caption="<span class=\"figure-number\">Figure 6: </span>level4" width="300px" >}}
 
 <!--list-separator-->
 
@@ -229,7 +239,7 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
     <a id="figure--underline"></a>
 
-    {{< figure src="/img/blog_homepage/underline.png" caption="<span class=\"figure-number\">Figure 7: </span>underline" width="600px" >}}
+    {{< figure src="/img/blog_homepage/underline.png" caption="<span class=\"figure-number\">Figure 7: </span>underline" width="300px" >}}
 
 <!--list-separator-->
 
@@ -239,7 +249,7 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
     <a id="figure--equal"></a>
 
-    {{< figure src="/img/blog_homepage/equal.png" caption="<span class=\"figure-number\">Figure 8: </span>equal" width="600px" >}}
+    {{< figure src="/img/blog_homepage/equal.png" caption="<span class=\"figure-number\">Figure 8: </span>equal" width="300px" >}}
 
 <!--list-separator-->
 
