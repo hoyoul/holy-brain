@@ -311,6 +311,30 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
     {{< figure src="/img/blog_homepage/attention.png" caption="<span class=\"figure-number\">Figure 16: </span>attention" width="600px" >}}
 
+<!--list-separator-->
+
+-  table
+
+    org에서 많이 쓰는 구조 중에 table이 있다. 다음 예를 보자.
+
+    | 온도      | -4 | -3 | -2 | -1 | 0 | 1 | 2 | 3 | 4  |
+    |---------|----|----|----|----|---|---|---|---|----|
+    | 아이스크림 판매량 | -6 | -4 | -2 | 0  | 2 | 4 | 6 | 8 | 10 |
+
+    보기 좋게 세로로 변경하자.
+
+    | 온도 | 아이스크림 판매량 |
+    |----|-----------|
+    | -4 | -6        |
+    | -3 | -4        |
+    | -2 | -2        |
+    | -1 | 0         |
+    | 0  | 2         |
+    | 1  | 4         |
+    | 2  | 6         |
+    | 3  | 8         |
+    | 4  | 10        |
+
 
 #### [step 4] make all {#step-4-make-all}
 
