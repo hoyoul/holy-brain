@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       60D3E48B-4132-401F-B056-3D940CD73A12
-:mtime:    20230608122911
+:mtime:    20230721211550 20230608122911
 :ctime:    20230608122911
 :END:
 #+title: [emacs] python lsp setting
@@ -9,17 +9,30 @@
 #+DATE: <2023-06-08 Thu>
 #+DESCRIPTION: python lsp setting을 하려 한다. eglot(client), pyright(server)를 이용한다.
 #+HUGO_DRAFT: true
-* DOING pyright 설정
+
+* lsp
+lsp는 server client구조다.
+* eglot
+emacs python client를 말한다.
+* pyls(server) 
+이게 가장 오래된 방식이다. google에서 만들었다. 그런데 지금은 관리되지
+않는다. depreciated되었다고 한다.
+https://emacs-lsp.github.io/lsp-mode/page/lsp-pyls/
+
+그래서 pyright를 사용한다. pyright는 ms에서 만들었다.
+* DOING pyright 설치
 ** create env
 #+BEGIN_SRC text
-$ conda create -n pyright python=3.11 RET
+$ conda create -n pyright_env python=3.11 RET
 #+END_SRC
 ** activate env
 #+BEGIN_SRC text
-$ conda activate pyright
+$ conda activate pyright_env
 #+END_SRC
 ** install pyright on pyright env
 #+BEGIN_SRC text
 $ conda install -c conda-forge pyright RET
 #+END_SRC
+
+
 

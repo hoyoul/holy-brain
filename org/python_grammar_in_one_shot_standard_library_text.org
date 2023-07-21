@@ -1,0 +1,18 @@
+:PROPERTIES:
+:ID:       70799E31-B2BE-4065-9A38-1CE96FDC7E1E
+:mtime:    20230721214500
+:ctime:    20230721214500
+:END:
+#+title: [python] grammar in one shot - standard library (Text)
+* String
+#+BEGIN_SRC python :results output :exports both
+  import sys
+  print(sys.version_info)
+#+END_SRC
+
+#+RESULTS:
+: sys.version_info(major=3, minor=10, micro=11, releaselevel='final', serial=0)
+* textwrap
+* regular expression
+* difflib
+

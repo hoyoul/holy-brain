@@ -59,6 +59,14 @@ ssh-keygen -t rsa -C "holy2frege.nil@gmail.com" -f ~/.ssh/id_holy2frege
 
 만들어진 key를 각 github에 등록한다.
 
+-   holytofrege 계정
+
+<!--listend-->
+
+```sh
+ssh-keygen -t rsa -C "holytofrege@fastmail.com" -f ~/.ssh/id_holytofrege
+```
+
 
 ### ~/.ssh/config 설정 {#dot-ssh-config-설정}
 
@@ -80,6 +88,11 @@ Host github.com-holy2frege
     HostName github.com
     User holy2frege
     IdentityFile ~/.ssh/id_holy2frege
+# 세번째 계정
+Host github.com-portfolio
+    HostName github.com
+    User holytofrege
+    IdentityFile ~/.ssh/id_holytofrege
 ```
 
 

@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       C2FA9C6E-D3CD-49ED-A8AB-FCECC8575338
-:mtime:    20230720195001 20230616162720 20230616140021 20230616124555
+:mtime:    20230721163513 20230720195001 20230616162720 20230616140021 20230616124555
 :ctime:    20230616124555
 :END:
 #+title: [github] multi account github problem
@@ -38,6 +38,10 @@ ssh-keygen -t rsa -C "hoyoul.park@gmail.com" -f ~/.ssh/id_hoyoul
 ssh-keygen -t rsa -C "holy2frege.nil@gmail.com" -f ~/.ssh/id_holy2frege
 #+END_SRC
 만들어진 key를 각 github에 등록한다.
+- holytofrege 계정
+#+BEGIN_SRC sh
+ssh-keygen -t rsa -C "holytofrege@fastmail.com" -f ~/.ssh/id_holytofrege
+#+END_SRC  
 ** ~/.ssh/config 설정
 다음과 같이 설정한다. 여기서 host명이 중요하다. host명에 따라
 github에서 repo를 clone할 때, 이 host명이 쓰이기 때문이다. 그래서
@@ -56,6 +60,11 @@ github에서 복사한 값이기 때문에 -hoyoul로 postfix를 붙이는 방�
       HostName github.com
       User holy2frege
       IdentityFile ~/.ssh/id_holy2frege
+  # 세번째 계정
+  Host github.com-portfolio
+      HostName github.com
+      User holytofrege
+      IdentityFile ~/.ssh/id_holytofrege      
 #+END_SRC
 ** server 연결 test
 #+BEGIN_SRC text

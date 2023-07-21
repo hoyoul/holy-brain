@@ -1,0 +1,1422 @@
++++
+title = "python_summary8 string"
+author = ["Holy Frege"]
+draft = false
++++
+
+## String {#string}
+
+python의 코드를 보면 string이 많이 나온다. python code를 이해하고 짜기
+위해선 string이 무엇이고 동작방식을 알아야하는데, 그럴려면 내부구조를
+알아야 한다. internals는 깊게 들어가면 한도 끝도 없고, 프로그램을
+짜는데 햇갈릴수도 있다. 하지만 코드를 봤을때 머리속에서 그림이 보여야
+한다. cpython옛날 버전을 가지고 internals를 설명하는 blog가 있어서
+참고를 한다. [참고](https://www.laurentluce.com/posts/python-string-objects-implementation/) string은 기본적으로 container다. string에 들어가는
+alphabet은 value이면서 객체다. primitive data type의 value들은
+값이면서 객체인것은 oop언어이기 때문이다. 물론 이건 내 생각이다.
+
+```python
+s = "abc"
+```
+
+위 코드를 보면 어떤 그림이 상상되는가? python interpreter는 위코드를
+읽고 어떤 일을 할까? 고민해 본적이 있는가? 나는 머리속에서 상상을
+해본다. parser는 ascii코드를 읽고 각각의 항목을 list로
+만들것이다. 그리고 assignment를 실행할것이다. rvalue는
+
+
+### string의 특징 {#string의-특징}
+
+-   immutable 이다.
+-   표기법: ''', """, ", '를 사용해서 string literal을 표시 가능
+-   여러줄의 string literal은 """,'''을 사용하자.
+-   tuple과 string은 둘다 배열이다. 그래서 둘다 immutable하고,
+    indexing이 가능하며, slicing이 가능하다. 이것들이 배열의 특징이기
+    때문이다.
+-   in과 not in이 가능하다. 예를 들어보자.
+    ```python
+    print('a' in 'abc')
+    print('asdf' in 'asdf_asdf')
+    ```
+-   python에선 character set으로 unicode로 처리한다. 즉 모든 글자는
+    4byte를 사용한다.
+
+
+### escape문자 {#escape문자}
+
+
+#### escape문자란? {#escape문자란}
+
+escape문자란 벗어난 문자다. 벗어난다는게 무슨 말인가? 원래 용도에서
+벗어나 다른용도로 사용된다는 뜻이다. 문자라는것은 문자열에
+포함된다. 문자열에 포함되면, 화면에 보여질 수도 있고, file에 text로
+저장이 될 수도 있다. 그런데 escape문자는 문자열에 포함되지
+않는다. escape문자중에 os나 언어차원에서 공식적으로 정의된 형태의
+문자가 있다. \\를 사용하지 않는 문자인데, meta문자라고 부르기도
+한다. 따옴표도 meta문자다. 예를 들어보자. python이란 언어에선
+문자열을 나타내기 위해서 따옴표같은 문자를 사용한다. 따옴표도
+문자이기때문에 문자열에 포함되어야 하지만, 따옴표는 문자열에
+포합되지 않는다. 문자열의 시작과 끝을 나타낸다. 문자이지만,
+문자열에 포함되지않는 escape문자라서 그렇다. 다시 말해서,문자라는게
+문자라는 용도에 벗어나 다른 용도로 정의되어 있다면, escape문자라고
+한다. meta문자 이외의 escape문자들은 보통 \\를 붙인다.
+
+escape문자를 만드는 \\문자가 일반문자에 적용되면 escape문자가
+되지만, escape문자에 적용되면 escape문자를 일반 문자로 만들어준다.
+
+```python
+print("this is \" .")
+```
+
+\\ escape 문자도 자기 자신을 escape시켜서 문자열에 포함시킬 수 있다.
+
+```python
+print("this escape escape character \\")
+```
+
+python 환경에만 이런 문자가 있는건 아니다. os도에도 있고,
+system에도 있다. 파일을 editor에서 편집한다고 생각하자. 키보드의
+문자키를 입력하면, 키보드에선 문자키에 해당하는 code값을 cpu에
+보낸다. 문자키에 해당하는 code값이란 unicode와 같은 character set
+테이블에 있는 숫자값을 뜻한다. 각각의 character set은 symbol과
+숫자값을 가지고 있기 때문이다. cpu에선 입력된 문자 code를 display로
+보낸다. 그리고,display에선 code에 일치하는 symbol그림을 화면에
+보여준다. font가 있다면 font에 해당하는 symbol그림을 display에서
+보여준다. 키보드 문자키로 작성되는 모든 문자들은 기본적으로 화면에
+출력이 된다. 파일을 열었을때, 파일에 담긴 문자코드들은 화면에
+글자로 보여져야하는 용도인데, escape문자들은 문자열에 포함되지 않은
+문자라서 화면에 보여지지 않고 다른 용도로 사용될 수있다. 예를 들어,
+\a라는 문자는 bell소리를 낸다. a라고 화면에 보이지
+않는다. escape문자이기 때문이다. display device로 가지않고 sound
+device로 가기 때문이다.
+
+
+#### escape 문자의 예 {#escape-문자의-예}
+
+python에서 사용되는 escape문자는 아래와 같은 예가 있다.
+
+```python
+print('\\ ')
+print('\' ')
+print('\" ')
+print('\b ')
+print('\n ')
+print('\t ')
+print('\e ')
+```
+
+-   \\\\: back slash
+-   \\ enter: back slash : 화면에서 다음줄로 넘어가지만, newline이
+    생기지 않는다. 실제 저장될 때, newline이 없게된다.
+    ```text
+    >>> 이렇게 적으면 \enter
+    >>> 엔터없이 \enter
+    >>> 여러줄을 적어요. \enter
+    >>> '이렇게 적으면 엔터없이 여러줄을 적어요'
+    ```
+-   \b: backspace
+-   \n: newline: 문자열에 newline이 있으면, 무조건 newline이 해석되는 게 아니다.
+
+    <a id="figure--text eval"></a>
+
+    {{< figure src="./img/text_eval.png" caption="<span class=\"figure-number\">Figure 1: </span>text eval" >}}
+
+    repl에선 text에 escape문자가 있다고 해서 evaluate되지
+    않는다. 하지만, 변수에 있는 문자열은 evaluate되기 때문에
+    newline이 해석된다. 이것은 repr()함수가 동작하기
+    때문이다. repr()는 built-in function이다. repr()는 escape문자를
+    그대로 출력한다. 따라서, repr()로 return된 값은 escape문자를
+    포함한 문자열을 return하기 때문에 print해도 escape문자가
+    출력된다. repr() 표현된 문자열은 string이 아닌
+    representation이라고 부른다고 한다. string은 formatting을 할수
+    있지만, representation은 formatting을 할 수 없다고 한다.
+    ```python
+    text ="This is \nNewline"
+
+    print(repr(text))
+    ```
+    repr()는 class객체를 출력할 때도 볼 수 있다.
+    ```python
+    class A:
+        pass
+
+    a = A()
+    print(a)
+    ```
+    객체를 출력할때, __str__()를 overriding해서 string을 출력하게
+    할수도 있지만, __repr__()을 overriding해서 위와 같은 문자열을
+    출력하게 할 수도 있다.
+
+-   \t: tab
+-   \e: esc
+
+
+### raw string {#raw-string}
+
+repr()가 escape문자를 해석하지 않고 original 그대로 가지고 있다면,
+raw string도 escape문자를 string literal로 취급하는데, 약간 trick을
+사용한다. 즉 escape문자에 \\를 덧붙이면 escape 문자가 출력이
+된다. 그래서 마치 escape문자를 문자 그대로 출력하는것 처럼 보이게
+만든다. 아래의 예를 보면, repr()에서 escape문자가 포함된 문자를
+출력하는것과 raw string으로 표현된 문자열의 출력을 repr()로 보면
+original string모습을 확인 할 수 있다.
+
+참고로 raw string은 r이라는 symbol을 string앞에 붙인다.
+
+```python
+string = "여기서 \n은 escape문자다."
+print(repr(string))
+print(string)
+
+raw_string = r"여기서 \n은 string literal이다."
+print(repr(raw_string))
+print(raw_string)
+```
+
+raw string이 사용되는 경우는 escape문자가 그대로 출력되야 하는
+경우에 raw string을 사용하면 편하다. 예를 들어보자.
+
+```python
+locate = "c:\\users\\test"
+print(locate)
+
+locate = r"c:\users\test"
+print(locate)
+```
+
+첫번째는 경로 문자열을 그대로 표현해야 한다. string을 사용할 경우,
+\\을 하나씩 더 붙여야 문자경로명이 표시된다. raw string을 사용할
+경우 경로와 같은 escape문자를 그대로 출력해야 할때, 그대로 사용하면
+된다. 굳이 원본 text에 \\을 붙일 필요가 없다. 예를 들어, ebook에 \\를
+사용한 단어들이 많이 나왔을때, string으로 취급해서 처리할려면,
+ebook의 모든 \\ 글자를 찾아서 \\를 추가해야만 \\가 출력이
+가능하다. 하지만, raw string은 그런 pre-processing을 할 필요가
+없다.
+
+
+## String의 기본 methods {#string의-기본-methods}
+
+
+### 기본 methods {#기본-methods}
+
+
+#### len(string) {#len--string}
+
+문자의 길이를 반환한다.
+
+```python
+text ='this is sentence'
+print(len(text))
+```
+
+
+#### string.upper() {#string-dot-upper}
+
+대문자로 변환한다.
+
+```python
+text = "this is string"
+print(text.upper())
+```
+
+
+#### string.lower() {#string-dot-lower}
+
+소문자로 변환한다.
+
+```python
+text = "this is string"
+print(text.lower())
+```
+
+
+#### string.capitalize() {#string-dot-capitalize}
+
+시작 문자를 대문자로 변환
+
+```python
+text = "this is string"
+print(text.capitalize())
+```
+
+
+#### string.title() {#string-dot-title}
+
+단어의 시작을 대문자로 변환한다.
+
+```python
+text = "this is string"
+print(text.title())
+```
+
+
+### string 공백 제거 methods {#string-공백-제거-methods}
+
+크롤링할때 공백을 제거할 일이 많다.
+
+```python
+text = '    공백이 \t  있어요. \t\n   '
+print(text)
+print(text.strip())
+print(text.rstrip())
+print(text.lstrip())
+```
+
+
+#### string.strip() {#string-dot-strip}
+
+좌우의 공백을 제거한다.
+
+
+#### string.lstrip() {#string-dot-lstrip}
+
+왼쪽 공백을 제거한다.
+
+
+#### string.rstrip() {#string-dot-rstrip}
+
+오른쪽 공백 제거한다.
+
+
+### 문자열 check predicate {#문자열-check-predicate}
+
+```python
+print('12345'.isdigit())
+print('1.23e-5'.isdigit())
+print('Capitalize'.isupper())
+print('lower_case'.islower())
+```
+
+
+#### string.isdigit() {#string-dot-isdigit}
+
+string이 0-9사이의 숫자형태인지 확인한다. 위의 예를 보면, e를
+사용한 지수형태가 있는데 이것은 digit이 아니다.
+
+
+#### string.isupper() {#string-dot-isupper}
+
+모든 문자가 대문자로 이루어져 있는지 확인한다.
+
+
+#### string.islower() {#string-dot-islower}
+
+모든 문자가 소문자로 이루어져 있는지 확인한다.
+
+
+### String Pattern matching {#string-pattern-matching}
+
+pattern이 문자열에 있는지 궁금할 수도 있고, 있다면 어디에 있는지
+알고 싶을 때 pattern matching함수를 사용한다. pattern이 있는지
+없는지 여부는 in을 사용해도 된다.
+
+```python
+text = 'abc_text_abc_ee'
+pattern = 'abc'
+
+print(text.count(pattern))
+print(text.find(pattern))
+print(text.rfind(pattern))
+print(text.startswith(pattern))
+print(text.endswith(pattern))
+```
+
+
+#### string.count(pattern) {#string-dot-count--pattern}
+
+string 문자열내에 pattern의 occurs 반환
+
+
+#### string.find(pattern) {#string-dot-find--pattern}
+
+string 문자열 내에서 pattern을 find해서 첫 occur의 index반환
+
+
+#### string.rfind(pattern) {#string-dot-rfind--pattern}
+
+string 문자열 내에서 pattern을 reversed(뒤에서부터) find한 첫 occur의 index반환
+
+
+#### string.startswith(pattern) {#string-dot-startswith--pattern}
+
+string이 pattern으로 시작하는지 확인
+
+
+#### string.endswith(pattern) {#string-dot-endswith--pattern}
+
+string이 pattern으로 끝나는지 확인
+
+
+### split &amp; join {#split-and-join}
+
+프로그램을 짤 때, 프로그램의 기본 구조가 있다. 파일이나 외부
+입력으로 sequence data(유한개)를 입력 받고 for-loop으로 하나하나
+꺼내서 if로 처리한다. 이게 기본 구조다. 여기서, 입력으로 받은
+sequence가 문자열이고, 우리는 for-loop으로 하나 하나 꺼내서 list에
+넣는 처리를 하고 싶다. 어떻게 해야 할까? 이때, split()를 사용하면
+for-loop과 if를 사용하지 않아도 된다. python에선 어떻게 하면 이 정형화된
+for-loop과 if대신 함수로 간단화 할것인가?에 관심이 많다.
+
+```python
+text = '한국어 abc 테스트 \n abc 중 \t 입니다'
+print(text.split())
+print(text.split('abc'))
+print(' '.join(text.split()))
+print(', '.join(str(i) for i in range(10)))
+```
+
+
+#### string.split() {#string-dot-split}
+
+string이 입력으로 들어왔을 때, 단어를 list로
+넣는다. white space(space,newline,tab)을 제거후 split한다. for-loop으로
+문자 하나하나 꺼내고 if로 white space 확인후 제거후 list에
+넣는다. for-loop과 if를 사용하지 않게 해준다.
+
+
+#### string.split(pattern) {#string-dot-split--pattern}
+
+split에 인자가 없다면, white space(space,newline,tab)을 기준으로 제거하고
+list에 넣는다면, 이것은 인자가 주어진다. 주어진 인자를 제거하고
+list에 넣는다.
+
+
+#### string.join(iterable) {#string-dot-join--iterable}
+
+for loop와 if로 입력 data를 처리하는게 programming에서
+입력데이터를 처리하는 기본 구조라고 했다. if로 조건에 맞는 data를
+처리도 해야 한다. join은 split()로 if까지 해서 조건에 맞는 data를
+list로 넣었다면, list에 대한 처리까지 한다. list의 item을 꺼내서
+string을 덧붙여 최종적으로 string을 만들어 낸다.
+
+```python
+print(' '.join(text.split()))
+print(', '.join(str(i) for i in range(10)))
+```
+
+위의 예에서 보듯이 join은 iterable의 item을 꺼낸 후 뒤에 string에
+해당하는 문자열을 붙여서 최종적으로 string을 return한다. 첫번째는
+split()에 의해서 white space가 제거된 list에서 space를 item마다
+추가한 문자열을 return한다. 여기서 추가된 건 space다. white
+space가 아니다.
+
+
+## string formatting {#string-formatting}
+
+program에서 string을 사용하는것은 string에서 어떤 값을 도출하기
+위해서,즉 계산을 위해서 사용될 수도 있으나, 출력을 위해서 사용할
+때도 있다. 화면에 출력한다거나, file에 로그기록을 남긴다던가, 이럴때
+formatting이 필요하다. 알아보기 쉽게 string을 재작성하는
+것이다. string literal을 사용하면 되지, 왜 재 작성이냐? 출력할
+string은 string literal이 아닌, 변수,객체값을 표현해야 하기
+때문이다. 객체의 값이나 변수의 값을 string에 포함시키기 위해선
+재작성및 재처리가 필요하다. 예를 들어, 어떤 변수가 3.141592... 엄청
+긴값을 가지고 있을때, 이것을 그대로 파일에 저장한다거나 화면에
+출력한다면 가독성이 떨어지게 된다. 그래서 formatting이 필요하다.
+
+```python
+a,b,c = 10,1.725, 'sample'
+print(str(a) + ": " + str(b) + " - " + c)
+
+print("%d: %f - %s" % (a,b,c))
+print("{}: {} - {}".format(a,b,c))
+print(f"{a}: {b} -{c}")
+```
+
+
+### % formatting {#formatting}
+
+문자열에 변수나 객체값을 넣어서 string을 만들려고 하기때문에 변수나
+객체를 제공하는 부분과, 변수값이나 객체가 위치할 placeholder를
+포함한 string template이 있다. 변수나 객체는 뒤에 % tuple형태로
+제공한다. placeholder는 %형태로 되어 있다. 미리 만들어준 string
+template에 %로 시작하는 placeholder를 넣어둔
+꼴이다. placeholder안에서 값들을 formatting한다. formatting은
+3-4가지 정도가 있다. 대표적인 padding,precision,datatype을 기술하는
+ppd format은 가장 많이 쓰이는 formatting방식이다.
+
+```text
+placeholder => %[padding+datatype]
+placeholder => %[align + padding + datatype] etc)  -,+: align
+placeholder => %[align + precision + padding + datatype] etc) -,+: align
+```
+
+
+#### padding 설정 {#padding-설정}
+
+```text
+%-4d: 4칸의 padding을 만들고 값을 앞에서부터 넣는다.
+%4d: 4칸의 padding을 만들고 값을 뒤에서부터 넣는다.
+%04d: 4칸의 padding을 만들고 값을 뒤에넣고 빈공간은 0으로 채운다.
+```
+
+```python
+print("%d+%d+%d" % (1,10,100))
+print("%4d+%4d+%4d" % (1,10,100))
+print('   1+   10+  100')
+print("%-4d+%-4d+%-4d" % (1,10,100))
+print("%04d+%04d+%04d" % (1,10,100))
+```
+
+
+#### float를 위한 precision 설정 {#float를-위한-precision-설정}
+
+precision은 .을 붙여준다.
+
+```python
+print("%f+%f+%f" %(123.4,12.34,1.234))
+print("%.3f+%.3f+%.3f" %(123.4,12.34,1.234))
+print("%8.3f+%8.3f+%8.3f" %(123.4,12.34,1.234))
+print("%08.3f+%08.3f+%08.3f" %(123.4,12.34,1.234))
+```
+
+-   [datatype]
+
+    | %datatype | a      |
+    |-----------|--------|
+    | %s        | string |
+    | %d        | int    |
+    | %f        | float  |
+    | %o        | octet  |
+    | %x        | hexa   |
+
+
+#### naming {#naming}
+
+placeholder를 나타내는 %와 변수는 1:1 mapping한다고 했다. 이를
+명확하게 해줄 수도 있다.
+
+```python
+print("%(first)5.2f - %(second)5.2f" % {"first": 10.2, "second": 5.62})
+
+```
+
+
+### format() 함수 {#format-함수}
+
+객체나 변수의 값을 string으로 만들어 출력한다고 했다. 이때
+formatting을 해서 string을 만든다고 했다. format()함수도
+formatting하는 함수다. % formatting은 %로 변수값을 제공했다면,
+format()는 인자에 변수값을 제공한다. 그리고 만들고 싶은 형태의
+string format은 미리 만들고, placeholder를 만드는 방식은 %
+formatting과 다를 바 없다. 다만 placeholder를 포함한 string
+template이 좀 다르다. %formatting은 placeholder가 %로 시작했다면,
+format()는 string template안에 들어가는 placeholder가 {}같은
+형태다. {}는 변수와 1:1 mapping된다. mapping된 변수에 대한
+formatting작업이 일어난다.
+
+
+#### positioning (순서 설정) {#positioning--순서-설정}
+
+{}와 변수는 1:1 mapping된다. mapping 순서를 바꿀 수 있다.
+
+```python
+a,b,c = 10,1.725,'sample'
+
+print("{}: {} - {}".format(a,b,c))
+print("{0}: {1} - {2}".format(a,b,c))
+print("{0}: {2} - {1}".format(a,b,c))
+```
+
+순서 설정은 변수와 placeholder가 mapping되는 순서를 바꿔줄 수
+있다는 것이다. 마치 index같다. % formatting에는 없는 방법이다.
+
+
+#### padding &amp; precision &amp; datatype 설정 {#padding-and-precision-and-datatype-설정}
+
+format()함수도 placeholder에서 padding과 float를 위한 precision, datatype을
+넣어 줄 수 있다.
+
+```python
+print("{0}+{1}+{2}".format(123.4, 12.34, 1.234))
+print("{0:.3f} + {1:.3f} +{2:.3f}".format(123.4, 12.34, 1.234))
+print("{:8.3f}+{:8.3f}+{:8.3f}".format(123.4, 12.34, 1.234))
+```
+
+
+#### naming {#naming}
+
+각각의 placeholder와 각각의 변수들이 1:1 mapping된다고
+했다. format()에서는 index를 사용해서 placeholder에서 구분이
+가능했다. 그런데 mapping이 많아지면, naming을 쓰는 것이 더
+효율적이다. 아래 예를 보면, kwargs형태가 나왔다. format()를
+호출할때, parameter가 stack에 쌓아지는데, keyword:value의 형태를
+한꺼번에 가져갈때, dictionary를 사용하고, \*\*kwargs로 받는다고
+했다. 비슷하게 dictionary를 string template이 받는다고 생각하면
+될듯하다. 강사는 unpacking이라고 얘기한다.
+
+```python
+print("{first:5.2f} - {second:5.2f}".format(first=10.2, second=5.62))
+print("{first:5.2f} - {second:5.2f}".format(**{"first": 10.2, "second": 5.62}))
+
+```
+
+
+### f string {#f-string}
+
+가장 많이 사용되는 방식이라고 한다. fstring은 % formatting이나
+format()와 가장 큰 차이점은 string template만 존재한다는
+것이다. 이전의 2가지 방식은 모두 placeholder가 포함된 string
+template과, 변수와 객체값을 나타내는 formatting provider가
+존재했다. f string에선 string template만 존재한다.
+
+
+#### positioning {#positioning}
+
+```python
+a,b,c = 10,1.725,'sample'
+
+print(f"{a}: {b} - {c}")
+print(f"{a}: {c} - {b}")
+```
+
+
+#### padding &amp; precision &amp; datatype {#padding-and-precision-and-datatype}
+
+```python
+value = 12.34
+
+print(f"{value*10} +{value} + {value/10}")
+print(f"{value*10:.3f} +{value:.3f} + {value/10:.3f}")
+print(f"{value*10:8.3f} +{value:8.3f} + {value/10:8.3f}")
+```
+
+
+## Regular Expression {#regular-expression}
+
+
+### pattern을 찾는다는것. {#pattern을-찾는다는것-dot}
+
+pattern이란 무엇인가? 규칙(regular)적인 형태, 반복적인 형태를
+pattern이라고 말한다. 문자열뿐만 아니라 우리는 보는 모든것에서
+본능적으로 pattern을 인식할 수 있다. 우리가 pattern이라고
+생각하는것을 표현할 수 있을까?  표현할 수 있다면 어디에 쓸것인가?
+
+pattern을 표현하는 방법, programming language에서 문자열에 나타내는
+pattern을 표현하는 언어가 따로 있다. regular expression이라고
+한다. 규칙적인 표현? pattern의 다른말에 불과하다. 즉 pattern을
+나타내고자 한다면, regular expression을 사용하면 된다.
+
+pattern을 regular expression으로 나타낸다면, 어디에 사용되는가
+사용가치가 있는가?라는 질문이 있을 수 있다. 패턴을 나타내면
+검색하는데 사용할 수 있다. 즉 어떤 문자열이 주어졌을때, 어떤
+pattern이 있냐 없냐를 검색할 수도 있고, 검색된 내용을 바꿀수도
+있다. regular expression이란 tool이 이것을 가능하게
+해준다. for-loop과 if를 사용해서 이런 기능을 구현할 수도 있겠지만,
+regular expression이란 tool을 사용하면, 좀 더 쉽고, 막강하게 처리할
+수 있다. 참고로 pattern은 일종의 set으로 봐도 된다. 강사는 실제적인
+예로 다음 예를 설명한다.
+
+```text
+야 이거 #%이름#꺼 아니야?
+#%이름#에게 물어봐
+#%이모티콘#
+```
+
+정보보호를 위해서 이름이나, 전화번호,주소, 특정내용은 blind되서
+제공된다고 한다. 이런 경우 pattern을 찾고 replace하는 일이 빈번하게
+일어난다. 이 경우 find(pattern)로 찾을 수 없다고 한다. find는
+명시적인 문자열이여야 하는데,#%&lt;임의의 문자열&gt;#으로 명확하지 않은
+pattern은 regular expression을 사용해야 한다고 한다.
+
+
+### Regular expression {#regular-expression}
+
+| 패턴                                | 예시          |
+|-----------------------------------|-------------|
+| \d{3}\\-\d{4}\\-\d{4}               | 010-1234-5678 |
+| {1,3}\\.\d{1,3}\\.\d{1,3}\\.\d{1,3} | 192.168.0.20  |
+| #%[^#]+#                            | #%이모티콘#   |
+
+-   정규식을 다룬다는건 양이 많다.
+    [참조](http://www.regexr.com) 사이트에서 연습을 하길 추천한다.
+
+
+### Regular Expression 문법 {#regular-expression-문법}
+
+
+#### meta character {#meta-character}
+
+escape문자의 일종, escape문자는 원래 용도에서 벗어난 문자. 문자의
+원래용도는 화면에 출력되거나 문자열에 포함되거나, data로서의
+역할이다. meta문자는 \\를 사용하지 않는 escape문자로
+보면된다. 다른곳에선, 문법적인 역할이 정해진 문자. pattern을 표현할 때,
+사용하는 문자다.라고 정의하기도 한다.
+
+```text
+. ^ $ * + ? { } [ ] \ | ( )
+```
+
+regular expression에서 위 문자들은 화면에 보이는 문자가
+아니다. 특수한 의미를 가진 문자로 용도가 정해져 있다. literal
+character로 사용하려면 \\를 앞에 붙여 줘야 한다.
+
+<!--list-separator-->
+
+-  ^ meta 문자
+
+    문자를 나타내지 않는다. line의 처음을 나타낸다.
+
+    ```text
+    ^a
+    ```
+
+    ```text
+    a
+    aa
+    aaa
+    aaaa
+    1aaa
+    ```
+
+    위에서 보면, 1aaa빼고 다 match된다.
+
+<!--list-separator-->
+
+-  $ meta 문자
+
+    문자를 나타내지 않는다. line의 끝을 나타낸다.
+
+    ```text
+    a$
+    ```
+
+    ```text
+    a
+    aa
+    baa
+    aabb
+    ```
+
+    a$는 line의 마지막글자가 a라는 것을 나타낸다. 따라서 aabb는
+    매치되지 않는다.
+
+<!--list-separator-->
+
+-  /d meta 문자
+
+    하나의 숫자를 나타내는 pattern이다.
+
+<!--list-separator-->
+
+-  /w meta 문자
+
+    한 문자를 나타내는 meta문자다. 한문자는 a-z,A-Z,0-9가 될 수 있다.
+
+<!--list-separator-->
+
+-  /s meta 문자
+
+    space를 나타내는 meta문자다.
+
+<!--list-separator-->
+
+-  [ ] meta 문자.
+
+    regular expression에서 []라는 문자를 보면, 다음과 같은 형태로 되어 있다.
+
+    ```text
+    [a-z], [A-Z0-9] [\d\s]
+    ```
+
+    [ ]는 한 문자를 나타내는 pattern이다. 어떤 문자인지는 [ ]
+    내부에서 -로 표현한다. [A-Z0-9]는 A~Z이거나 0~9의 범위에 있는
+    문자를 의미한다. [\d\s]는 digit이거나 space이거나라는 범위를 나타낸다.
+
+<!--list-separator-->
+
+-  [^ ] meta 문자
+
+    ^란 문자는 not을 의미한다. 즉 포함되지 않는 문자를 말한다.&nbsp;[^ ]
+    도 한 문자를 의미한다.
+
+<!--list-separator-->
+
+-  dot(.) meta 문자
+
+    dot 문자도 하나의 문자를 나타내는 pattern이다. [ ]는 range가
+    있다. 하지만 dot은 \n을 제외한 모든 문자를 dot으로 나타낼 수
+    있다. white space도 포함한다.
+
+    ```text
+    \s...\s  pattern은 "abcd efg hij klmnop" => efg, hij
+    ```
+
+<!--list-separator-->
+
+-  ? meta 문자
+
+    []이나 dot처럼 ?문자도 한문자를 대신하는 pattern이다. 한 문자를
+    대신하는 pattern이 3개 이지만, 한문자를 cover하는 범위가 각기
+    다르다. 예를 들어 []의 경우는 안에 range가 있다. 특정 range의
+    문자만 대신한다. 반면에 dot은 모든 문자1개를 대신할 수
+    있다. 그런데 ?는 범위가 더 넓다. 1개의 모든문자와 문자가 없는
+    경우도 대신한다.
+
+<!--list-separator-->
+
+-  반복횟수 지정({}) meta문자
+
+    이전에는 한개의 문자에 대한 pattern이였다. 한 문자에 대한
+    pattern은 강력하지 않을 수 있다. 아래에 나오는 반복을 나타내는
+    pattern과 같이 쓰인다면 강력한 pattern을 만들 수 있다.
+
+    -   {3} -&gt; 3번 반복
+    -   {3,} -&gt; 3번이상 반복하는, 무한 반복을 나타낼수 있다.
+    -   {2,5} -&gt; 2번이상 반복 5번 이하 반복 되지 않는것.
+
+<!--list-separator-->
+
+-  star(\*) meta 문자
+
+    문자를 나타내는 meta문자가 아니다. 앞의 문자의 횟수를 나타내는
+    meta문자다. 0번 이상 무한 반복을 나타내는 pattern이다. 예를
+    들어서,
+
+    ```text
+    ab* pattern은 a,ab, abb, abbb, abbb...
+    ```
+
+    앞의 문자인 b의 0번부터 무한까지의 반복된 문자 pattern을 나타낼
+    수 있다.
+
+<!--list-separator-->
+
+-  + meta 문자
+
+    +도 문자를 나타내는 meta문자가 아니다. 앞문자의 횟수를 나타내는
+    meta문자다. 단 1회 이상의 반복을 해야하기 때문에 \*와는 다르다.
+
+    ```text
+    ab+ pattern은 ab, abb, abbb, abbb...
+    ```
+
+<!--list-separator-->
+
+-  start와 + meta 문자의 문제점
+
+    +와 \*를 사용해서 pattern을 만들고, 만든 pattern으로 특정 text를
+    검색할 때 문제가 생길 수 있다. 우리가 원하는 문자열 검색이 안될
+    수 있다.
+
+    예를 들어서 #%을 prefix로 갖고, #을 postfix로 갖는 pattern을
+    만들었다고 하자.
+
+    ```text
+    #%.*#
+    ```
+
+    .\*는 prefix와 postfix의 문자열이다. 무한개의 가능한 문자열이
+    들어갈수 있다. prefix와 postfix만 맞으면 된다. 이 pattern으로
+    아래 text를 검색해 보자.
+
+    ```text
+    #% 테스트입니다.# 정말로 #% test일까요?#
+    ```
+
+    결과는
+
+    ```text
+    #% 테스트입니다.# 정말로 #
+    ```
+
+    우리가 원한 결과는 아래였다.
+
+    ```text
+    #% 테스트입니다.#
+    ```
+
+    많이 다르다. 왜냐하면 \*나 +의 앞문자 무한반복 가능한 pattern의
+    경우, greedy하다. 즉 prefix와 postfix가 일치해도, 남은 text중에
+    postfix가 일치하면, 더 긴 검색결과를 return하기 때문이다. 이것을
+    막기위해서 다음과 같은 방식을 사용할 수도 있다.
+
+    ```text
+    #%[^#]+#
+    ```
+
+    즉 prefix와 postfix안에 #이라는 문자가 있는 경우
+    제외시킨다. 이러면 우리가 원한 결과를 얻을 수 있다. 이 방식
+    말고도 lazy matching pattern을 사용할 수도 있다. 선호하는
+    방식은 위의 방법이 더 선호된다고 한다.
+
+<!--list-separator-->
+
+-  lazy matching pattern
+
+    위에서 +나 \*를 사용한 pattern들은 우리가 원했던 의도로 검색이
+    안됐다. 안된 이유는, 가장 긴 pattern을 찾기 때문이라고
+    했다. greedy하다. 그래서 검색을 할때 만족하는 가장 긴 pattern이
+    아닌 가장 짧은 pattern을 검색하게 하려면, lazy하게 만들어야
+    한다. 게을러지면, 짧아도 만족만 되면 멈추기 때문이다. 그것을 lazy
+    matching pattern이라고 부른다고 한다. 아래와 같은 pattern을
+    만들었다.
+
+    ```text
+    <.+>
+    ```
+
+    prefix인 &lt;과 postfix인 &gt; 사이에, 무한한 문자(.+)가 올수 있는
+    경우다. 이것은 \*와 +를 사용할 때의 문제점을 보여주고자 함이다.
+    아래의 문자열을 검색해 보자.
+
+    ```text
+    This is a <div> simple div</div> test
+    ```
+
+    검색 결과는 다음과 같다.
+
+    ```text
+    <div> simple div</div>
+    ```
+
+    우리가 원하는 결과는 앞의 &lt;div&gt; 와 뒤의 &lt;div&gt;를 찾고 싶었던 건데,
+    원하는 결과가 안나왔다. 즉 pattern을 만족하는 가장 긴 문자열을
+    찾았기 때문이다. 이것을 lazy pattern으로 만든다면, 다음과 같다.
+
+    ```text
+    <.+?>
+    ```
+
+    +나 \*뒤에 ?를 하면 lazy pattern이 되는 것이다. lazy pattern을
+    사용하면 원하는 검색결과를 얻을 수 있다고 한다. 하지만, 선호되지
+    않는다고 한다. 그래서 보통은 다음과 같이 사용한다고 한다.
+
+    ```text
+    <[^>]+>
+    ```
+
+    &lt; &gt; 사이에 문자들이 오는데, &gt;을 포함하면 안된다는 뜻이다.
+
+<!--list-separator-->
+
+-  선택(|) meta 문자
+
+    '|' meta 문자는 두개의 pattern을 사용할 수 있게 해준다. 예를 들어
+    보자.
+
+    ```text
+    010-1234-5678
+    +82-010-1234-1234
+    +81-42-1234-5678
+    024-23-4321
+    ```
+
+    위 전화번호중에 010으로 시작하고, +82로 시작하는 전화번호만
+    검색하려고 한다. 이때 2개의 pattern을 만들고 |을 사용하면 된다.
+
+    ```text
+    (0 | \+82)\d{1,2}-\d{3,4}-\d{4}
+    ```
+
+<!--list-separator-->
+
+-  Boundary meta 문자들
+
+    -   \b : 단어를 찾을 때 사용한다. 단어의 시작점을 의미
+        ```text
+        \babc
+        ```
+
+        ```text
+        this is not mabc but abc
+        ```
+        abc가 검색된다.
+
+    -   ^: 줄이나 문자열의 시작점
+        ```text
+        ^\w+
+        ```
+
+        ```text
+        This is sample.
+        I like this.
+        Life is short.
+        ```
+         참고로 \w 는 문자 하나를 나타내는 pattern이다. 각라인의 첫
+        단어를 검색하게 된다. 아래와 같은 것이 검색된다.
+        ```text
+        This, I, Life
+        ```
+
+    -   $: 줄의 끝에서 찾는다.
+        ```text
+        $\.
+        ```
+         이것은 newline 바로 앞 단어에서 찾는다. 예제는 마침표를 찾는
+        것이다.
+
+<!--list-separator-->
+
+-  capturing group
+
+    -   capturing group: tomato같은 단어를 찾고 싶다면, one-to-one이란
+        단어를 찾고 싶다면, abdeab라는 단어를 찾고 싶다면 어떻게
+        해야할까?
+        ```text
+        tomato, one-to-one, abcdebch
+        ```
+         위 단어의 공통점은 prefix에 해당하는 문자들과 postfix에
+        해당하는 문자들이 동일하다는 것이다. 이것을 pattern으로 나타낼
+        수 있다면, 비슷한 단어들을 검색할 수 있을 것이다. 어떻게
+        pattern을 만들어야 할까? prefix는 capture하고, postfix는
+        numeric reference로 참조한다. capturing을 group화 한다고도 많이
+        말한다.
+
+        우선 capture, numeric reference란 용어와 사용법을 알아야 한다. capture는
+        group으로 만들어 저장한다. 저장하는 방법과 capture된것을 사용하는 방법은
+        아래에 있다.
+        ```text
+        (\w)a\1
+        ```
+
+        ```text
+        hah bong dad bad dab gag gab
+        ```
+        우선 pattern분석부터 해보자.
+        ```text
+        \w
+        ```
+        w는 한 문자다. [a-zA-Z0-9]와 같은 뜻이다. 즉 소문자이거나,
+        대문자이거나 digit인 한 문자다. 따라서 아래의 text에서 space를
+        제외한 모든 문자들이 하나 하나 다 선택된다.
+        ```text
+        hah bong dad bad dab gag gab
+        ```
+
+        ```text
+        (\w)
+        ```
+        이것은 한문자가 선택되는 건 맞는데 capture된다. capture된다는건
+        기억된다는 것이고 기억하는 이유는 다시 사용하기
+        위함이다. number reference로 기억했던걸 다시 사용할 수
+        있다. 우선 한문자를 선택하는 건 변함이 없기 때문에 아래의 text
+        각각의 문자가 선택된다.
+        ```text
+        hah bong dad bad dab gag gab
+        ```
+        이제 한문자를 추가한 pattern을 만들자.
+        ```text
+        (\w)a
+        ```
+        임의의 문자와 그 뒤에 a가 나오는 pattern을 만들었다. 이
+        pattern으로 아래의 text를 검색해보자.
+        ```text
+        hah bong dad bad dab gag gab
+        ```
+
+        ```text
+        ha da ba da ga ga
+        ```
+        위의것이 선택된다. 이제 numeral reference를 사용하자. 지금
+        capturing group은 1개밖에 없다. 따라서 \\1밖에 사용하지
+        못한다. 여튼 이 패턴을 text에 적용해보자. 즉 검색해보자.
+        ```text
+        (\w)a\1
+        ```
+
+        ```text
+        hah bong dad bad dab gag gab
+        ```
+        결과는 어떻게 될까?
+        ```text
+        hah dad gag
+        ```
+        위와같이 된다. 작동 원리는 다음과 같다. 임의의 한문자뒤의 a로
+        된 2개의 문자, 그리고 capturing된 문자가 있는 3개의 문자를
+        text에서 찾아야한다. text를 보자. 첫 문자 'h'는
+        일치한다. 따라서 capturing한다. 이제 뒤의 문자를 보자. 'a'가
+        있다. ok. 그 다음 문자는 h다. 우리의 pattern을 보면, 'a'다음엔
+        capturing문자가 와야 한다. 즉,\\1에 의해 'h'문자가 와야 pass가
+        된다. 'h'가 있다. 일치한다. 따라서 검색 완료. 그다음 space는
+        \w에 해당하지 않기 때문에 pass한다. 'b'는 \w와 일치한다. 그런데
+        그 다음 'o'는 일치하지 않는다. 'n'은 \w와 일치한다. 'g'가
+        일치하지 않는다. 그 다음은 space라서 \w와 일치하지 않는다. d를
+        본다. \w와 일치한다. d가 capturing된다. 'a'문자를
+        본다. 일치한다. 'd'문자가 나왔다. 이것은 capturing된 'd'와
+        일치한다. 따라서 검색이 완료된다. 이런식으로 계속 검색을 하는 것이다.
+
+    -   위에서도 말했지만, prefix와 postfix가 같은 경우, capturing group을
+        사용하는게 굉장히 유용하다.
+
+    -   capturing group이 한개만 사용되는건 아니다. 2개도 사용될 수
+        있다. 2개가 사용되면, 2개를 기억하게 되고, 기억된 문자를 다시
+        numeric reference로 참조해서 사용하면 된다.
+
+<!--list-separator-->
+
+-  capturing(group) 간단 예제
+
+    ```python
+    import re
+
+    m = re.match('([0-9]+) ([0-9]+)', '10 295 32 54')
+    print(m.group(1))
+    print(m.group(2))
+    print(m.group())
+    print(m.group(0))
+    print(m.groups())
+    ```
+
+    위의 pattern을 보면 2개의 group이 있다. 첫번째 group에 매치되는
+    문자열은 group(1)로 출력할 수 있고, 두번째 group에 매치되는
+    문자열은 group(2)에 출력할 수 있다. group()는 group이 몇개던
+    matching된 문자열을 return한다. group(0)도 group()과 같은
+    뜻이다. groups()는 tuple로 return한다.
+
+<!--list-separator-->
+
+-  non-capturing group
+
+    non-capturing group은 group이긴 한데, captuing을 하지
+    않는다. group()을 사용하는 이유는 우선순위를 갖기 때문이라고
+    한다. 사용법은 (?:)형태로 사용해야 한다. 자주 사용될지
+    모르겠다. 여튼 captuing은 하지 않는다. 다음과 같은 text가 있다고
+    하자. 여기서 010-1234-1234, +82-10-5678-5678과 같은 형태의
+    전화번호를 검색하고 싶다고 하자. pattern을 만들어야 한다.
+
+    ```text
+    010-1234-1234
+    010-1234-5678
+    +82-10-5678-5678
+    +82-4123-1234
+    ```
+
+    pattern을 어떻게 만들까? 5678로 나온게 뒤에 다시 5678로 나오고
+    1234로 나온게 뒤에 또 1234가 나온다. 이것은 capturing의
+    예이다. 우선 capturing만 적용시키면 다음과 같이 쓸수 있다.
+
+    ```text
+    (\d\d\d\d)-\1
+    ```
+
+    그런데 반복된다. 반복은 {} meta문자로 나타낼수 있기 때문에,
+
+    ```text
+    (\d{4})-\1
+    ```
+
+    로 표현하면 된다. 그다음 해야할 것은 010-1234-1234,
+    +82-10-5678-5678 에서 보면 010이거나 10이다. 즉 3자리의
+    숫자이거나 2자리의 숫자이다.
+
+    ```text
+    \d{2,3}
+    ```
+
+    표시하면 된다. 이제 마지막으로 +82이거나 없거나인데, 이때,
+    non-capturing group을 사용할 수 있다.
+
+    ```text
+    (?: ?|\+82-)
+    ```
+
+    최종 결과 pattern은 다음과 같다.
+
+    ```text
+    (?: ?|\+82-)\d{2,3}(\d{4})-\1
+    ```
+
+<!--list-separator-->
+
+-  condition
+
+    <!--list-separator-->
+
+    -  postfix 포함 여부
+
+        postfix로 끝나는 단어를 찾는데 편한 방법이 있다고 한다. 예를
+        들어, 다음과 같은 text가 있다고 하자.
+
+        ```text
+        Tourism
+        I don't like idealism
+        He is socialism
+        ```
+
+        여기서 ism으로 끝나는 단어의 앞부분만 가져오고 싶다면, pattern을
+        만들어야 한다.
+
+        ```text
+        [^\s]*
+        ```
+
+        이렇게 하면 ism을 postfix로 갖는 문자열을 검색하는 pattern이
+        된다.&nbsp;[^\s]\* 는 space가 포함되지 않은 문자열을 의미한다. 즉
+        단어를 뜻한다. 그런데 강사는 단어를 가져올때, 쉬운 방법이 있다고 한다.
+
+        ```text
+        \w+
+        ```
+
+        이게 단어를 가져오는 pattern이라고 한다. w라는게 word를 뜻한다고
+        한다. \w는 단하나의 문자이기 때문에 \w+를 해줘야 단어가 된다.
+
+        여기서, postfix를 추가하기 위해서 ism을 추가한다.
+
+        ```text
+        \w+ism
+        ```
+
+        이런 pattern을 다음의 text에서 검색한다.
+
+        ```text
+        Tourism
+        I don't like idealism
+        He is socialism
+        ```
+
+        결과는 아래와 같다.
+
+        ```text
+        Tourism
+        idealism
+        socialism
+        ```
+
+        여기서, ism이 다 포함된다. 만일 ism을 포함시키지 않을려면 어떻게
+        해야 하나? 이때 ism 대신 (?=ism)을 사용하면 된다. 즉 ism은 결과에
+        포함시키지 않겠다는 뜻이다.
+
+        ```text
+        [^\s]*(?=ism)
+        ```
+
+        이렇게 하면 결과는 다음과 같다.
+
+        ```text
+        Tour
+        ideal
+        social
+        ```
+
+    <!--list-separator-->
+
+    -  prefix 포함 여부
+
+        위에서 했던것과 비슷하다. 예를 들어보자. 다음과 같은 text가
+        있다고 하자.
+
+        ```text
+        This is preprocessing function.
+        The word is precompiled function.
+        ```
+
+        여기서 preprocessing, precompiled라는 단어를 검색하고
+        싶다. 그리고 결과로 pre를 제거한 processing과 compiled를 얻고
+        싶다고 하자.
+
+        pattern을 만들어야 한다. pre로 시작하는 단어이기 때문에 다음과
+        같이 쓴다.
+
+        ```text
+        pre\w+
+        ```
+
+        그런데 이 방식은 pre라는 prefix를 포함한다. 따라서 (?&lt;=pre)로
+        바꿔줘야 한다.
+
+        ```text
+        (?<=pre)\w+
+        ```
+
+        이렇게 하면 다음과 같은 결과를 얻게 된다.
+
+        ```text
+        processing
+        compiled
+        ```
+
+        주의해야 할것은 prefix경우 (?&lt;=)를 사용하고 postfix의 경우 (?=)를
+        사용한다는 것이다.
+
+
+## python에서 regular expression {#python에서-regular-expression}
+
+
+### 간단한 사용법 {#간단한-사용법}
+
+```python
+import re
+text = """
+    010-1234-1234
+    010-1234-5678
+    +82-10-5678-5678
+    +82-4123-1234
+    """
+pattern = r'(?:0|\+82-)\d{1,2}-(\d{4})-\1$'
+
+for match in re.finditer(pattern,text,re.MULTILINE):
+    print("전체문자열",match.group())
+    print(r"\1 문자열", match.group(1))
+```
+
+python에서 정규식은 re package를 사용한다. pattern은 r로 시작하는
+문자열로 정의된다. pattern을 통해 text검색하는 함수는 여러개를
+제공한다. 위의 예에도 있지만, re패키지에 보면, finditer라는 함수가
+있다. 이 함수는 text에 pattern을 적용시켜서 검색을 하는데,
+iterator형태라서 한번 검색하는게 아니라, text끝까지 반복해서
+검색한다. 이 함수의 1번째는 pattern, 두번째는 text, 3번째 인자는
+multiline flag이다. text에서 multiline은 flag가 없다면 line으로
+인식하지 않기 때문이다.  이 함수에서 match라는 객체를 return한다. 이
+객체는 일치하는 문자열을 가지고 있다. 또한 여기선 capturing group을
+사용하기 때문에, capturing된 문자열도 가지고 있다. group(0)은
+일치하는 문자열이 나오고, group(1)은 capturing group의 값이 나오게
+된다.
+
+
+#### MULTILINE option {#multiline-option}
+
+python의 re package를 사용해서 pattern을 text에 적용할 때,
+option들을 사용할 수 있다. 여러 option들이 있지만, MULTILINE에
+대해서만 살펴보자.
+
+```python
+import re
+
+pattern = r"^python\s\w+"
+text = """python one
+life is too short
+python two
+you need python
+python three"""
+# match = re.findall(pattern,text,re.MULTILINE)
+match = re.findall(pattern,text)
+print (match)
+```
+
+MULTILINE이란 option을 추가하지 않으면, python one만 결과로
+나온다. pattern을 보면, ^는 문자열의 처음을 나타낸다. 주어진
+text는 여러 line으로 이루어져 있음에도, 따옴표때문에 하나의
+문자열로 인식되기 때문이다. 여기서 MULTILINE option을 넣어주면,
+python one, python two, python three의 결과가 나온다. 이것은
+하나의 따옴표로 이루어진 문자열이라고 해도 각각의 line의 처음을
+문자열의 처음으로 보겠다는 뜻이다.
+
+
+### 사용되는 함수들 {#사용되는-함수들}
+
+
+#### re.search() {#re-dot-search}
+
+```python
+import re
+text = """
+    010-1234-1234
+    010-1234-5678
+    +82-10-5678-5678
+    +82-4123-1234
+    """
+pattern = r'(?:0|\+82-)\d{1,2}-(\d{4})-\1'
+# pattern = r'(?:\d{3})-\d{4}'
+temp = re.search(pattern,text,re.MULTILINE)
+print(temp.group())
+print(temp.groups())
+# print(match.group(0))
+```
+
+search는 처음 매칭되는 문자열을 match객체로
+return한다. match객체에서 group()를 사용하면 검색된 문자열을
+return한다. groups()는 tuple형태로 검색된 문자열을 반환하는
+match의 method다. 만일 capturing을 사용한다면, group(0)을 사용해서
+capturing을 출력할 수 있다.
+
+
+#### re.finditer() {#re-dot-finditer}
+
+이것은 위에서 예제를 봤는데, iterator를 사용해서 matching될때마다
+return하게 된다.
+
+
+#### re.sub() {#re-dot-sub}
+
+```python
+import re
+text = '''
+    010-1234-1234
+    010-1234-5678
+    +82-10-5678-5678
+    +82-4123-1234'''
+
+repl = r'치환됨\1'
+pattern = r'(?:0|\+82-)\d{1,2}-(\d{4})-\1$'
+temp = re.sub(pattern,repl,text,re.MULTILINE)
+print(temp)
+
+# 다른예
+# text = '''010-1234-5678 Kim
+# 011-1234-5678 Lee
+# 016-1234-5678 Han'''
+# text_mod = re.sub('^[0-9]{3}-[0-9]{4}-[0-9]{4}',"***-****-****",text, flags=re.MULTILINE)
+# print(text_mod)
+```
+
+re.sub는 substitute로, pattern을 검색해서 찾은 것을 replace하는
+건데, 강사의 예제는 실행되지 않는다. 강사의 예제는 capture한것을
+재가공해서 replace한건데, 제대로 안된다. replace할 문자열은
+capture한 것을 사용하기 위해서 \\1 이라는 numeric reference를
+사용했기 때문에, r이라는 prefix를 붙였다.
+
+
+#### re.split() {#re-dot-split}
+
+```python
+import re
+
+print(re.split('-','aaa-bbb'))
+print(re.split('(-)','aaa-bbb'))
+```
+
+```python
+import re
+text = """
+    010-1234-1234
+    010-1234-5678
+    +82-10-5678-5678
+    +82-4123-1234
+    """
+pattern = r'(?:0|\+82-)\d{1,2}-(\d{4})-\1'
+# result = re.search(pattern,text, re.MULTILINE)
+
+splited = re.split(pattern,text,re.MULTILINE)
+print(splited)
+# print(result)
+```
+
+split는 검색결과를 list로 나타낸다. group이 있는경우는 좀 다르게
+return한다. group에 match된 문자열과 전체문자열을 모두
+표시한다. 따라서, 첫번째 group에 매치된 문자열과, group을 포함한
+regular expression에 일치된 문자열을 return하는 것이다. group이란
+독립적인 regular expression으로 볼 수 있기 때문이다.
+
+
+### regular expression compile {#regular-expression-compile}
+
+pattern을 compile해서 사용할 수 있다고 한다. compile을 한다는
+의미가 와 닿지는 않는다. 강사는 pattern을 인식하는것이 시간이 많이
+걸린다고 하는데, 그냥 meta와 escape문자로 이루어진 문자열에
+불과한데, 시간이 더 많이 걸릴 이유는 없어보인다. 내가 봤을때,
+compile은 단지 pattern이란 문자열을 객체화한다고 본다. 그렇게 되면
+재사용에 유리하다는 장점을 갖기 때문이다. 또한 코드의 가독성이
+높아진다.
+
+```python
+for string in dataset:
+    match = re.search(pattern, string, re.MULTILINE)
+    print (match.group(0))
+```
+
+위에는 compile을 사용하지 않고, dataset으로 부터 string을 가져와서
+검색하는 code다. 매번 string을 가져올때마다 pattern이 string에
+적용되게 된다. 이것을 compile하면 다음과 같은 모양이 된다.
+
+```python
+compiled = re.compile(pattern, flags= re.MULTILINE)
+
+for string in dataset:
+    match = compiled.search(string)
+    print(match.group(0))
+```
+
+re.search가 compiled.search(string)문장으로 대체된다. 가독성도
+좋아지는 것을 볼 수 있다.

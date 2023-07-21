@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       8B9F0D6F-7E68-4C27-86F9-15FA8DD89458
-:mtime:    20230614104840
+:mtime:    20230721213739 20230614104840
 :ctime:    20230614104840
 :END:
 #+title: [linear algebra-2] linear independence
