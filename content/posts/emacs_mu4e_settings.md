@@ -6,23 +6,31 @@ date = 2023-07-22T00:00:00+09:00
 draft = true
 +++
 
-## 기본 단계. {#기본-단계-dot}
+## 개요 {#개요}
 
 <div class="note">
 
-gmail이나 fastmail은 외부에 있는 email server다. 그림에선 remote Mail
-Server로 보면 된다. local에서는 이 email server에 smtp나 imap과같은
-protocol을 연결해서 email을 보내거나 가져올수 있다. 하지만, emacs에서
-직접 smtp나 imap를 연결하진 않는다. smtp나 imap과 연결하는 것은 local
-daemon인 mbsync가 그 역할을 한다. emacs에서는 mu4e라는 front UI가
-있는데, 이 mu4e는 mbsync라는 daemon에게 명령을 내릴 뿐이다. email을
-가져오거나 보내는 명령을 내린다.
+emacs에서 email을 읽으려고 한다. 언뜻 생각하면, gmail, fastmail같은
+email server에 접속해서 mail을 가져와서 보여주면 되는거 아닌가? 그렇게
+생각할 수 있다. 근데 내부적으로는 복잡하다. emacs가 email client 같은
+역할을 하지 않기때문이다. 즉, emacs는 외부에 있는 email server에 직접
+연결하지 않는다. 이런 behind scene을 알아야 설정과 설치가
+가능하다. 우선 emacs에서 mail server에 접속해서 mail을 보여주는 것처럼
+하는 package는 mu4e다. 그리고 내부동작을 간단히 설명하면 local
+computer에 daemon을 하나 만든다. 이 daemon은 mbsync, offline imap과
+같은게 있다. 이 daemon이 gmail이나 fastmail과 통신을 해서 자체적으로
+email보관함에 넣어두는 역할을 한다. 그래서 emacs의 mu4e가 내부
+daemon에 저장된 mail을 꺼내서 보여주는 형태다.
 
-<a id="figure--"></a>
+<a id="figure--overview mu4e"></a>
 
-{{< figure src="./img/mu4e1.png" alt="neural network" caption="<span class=\"figure-number\">Figure 1: </span>overview mu4e" title="Neural network representation" width="100%" height="100%" >}}
+{{< figure src="/img/mu4e/mu4e1.png" caption="<span class=\"figure-number\">Figure 1: </span>overview mu4e" width="600px" >}}
 
 </div>
+
+우리는 mbsync라는 daemon을 사용할 것이다. mbsync는 gmail과 같은 email
+server와 통신을 해서 email을 가져오거나 보낸다. 둘사이에 통신방법을 정해야
+하는데, 그 과정이 step1에 있다.
 
 
 ## [step 1] remote email server setting {#step-1-remote-email-server-setting}
@@ -30,48 +38,41 @@ daemon인 mbsync가 그 역할을 한다. emacs에서는 mu4e라는 front UI가
 
 ### gmail settings {#gmail-settings}
 
--   gmail을 먼저 imap,smtp or pop3를 사용할 지 여부를 setting해야
-    한다. 그래야 mbsync와 통신이 가능하다. 우리는 imap을 사용할
-    것이다.
-    ```text
-    gmail setting 에서 enable imap.
-    ```
+먼저 mail server를 setting한다. gmail과 mbsync와 imap을 사용해서
+email을 다운받을 것이다. setting 방법은 다음과 같이 gmail에서
+설정한다.
+
 -   [gmail settings]
 
-<a id="figure--"></a>
+    <a id="figure--gmail settings"></a>
 
-{{< figure src="./img/mu4e2.png" alt="neural network" caption="<span class=\"figure-number\">Figure 2: </span>gmail settings" title="Neural network representation" width="100%" height="100%" >}}
+    {{< figure src="/img/mu4e/mu4e2.png" caption="<span class=\"figure-number\">Figure 2: </span>gmail settings" width="600px" >}}
 
-<a id="figure--"></a>
+    <a id="figure--gmail settings2"></a>
 
-{{< figure src="./img/mu4e3.png" alt="neural network" caption="<span class=\"figure-number\">Figure 3: </span>gmail settings2" title="Neural network representation" width="100%" height="100%" >}}
+    {{< figure src="/img/mu4e/mu4e3.png" caption="<span class=\"figure-number\">Figure 3: </span>gmail settings2" width="600px" >}}
 
 
 ### fastmail settings {#fastmail-settings}
 
--   fastmail에서는 imap을 enable하지 않아도 된다.
+fastmail에서는 imap을 enable하지 않아도 된다.
 
 
-## [step 2] mbsync setting {#step-2-mbsync-setting}
+## [step 2] Client Daemon (mbsync) setting {#step-2-client-daemon--mbsync--setting}
 
--   mbysync에서 하는일은 gmail과 fastmail과 같은 email server와 통신하기
-    위한 인증작업.
--   gmail과 fastmail에서 받은 email을 local에 저장하기 위한 폴더 생성
-    -   .maildir폴더에 인증파일과 mail을 저장할 폴더 생성.
+mbysync가 하는 일은 인증작업과 mail을 저장할 저장소를 만드는 것이다.
 
 
 ### mbsync 설치 {#mbsync-설치}
 
--   isync가 mbsync다.
-
-<!--listend-->
+mbsync를 local에 설치한다. mac에서 mbsync는 isync다.
 
 ```text
 brew install isync
 ```
 
 
-### openssl {#openssl}
+### 인증 작업1 (openssl) {#인증-작업1--openssl}
 
 
 #### openssl 설치 {#openssl-설치}
@@ -127,14 +128,14 @@ brew link openssl --force
     ```
 
 
-### app password {#app-password}
+### 인증작업2 (app password) {#인증작업2--app-password}
 
 
 #### app password {#app-password}
 
--   .mbsynce를 설정하기에 앞서서, 인증관련 처리를 하나 더 해줘야
-    한다. 여기서는 gmail에서 mail을 가져오거나, 보내야 하는데,
-    app-password를 발급받아야 한다.
+.mbsynce를 설정하기에 앞서서, 인증관련 처리를 하나 더 해줘야
+한다. 여기서는 gmail에서 mail을 가져오거나, 보내야 하는데,
+app-password를 발급받아야 한다.
 
 
 #### app password 발급 방법 {#app-password-발급-방법}
@@ -143,20 +144,24 @@ brew link openssl --force
 
 -  gmail
 
-    <a id="org508511d"></a>
+    <a id="figure--app pw"></a>
 
-    ![](./img/app_pwd.png)
+    {{< figure src="/img/mu4e/app_pwd.png" caption="<span class=\"figure-number\">Figure 4: </span>app pw" width="600px" >}}
+
     여기서 발급받은 key는 .mbsyncrc에 pass에 넣어준다.
 
 <!--list-separator-->
 
 -  fastmail
 
-    ![](./img/app_pw_fastmail.png)
+    <a id="figure--app pw for fastmail"></a>
+
+    {{< figure src="/img/mu4e/app_pw_fastmail.png" caption="<span class=\"figure-number\">Figure 5: </span>app pw for fastmail" width="600px" >}}
+
     =&gt; eadu273mnpjmpt74
 
 
-### .mbsyncrc 설정 {#dot-mbsyncrc-설정}
+### .mbsyncrc 저장소 설정 {#dot-mbsyncrc-저장소-설정}
 
 -   ~/.mbsyncrc라는 mbsync 설정파일을 만든다. 아래 내용을 복사해서 사용한다.
 
@@ -246,15 +251,16 @@ Create Both
 SyncState *
 ```
 
--   .maildir/Gmail과 .maildir/Fastmail 폴더가 있어야 한다.
+.maildir/Gmail과 .maildir/Fastmail 폴더가 있어야 한다.
 
 
-### test {#test}
+### .mbsyncrc test {#dot-mbsyncrc-test}
 
--   실제 email server에서 local로 메일을 가져오는지 test한다.
-    ```text
-    mbsync -a
-    ```
+실제 email server에서 local로 메일을 가져오는지 test한다.
+
+```text
+mbsync -a
+```
 
 
 ### 기본 개념 {#기본-개념}
@@ -262,19 +268,33 @@ SyncState *
 
 #### 용어들 {#용어들}
 
--   stores: mailbox들을 group화한게 store가 있다. store는 remote와
-    local이 있다. remote와 마찬가지로 local에도 mapping되는 store가 있다.
+<!--list-separator-->
+
+-  store
+
+    stores: mailbox들을 group화한게 store가 있다. store는 remote와 local이
+    있다. remote와 마찬가지로 local에도 mapping되는 store가 있다.
 
     <a id="figure--remote store"></a>
 
-    {{< figure src="./img/store.png" caption="<span class=\"figure-number\">Figure 6: </span>remote store" >}}
--   channel: remote와 local의 mailbox들은 서로 대응되어 연결되어
+    {{< figure src="/img/mu4e/store.png" caption="<span class=\"figure-number\">Figure 6: </span>remote store" width="600px" >}}
+
+<!--list-separator-->
+
+-  channel
+
+    channel: remote와 local의 mailbox들은 서로 대응되어 연결되어
     있다. 이것을 channel이라고 한다.
--   mailbox: store에는 mailbox들이 있다.
 
-    <a id="figure--"></a>
+<!--list-separator-->
 
-    {{< figure src="./img/mu4e4.png" alt="neural network" caption="<span class=\"figure-number\">Figure 7: </span>mail box" title="Neural network representation" width="50%" height="50%" >}}
+-  mailbox
+
+    mailbox: store에는 mailbox들이 있다.
+
+    <a id="figure--mail box"></a>
+
+    {{< figure src="/img/mu4e/mu4e4.png" caption="<span class=\"figure-number\">Figure 7: </span>mail box" width="600px" >}}
 
 
 #### 참고 {#참고}
@@ -282,53 +302,50 @@ SyncState *
 1.  <http://manpages.ubuntu.com/manpages/xenial/man1/mbsync.1.html>
 2.  <https://manpages.debian.org/testing/isync/mbsync.1.en.html>
 3.  group: channel을 묶은것을 의미한다.
-4.  maildir stores: store는 mailbox의 collection을 의미한다. maildir은 local을 의미한다.
-5.  IMAP stores:  IMAP을 사용하는 server의 mailbox collection을 의미한다. gmail에 있는 모든
-    mailbox들을 나타낸다고 봐도 된다.
+4.  maildir stores: store는 mailbox의 collection을
+    의미한다. maildir은 local을 의미한다.
+5.  IMAP stores: IMAP을 사용하는 server의 mailbox collection을
+    의미한다. gmail에 있는 모든 mailbox들을 나타낸다고 봐도 된다.
 
 
-## [step 3] mu4e 설정 {#step-3-mu4e-설정}
+## [step 3] mu (mbsync addon) 설치 {#step-3-mu--mbsync-addon--설치}
 
 
 ### mu설치 {#mu설치}
 
--   mu는 mbsync의 maildir에 있는 mail들을 indexing해서 빠른 검색을
-    가능하게 해주고, emacs에서 사용할 수 있게 해준다. mu가 곧 emacs의
-    mu4e이기 때문이다.
--   mu4e(emacs mail app)를 위해선 mu package를 system에 설치 해야
-    한다.
-    ```text
-    brew install mu
-    ```
--   설치한 mu에는 mu를 사용하는 emacs lisp파일을 제공한다. 이 경로는
-    emacs설정시에 사용된다.
-    ```text
-    /usr/local/share/emacs/site-lisp/mu/mu4e
-    ```
+mu는 mbsync addon으로 생각하면 된다.  mbsync에서 설치한 maildir에 있는
+mail들을 indexing해서 빠른 검색을 가능하게 해준다. 또한 emacs(mu4e)에서
+사용할 수 있는 interface를 제공한다. mu를 설치하자.
+
+```text
+brew install mu
+```
+
+mu를 설치하면 사용할 수 있는 emacs lisp파일을 제공한다. 다음 경로에
+mu4e를설정시에 사용된다.
+
+```text
+/usr/local/share/emacs/site-lisp/mu/mu4e
+```
 
 
 ### mu 초기화 {#mu-초기화}
 
--   mu init으로 db를 만든다.
--   원리는 다음과 같다. mail이 저장된 local directory인 .maildir을
-    mu에게 알려주면 indexing해서 db에 저장한다.
-
-<!--listend-->
+mu init으로 db를 만든다. mbsync로 email server로 부터 다운받은
+mail저장소를 mu에게 알려주면 db에 저장한다.
 
 ```text
 mu init --maildir=~/.maildir
 ```
 
-{{< figure src="./img/mu4e5.png" alt="neural network" caption="<span class=\"figure-number\">Figure 8: </span>mu init" title="Neural network representation" width="100%" height="100%" >}}
+<a id="figure--mu init"></a>
+
+{{< figure src="/img/mu4e/mu4e5.png" caption="<span class=\"figure-number\">Figure 8: </span>mu init" width="600px" >}}
 
 
 ### mu testing {#mu-testing}
 
--   mu를 초기화 한 후, mu index로 maildir로부터 mail을 가져와서
-    indexing을 해주어야 한다. mu index를 한다. testing을 위해서, mu
-    find로 google로 시작되는 메일을 찾아보자.
-
-<!--listend-->
+mu index하면 db를 indexing을 한다.
 
 ```text
 mu index
@@ -338,49 +355,31 @@ mu find google
 
 ## [step3] mu4e 설정 {#step3-mu4e-설정}
 
--   mu를 설치했기 때문에, mu4e도 설치할 수 있다. mu 설치시 mu4e를
-    제공하기 때문이다.
+mu를 설치했기 때문에, db가 만들어졌고 indexing을 할 수 있다. 이제
+mu4e를 emacs에 설치해서 mu에 있는 db를 가져와서 보여주면 된다.
 
 
 ### mu4e 설정 {#mu4e-설정}
 
--   mu4e는 email server에서 mail을 받을 뿐이다. 보내기 위해선 smtp도
-    같이 설정한다.
-    ```text
-    (add-to-list 'load-path "/usr/local/Cellar/mu/1.4.13/share/emacs/site-lisp/mu/mu4e/")
-    (require 'mu4e)
-    (require 'smtpmail)
-    (setq mu4e-maildir (expand-file-name "~/.maildir"))
-
-    (setq mail-user-agent 'mu4e-user-agent)
-    (setq mu4e-drafts-folder "/[Gmail].Drafts")
-    (setq mu4e-sent-folder   "/[Gmail].Sent Mail")
-    (setq mu4e-trash-folder  "/[Gmail].Trash")
-
-    ;; smtp mail setting; these are the same that `gnus' uses.
-    (setq
-       message-send-mail-function   'smtpmail-send-it
-       smtpmail-default-smtp-server "smtp.gmail.com"
-       smtpmail-smtp-server         "smtp.gmail.com"
-       smtpmail-local-domain        "gmail.com")
-    ```
-
-
-### mu4e 설정 설명 {#mu4e-설정-설명}
-
-
-#### mu4e 경로및 load {#mu4e-경로및-load}
-
--   emacs에서 아래를 설정한다.  mu를 설치했을 때 얻은
-    site-lisp의 경로다. mu를 설치하면, emacs에서 사용할 수 있게 mu4e
-    app을 제공해주기 때문이다.  그래서 (require 'mu4e)가 가능하다.
-
-<!--listend-->
+mu4e는 다음과 같이 설정하면 된다.
 
 ```text
-(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
-# (add-to-list 'load-path "/usr/local/Cellar/mu/1.4.13/share/emacs/site-lisp/mu/mu4e/")
+(add-to-list 'load-path "/usr/local/Cellar/mu/1.4.13/share/emacs/site-lisp/mu/mu4e/")
 (require 'mu4e)
+(require 'smtpmail)
+(setq mu4e-maildir (expand-file-name "~/.maildir"))
+
+(setq mail-user-agent 'mu4e-user-agent)
+(setq mu4e-drafts-folder "/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+(setq mu4e-trash-folder  "/[Gmail].Trash")
+
+;; smtp mail setting; these are the same that `gnus' uses.
+(setq
+   message-send-mail-function   'smtpmail-send-it
+   smtpmail-default-smtp-server "smtp.gmail.com"
+   smtpmail-smtp-server         "smtp.gmail.com"
+   smtpmail-local-domain        "gmail.com")
 ```
 
 
