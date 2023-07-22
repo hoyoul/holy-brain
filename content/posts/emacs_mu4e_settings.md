@@ -143,7 +143,7 @@ brew link openssl --force
 
 -  gmail
 
-    <a id="org40a9dd4"></a>
+    <a id="org508511d"></a>
 
     ![](./img/app_pwd.png)
     여기서 발급받은 key는 .mbsyncrc에 pass에 넣어준다.
