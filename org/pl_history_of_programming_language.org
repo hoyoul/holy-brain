@@ -1,9 +1,9 @@
 :PROPERTIES:
 :ID:       49BE5646-2246-44D7-8ED9-4DC5B59DB548
-:mtime:    20230721214104
+:mtime:    20230722094241 20230721214104
 :ctime:    20230721214104
 :END:
-#+title: [pl] history of programming language
+#+title: [pl] history of programming language from calcuation to OOP
 #+AUTHOR: holy
 #+EMAIL:  hoyoul.park@gmail.com
 #+DATE:  <2023-06-28 Wed>
@@ -87,18 +87,51 @@ language에서 이런 수치 데이터를 data structure라는 형태로 변환�
 다루는 data를 수치화 하거나, program이 사용하는 data형태로 변형해서
 주어진 computer에서 얼마나 효율적으로 동작하게 만드는가? 그것이
 focusing되어 있다.
-* GUI와 OOP의 등장
-GUI가 등장하기 전까지 대용량 데이터의 효율적인 계산에 focus를
-두었다. 하지만, os가 순차적으로 데이터를 처리하는 cli 방식에서
-gui방식으로 변경되면서 programming이라는게 계산뿐 아니라 현실의
-thing을 simulate하는것에 관심이 두었다. 우리가 computer에서 자판기라는
-현실에 존재하는 machine을 simulate(흉내)낼 수도 있다. 이때 대용량
-데이터 처리는 관심이 아니다. 단지 현실의 존재를 얼마나
-simulate하느냐이다. 모든 앱과 web app들은 인간세상에 있는 존재들과
-동일하다. 계산을 위한 programming이 아니라 존재를 위한 programming을
-할 수 있는 것이다. 지금 핸드폰에 있는 app들은 모두 객체지향
-프로그램으로 작성된것이다. 하나의 app은 하나의 존재고, 내부에는 수많은
-레고블럭과 같은 존재로 구성되어 있다. 따라서 oop언어들은 계산이 아닌,
-simulate하기 위해서 만들어져 있다. 그래서 재사용성이 중요하고 상속이
-중요하고 은밀성?이 중요한 것이다.
 
+* GUI와 OOP의 등장
+GUI가 등장하기 전까지 programming은 대용량 데이터의 효율적인 계산에
+focus를 두었다. 하지만, os가 cli 방식에서 gui방식으로 변경되면서
+programming의 paradigm이 변하게 된다. 계산에 focus를 두기 보다
+재사용성에 focus를 두게 된다. 생각을 해보자. GUI OS에서 모든것은
+window로부터 시작된다. button,title bar같은 widget으로 만들어져 있는
+window는 programming의 단위가 되버린다. 어떤 program을 짜더라도 window
+로 부터 시작된다. 매번 window를 만들어서 사용해야 할까?  재사용이
+해결되지 않고는 GUI OS 자체를 사용할 수 없게 된다. 여기서 OOP라는
+개념이 사용되어 window 재사용 문제가 해결된다.
+smalltalk,c++,java,델파이같은 언어들은 기존의 pascal, c와 다르게
+OOP방식으로 programming을 하고, GUI와 친화적이다. 왜냐면 GUI OS를
+도입할때 생긴 재사용의 문제를 해결한 언어들이기 때문이다. 그런데
+OOP언어를 설명할때, 이 세상 모든 것은 객체다. 모든것은 객체로 표현될수
+있다고 한다. 이런 설명은 갑자기 나온건 아니다. 물론 system자체가
+window라는 무거운 코드로 대체되면서, 무거운 코드를 재사용하기 위해서
+나왔지만, 원래 그런 개념을 가진 언어가 있었다.  초창기 언어중 하나인
+simula67에서 현실의 thing을 simulate하는것에 관심이 있었고 그 이전에
+철학적으로 이 세상 모든 것은 object로 구성되어 있다는 Aristotle의
+생각이 있었다. 그래서 세상의 모든 것을 흉내내는 simula에 방점을 찍은
+언어와 개념이 OOP언어가 되는 것이다. 세상의 모든 것을 흉내낼 수 있다는
+paradigm이 oop언어의 핵심적인 특징이 된것이다.
+
+우리가 computer에서 자판기라는 현실에 존재하는 machine을
+simulate(흉내)낼 수도 있다. 이때 대용량 데이터 처리는 관심이
+아니다. 단지 현실의 존재를 얼마나 simulate하느냐이다. 모든 앱과 web
+app들은 인간세상에 있는 존재들과 동일하다. 계산을 위한 programming이
+아니라 존재를 위한 programming을 할 수 있는 것이다. 지금 핸드폰에 있는
+app들은 모두 객체지향 프로그램으로 작성된것이다. 하나의 app은 하나의
+존재고, 내부에는 수많은 레고블럭과 같은 존재로 구성되어 있다. 따라서
+oop언어들은 계산이 아닌, simulate하기 위해서 만들어져 있다. 그래서
+재사용성이 중요하고 상속이 중요하고 은밀성?이 중요한 것이다.
+
+* TODO class와 prototype
+java, python은 class중심적 사고관이라면 js의 prototype은 객체 중심적
+사고관이다. js에서는 class가 없다. 객체만 있고, 객체간의 관계는 서로
+협력하는 관계다. 상속의 개념이 없다. 이렇게 한발짝 더 나아간 moder oop는 js다. 
+
+* this와 self에 대해서
+java의 this와 self는 class의 method나 member변수에 사용된다. class는
+빵틀이라고 흔히 설명된다. 객체의 원형(prototype)을 class라고 하기도
+한다. class에서 객체에 대한 설계를 한다. person이라는 class를 만든다고
+하면 person의 팔,다리를 나타내는 function과 variable을 만들게
+된다. 1000명의 사람을 만들었다고 하자. 철수, 영희, 개똥이...개똥이의
+팔은 영희의 팔과는 다르다. 각 instance에대한 접근을 하려면 self,this가
+있어야 한다. 만일 self나 this를 사용하지 않는 method나 variable은
+class가 가진 공통적인 기능과 요소에 불과하다.

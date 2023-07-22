@@ -1,0 +1,359 @@
+:PROPERTIES:
+:ID:       AC6F86A6-F57A-4841-A604-4EAEB3AF6666
+:mtime:    20230722125733
+:ctime:    20230722125733
+:END:
+#+title: [emacs] mu4e settings
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-07-22 Sat>
+#+DESCRIPTION: emacs에서 mail관리
+#+HUGO_DRAFT: true
+* 기본 단계.
+#+begin_note
+# mu4e는 emacs에서 email을 사용하는 facility다.  mu4e를 설정하려면
+# 동작 구조를 알아야 한다. gmail server가 있고, local에서 smtp나
+# imap을 사용해서 mail을 가져오는 프로그램이 필요하다. 이것은
+# offlineimap도 있고, mbsync도 있는데, 나는 mbsync를 사용하기로
+# 한다. 가져온 mail을 바로 emacs에서 사용하는 건 아니고, mu가 빠른
+# 검색을 위해서 indexing작업을 한다. 그리고 mu4e라는 ui를 사용자가
+# 사용하는 것이다. mu는 mu4e의 backend로 보면 된다. 전체적인 구조는
+# 다음 그림이 이해하기 쉬울 것이다.  이해하기에 좋다.
+
+gmail이나 fastmail은 외부에 있는 email server다. 그림에선 remote Mail
+Server로 보면 된다. local에서는 이 email server에 smtp나 imap과같은
+protocol을 연결해서 email을 보내거나 가져올수 있다. 하지만, emacs에서
+직접 smtp나 imap를 연결하진 않는다. smtp나 imap과 연결하는 것은 local
+daemon인 mbsync가 그 역할을 한다. emacs에서는 mu4e라는 front UI가
+있는데, 이 mu4e는 mbsync라는 daemon에게 명령을 내릴 뿐이다. email을
+가져오거나 보내는 명령을 내린다.
+
+#+CAPTION: overview mu4e
+#+NAME: 
+#+ATTR_HTML: :alt neural network :title Neural network representation :align center
+#+ATTR_HTML: :width 100% :height 100%
+#+attr_latex: :width 100px
+[[./img/mu4e1.png]]
+
+#+end_note
+
+* [step 1] remote email server setting
+** gmail settings
+   - gmail을 먼저 imap,smtp or pop3를 사용할 지 여부를 setting해야
+     한다. 그래야 mbsync와 통신이 가능하다. 우리는 imap을 사용할
+     것이다.
+    #+begin_example
+    gmail setting 에서 enable imap.
+    #+end_example
+   - [gmail settings]
+   #+CAPTION: gmail settings
+   #+NAME: 
+   #+ATTR_HTML: :alt neural network :title Neural network representation :align center
+   #+ATTR_HTML: :width 100% :height 100%
+   #+attr_latex: :width 100px
+   [[./img/mu4e2.png]]
+
+   #+CAPTION: gmail settings2
+   #+NAME: 
+   #+ATTR_HTML: :alt neural network :title Neural network representation :align center
+   #+ATTR_HTML: :width 100% :height 100%
+   #+attr_latex: :width 100px
+   [[./img/mu4e3.png]]
+** fastmail settings
+   - fastmail에서는 imap을 enable하지 않아도 된다.
+* [step 2] mbsync setting
+- mbysync에서 하는일은 gmail과 fastmail과 같은 email server와 통신하기
+  위한 인증작업.
+- gmail과 fastmail에서 받은 email을 local에 저장하기 위한 폴더 생성
+  - .maildir폴더에 인증파일과 mail을 저장할 폴더 생성.
+** mbsync 설치
+  + isync가 mbsync다.
+  #+begin_example
+  brew install isync
+  #+end_example
+** openssl
+*** openssl 설치
+  - mbsync가 gmail이나 fastmail과 같은 email에 연결하기 위해선 보안
+  작업을 해야 한다. openssl을 설치하고 opessl로 인증서를 가져온다.
+  # 그 다음 mbysync가 읽어들일 설정파일을 설정한다.
+  # 설정파일 이름은 ~/.mbysyncrc다. 내용은 좀 길다. 어차피 mbsync를 설정하기 위해서는 인증서정보가
+  # 필요하다. 인증서는 gmail server가 가지고 있고, 인증서를 받으면, ssl통신을 할 수 있고, server의
+  # public key를 제공해서 암호화된 통신이 가능하다. 
+  #+begin_example
+  brew install openssl
+  brew link openssl --force
+  #+end_example
+*** openssl로 인증서 가져오기
+**** gmail
+     #+begin_example
+     openssl s_client -connect imap.gmail.com:993 -showcerts
+     #+end_example
+     위 명령을 내리면, 3개의 fingerprint가 출력되는 데(즉, begin
+     certificate, end certificate로 끝난다.), 이것이 모두
+     인증서다. 이것을 복사해서 저장해야 한다. 저장 위치를 난
+     /Users/hoyoul/.maildir/certs 여기에 했다. 파일 이름은 순서대로,
+     gmail.crt, google.crt, Equifax.crt로 한다.
+     이것을 .mbsyncrc라는 설정파일에 다음과 같이 기술한다.
+     #+begin_example
+       CertificateFile /Users/hoyoul/.maildir/certs/gmail.crt
+       CertificateFile /Users/hoyoul/.maildir/certs/google.crt
+       CertificateFile /Users/hoyoul/.maildir/certs/Equifax.crt
+     #+end_example
+**** fastmail
+     #+begin_example
+     openssl s_client -connect imap.fastmail.com:993 -showcerts
+     #+end_example
+     - fastmail은 2개의 certs가 있다.
+     #+begin_example
+       CertificateFile /Users/hoyoul/.maildir/certs/fm.crt
+       CertificateFile /Users/hoyoul/.maildir/certs/fastmail.crt
+     #+end_example        
+** app password
+*** app password
+   + .mbsynce를 설정하기에 앞서서, 인증관련 처리를 하나 더 해줘야
+     한다. 여기서는 gmail에서 mail을 가져오거나, 보내야 하는데,
+     app-password를 발급받아야 한다.
+*** app password 발급 방법
+**** gmail
+    #+CAPTION: app password
+    #+NAME: app password
+    [[./img/app_pwd.png]]
+    여기서 발급받은 key는 .mbsyncrc에 pass에 넣어준다.
+**** fastmail
+   #+CAPTION: fastmail.com
+   [[./img/app_pw_fastmail.png]]
+   => eadu273mnpjmpt74
+** .mbsyncrc 설정
+  - ~/.mbsyncrc라는 mbsync 설정파일을 만든다. 아래 내용을 복사해서 사용한다.
+  #+begin_example
+#------------------------------------------------------
+# 2개의 imap을 사용한다. 각각의 이름을 Imap account라고 한다.
+# (1) gmail => gmailcon
+# (2) fastmail => fastmailcon
+#------------------------------------------------------
+IMAPAccount gmailcon
+Host imap.gmail.com
+Port 993
+User hoyoul.park@gmail.com
+Pass gsrupwxkyiepvjwh
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /Users/holy/.maildir/certs/gmail.crt
+CertificateFile /Users/holy/.maildir/certs/google.crt
+CertificateFile /Users/holy/.maildir/certs/Equifax.crt
+
+#------------------------------------------------------
+# gmail의 store를 정의한다. store는 group of mailbox이며,
+# 원격에 있는 gmail store와 다운받은 local의 store가 있다.
+#------------------------------------------------------
+
+IMAPStore gmail-store
+Account gmailcon
+
+MaildirStore local-store
+Path ~/.maildir/Gmail/
+Inbox ~/.maildir/Gmail/Inbox
+SubFolders Verbatim
+# -----------------------------------------------------------
+#[gmail channel] channel은 동기화를 담당한다. channel을 만들면
+# master와 slave의 동기화를 하겠다는 뜻이다.  master와 slave는 gmail과
+# local의 store를 말한다. patterns의 *는 모든 mail box를
+# 뜻한다. local에서 mailbox를 만들어도 gmail에 동일하게 mailbox가
+# 만들어지고, gmail에서 mailbox를 만들어도 local에 생긴다.  그런데,
+# maildirstore에 보면 inbox라는 mailbox가 기술된것을 볼 수 있다.
+# inbox는 default mailbox로 gmail server에 있다.  master와 slave에
+# 있는 모든(*) mailboxes를 동기화 한다.  양쪽에 없는 mailbox가 있다면
+# 만든다.
+#------------------------------------------------------
+
+#All mail
+Channel my-channel
+Far :gmail-store:
+Near :local-store:
+Patterns *
+Create Both
+Sync Pull
+SyncState *
+
+
+#------------------------------------------------------
+# [fastmail 설정]
+#------------------------------------------------------
+IMAPAccount fastmailcon
+Host imap.fastmail.com
+Port 993
+User holy_frege@fastmail.com
+Pass eadu273mnpjmpt74
+AuthMechs LOGIN
+SSLType IMAPS
+CertificateFile /Users/holy/.maildir/certs/fm.crt
+CertificateFile /Users/holy/.maildir/certs/fastmail.crt
+
+IMAPStore fastmail-remote
+Account fastmailcon
+
+MaildirStore fastmail-local
+Path ~/.maildir/Fastmail/
+Inbox ~/.maildir/Fastmail/INBOX/
+Trash ~/.maildir/Fastmail/Trash/
+SubFolders Verbatim
+
+Channel fastmail
+Far :fastmail-remote:
+Near :fastmail-local:
+Patterns *
+Expunge None
+CopyArrivalDate yes
+Sync All
+Create Both
+SyncState *
+  #+end_example
+  - .maildir/Gmail과 .maildir/Fastmail 폴더가 있어야 한다.
+** test
+- 실제 email server에서 local로 메일을 가져오는지 test한다.
+ #+begin_example
+  mbsync -a
+ #+end_example
+** 기본 개념
+*** 용어들
+    - stores: mailbox들을 group화한게 store가 있다. store는 remote와
+      local이 있다. remote와 마찬가지로 local에도 mapping되는 store가 있다.
+      #+CAPTION: remote store
+      #+NAME: remote store
+      [[./img/store.png]]
+    - channel: remote와 local의 mailbox들은 서로 대응되어 연결되어
+      있다. 이것을 channel이라고 한다.
+    - mailbox: store에는 mailbox들이 있다.
+      #+CAPTION: mail box
+      #+NAME: 
+      #+ATTR_HTML: :alt neural network :title Neural network representation :align center
+      #+ATTR_HTML: :width 50% :height 50%
+      #+attr_latex: :width 100px
+      [[./img/mu4e4.png]]
+*** 참고
+    1) http://manpages.ubuntu.com/manpages/xenial/man1/mbsync.1.html
+    2) https://manpages.debian.org/testing/isync/mbsync.1.en.html
+    3) group: channel을 묶은것을 의미한다.
+    5) maildir stores: store는 mailbox의 collection을 의미한다. maildir은 local을 의미한다.
+    6) IMAP stores:  IMAP을 사용하는 server의 mailbox collection을 의미한다. gmail에 있는 모든
+       mailbox들을 나타낸다고 봐도 된다. 
+
+* [step 3] mu4e 설정
+** mu설치
+   + mu는 mbsync의 maildir에 있는 mail들을 indexing해서 빠른 검색을
+     가능하게 해주고, emacs에서 사용할 수 있게 해준다. mu가 곧 emacs의
+     mu4e이기 때문이다.
+   + mu4e(emacs mail app)를 위해선 mu package를 system에 설치 해야
+     한다.
+      #+begin_example
+      brew install mu 
+      #+end_example
+   + 설치한 mu에는 mu를 사용하는 emacs lisp파일을 제공한다. 이 경로는
+     emacs설정시에 사용된다.
+      #+begin_example
+      /usr/local/share/emacs/site-lisp/mu/mu4e
+      #+end_example
+** mu 초기화
+   - mu init으로 db를 만든다.
+   - 원리는 다음과 같다. mail이 저장된 local directory인 .maildir을
+     mu에게 알려주면 indexing해서 db에 저장한다.
+   #+begin_example
+   mu init --maildir=~/.maildir
+   #+end_example
+   #+CAPTION: mu init
+   #+ATTR_HTML: :alt neural network :title Neural network representation :align center
+   #+ATTR_HTML: :width 100% :height 100%
+   #+attr_latex: :width 100px
+   [[./img/mu4e5.png]]
+** mu testing
+   - mu를 초기화 한 후, mu index로 maildir로부터 mail을 가져와서
+     indexing을 해주어야 한다. mu index를 한다. testing을 위해서, mu
+     find로 google로 시작되는 메일을 찾아보자.
+   #+begin_example
+   mu index
+   mu find google
+   #+end_example
+
+* [step3] mu4e 설정
+   - mu를 설치했기 때문에, mu4e도 설치할 수 있다. mu 설치시 mu4e를
+     제공하기 때문이다.
+** mu4e 설정
+- mu4e는 email server에서 mail을 받을 뿐이다. 보내기 위해선 smtp도
+  같이 설정한다.
+ #+begin_example
+(add-to-list 'load-path "/usr/local/Cellar/mu/1.4.13/share/emacs/site-lisp/mu/mu4e/")
+(require 'mu4e)
+(require 'smtpmail)
+(setq mu4e-maildir (expand-file-name "~/.maildir"))
+
+(setq mail-user-agent 'mu4e-user-agent)
+(setq mu4e-drafts-folder "/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+(setq mu4e-trash-folder  "/[Gmail].Trash")
+
+;; smtp mail setting; these are the same that `gnus' uses.
+(setq
+   message-send-mail-function   'smtpmail-send-it
+   smtpmail-default-smtp-server "smtp.gmail.com"
+   smtpmail-smtp-server         "smtp.gmail.com"
+   smtpmail-local-domain        "gmail.com")
+ #+end_example
+** mu4e 설정 설명
+*** mu4e 경로및 load
+  - emacs에서 아래를 설정한다.  mu를 설치했을 때 얻은
+    site-lisp의 경로다. mu를 설치하면, emacs에서 사용할 수 있게 mu4e
+    app을 제공해주기 때문이다.  그래서 (require 'mu4e)가 가능하다.
+  #+begin_example
+  (add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e")
+  # (add-to-list 'load-path "/usr/local/Cellar/mu/1.4.13/share/emacs/site-lisp/mu/mu4e/")
+  (require 'mu4e)
+  #+end_example
+
+* mu4e 기본 사용법
+#+begin_note
+기본 사용법은 아래를 참고한다.
+
+#+CAPTION: 기본 사용법
+[[./img/mu4e6.png]]
+
+key binding은 다음과 같다.
+#+CAPTION: key binding
+[[./img/mu4e7-1.png]]
+
+#+CAPTION: keybinding2
+[[./img/mu4e7-2.png]]
+#+end_note
+* mu4e 사용법 (update)
+#+begin_note
+C-c C-u: 언제 어디서나 update할 수 있다.
+#+end_note
+* mu4e 사용법 (편지 쓰기)
+#+begin_note
+0. M-x mu4e로 들어간다.
+1. 편지 쓰기 (C를 누른다) ;; 언제 어디서든 Capital C를 누르면 된다.
+2. attachment( C-c C-a를 누른다. )
+3. 작성을 완료한다. ( C-c C-c )
+
+- cc 추가
+1. C-c C-f C-c (cc field가 만들어진다.)
+
+- bcc 추가
+1. C-c C-f C-b (bcc field가 만들어진다.)
+
+#+end_note
+
+* mu4e 사용법 (답장 편지)
+#+begin_note
+0. 편지 읽기
+1. R(reply)를 누른다.
+2. 작성을 완료한다.(C-c C-c)
+#+end_note
+
+* mu4e 사용법 (org mode에서 편지쓰기) 
+- mu4e-org를 사용한다.
+   #+begin_example
+   (require 'mu4e-org)
+   #+end_example
+
+
+
