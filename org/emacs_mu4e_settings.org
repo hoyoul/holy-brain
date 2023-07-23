@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       AC6F86A6-F57A-4841-A604-4EAEB3AF6666
-:mtime:    20230722200146 20230722185214 20230722175108 20230722163846 20230722153414 20230722142459 20230722125733
+:mtime:    20230723085547 20230722210652 20230722200146 20230722185214 20230722175108 20230722163846 20230722153414 20230722142459 20230722125733
 :ctime:    20230722125733
 :END:
 #+title: [emacs] mu4e settings
@@ -67,41 +67,74 @@ mbsync를 local에 설치한다. mac에서 mbsync는 isync다.
 
 ** 인증 작업1 (openssl)
 *** openssl 설치
-  - mbsync가 gmail이나 fastmail과 같은 email에 연결하기 위해선 보안
-  작업을 해야 한다. openssl을 설치하고 opessl로 인증서를 가져온다.
-  # 그 다음 mbysync가 읽어들일 설정파일을 설정한다.
-  # 설정파일 이름은 ~/.mbysyncrc다. 내용은 좀 길다. 어차피 mbsync를 설정하기 위해서는 인증서정보가
-  # 필요하다. 인증서는 gmail server가 가지고 있고, 인증서를 받으면, ssl통신을 할 수 있고, server의
-  # public key를 제공해서 암호화된 통신이 가능하다. 
-  #+begin_example
-  brew install openssl
-  brew link openssl --force
-  #+end_example
+ mbsync가 gmail이나 fastmail과 같은 email에 연결하기 위해선 인증
+ 작업을 해야 한다. openssl을 설치하고 opessl로 인증서를 가져온다.
+ # 그 다음 mbysync가 읽어들일 설정파일을 설정한다.
+ # 설정파일 이름은 ~/.mbysyncrc다. 내용은 좀 길다. 어차피 mbsync를 설정하기 위해서는 인증서정보가
+ # 필요하다. 인증서는 gmail server가 가지고 있고, 인증서를 받으면, ssl통신을 할 수 있고, server의
+ # public key를 제공해서 암호화된 통신이 가능하다. 
+ #+begin_example
+ brew install openssl
+ brew link openssl --force
+ #+end_example
 *** openssl로 인증서 가져오기
 **** gmail
-     #+begin_example
-     openssl s_client -connect imap.gmail.com:993 -showcerts
-     #+end_example
-     위 명령을 내리면, 3개의 fingerprint가 출력되는 데(즉, begin
-     certificate, end certificate로 끝난다.), 이것이 모두
-     인증서다. 이것을 복사해서 저장해야 한다. 저장 위치를 난
-     /Users/hoyoul/.maildir/certs 여기에 했다. 파일 이름은 순서대로,
-     gmail.crt, google.crt, Equifax.crt로 한다.
-     이것을 .mbsyncrc라는 설정파일에 다음과 같이 기술한다.
-     #+begin_example
-       CertificateFile /Users/hoyoul/.maildir/certs/gmail.crt
-       CertificateFile /Users/hoyoul/.maildir/certs/google.crt
-       CertificateFile /Users/hoyoul/.maildir/certs/Equifax.crt
-     #+end_example
+#+begin_example
+openssl s_client -connect imap.gmail.com:993 -showcerts
+#+end_example
+위 명령을 내리면, 3개의 fingerprint가 출력되는 데(즉,
+begin_certificate, end_certificate로 끝난다.), 이것이 모두
+인증서다. 이것을 복사해서 저장해야 한다. 저장 위치를 난
+/Users/fregeholy/.maildir/certs 여기에 했다. 파일 이름은 순서대로,
+gmail.crt, google.crt, Equifax.crt로 저장 한다.  이것을 .mbsyncrc라는
+설정파일에 다음과 같이 기술한다.
+
+#+begin_example
+CertificateFile /Users/hoyoul/.maildir/certs/gmail.crt
+CertificateFile /Users/hoyoul/.maildir/certs/google.crt
+CertificateFile /Users/hoyoul/.maildir/certs/Equifax.crt
+#+end_example
+
+ #+begin_verse
+<2023-07-23 Sun> 수정 사항
+이전에는 위의 certificatefile을 .mbsyncrc에 기술했으나, 제대로 되지 않았다.
+그래서 위 파일은 저장만 하고, .mbsyncrc에는 다음과 같이 기술 했다.
+[이전 방식]
+SSLType IMAPS
+CertificateFile /Users/holy/.maildir/certs/gmail.crt
+CertificateFile /Users/holy/.maildir/certs/google.crt
+CertificateFile /Users/holy/.maildir/certs/Equifax.crt
+[변경된 방법]
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /usr/local/etc/openssl@3/cert.pem
+
+ #+end_verse
+
 **** fastmail
-     #+begin_example
-     openssl s_client -connect imap.fastmail.com:993 -showcerts
-     #+end_example
-     - fastmail은 2개의 certs가 있다.
-     #+begin_example
-       CertificateFile /Users/hoyoul/.maildir/certs/fm.crt
-       CertificateFile /Users/hoyoul/.maildir/certs/fastmail.crt
-     #+end_example        
+#+begin_example
+openssl s_client -connect imap.fastmail.com:993 -showcerts
+#+end_example
+fastmail은 2개의 certs가 있다.
+#+begin_example
+CertificateFile /Users/hoyoul/.maildir/certs/fm.crt
+CertificateFile /Users/hoyoul/.maildir/certs/fastmail.crt
+#+end_example
+
+ #+begin_verse
+<2023-07-23 Sun> 수정 사항
+fastmail도 위의 gmail처럼 certificate file을 만들어 저장만 하고 .mbsyncrc는 아래처럼 변경했다.
+[이전 방법]
+SSLType IMAPS
+CertificateFile /Users/holy/.maildir/certs/fm.crt
+CertificateFile /Users/holy/.maildir/certs/fastmail.crt
+[변경된 방법]
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /usr/local/etc/openssl@3/cert.pem
+
+ #+end_verse
+
 ** 인증작업2 (app password)
 *** app password
 .mbsynce를 설정하기에 앞서서, 인증관련 처리를 하나 더 해줘야
@@ -116,7 +149,17 @@ app-password를 발급받아야 한다.
 #+attr_latex: :width 100px
 [[../static/img/mu4e/app_pwd.png]]
 
-여기서 발급받은 key는 .mbsyncrc에 pass에 넣어준다.
+이전 위치에서 좀 변경되었다.
+ 
+
+#+CAPTION: app pw2
+#+NAME: app pw2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/mu4e/app_pwd2.png]]
+
+=> iznmiohdszmezubo
+여기서 발급받은 key는 뒤에 설정할 .mbsyncrc에 pass에 넣어준다.
 
 **** fastmail
 #+CAPTION: app pw for fastmail
@@ -140,11 +183,13 @@ Port 993
 User hoyoul.park@gmail.com
 Pass gsrupwxkyiepvjwh
 AuthMechs LOGIN
+#SSLType IMAPS
+#CertificateFile /Users/holy/.maildir/certs/gmail.crt
+#CertificateFile /Users/holy/.maildir/certs/google.crt
+#CertificateFile /Users/holy/.maildir/certs/Equifax.crt
 SSLType IMAPS
-CertificateFile /Users/holy/.maildir/certs/gmail.crt
-CertificateFile /Users/holy/.maildir/certs/google.crt
-CertificateFile /Users/holy/.maildir/certs/Equifax.crt
-
+SSLVersions TLSv1.2
+CertificateFile /usr/local/etc/openssl@3/cert.pem
 #------------------------------------------------------
 # gmail의 store를 정의한다. store는 group of mailbox이며,
 # 원격에 있는 gmail store와 다운받은 local의 store가 있다.
@@ -188,9 +233,12 @@ Port 993
 User holy_frege@fastmail.com
 Pass eadu273mnpjmpt74
 AuthMechs LOGIN
+#SSLType IMAPS
+#CertificateFile /Users/holy/.maildir/certs/fm.crt
+#CertificateFile /Users/holy/.maildir/certs/fastmail.crt
 SSLType IMAPS
-CertificateFile /Users/holy/.maildir/certs/fm.crt
-CertificateFile /Users/holy/.maildir/certs/fastmail.crt
+SSLVersions TLSv1.2
+CertificateFile /usr/local/etc/openssl@3/cert.pem
 
 IMAPStore fastmail-remote
 Account fastmailcon
@@ -211,7 +259,7 @@ Sync All
 Create Both
 SyncState *
   #+end_example
-.maildir/Gmail과 .maildir/Fastmail 폴더가 있어야 한다.
+.maildir/Gmail과 .maildir/Fastmail 폴더가 없다면 생성한다.
 
 ** .mbsyncrc test
  실제 email server에서 local로 메일을 가져오는지 test한다.
@@ -255,7 +303,7 @@ mailbox: store에는 mailbox들이 있다.
 ** mu설치
 mu는 mbsync addon으로 생각하면 된다.  mbsync에서 설치한 maildir에 있는
 mail들을 indexing해서 빠른 검색을 가능하게 해준다. 또한 emacs(mu4e)에서
-사용할 수 있는 interface를 제공한다. mu를 설치하자.
+사용할 수 있는 mu4e interface를 제공한다. mu를 설치하자.
 
 #+begin_example
 brew install mu 
@@ -271,7 +319,7 @@ mu4e를설정시에 사용된다.
 mu init으로 db를 만든다. mbsync로 email server로 부터 다운받은
 mail저장소를 mu에게 알려주면 db에 저장한다.
 #+begin_example
-mu init --maildir=~/.maildir
+mu init --maildir=.maildir
 #+end_example
 
 #+CAPTION: mu init
@@ -282,11 +330,20 @@ mu init --maildir=~/.maildir
 
 ** mu testing
 mu index하면 db를 indexing을 한다.
-   #+begin_example
-   mu index
-   mu find google
-   #+end_example 
+#+begin_example
+mu index
+mu find google
+#+end_example
 
+결과는 다음과 같다.
+
+#+CAPTION: mu find
+#+NAME: mu find
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/mu4e/mu-find.png]]
+
+   
 * [step3] mu4e 설정
  mu를 설치했기 때문에, db가 만들어졌고 indexing을 할 수 있다. 이제
  mu4e를 emacs에 설치해서 mu에 있는 db를 가져와서 보여주면 된다.
@@ -295,7 +352,8 @@ mu index하면 db를 indexing을 한다.
 mu4e는 다음과 같이 설정하면 된다.
 
  #+begin_example
-(add-to-list 'load-path "/usr/local/Cellar/mu/1.4.13/share/emacs/site-lisp/mu/mu4e/")
+#(add-to-list 'load-path "/usr/local/Cellar/mu/1.10.5/share/emacs/site-lisp/mu/mu4e/")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e/")
 (require 'mu4e)
 (require 'smtpmail)
 (setq mu4e-maildir (expand-file-name "~/.maildir"))
@@ -318,14 +376,21 @@ mu4e는 다음과 같이 설정하면 된다.
 기본 사용법은 아래를 참고한다.
 
 #+CAPTION: 기본 사용법
-[[./img/mu4e6.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/mu4e/mu4e6.png]]
 
 key binding은 다음과 같다.
 #+CAPTION: key binding
-[[./img/mu4e7-1.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/mu4e/mu4e7-1.png]]
 
 #+CAPTION: keybinding2
-[[./img/mu4e7-2.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/mu4e/mu4e7-2.png]]
+
 #+end_note
 * mu4e 사용법 (update)
 #+begin_note
