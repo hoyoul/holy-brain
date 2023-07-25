@@ -382,3 +382,31 @@ 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<br />
 
 
 ## [ portfolio page ] {#portfolio-page}
+
+
+### domain설정 {#domain설정}
+
+frege2godel이라는 domain에 subdomain을 만들어야 한다. 나는 가비아에서
+domain을 구입했기 때문에 가비아에서 portfolio.frege2gode.me라는
+CNAME의 domain을 설정했다.
+
+<a id="figure--domain"></a>
+
+{{< figure src="/img/blog_homepage/domain.png" caption="<span class=\"figure-number\">Figure 17: </span>domain" width="600px" >}}
+
+
+### 기본 정보 {#기본-정보}
+
+-   homepage 운영주소: <https://portfolio.frege2godel.me>
+-   github source 주소:
+-   github repo(dev,publish):holytofrege.github.io
+-   github address: <https://github.com/holytofrege/holytofrege>
+-   github id: holytofrege
+-   github email: holy.frege@fastmail.com
+-   pat:
+
+    <div class="verse">
+
+    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<br />
+
+    </div>

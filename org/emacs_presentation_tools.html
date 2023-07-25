@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>[emacs] presentation tools</title>
+<meta name="author" content="Holy Frege"/>
+<meta name="description" content=""/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/dist/reveal.css"/>
+
+<link rel="stylesheet" href="http://cdn.jsdelivr.net/reveal.js/2.5.0/dist/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = 'http://cdn.jsdelivr.net/reveal.js/2.5.0/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">[emacs] presentation tools</h1><p class="subtitle"></p>
+<h2 class="author">Holy Frege</h2><p class="date">Created: 2023-07-24 Mon 02:46</p>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-org9ead23d">1. Reveal</a>
+<ul>
+<li><a href="#/slide-org8f868b6">1.1. org reveal 설치법</a>
+<ul>
+<li><a href="#/slide-org9994fdc">1.1.1. 설치</a></li>
+<li><a href="#/slide-org28035ce">1.1.2. reveal.js 설치</a></li>
+<li><a href="#/slide-org6ee0386">1.1.3. ox-reveal.el 설치</a></li>
+</ul>
+</li>
+<li><a href="#/slide-orgfa4ae8a">1.2. chrome browser에서 presentation시 전체화면</a></li>
+<li><a href="#/slide-org5fe7937">1.3. reveal의 구조</a></li>
+<li><a href="#/slide-orgbd057cc">1.4. org mappings</a></li>
+<li><a href="#/slide-org7f60c12">1.5. font size</a></li>
+<li><a href="#/slide-org9a4468c">1.6. test slide1 h1</a>
+<ul>
+<li><a href="#/slide-orgbdc84c6">1.6.1. test slide h2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</section>
+<p>
+:ID:       5FE9006E-0300-441F-9D66-5366866C47B7
+:mtime:    20230724014817
+:ctime:    20230724014817
+</p>
+<section>
+<section id="slide-org9ead23d">
+<h2 id="org9ead23d"><span class="section-number-2">1.</span> Reveal</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+</section>
+<section id="slide-org8f868b6">
+<h3 id="org8f868b6"><span class="section-number-3">1.1.</span> org reveal 설치법</h3>
+<div class="outline-text-3" id="text-1-1">
+</div>
+</section>
+<section id="slide-org9994fdc">
+<h4 id="org9994fdc"><span class="section-number-4">1.1.1.</span> 설치</h4>
+<p>
+org 문서를 reveal로 볼려면 C-c C-e R R로 export해서 보면 된다. C-c
+C-e 했을 때 Reveal 메뉴가 안보이면 설치가 안된것이다. ox-reveal.el과
+reveal.js가 있어야 한다. 자세한 설치과정은 다음사이트를 확인하자.
+<a href="https://github.com/hexmode/ox-reveal">https://github.com/hexmode/ox-reveal</a>
+</p>
+</section>
+<section id="slide-org28035ce">
+<h4 id="org28035ce"><span class="section-number-4">1.1.2.</span> reveal.js 설치</h4>
+<p>
+두 가지 방법이 있다. reveal.js를 시스템에 다운받는경우와 org mode에서
+cdn을 사용하는 경우가 있다. 나는 cdn을 사용하기로 한다. org 문서
+상단에 다음을 추가한다. snippet을 추가하자.
+</p>
+<div class="important" id="orgb163f4a">
+
+</div>
+</section>
+<section id="slide-org6ee0386">
+<h4 id="org6ee0386"><span class="section-number-4">1.1.3.</span> ox-reveal.el 설치</h4>
+<p>
+위의 ox-reveal에서 git을 clone한 후 ox-reveal.el을 .emacs의
+lisp폴더에 넣는다. lisp폴더는 내가 만든 폴더인데, emacs를 실행할때
+load할수 있게 이미 다음과 같이 setting을 했다.
+</p>
+
+<div class="important" id="orgf46e6f9">
+<p>
+(add-to-list 'load-path "<i>Users/holy</i>.emacs.d/lisp/")
+</p>
+
+</div>
+
+<p>
+lisp폴더에 넣은후에 require로 load하면 된다.
+</p>
+<div class="important" id="org93ecb49">
+<p>
+(require 'ox-reveal)
+</p>
+
+</div>
+</section>
+<section id="slide-orgfa4ae8a">
+<h3 id="orgfa4ae8a"><span class="section-number-3">1.2.</span> chrome browser에서 presentation시 전체화면</h3>
+<p>
+f를 누르면 된다. 
+</p>
+</section>
+<section id="slide-org5fe7937">
+<h3 id="org5fe7937"><span class="section-number-3">1.3.</span> reveal의 구조</h3>
+<pre class="example" id="orga7246f6">
+&lt;div class="reveal"&gt;
+  &lt;div class="slides"&gt;
+    &lt;section&gt;Horizontal Slide&lt;/section&gt;
+    &lt;section&gt;
+      &lt;section&gt;Vertical Slide 1&lt;/section&gt;
+      &lt;section&gt;Vertical Slide 2&lt;/section&gt;
+    &lt;/section&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+</pre>
+<p>
+slides라는 class아래에 section이 있는데, 우리가 흔히 말하는 슬라이드는
+reveal에선 slides아래에 있는 section을 의미한다. section안에 또 다른
+section이 있을 수 있는데, vertical 슬라이드가 만들어진다. vertical
+슬라이드 안에 level2의 section이 별도의 슬라이드로 들어가는 형태가
+된다. 즉 level1의 section은 하나의 슬라이드가 되고, level2의 section은
+vertical 슬라이드가 된다. 이것을 기준으로 css를 customize할 수
+있다. org mode에서의 mapping관계를 사용해서 설정할 수 있다.
+</p>
+</section>
+<section id="slide-orgbd057cc">
+<h3 id="orgbd057cc"><span class="section-number-3">1.4.</span> org mappings</h3>
+
+</section>
+<section id="slide-org7f60c12">
+<h3 id="org7f60c12"><span class="section-number-3">1.5.</span> font size</h3>
+<pre  class="example" >
+#+REVEAL_EXTRA_CSS: ./modifications.css
+</pre>
+</section>
+<section id="slide-org9a4468c">
+<h3 id="org9a4468c"><span class="section-number-3">1.6.</span> test slide1 h1</h3>
+<p>
+inside test
+</p>
+</section>
+<section id="slide-orgbdc84c6">
+<h4 id="orgbdc84c6"><span class="section-number-4">1.6.1.</span> test slide h2</h4>
+<p>
+inside test2
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="http://cdn.jsdelivr.net/reveal.js/2.5.0/dist/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: 'http://cdn.jsdelivr.net/reveal.js/2.5.0/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

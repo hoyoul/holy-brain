@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       C2FA9C6E-D3CD-49ED-A8AB-FCECC8575338
-:mtime:    20230721163513 20230720195001 20230616162720 20230616140021 20230616124555
+:mtime:    20230724214615 20230721163513 20230720195001 20230616162720 20230616140021 20230616124555
 :ctime:    20230616124555
 :END:
 #+title: [github] multi account github problem
@@ -70,7 +70,8 @@ github에서 복사한 값이기 때문에 -hoyoul로 postfix를 붙이는 방�
 #+BEGIN_SRC text
   ssh -T git@ host명
   ssh -T git@holy2frege_github
-  ssh -T git@hoyoul_github  
+  ssh -T git@hoyoul_github
+  ssh -T git@holytofrege_github
 #+END_SRC
 
 사용자를 git으로 하고, host명을 입력해서 server에 접속 유무를 test할

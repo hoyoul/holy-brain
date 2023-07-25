@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       3730AC1B-9357-47AE-A11C-38323D691649
-:mtime:    20230721153506 20230721110034 20230721020240 20230720233433 20230720191137 20230720175805 20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
+:mtime:    20230724173725 20230724162228 20230721153506 20230721110034 20230721020240 20230720233433 20230720191137 20230720175805 20230720163542 20230720122202 20230616124105 20230616113505 20230616103455
 :ctime:    20230616103455
 :END:
 #+title: [website] about my braindump blog and homepage usage 
@@ -285,3 +285,26 @@ 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
 
 - public folder: 이것도 마찬가지다.
 * [ portfolio page ]
+** domain설정
+frege2godel이라는 domain에 subdomain을 만들어야 한다. 나는 가비아에서
+domain을 구입했기 때문에 가비아에서 portfolio.frege2gode.me라는
+CNAME의 domain을 설정했다.
+
+#+CAPTION: domain
+#+NAME: domain
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/blog_homepage/domain.png]]
+
+** 기본 정보
+- homepage 운영주소: https://portfolio.frege2godel.me
+- github source 주소: 
+- github repo(dev,publish):holytofrege.github.io
+- github address: https://github.com/holytofrege/holytofrege
+- github id: holytofrege
+- github email: holy.frege@fastmail.com
+- pat:
+   #+begin_verse
+   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
+   #+end_verse
+

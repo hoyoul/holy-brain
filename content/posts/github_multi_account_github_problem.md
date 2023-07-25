@@ -102,6 +102,7 @@ Host github.com-portfolio
 ssh -T git@ host명
 ssh -T git@holy2frege_github
 ssh -T git@hoyoul_github
+ssh -T git@holytofrege_github
 ```
 
 사용자를 git으로 하고, host명을 입력해서 server에 접속 유무를 test할
