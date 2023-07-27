@@ -42,10 +42,10 @@ setting할 수 있다. 이렇게 하면 commit만 만들면 된다. 이것은 pa
 
 ```text
 - git 설치 : system에 git program설치
-	(1) git init : .git(repository)을 만든다.
-    (2) git clone : .git(repository) 폴더를 server에서 가져온다.
-	(3) git configure : git을 설정한다. commit에 자신의 정보를 넣기위해서 필요.
-	(4) git ignore: git에서 처리하지 않을 파일을 기록
+        (1) git init : .git(repository)을 만든다.
+        (2) git clone : .git(repository) 폴더를 server에서 가져온다.
+        (3) git configure : git을 설정한다. commit에 자신의 정보를 넣기위해서 필요.
+        (4) git ignore: git에서 처리하지 않을 파일을 기록
 ```
 
 
@@ -136,7 +136,7 @@ directory에서의 변경사항의 기준은 이전 commit이다. 처음 repo를
 된다. git은 이 모든 것을 check하고 있다.
 
 
-#### git status {#git-status}
+#### [git status] {#git-status}
 
 git이 이전 commit과 현재의 working directory의 차이를 monitoring하고
 있다고 했다. 정말 git이 monitoring하는지 알수 있는 git 명령어가
@@ -173,7 +173,7 @@ commit과 비교해서 변경된 파일들(changes)를 계속 monitoring한다�
 stage에 올라가듯 untracked file들도 선택되어 stage에 올라갈 수 있다.
 
 
-#### 변경파일(changes),새파일(untracked)들은 선택되어 staged될 수 있다. {#변경파일--changes--새파일--untracked--들은-선택되어-staged될-수-있다-dot}
+#### [git add] - 변경파일(changes),새파일(untracked)들은 선택되어 staged될 수 있다. {#git-add-변경파일--changes--새파일--untracked--들은-선택되어-staged될-수-있다-dot}
 
 모든 changes들이 commit이 되는게 아니라, changes들 중 선택할 수 있다.
 git에선 git add라는 명령어를 제공한다.  git add로 우린 원하는
@@ -195,7 +195,7 @@ git add .
 ```
 
 
-#### stage에 간택된 changes만 commit. {#stage에-간택된-changes만-commit-dot}
+#### [git commit] stage에 간택된 changes만 commit. {#git-commit-stage에-간택된-changes만-commit-dot}
 
 이렇게 stage에 올린 후에 git commit -m
 "message"를 입력하면 commit이란 형태로 repository에 저장된다.
@@ -205,7 +205,7 @@ git commit -m "message"
 ```
 
 
-#### branch와 HEAD의 역할 {#branch와-head의-역할}
+#### [git commit] branch와 HEAD의 역할 {#git-commit-branch와-head의-역할}
 
 앞으로 나오게 될 말이기도 하지만, 최초의 commit이 만들어지면, 그 때
 master(main)라는 branch와 Head가 만들어진다. master는 commit을
@@ -237,30 +237,152 @@ git commit -m "message"
 {{< figure src="/img/git/commit.png" caption="<span class=\"figure-number\">Figure 2: </span>commit" >}}
 
 
-#### commit 만들 때 유의할 점(2) - unstage하는 법 {#commit-만들-때-유의할-점--2--unstage하는-법}
+#### [git switch,git checkout] 'HEAD detached' 용어 {#git-switch-git-checkout-head-detached-용어}
 
-<div class="attention">
-
-```text
-git reset HEAD [file]
-```
-
-stage에 올려진 파일을 stage에서 내릴때 사용한다.
-
-</div>
+HEAD detached라는 용어가 있다. HEAD는 branch를 가리킨다고 한다. 만일
+HEAD가 branch가 아닌 commit을 가리키면 Head Detached라고
+부른다. HEAD를 이동하는 명령어는 git switch과 git checkout이 있다.
 
 
-#### commit 만들 때 유의할 점(3) - commit취소 {#commit-만들-때-유의할-점--3--commit취소}
+#### [git commit] 결과 [git log],[git status] {#git-commit-결과-git-log-git-status}
 
-<div class="attention">
-
-commit을 만들었는데, 잘못 만들었다. 이럴 때도 git reset을 사용한다.
+git commit을 했을때 순차적인 동작은 다음과 같다. commit이 만들어지고,
+HEAD가 가리키는 branch는 새로운 commit으로 이동된다. branch가 이동되면
+HEAD도 같이 이동된다. 이것을 확인하는 것은 git log라는 명령어이다. git
+log는 만들어진 commit과 HEAD와 Branch를 보여준다.
 
 ```text
-git reset HEAD^(이전 commit으로 되돌린다.)
+git log
 ```
 
-</div>
+<a id="figure--git log"></a>
+
+{{< figure src="/img/git/git_log.png" caption="<span class=\"figure-number\">Figure 3: </span>git log" width="600px" >}}
+
+stage에 올린것을 commit으로 만들었기 때문에 staged(cached)라고 불리는
+영역은 깨끗해진다.
+
+<a id="figure--clean git status"></a>
+
+{{< figure src="/img/git/clean_git_status.png" caption="<span class=\"figure-number\">Figure 4: </span>clean git status" width="600px" >}}
+
+stage가 깨끗해진다는 것은 이렇게 이해해도 된다. 새롭게 만들어진
+commit에 있는 working directory는 현재 working directory와 동일하기
+때문에 changes가 없는건 당연하다. 라고 이해할 수 있다.
+
+
+#### [git rm] stage에서 내리는법(unstage) {#git-rm-stage에서-내리는법--unstage}
+
+```text
+(use "git rm --cached <file>..." to unstage)
+```
+
+stage를 다른 말로 cached라고 부르기도 한다. git rm으로 stage에
+올린것을 지우면 된다.
+
+
+#### [git reset] commit취소 그리고 이동 {#git-reset-commit취소-그리고-이동}
+
+commit을 만들었는데, 잘못 만들었다. 취소하고 싶다. 이것은 좀 복잡한
+내부처리 과정을 거친다. 취소라는 단어보단, 어떻게 보면 Head와
+branch이동인데, 그냥 취소라고 하자. 두 가지 경우가 있다. 하나는 만든
+commit이 최초의 commit인 경우와, 두번째는 만든 commit이 최초 commit이
+아닌 경우다.
+
+<!--list-separator-->
+
+-  최초 commit인 경우.
+
+    commit을 삭제하면 이전의 상태로 가야 한다. 이전 상태는 아무것도 없는
+    상태, 그러면 HEAD와 Branch가 없어야 한다. 그리고 수정된 파일이나,
+    새롭게 만든 파일들은 그대로 working directory에 있어야 하고, git
+    status를 했을때 변경사항으로 보여져야 한다.
+
+    가장 쉬운 방법은 repo를 지우는 것이다. rm -rf .git으로 지워도 작성된
+    파일은 그대로 working directory에 남아있기 때문에 수정해서 새 commit을
+    만들면 된다.
+
+    ```text
+    rm -rf .git
+    ```
+
+    다른 방법도 있다. HEAD를 삭제하는 것이다. HEAD를 없애면 HEAD가
+    가리키는 branch도 없어진다. 이렇게 하는 git 명령어가 존재한다.
+
+    ```text
+    git update-ref -d HEAD
+    ```
+
+    이렇게 하면 현재의 HEAD를 날려버린다. 그러면 commit이 가졌던
+    변경사항들이 index에 있게 된다. 이것은 repo를 지웠을 때와 차이가
+    있다. repo를 지우면 잘못만든 commit이 가지고 있던 file들은 그대로 현
+    폴더에 있는 상태지만, HEAD만 지우면, 변경사항들은 index(stage)에
+    올려져 있다.
+
+<!--list-separator-->
+
+-  [git reset] 최초의 commit이 아닌 경우
+
+    commit을 취소하면 HEAD와 branch가 이전의 commit으로 이동하고 취소된
+    commit이 가지고 있던 변경사항들이 stage에 있는것을 원할 것이다. 이 때
+    사용하는 명령이 reset이다. reset은 HEAD와 Branch를 함께 움직이는
+    명령어다. git switch와 checkout은 HEAD만 이동한다. 그래서 git switch나
+    checkout은 branch를 인자로 받아서 HEAD를 branch로 이동한다면, reset의
+    경우는 HEAD와 branch를 같이 이동하는 명령어다.
+
+    다시 요약하면, reset은 `HEAD와 Branch를 함께 이동` 시키는
+    명령어다. 이런 git reset은 3가지 경우가 있다. `이동하려는 commit과
+    현재 commit의 변경사항들` 을 어떻게 처리할까에 따라서 3가지 경우가
+    있는 것이다.
+
+    -   --soft:
+        ```text
+        git reset --soft cd23ed20deb
+        ```
+        가장 일반적인 경우다. 원하는 commit으로 HEAD와 branch를 이동 시키고,
+        현재 commit과 이동할 commit간의 변경사항들을 `모두 stage영역` 에
+        올려놓는 것이다.
+
+    -   --mixed:
+
+        이동하려는 commit과 현재 commit의 차이를 그대로 `변경사항영역` 에
+        놔둔다. 변경 사항들을 지우지 않는다. soft에서는 모두 stage에
+        올려놨다면, mixed는 그대로 변경사항으로 남아 있는 것이다.
+
+    -   --hard
+
+    <!--listend-->
+
+    ```text
+    git reset --hard cd23ed20deb
+    ```
+
+    hard라는 단어에서 느끼듯이 이것은 현재 commit과 해당 commit간의 모든
+    변경 사항들은 무시한다. `stage에 올려놓거나 변경사항을 유지하지
+    않는다.` 즉 두 commit간의 차이점을 반영하지 않는다. git status를
+    했을때, 변경사항이나 stage영역이 깨끗한 것을 확인할 수 있다. 해당
+    commit을 commit했을 때, 당시 시점으로 이동하는것이다. commit한 당시
+    시점이기 때문에 git status를 했을 때 아무것도 안보이는 것은 당연한
+    일이다. --hard는 모든 변경했던 파일 정보가 사라지기 때문에 사용에
+    신중함이 필요하다.
+
+
+#### 상대 참조에 관해(HEAD^와 HEAD~n 그리고 commit hash) {#상대-참조에-관해--head-와-head-n-그리고-commit-hash}
+
+git checkout,switch,reset은 HEAD와 branch를 특정 commit으로 이동하는
+명령어이다. 특정 commit을 가리킬 때는 git log를 통해서 hash값을 알아야
+이동 할 수 있다. hash값을 사용해서 처리하는것은 절대주소를 참조하는
+것과 같이 불편하다. 그래서 상대 참조하는 방식이 있다.
+
+```text
+git switch main^
+git switch main~3
+git reset HEAD^
+git reset HEAD~3
+```
+
+위와 같이 해서 commit이 가진 hash값을 직접 입력하지 않고 commit을
+참조할 수 있다. Head와 branch 어떤걸로 해도 상관없다.
 
 
 #### summary {#summary}
@@ -269,22 +391,19 @@ git reset HEAD^(이전 commit으로 되돌린다.)
 
 <a id="figure--git commit"></a>
 
-{{< figure src="./img/makecommit.png" caption="<span class=\"figure-number\">Figure 3: </span>git commit과정" >}}
+{{< figure src="/img/git/makecommit.png" caption="<span class=\"figure-number\">Figure 5: </span>git commit과정" >}}
 
 </div>
 
 
 #### linked list {#linked-list}
 
-<div class="attention">
-
-git은 version의 history를 linked list로 관리한다. version은 commit이라는 형태이고 단방향 linked
-list로 저장된다. linked list로 관리하면 몇가지 특징이 있다. Head가 있고,
-저장한다. 그냥 배열을 사용해서 무턱대고 집어넣는게 아니다. 배열은 공간의 크기가 정해져 있지만,
-linked list는 동적이다. commit들이 link로 연결되어 있는 것이다. 새로운 commit이 오면 기존의
-연결된 commit과 연결되는 것이다.
-
-</div>
+git은 version의 history를 linked list로 관리한다. version은
+commit이라는 형태이고 단방향 linked list로 저장된다. linked list로
+관리하면 몇가지 특징이 있다. Head가 있고, 저장한다. 그냥 배열을
+사용해서 무턱대고 집어넣는게 아니다. 배열은 공간의 크기가 정해져
+있지만, linked list는 동적이다. commit들이 link로 연결되어 있는
+것이다. 새로운 commit이 오면 기존의 연결된 commit과 연결되는 것이다.
 
 
 ### git drill(2단계) {#git-drill--2단계}
@@ -323,7 +442,7 @@ git은 단방향 list를 사용한다. list는 처음에 Head만 있다. HEAD를
 
 <a id="figure--linked list"></a>
 
-{{< figure src="./img/linkedlist.png" caption="<span class=\"figure-number\">Figure 4: </span>linked list" >}}
+{{< figure src="./img/linkedlist.png" caption="<span class=\"figure-number\">Figure 6: </span>linked list" >}}
 
 </div>
 
@@ -350,7 +469,7 @@ linked list는 자료구조다. 자료구조는 data를 추가하거나, 중간�
 
 <a id="figure--new list"></a>
 
-{{< figure src="./img/newlist1.png" caption="<span class=\"figure-number\">Figure 5: </span>new head list" >}}
+{{< figure src="./img/newlist1.png" caption="<span class=\"figure-number\">Figure 7: </span>new head list" >}}
 
 </div>
 
@@ -365,7 +484,7 @@ HEAD를 추가하면 문제가 생긴다. Node를 삽입할 때, 어떤 HEAD를 
 
 <a id="figure--new head"></a>
 
-{{< figure src="./img/newlist2.png" caption="<span class=\"figure-number\">Figure 6: </span>new head" >}}
+{{< figure src="./img/newlist2.png" caption="<span class=\"figure-number\">Figure 8: </span>new head" >}}
 
 </div>
 
@@ -375,15 +494,15 @@ HEAD를 추가하면 문제가 생긴다. Node를 삽입할 때, 어떤 HEAD를 
 
 <a id="figure--summary1"></a>
 
-{{< figure src="./img/list_sum1.png" caption="<span class=\"figure-number\">Figure 7: </span>summary1" >}}
+{{< figure src="./img/list_sum1.png" caption="<span class=\"figure-number\">Figure 9: </span>summary1" >}}
 
 <a id="figure--summary2"></a>
 
-{{< figure src="./img/list_sum2.png" caption="<span class=\"figure-number\">Figure 8: </span>summary2" >}}
+{{< figure src="./img/list_sum2.png" caption="<span class=\"figure-number\">Figure 10: </span>summary2" >}}
 
 <a id="figure--summary3"></a>
 
-{{< figure src="./img/list_sum3.png" caption="<span class=\"figure-number\">Figure 9: </span>summary3" >}}
+{{< figure src="./img/list_sum3.png" caption="<span class=\"figure-number\">Figure 11: </span>summary3" >}}
 
 </div>
 
@@ -434,7 +553,7 @@ git은 변형 linked list를 사용한다고 했다. linked list에서 사용하
 
 <a id="figure--git terms"></a>
 
-{{< figure src="./img/gitdrill3.png" caption="<span class=\"figure-number\">Figure 10: </span>git term" >}}
+{{< figure src="./img/gitdrill3.png" caption="<span class=\"figure-number\">Figure 12: </span>git term" >}}
 
 commit을 만들면 이것을 list에 삽입을 해야 하는데, list에서 삽입은 HEAD가 Node를 가리키는 방식이다. Git에서 HEAD는 branch를 선택하는
 용어로 쓰인다. 그리고 Branch가 list에서 HEAD에 대응되는 용어다. 즉 branch가 새로운 commit을 가리키면서 삽입이 되기 때문에 Branch는
@@ -485,7 +604,7 @@ git commit은 linked list에 commit을 삽입한다. linked list의 HEAD는 bran
 
 <a id="figure--git commit"></a>
 
-{{< figure src="./img/gitcommit.png" caption="<span class=\"figure-number\">Figure 11: </span>git commit" >}}
+{{< figure src="./img/gitcommit.png" caption="<span class=\"figure-number\">Figure 13: </span>git commit" >}}
 
 </div>
 
@@ -504,7 +623,7 @@ commit을 접근할 방법이 없다. linked list는 array와 달라서 link가 
 
 <a id="figure--git commit amend"></a>
 
-{{< figure src="./img/commitamend.png" caption="<span class=\"figure-number\">Figure 12: </span>git commit --amend" >}}
+{{< figure src="./img/commitamend.png" caption="<span class=\"figure-number\">Figure 14: </span>git commit --amend" >}}
 
 </div>
 
@@ -520,7 +639,7 @@ line(linked list)가 만들어지는 것을 아래 그림에 표시했다.
 
 <a id="figure--git branch"></a>
 
-{{< figure src="./img/gitbranch.png" caption="<span class=\"figure-number\">Figure 13: </span>git branch" >}}
+{{< figure src="./img/gitbranch.png" caption="<span class=\"figure-number\">Figure 15: </span>git branch" >}}
 
 </div>
 
@@ -558,7 +677,7 @@ origin/testing이라는 branch와 testing이란 branch가 생기게 된다.
 
 <a id="figure--git clone"></a>
 
-{{< figure src="./img/gitclone.png" caption="<span class=\"figure-number\">Figure 14: </span>git clone" >}}
+{{< figure src="./img/gitclone.png" caption="<span class=\"figure-number\">Figure 16: </span>git clone" >}}
 
 </div>
 
@@ -591,7 +710,7 @@ git checkout은 commit을 하느냐 혹은 branch를 하느냐에 따라서 그 
 
     <a id="figure--git checkout commit"></a>
 
-    {{< figure src="./img/checkout1.png" caption="<span class=\"figure-number\">Figure 15: </span>git checkout commit" >}}
+    {{< figure src="./img/checkout1.png" caption="<span class=\"figure-number\">Figure 17: </span>git checkout commit" >}}
 
 2.  git checkout branch: 이것의 의도는 해당 branch가 가리키는 commit으로 working directory가
     복원되고, 수정도 할 수 있고, 새로운 commit을 만드는 것도 가능하다. content-addressable하기 때문에
@@ -607,7 +726,7 @@ git checkout은 commit을 하느냐 혹은 branch를 하느냐에 따라서 그 
 
 <a id="figure--git checkout"></a>
 
-{{< figure src="./img/gitcheckout.png" caption="<span class=\"figure-number\">Figure 16: </span>git checkout" >}}
+{{< figure src="./img/gitcheckout.png" caption="<span class=\"figure-number\">Figure 18: </span>git checkout" >}}
 
 </div>
 
@@ -626,7 +745,7 @@ branch를 선택하는게 주 역할이기 때문에, 그 기준으로 살펴보
 
 <a id="figure--git log"></a>
 
-{{< figure src="./img/gitlog.png" caption="<span class=\"figure-number\">Figure 17: </span>git log" >}}
+{{< figure src="./img/gitlog.png" caption="<span class=\"figure-number\">Figure 19: </span>git log" >}}
 
 위 그림에서 2개의 주머니가 보인다. 하나는 Testing이란 입구를 가진 주머니, 또 다른 하나는 master란
 주머니가 있다. Testing이란 주머니에서 git log를 하면, E - B - A를 볼 수 있다. Master란 주머니에서
@@ -648,7 +767,7 @@ commit으로 되돌아갈 방법이 없다. link가 없기 때문이다. history
 
 <a id="figure--git reset"></a>
 
-{{< figure src="./img/gitreset.png" caption="<span class=\"figure-number\">Figure 18: </span>git reset" >}}
+{{< figure src="./img/gitreset.png" caption="<span class=\"figure-number\">Figure 20: </span>git reset" >}}
 
 </div>
 
@@ -698,7 +817,7 @@ master: git merge testing(branch명)
 
     <a id="figure--git merge"></a>
 
-    {{< figure src="./img/gitmerge1.png" caption="<span class=\"figure-number\">Figure 19: </span>git merge(fast forward)" >}}
+    {{< figure src="./img/gitmerge1.png" caption="<span class=\"figure-number\">Figure 21: </span>git merge(fast forward)" >}}
 
     </div>
 
@@ -711,7 +830,7 @@ master: git merge testing(branch명)
     3 way merge가 더 일반적인 경우고 conflict가 일어날 확률이 있는 merge다. 아래에서 충돌이 일어나는 경우를 설명한다. 충돌이
     일어나지 않는 경우는 merge commit이 자동으로 만들어지고, 충돌이 일어나면 수동으로 merge commit을 만드는 차이가 있다.
 
-    <a id="orge946248"></a>
+    <a id="org139aee2"></a>
 
     ![](./img/3way1.png)
     여기서 b.txt란 파일이 양쪽 linked list에 둘다 있다. 그럼 반드시 충돌이 일어나게 되어있다. 왜냐 어떤 linked list에 있는
@@ -719,7 +838,7 @@ master: git merge testing(branch명)
 
     <a id="figure--3way merge 2"></a>
 
-    {{< figure src="./img/3way2.png" caption="<span class=\"figure-number\">Figure 21: </span>3way merge 2" >}}
+    {{< figure src="./img/3way2.png" caption="<span class=\"figure-number\">Figure 23: </span>3way merge 2" >}}
 
     위 그림 보면, b.txt가 양쪽 linked list에 있기 때문에, stop된다. conflict를 수정하기 전에는 merge가 되지 않는다. 수동으로
     수정하고 commit을 만들어야 한다. 여기서는 하나의 b.txt만 충돌하지만, 10개의 파일이 충돌이 났다면, 일일이 수정을 해야 한다.
@@ -729,7 +848,7 @@ master: git merge testing(branch명)
 
     <a id="figure--3 way merge 3"></a>
 
-    {{< figure src="./img/3way3.png" caption="<span class=\"figure-number\">Figure 22: </span>3 way merge 3" >}}
+    {{< figure src="./img/3way3.png" caption="<span class=\"figure-number\">Figure 24: </span>3 way merge 3" >}}
 
     </div>
 
@@ -774,27 +893,27 @@ ancestor가 있다는 얘기는 우서 linked list가 2개 이상이라는 의�
 
 <a id="figure--git rebase 1"></a>
 
-{{< figure src="./img/rebase1.png" caption="<span class=\"figure-number\">Figure 23: </span>git rebase 1" >}}
+{{< figure src="./img/rebase1.png" caption="<span class=\"figure-number\">Figure 25: </span>git rebase 1" >}}
 
 제일 먼저 master branch를 base로 할려는 branch로 이동 시킨다.
 
 <a id="figure--git rebase 2"></a>
 
-{{< figure src="./img/rebase2.png" caption="<span class=\"figure-number\">Figure 24: </span>git rebase 2" >}}
+{{< figure src="./img/rebase2.png" caption="<span class=\"figure-number\">Figure 26: </span>git rebase 2" >}}
 
 그 다음 master와 base사이에 있는 commit들은 위에서 정한 새로운 base와 diff를 통해서 새로운
 commit들이 만들어진다.  Head가 master에 있기때문에 만들어진 commit들은 master가 가리키게 된다.
 
 <a id="figure--git rebase 3"></a>
 
-{{< figure src="./img/rebase3.png" caption="<span class=\"figure-number\">Figure 25: </span>git rebase 3" >}}
+{{< figure src="./img/rebase3.png" caption="<span class=\"figure-number\">Figure 27: </span>git rebase 3" >}}
 
 diff로 비교했던 commit 두개는 B라는 commit을 가리키고는 있지만, branch가 아래로 내려갔기 때문에
 garbage collector에 의해서 사라진다.
 
 <a id="figure--git rebase 4"></a>
 
-{{< figure src="./img/rebase4.png" caption="<span class=\"figure-number\">Figure 26: </span>git rebase4" >}}
+{{< figure src="./img/rebase4.png" caption="<span class=\"figure-number\">Figure 28: </span>git rebase4" >}}
 
 </div>
 
@@ -808,7 +927,7 @@ garbage collector에 의해서 사라진다.
 
     <a id="figure--rebase summary"></a>
 
-    {{< figure src="./img/rebasesummary.png" caption="<span class=\"figure-number\">Figure 27: </span>rebase summary" >}}
+    {{< figure src="./img/rebasesummary.png" caption="<span class=\"figure-number\">Figure 29: </span>rebase summary" >}}
 
     위 그림에서 testing은 base를 X라는 node로 바꾸고 싶다. 그러면 rebase를 명령하기 위해서 git
     checkout testing으로 testing branch를 선택하고 git rebase X라는 명령을 수행한다. 그러면 아래처럼,
@@ -816,7 +935,7 @@ garbage collector에 의해서 사라진다.
 
     <a id="figure--rebase summary 2"></a>
 
-    {{< figure src="./img/rebasesummary2.png" caption="<span class=\"figure-number\">Figure 28: </span>rebase summary 2" >}}
+    {{< figure src="./img/rebasesummary2.png" caption="<span class=\"figure-number\">Figure 30: </span>rebase summary 2" >}}
 
     A라는 commit과 new base라는 commit이 diff과정을 통해서 new commit이 만들어진다. branch가 있는
     가운데 new commit이 만들어졌기 때문에 testing branch가 new commit을 가리키게 된다. A라는 commit은
@@ -864,7 +983,7 @@ john과 호열이 git clone해서 특정 server에 있는 git을 local로 가져
 
 <a id="figure--git push 1"></a>
 
-{{< figure src="./img/push1.png" caption="<span class=\"figure-number\">Figure 29: </span>git push 1" >}}
+{{< figure src="./img/push1.png" caption="<span class=\"figure-number\">Figure 31: </span>git push 1" >}}
 
 clone을 하면 server의 linked list를 가져오게 된다. origin/master라는 server의 branch가
 보여진다. 그리고 master라는 또다른 local linked list가 자동적으로 만들어진다. origin/master는
@@ -873,13 +992,13 @@ John이 새로운 commit을 만들어서 server에 반영했다고 하자.
 
 <a id="figure--git push 2"></a>
 
-{{< figure src="./img/push2.png" caption="<span class=\"figure-number\">Figure 30: </span>git push 2" >}}
+{{< figure src="./img/push2.png" caption="<span class=\"figure-number\">Figure 32: </span>git push 2" >}}
 
 별 문제가 없다. 이제 호열이 B라는 commit을 만들고 push해보자.
 
 <a id="figure--git push 3"></a>
 
-{{< figure src="./img/push3.png" caption="<span class=\"figure-number\">Figure 31: </span>git push 3" >}}
+{{< figure src="./img/push3.png" caption="<span class=\"figure-number\">Figure 33: </span>git push 3" >}}
 
 에러가 난다. 호열은 push를 할 수 없다. 호열이 origin/master라는 server의 linked list의 head에
 commit을 붙일려고 하지만, 할수없다. 왜냐면,음...호열은 origin/master branch는 Node를 삽입할 수 있는
@@ -934,15 +1053,15 @@ repository에는 10개, 100개, 10000개가 있을 수 있다. 그런데 그 지
 
 <a id="figure--basic linked list"></a>
 
-{{< figure src="./img/basiclinkedlist.png" caption="<span class=\"figure-number\">Figure 32: </span>basic linked list" >}}
+{{< figure src="./img/basiclinkedlist.png" caption="<span class=\"figure-number\">Figure 34: </span>basic linked list" >}}
 
 <a id="figure--basic linked list2"></a>
 
-{{< figure src="./img/basiclinkedlist2.png" caption="<span class=\"figure-number\">Figure 33: </span>basic linked list2" >}}
+{{< figure src="./img/basiclinkedlist2.png" caption="<span class=\"figure-number\">Figure 35: </span>basic linked list2" >}}
 
 <a id="figure--basic linked list3"></a>
 
-{{< figure src="./img/basiclinkedlist3.png" caption="<span class=\"figure-number\">Figure 34: </span>basic linked list3" >}}
+{{< figure src="./img/basiclinkedlist3.png" caption="<span class=\"figure-number\">Figure 36: </span>basic linked list3" >}}
 
 repository의 본질을 얘기하면서 최초 commit은 모든 repository내의 branch가 가지고 있다는 것을
 강조했다. 왜냐면 우리가 사용할 remote repository, local repository는 모두 하나의 뿌리로부터 파생된
@@ -964,11 +1083,11 @@ clone했고, Lg전자는 fetch로 가져올려고 해도 서로다른 repository
 
 <a id="figure--repo 1"></a>
 
-{{< figure src="./img/repo1.png" caption="<span class=\"figure-number\">Figure 35: </span>repo 1" >}}
+{{< figure src="./img/repo1.png" caption="<span class=\"figure-number\">Figure 37: </span>repo 1" >}}
 
 <a id="figure--repo2"></a>
 
-{{< figure src="./img/repo2.png" caption="<span class=\"figure-number\">Figure 36: </span>repo2" >}}
+{{< figure src="./img/repo2.png" caption="<span class=\"figure-number\">Figure 38: </span>repo2" >}}
 
 위에 처럼 뿌리가 같기 때문에 하나의 local repository에서 관리가 가능한 것이다. 뿌리가 같지 않으면 다른 repository를 현재
 작업중인 local repository에 가져오질 못한다. 또 다른 예로, 자신이 local repository에서 자신만의 project를 개발하고 있는데,
@@ -992,7 +1111,7 @@ downstream으로 사용하기도 한다.
 
 <a id="figure--stream"></a>
 
-{{< figure src="./img/stream.png" caption="<span class=\"figure-number\">Figure 37: </span>stream" >}}
+{{< figure src="./img/stream.png" caption="<span class=\"figure-number\">Figure 39: </span>stream" >}}
 
 </div>
 
@@ -1019,7 +1138,7 @@ git clone이나, git remote add name URL을 한 후, git fetch를 해서 remote 
 
     <a id="figure--real clone"></a>
 
-    {{< figure src="./img/realclone.png" caption="<span class=\"figure-number\">Figure 38: </span>real clone" >}}
+    {{< figure src="./img/realclone.png" caption="<span class=\"figure-number\">Figure 40: </span>real clone" >}}
 
     </div>
 
@@ -1033,7 +1152,7 @@ git clone이나, git remote add name URL을 한 후, git fetch를 해서 remote 
 
     <a id="figure--real fetch"></a>
 
-    {{< figure src="./img/realfetch.png" caption="<span class=\"figure-number\">Figure 39: </span>real fetch" >}}
+    {{< figure src="./img/realfetch.png" caption="<span class=\"figure-number\">Figure 41: </span>real fetch" >}}
 
     </div>
 
@@ -1107,7 +1226,7 @@ git clone이나, git remote add name URL을 한 후, git fetch를 해서 remote 
 
     <a id="figure--branch term"></a>
 
-    {{< figure src="./img/cloneterm.png" caption="<span class=\"figure-number\">Figure 40: </span>branch term" >}}
+    {{< figure src="./img/cloneterm.png" caption="<span class=\"figure-number\">Figure 42: </span>branch term" >}}
 
     이제 좀 더 자세하게, git push, git fetch, git pull을 살펴볼 것이다.
 
@@ -1137,7 +1256,7 @@ branch없이는 안된다.
 
 <a id="figure--git clone"></a>
 
-{{< figure src="./img/clone_1.png" caption="<span class=\"figure-number\">Figure 41: </span>git clone" >}}
+{{< figure src="./img/clone_1.png" caption="<span class=\"figure-number\">Figure 43: </span>git clone" >}}
 
 </div>
 
@@ -1151,7 +1270,7 @@ local에 있는 bookmark branch를 갱신한다. 즉 동기화만 할 뿐이다.
 
 <a id="figure--git fetch"></a>
 
-{{< figure src="./img/fetch_1.png" caption="<span class=\"figure-number\">Figure 42: </span>git fetch" >}}
+{{< figure src="./img/fetch_1.png" caption="<span class=\"figure-number\">Figure 44: </span>git fetch" >}}
 
 </div>
 
@@ -1174,7 +1293,7 @@ git push는 git pull과 반대 과정이다. git pull 과정을 그림으로 그
 
 <a id="figure--git pull"></a>
 
-{{< figure src="./img/gitpull1.png" caption="<span class=\"figure-number\">Figure 43: </span>git pull" >}}
+{{< figure src="./img/gitpull1.png" caption="<span class=\"figure-number\">Figure 45: </span>git pull" >}}
 
 </div>
 
@@ -1195,7 +1314,7 @@ git push 과정을 그림으로 그리면 다음과 같다.
 
 <a id="figure--git push"></a>
 
-{{< figure src="./img/gitpush1.png" caption="<span class=\"figure-number\">Figure 44: </span>git push" >}}
+{{< figure src="./img/gitpush1.png" caption="<span class=\"figure-number\">Figure 46: </span>git push" >}}
 
 </div>
 
