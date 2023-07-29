@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       9B8444BA-C218-4CE8-9483-DB4397F067FB
-:mtime:    20230727111313 20230727100359 20230727083551 20230727011914 20230726135411 20230726125330 20230726114817 20230726034226 20230726023504 20230726005619 20230725233229
+:mtime:    20230727135702 20230727123615 20230727111313 20230727100359 20230727083551 20230727011914 20230726135411 20230726125330 20230726114817 20230726034226 20230726023504 20230726005619 20230725233229
 :ctime:    20230725233229
 :END:
 #+title: [git] git explained
@@ -10,7 +10,7 @@
 #+DESCRIPTION: 이전에 작성했던 git explained 초고.
 #+HUGO_DRAFT: true
 * Git Explained
-** Git Introduction
+* Git Introduction
 #+begin_attention
 Git은 Version Control System이다. 또한 Git은 version history라고
 부른다. Git에서 commit이라는 자료구조는 version이라고 한다. history는
@@ -22,7 +22,7 @@ system에서 Git의 사용, 3단계는 remote system에서 Git의 사용, 4단�
 work flow다. 부록으로 Git 내부 명령어를 설명할 수도 있다. 1단계는
 어디가도 있는 내용이라서 그냥 가볍게 읽고 넘어가면 된다.
 #+end_attention
-**  Git Drill-1단계(part 1: repo란 무엇이고, repo 준비)
+* Git Drill-1단계(part 1: repo란 무엇이고, repo 준비)
 누군가가 repository가 무엇이냐고 묻는다면? 어떻게 대답할 수 있을까?
 repo는 container다. repo라는 자신만의 file-system을 가지고 있고,
 자신만의 file system의 변경사항들을 commit이란 형태로
@@ -42,14 +42,13 @@ setting할 수 있다. 이렇게 하면 commit만 만들면 된다. 이것은 pa
           (3) git configure : git을 설정한다. commit에 자신의 정보를 넣기위해서 필요.
           (4) git ignore: git에서 처리하지 않을 파일을 기록
  #+end_example
-
-*** git 설치(brew)
+** git 설치(brew)
 #+begin_example
 brew install git
 #+end_example
 git을 system에 설치, 간단히 brew로 설치
 
-*** git init, git clone
+** git init, git clone
 
 #+begin_example
 git init
@@ -60,7 +59,7 @@ commit도 없고, branch도 없다.  git clone URL에서 다른곳에 있는
 .git폴더를 가져오는 것이다. git clone은 remote와 관련이 있기 때문에
 3단계에서도 설명을 할 것이다.
 
-*** git configure
+** git configure
 
 #+begin_example
 git config --global user.name "[name]"
@@ -71,7 +70,7 @@ git config --global user.email "[name]"
 사용자가 저장했는지, 언제 했는지 같은 meta data가 들어간다. 그 meta
 data를 설정해야 한다. 사용자 이름,email주소를 적어주면 된다.
 
-*** git ignore
+** git ignore
 편집기에서 .gitignore이라는 파일을 열고 다음과 같은 내용을 쓴다.
 #+begin_example
 *.log
@@ -80,7 +79,7 @@ data를 설정해야 한다. 사용자 이름,email주소를 적어주면 된다
 지금 몰라도 나중에는 알게 된다.  배제할 파일 목록은 다음을 참고하면
 된다.  https://gitignore.io/
 
-** Git drill - 1단계 (part2-commit 만들기)
+* Git drill - 1단계 (part2-commit 만들기)
 #+begin_attention
 Part1에서 git을 사용해서 commit을 할 수 있는 준비가 되었다고
 했다. commit은 git에서 다루는 가장 기본적인 단위다. commit은 동사로도
@@ -89,14 +88,14 @@ linked list 형태로 연결되어 있다.  commit은 git의 가장 fundamental�
 요소다. part2에선 commit을 만들고, 이것이 어떻게 linked list로
 연결되는가?에 대해서 알아본다.
 #+end_attention
-*** Commit
+** Commit
 part1에서 repo를 생성하거나 가져왔다. repo에는 commit들의 linked
 list형태로 저장된다고 했다. 그러면 commit은 무엇이냐?라고 물을 수
 있다. 뭐라고 말할 것인가? commit은 변경사항이다. repo가 가진 sub file
 system의 변경사항을 압축한게 commit이다. 난 이렇게 밖에 답할 수 없을
 듯 하다.
 
-*** commit 만들기 위한 조건.
+** commit 만들기 위한 조건.
 git은 저장시스템(repository)에 commit을 linked list형태로 저장한다고
 했다. commit은 변경사항을 저장한 것이라고 했다. 변경사항? 어떤
 변경사항인가? repo가 가진 working directory의 변경사항을 뜻한다.
@@ -110,7 +109,7 @@ directory에서의 변경사항의 기준은 이전 commit이다. 처음 repo를
 작성하면 이전 commit은 없기 때문에 새로 생성되는 모든 파일은 변경사항이
 된다. git은 이 모든 것을 check하고 있다. 
 
-*** [git status]
+** [git status]
 git이 이전 commit과 현재의 working directory의 차이를 monitoring하고
 있다고 했다. 정말 git이 monitoring하는지 알수 있는 git 명령어가
 제공된다. git status라는 명령어다.
@@ -122,7 +121,7 @@ git status
 #+NAME: git status
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
-[[../static/img/git/git_status1.png]]
+[[../static/img/git/git_status.png]]
 
 git은 이전 commit과 현재의 working directory의 차이만 monitoring하고
 있는지 알았는데, git status를 보니, 다양한 일을 하는 것 같다. 우선
@@ -146,7 +145,7 @@ commit과 비교해서 변경된 파일들(changes)를 계속 monitoring한다�
 파일들도 다음 commit을 만들때 선택될 수 있다. 마치 changes가 선택되서
 stage에 올라가듯 untracked file들도 선택되어 stage에 올라갈 수 있다.
 
-*** [git add] - 변경파일(changes),새파일(untracked)들은 선택되어 staged될 수 있다.
+** [git add] - 변경파일(changes),새파일(untracked)들은 선택되어 staged될 수 있다.
 
 모든 changes들이 commit이 되는게 아니라, changes들 중 선택할 수 있다.
 git에선 git add라는 명령어를 제공한다.  git add로 우린 원하는
@@ -166,7 +165,7 @@ git add . 로 전체를 올린다.
 git add .
 #+END_SRC
 
-*** [git commit] stage에 간택된 changes만 commit.
+** [git commit] stage에 간택된 changes만 commit.
 이렇게 stage에 올린 후에 git commit -m
 "message"를 입력하면 commit이란 형태로 repository에 저장된다.
 
@@ -175,7 +174,7 @@ git commit -m "message"
 #+END_SRC
 
 
-*** [git commit] branch와 HEAD의 역할
+** [git commit] branch와 HEAD의 역할
 앞으로 나오게 될 말이기도 하지만, 최초의 commit이 만들어지면, 그 때
 master(main)라는 branch와 Head가 만들어진다. master는 commit을
 가리키고, Head는 master를 가리킨다. 물론, HEAD나 branch는 모두
@@ -205,12 +204,12 @@ git commit -m "message"
 #+NAME: commit.png
 [[../static/img/git/commit.png]]
 
-*** [git switch,git checkout] 'HEAD detached' 용어
+** [git switch,git checkout] 'HEAD detached' 용어
 HEAD detached라는 용어가 있다. HEAD는 branch를 가리킨다고 한다. 만일
 HEAD가 branch가 아닌 commit을 가리키면 Head Detached라고
 부른다. HEAD를 이동하는 명령어는 git switch과 git checkout이 있다.
 
-*** [git commit] 결과 [git log],[git status]
+** [git commit] 결과 [git log],[git status]
 git commit을 했을때 순차적인 동작은 다음과 같다. commit이 만들어지고,
 HEAD가 가리키는 branch는 새로운 commit으로 이동된다. branch가 이동되면
 HEAD도 같이 이동된다. 이것을 확인하는 것은 git log라는 명령어이다. git
@@ -239,7 +238,7 @@ stage가 깨끗해진다는 것은 이렇게 이해해도 된다. 새롭게 만�
 commit에 있는 working directory는 현재 working directory와 동일하기
 때문에 changes가 없는건 당연하다. 라고 이해할 수 있다.
 
-*** [git rm] stage에서 내리는법(unstage)
+** [git rm] stage에서 내리는법(unstage)
 #+begin_example
 (use "git rm --cached <file>..." to unstage)
 #+end_example
@@ -247,14 +246,14 @@ stage를 다른 말로 cached라고 부르기도 한다. git rm으로 stage에
 올린것을 지우면 된다.
 
 
-*** [git reset] commit취소 그리고 이동
+** [git reset] commit취소 그리고 이동
 commit을 만들었는데, 잘못 만들었다. 취소하고 싶다. 이것은 좀 복잡한
 내부처리 과정을 거친다. 취소라는 단어보단, 어떻게 보면 Head와
 branch이동인데, 그냥 취소라고 하자. 두 가지 경우가 있다. 하나는 만든
 commit이 최초의 commit인 경우와, 두번째는 만든 commit이 최초 commit이
 아닌 경우다.
 
-**** 최초 commit인 경우.
+*** 최초 commit인 경우.
 commit을 삭제하면 이전의 상태로 가야 한다. 이전 상태는 아무것도 없는
 상태, 그러면 HEAD와 Branch가 없어야 한다. 그리고 수정된 파일이나,
 새롭게 만든 파일들은 그대로 working directory에 있어야 하고, git
@@ -281,7 +280,7 @@ git update-ref -d HEAD
 폴더에 있는 상태지만, HEAD만 지우면, 변경사항들은 index(stage)에
 올려져 있다.
 
-**** [git reset] 최초의 commit이 아닌 경우
+*** [git reset] 최초의 commit이 아닌 경우
 commit을 취소하면 HEAD와 branch가 이전의 commit으로 이동하고 취소된
 commit이 가지고 있던 변경사항들이 stage에 있는것을 원할 것이다. 이 때
 사용하는 명령이 reset이다. reset은 HEAD와 Branch를 함께 움직이는
@@ -302,7 +301,7 @@ checkout은 branch를 인자로 받아서 HEAD를 branch로 이동한다면, res
   현재 commit과 이동할 commit간의 변경사항들을 =모두 stage영역= 에
   올려놓는 것이다.
 
-- --mixed:
+- --mixed(default):
 
   이동하려는 commit과 현재 commit의 차이를 그대로 =변경사항영역= 에
   놔둔다. 변경 사항들을 지우지 않는다. soft에서는 모두 stage에
@@ -321,7 +320,7 @@ commit을 commit했을 때, 당시 시점으로 이동하는것이다. commit한
 일이다. --hard는 모든 변경했던 파일 정보가 사라지기 때문에 사용에
 신중함이 필요하다.
 
-*** 상대 참조에 관해(HEAD^와 HEAD~n 그리고 commit hash)
+** 상대 참조에 관해(HEAD^와 HEAD~n 그리고 commit hash)
 git checkout,switch,reset은 HEAD와 branch를 특정 commit으로 이동하는
 명령어이다. 특정 commit을 가리킬 때는 git log를 통해서 hash값을 알아야
 이동 할 수 있다. hash값을 사용해서 처리하는것은 절대주소를 참조하는
@@ -336,22 +335,24 @@ git checkout,switch,reset은 HEAD와 branch를 특정 commit으로 이동하는
 위와 같이 해서 commit이 가진 hash값을 직접 입력하지 않고 commit을
 참조할 수 있다. Head와 branch 어떤걸로 해도 상관없다.
 
-*** summary
-	#+begin_note
-	#+CAPTION: git commit과정
-	#+NAME: git commit
-	[[../static/img/git/makecommit.png]]
-	#+end_note
-*** linked list
-git은 version의 history를 linked list로 관리한다. version은
-commit이라는 형태이고 단방향 linked list로 저장된다. linked list로
-관리하면 몇가지 특징이 있다. Head가 있고, 저장한다. 그냥 배열을
-사용해서 무턱대고 집어넣는게 아니다. 배열은 공간의 크기가 정해져
-있지만, linked list는 동적이다. commit들이 link로 연결되어 있는
-것이다. 새로운 commit이 오면 기존의 연결된 commit과 연결되는 것이다.
+** summary
+  git repo와 commit에 대해서 대충 다뤄봤다. commit에서 좀 설명해야 할
+  게 있는데, commit의 구조다. commit은 변경사항만 저장하는데, working
+  directory구조는 유지하면서 변경사항을 저장한다. 변경된 파일들을
+  나열해서 저장하는게 아니라, working diretory의 구조인 tree와
+  blob이라는 file형태로 저장한다. 그래서 commit을 보면 아래와 같이
+  tree와 blob을 볼 수 있다.
+  #+CAPTION: git commit과정
+  #+NAME: git commit
+  [[../static/img/git/makecommit.png]]
 
-** git drill(2단계)
-** git drill3
+
+* git drill(2단계 -local)
+git drill 1단계에서 repo와 commit을 만드는것을 해봤다. 이제 local에서
+branch와 merge같은 작업이 어떻게 이루어지는지 살펴봐야 한다. 그리고
+local에서 주로 사용하는 git 명령어들도 살펴볼 것이다.
+
+* git drill3
 	말하는 점 조직이란게 이런것이다. 새로운 조직원은 말단 조직원을 통해서만 들어올 수 있고, 그 윗선은
 	알수가 없다.
 
@@ -372,7 +373,7 @@ commit이라는 형태이고 단방향 linked list로 저장된다. linked list�
 	#+begin_note
 	 #+CAPTION: linked list
 	 #+NAME: linked list
-	 [[./img/linkedlist.png]]
+	 [[../static/img/git/linkedlist.png]]
 	#+end_note
 	 #+begin_attention
 	 linked list는 자료구조다. 자료구조는 data를 추가하거나, 중간에 삽입하거나, 삭제하거나, 갱신하는
@@ -388,7 +389,7 @@ commit이라는 형태이고 단방향 linked list로 저장된다. linked list�
 	 #+begin_note
 	 #+CAPTION: new head list
 	 #+NAME: new list
-	 [[./img/newlist1.png]]
+	 [[../static/img/git/newlist1.png]]
 	 #+end_note
 	 #+begin_attention
 	 HEAD를 추가하면 문제가 생긴다. Node를 삽입할 때, 어떤 HEAD를 사용해야 하는가? 이런 문제가 생긴다.
@@ -397,22 +398,22 @@ commit이라는 형태이고 단방향 linked list로 저장된다. linked list�
 	#+begin_note
 	#+CAPTION: new head
 	#+NAME: new head
-	[[./img/newlist2.png]]
+	[[../static/img/git/newlist2.png]]
 
 	#+end_note
 	 #+begin_note
 	 최종 결과는 다음과 같은 모습이 된다.
 	 #+CAPTION: summary1
 	 #+NAME: summary1
-	 [[./img/list_sum1.png]]
+	 [[../static/img/git/list_sum1.png]]
 
 	 #+CAPTION: summary2
 	 #+NAME: summary2
-	 [[./img/list_sum2.png]]
+	 [[../static/img/git/list_sum2.png]]
 
 	 #+CAPTION: summary3
 	 #+NAME: summary3
-	 [[./img/list_sum3.png]]
+	 [[../static/img/git/list_sum3.png]]
 	 #+end_note
 *** 변형 Linked list의 고찰
 	 #+begin_attention
@@ -447,7 +448,7 @@ commit이라는 형태이고 단방향 linked list로 저장된다. linked list�
 	git은 변형 linked list를 사용한다고 했다. linked list에서 사용하는 term과 git에서 사용하는 term이 다르기 때문에 정리한다.
 	#+CAPTION: git term
 	#+NAME: git terms
-	[[./img/gitdrill3.png]]
+	[[../static/img/git/gitdrill3.png]]
 
 	commit을 만들면 이것을 list에 삽입을 해야 하는데, list에서 삽입은 HEAD가 Node를 가리키는 방식이다. Git에서 HEAD는 branch를 선택하는
 	용어로 쓰인다. 그리고 Branch가 list에서 HEAD에 대응되는 용어다. 즉 branch가 새로운 commit을 가리키면서 삽입이 되기 때문에 Branch는
@@ -488,7 +489,7 @@ commit이라는 형태이고 단방향 linked list로 저장된다. linked list�
 
 	#+CAPTION: git commit
 	#+NAME: git commit
-	[[./img/gitcommit.png]]
+	[[../static/img/git/gitcommit.png]]
 	 #+end_attention
 *** git commit --amend
 	 #+begin_attention
@@ -502,7 +503,7 @@ commit이라는 형태이고 단방향 linked list로 저장된다. linked list�
 
 	#+CAPTION: git commit --amend
 	#+NAME: git commit amend
-	[[./img/commitamend.png]]
+	[[../static/img/git/commitamend.png]]
 	 #+end_attention
 *** git branch
 	 #+begin_attention

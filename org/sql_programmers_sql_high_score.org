@@ -1,0 +1,151 @@
+:PROPERTIES:
+:ID:       E47B6B34-BB65-4F0D-9B4E-484E5BF6D1EA
+:mtime:    20230728212949 20230728201745 20230728173300 20230728162022 20230728142755 20230728115706 20230728104511 20230728001315 20230727171015
+:ctime:    20230727171015
+:END:
+#+title: [sql] programmers sql high score
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-07-27 Thu>
+#+DESCRIPTION: sql programmers 고득점 kit풀기
+#+HUGO_DRAFT: true
+
+* introduction
+여기에 쓰는것은 누군가가 나에게 sql좀 알려줘 하면 설명해주는 일종의
+pattern이다. 그냥 머리속의 생각이라서 대충 이정도는 머리속에 있고
+나머지는 검색해서 현업에서 일했다. 즉 아주 기초중의 기초라는
+것이다. 하지만, 머리속에 떠오르는 이런 생각이 없으면 개발이
+힘들어진다. 누구나 알고 있겠지만, sql은 set theory에 기반한다. 그리고
+logic에 대한 개념도 들어가 있다. 이 두 개념에 익숙하다면 그 개념으로
+이해해도 된다. 여튼 내가 알고 있는 개념과 새롭게 문제를 풀면서 설명이
+필요한것을 적기로 한다. 여기에서 dbms에 관한 sql은 생략한다. 예를 들면
+table을 만든다거나, use db로 db를 사용한다거나 이런것들은
+생략한다. from where group by having SOL만 다뤄보기로 한다. 그리고
+반드시 알아야 하는 집계함수들과 가장 중요한 join만 정리한다. 왜냐면
+내가 아는것은 이것밖에 없다. 나머지는 필요에 따라서 검색할 뿐이다.
+
+* 기본 select문
+select라는 건 말그대로 선택한다는 것이다. 무엇을 선택하는가? table의
+column을 선택한다. table로부터 column을 선택해서 table을
+만드는것이다. 일종의 함수다. 정의역도 table, 공역도
+table. select문에는 실행 순서가 있다. 보통은 이렇게 외운다.
+
+#+BEGIN_SRC text
+from(join) where group by having SOL[select(distint),order by, limit]
+#+END_SRC
+좀 유치하긴 해도, 이게 기본 실행 순서이고 각각의 keyword는 모든
+select문의 기초이기 때문이다.
+
+** from
+이제 정의역에 해당하는 table을 기술해보자. 정의역 table을 기술하는
+것은 from이다. 왠지 적절한 단어같다. 정의역 table로 부터 원하는
+column을 가져와서 table을 만드는 것은 다음과 같다.
+#+BEGIN_SRC text
+select a,b from Atable
+#+END_SRC
+이것은 이렇게 해석한다. db에 있는 Atable을 가져온다. 그리고 a,b column
+data를 꺼낸다. 이렇게 해석하는 이유는 from이 가장먼저 실행되기
+때문이다. 의외로 이것을 모르는 사람이 많이 있어서 적는다.
+
+** where
+table에서 a,b컬럼을 가져온다는 것은 data를 포함한 column을 다
+가져온다는 것이다. 여기서 특정 조건의 row data만을 가져올 수
+있다. 예를 들어보자.
+
+#+BEGIN_SRC text
+select district from local where district="busan"
+#+END_SRC
+
+where절의 형태를 보자. 선택된 column district의 row를 제한하기위해서
+busan과 같다는 조건을 걸었다. 선택된 column이 일종의 변수와 같은
+역할을 한다. 이것도 local이라는 table을 db에서 꺼낸다. 그 다음
+district가 busan인것만 추린 table에서 district column만 선택해서 꺼낸
+table을 return한다. 순서는 다음과 같다. =from => where => select=.
+
+** group by
+group by는 특정 column의 row data를 group별로 묶는다. 왜 묶을까?
+보통은 집계함수(mma cs)를 사용하려고 묶는다. row를 group으로
+묶는다는것을 생각해봐라. 예를 들어 sex라는 column을 group으로 묶으면
+어떻게 될까? male 아니면 female이다. 두개밖에 없다. 만일 region이라는
+지역으로 group by를 하면 지역별로 하나씩만 나오게 된다. 즉 row data를
+summary한 느낌이다. 대표값만을 뽑은 느낌이다. 이렇게 하는 이유는
+개개의 row data를 사용하지 않고, mma cs라는 집계함수를 사용하기
+위함이다. 이것을 명령어의 동작으로 이해하기 보단, mma cs라는
+집계함수를 사용하기 위해선 group by를 사용해야 한다는 관점에서
+바라봐야 한다. sex라는 항목을 본다면, 남자는 몇명인가? 키가 180이상인
+여자는 몇명인가? 남자의 평균 몸무게는? 가장 몸무게가 많이 나가는
+남자는? 이런 질문에 답을 하기 위해선 group by를 사용하는 것이다. 그럼
+이제 group by를 어떻게 사용하는지 확인해 보자.
+
+#+CAPTION: table
+#+NAME: table
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/sql1.png]]
+
+위와 같은 table이 있을때, 다음과 같은 명령을 내린다면 어떻게 될까?
+#+BEGIN_SRC text
+SELECT Country 
+FROM Customers
+group by Country
+#+END_SRC
+
+
+Customers라는 table을 db에서 가져온다. group by country는 Coutry라는
+필드의 data를 대상으로 grouping한다.   Country다. Country라는 column의
+data를 grouping하면 대표값만 남는다. 이상태에서 Country라는 Field를
+선택하면
+
+
+#+BEGIN_SRC text
+select name
+#+END_SRC
+
+
+
+** select
+*** distinct
+distinct는 중복을 피하는 keyword다. select절에 포함된다. select절을
+수행할 때 실행되는데, 굉장히 많이 쓰이는 편이다. 예를 들면,
+#+BEGIN_SRC text
+select distinct people_id from Atable where city='인천'
+#+END_SRC
+이런 식으로 사용된다. 이것이 의미하는 것은 Atable을 db에서
+가져온다. city가 인천인 table을 만든다. 이런 table에서 peple_ID가
+중복되지 않은 column을 꺼내서 return한다. select distinct가 하나의
+절이다.
+*** 집계함수
+mma cs로 외우자. min,max,average 그리고 count, sum이다. 가장 많이
+쓰이는 집계함수다.
+** order by
+
+** limit
+
+ 
+
+** 요약
+이것이 기본적인 select문의 구조다.
+
+* join
+하나의 table에서 column을 선택해서 table을 만드는게 아니라, 2개의
+table에서 column을 뽑아내서 만들 수는 없나? 그럴려면 2개의 table을
+기술해야 한다. 예를 들어서,
+#+BEGIN_SRC text
+select a,b from Atable, Btable
+#+END_SRC
+위와 같은 형태로 기술할 수 있다. 근데 a와 b는 Atable의 column인가?
+아니면 Btable의 column인가? a,b라는 column은 Atable에도 Btable에도
+있을 수 있다. 따라서 이런 표기법은 문제가 있다. 다음 표기법은 어떤가?
+
+#+BEGIN_SRC text
+select Atable.a,Btable.b from Atable, Btable
+#+END_SRC
+
+일견 그럴싸하다. a라는 column은 Atable에서 선택한다는 명확한
+의미전달이 가능하기 때문이다. 그럼 다음과 같은 상황을 살펴보자.
+
+#+BEGIN_SRC text
+select SeoulElementarySchoolTeachers.a, BusanPeopleTable.b from SeoulElementarySchoolTeachers, BusanPeopleTable
+#+END_SRC
+
+뭔가 불편하지 않은가? 그렇다. table 이름이 길면 불편하다.

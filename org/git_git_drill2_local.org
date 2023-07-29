@@ -1,0 +1,17 @@
+:PROPERTIES:
+:ID:       8924B5FA-DAA7-4888-AC44-E1228CEF890D
+:mtime:    20230727140121
+:ctime:    20230727140121
+:END:
+#+title: [git] git drill2 local
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-07-27 Thu>
+#+DESCRIPTION: 이전에 작성했던 git explained의 재작성
+#+HUGO_DRAFT: true
+
+* git drill(2단계 -local)
+git drill 1단계에서 repo와 commit을 만드는것을 해봤다. 이제 local에서
+branch와 merge같은 작업이 어떻게 이루어지는지 살펴봐야 한다. 그리고
+local에서 주로 사용하는 git 명령어들도 살펴볼 것이다.
+
