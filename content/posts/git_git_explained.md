@@ -825,7 +825,7 @@ master: git merge testing(branch명)
     3 way merge가 더 일반적인 경우고 conflict가 일어날 확률이 있는 merge다. 아래에서 충돌이 일어나는 경우를 설명한다. 충돌이
     일어나지 않는 경우는 merge commit이 자동으로 만들어지고, 충돌이 일어나면 수동으로 merge commit을 만드는 차이가 있다.
 
-    <a id="orge007a9b"></a>
+    <a id="org8e9ea90"></a>
 
     ![](./img/3way1.png)
     여기서 b.txt란 파일이 양쪽 linked list에 둘다 있다. 그럼 반드시 충돌이 일어나게 되어있다. 왜냐 어떤 linked list에 있는
@@ -1331,3 +1331,33 @@ merge를 통해서 release하고, major, minor로 release하는 개발과정을 
 현장에서 어떻게 사용되는지를 보여준다.
 
 </div>
+
+
+### git fork {#git-fork}
+
+협업을 위해서 fork를 사용할 수 있다. fork는 일반적으로 다른 사람이
+만든 repo에 contribute하기 위해서 많이 사용한다. github에서 사용하는
+명령어인데 협업을 할때도 fork를 사용한다.
+
+
+#### [step1] leader가 repo를 만든다. {#step1-leader가-repo를-만든다-dot}
+
+leader가 repo를 만들고 project code를 만들고, 코드를 upload한다.
+
+
+#### [step2] 팀원들이 fork한다. {#step2-팀원들이-fork한다-dot}
+
+이렇게 하면 github에 있는 repo와 똑같다고 보면 된다. clone해서
+수정하고 반영할 수 있다. 수정하고 github에 push한다.
+
+
+#### [step3] pull request한다. {#step3-pull-request한다-dot}
+
+pull request는 팀원들이 가지고 있는 repo의 commit은 leader의 repo와
+다르다. 왜냐면 코드를 수정하고 반영했기 때문이다. 그렇기 때문에 Pull
+request를 보낸다.
+
+
+#### [step4] code review를 하고 merge {#step4-code-review를-하고-merge}
+
+leader는 받은 요청에 대해서 code review를하고 merge여부를 결정한다.
