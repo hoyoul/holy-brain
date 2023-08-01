@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       0B3D6C25-FBDD-485F-8FF3-57726FA77256
-:mtime:    20230731081709 20230730215744 20230730191926 20230730161740 20230730151520 20230730125558 20230730115524
+:mtime:    20230731111844 20230731081709 20230730215744 20230730191926 20230730161740 20230730151520 20230730125558 20230730115524
 :ctime:    20230730115524
 :END:
 #+title: [elisp] korean lorem ipsum
@@ -110,7 +110,7 @@ for-loop로 생각하면 된다. concat과 dotimes를 사용하는 법은 다음
     (concat str1 str2 str3)
   #+END_SRC
   마지막엔 "입니다"를 추가했다.
-*** melpa에 등록하자.
+*** TODO melpa에 등록하자.
 melpa는 repo다. python에서 pip나 ruby의 gem, node의 npm들이 repo에서
 package를 가져오듯이 자시만의 repo가있다. program을 만들면 그런
 저장소에 저장할 수 있다. 등록 이름은 simplis absurdi korean textus:

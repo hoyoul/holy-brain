@@ -143,7 +143,7 @@ concat은 문자열을 합친다. 10번 반복될때마다 my-sentence변수가
 마지막엔 "입니다"를 추가했다.
 
 
-#### melpa에 등록하자. {#melpa에-등록하자-dot}
+#### <span class="org-todo todo TODO">TODO</span> melpa에 등록하자. {#melpa에-등록하자-dot}
 
 melpa는 repo다. python에서 pip나 ruby의 gem, node의 npm들이 repo에서
 package를 가져오듯이 자시만의 repo가있다. program을 만들면 그런
