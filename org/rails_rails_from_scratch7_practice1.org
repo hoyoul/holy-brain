@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       9EB37BC7-F8E9-4E05-B99F-9240CCD99A9C
-:mtime:    20230802115230
+:mtime:    20230804220215 20230802115230
 :ctime:    20230802115230
 :END:
 #+title: [rails] rails from scratch7-practice1
@@ -9,6 +9,7 @@
 #+DATE: <2023-08-02 Wed>
 #+DESCRIPTION: 옛날 자료 취합
 #+HUGO_DRAFT: true
+
 * 제일 먼저 할것은 hello world page
 #+begin_note
 rails를 설치하고, CI/CD를 위한 환경이 조성되었다면, hello world를
