@@ -1,0 +1,131 @@
+:PROPERTIES:
+:ID:       07488BC8-0B70-4392-A031-F165B5F8F1D9
+:mtime:    20230803215130 20230803204122 20230803180222
+:ctime:    20230803180222
+:END:
+#+title: [sql] programmers sql high score2
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-03 Thu>
+#+DESCRIPTION: programmers 문제 풀이
+#+HUGO_DRAFT: true
+* problem1: 강원도에 위치한 생상공장 목록 출력하기(level1)
+#+CAPTION: problem1-1
+#+NAME: problem1-1
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p1-1.png]]
+
+#+CAPTION: problem1-2
+#+NAME: problem1-2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p1-2.png]]
+* 풀이
+
+* problem2: 흉부외과 또는 일반 외과 의사 목록 출력하기(level1)
+#+CAPTION: problem2-1
+#+NAME: problem2-1
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p2-1.png]]
+#+CAPTION: problem2-2
+#+NAME: problem2-2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p2-2.png]]
+#+CAPTION: problem2-3
+#+NAME: problem2-2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p2-3.png]]
+
+* 풀이
+
+* problem3: 서울에 위치한 식당 목록 출력하기(level4)
+#+CAPTION: problem3-1
+#+NAME: problem3-1
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p3-1.png]]
+#+CAPTION: problem3-2
+#+NAME: problem3-2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p3-2.png]]
+#+CAPTION: problem3-3
+#+NAME: problem3-3
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p3-3.png]]
+#+CAPTION: problem3-4
+#+NAME: problem3-4
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p3-4.png]]
+
+* 풀이
+
+* problem4: 조건에 맞는 도서 리스트 출력하기(level1)
+#+CAPTION: problem4-1
+#+NAME: problem4-1
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p4-1.png]]
+
+#+CAPTION: problem4-2
+#+NAME: problem4-2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p4-2.png]]
+
+* 풀이
+
+* problem5: 과일로 만든 아이스크림 고르기(level1)
+* 풀이
+
+* problem6: 평균 일일 대여 요금 구하기(level1)
+* 풀이
+
+* problem7: 조건에 부합하는 중고거래 댓글 조회하기(level1)
+* 풀이
+
+* problem8: 인기 있는 아이스크림(level1)
+* 풀이
+
+* problem9: 3월에 태어난 여성 회원 목록 출력하기(level2)
+* 풀이
+
+
+* problem10: 12세 이하인 여자환자 목록 출력하기(level1)
+* 풀이
+
+* problem11: 모든 레코드 조회하기(level1)
+* 풀이
+
+* problem12: 재구매가 일어난 상품과 회원 리스트 구하기(level2)
+* 풀이
+
+* problem13: 역순 정렬하기(level1)
+* 풀이
+
+* problem14: 오프라인/온라인 판매 데이터 통합하기(level4)
+* 풀이
+
+* problem15: 아픈 동물 찾기(level1)
+* 풀이
+
+* problem16: 어린 동물 찾기(level1)
+* 풀이
+
+* problem17: 동물의 아이디와 이름(level1)
+* 풀이
+
+* problem18: 여러기준으로 정렬하기(level1)
+* 풀이
+
+* problem19: 상위 n개 레코드(level1)
+* 풀이
+
+* problem20: 조건에 맞는 회원수 구하기(level1)
+* 풀이

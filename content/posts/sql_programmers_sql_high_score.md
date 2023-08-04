@@ -219,6 +219,14 @@ group by를 하면 아메리카노밖에 없다.
 ### select {#select}
 
 
+#### 개요 {#개요}
+
+select는 출력할 column을 최종적으로 선택하고 선택된 column의 각 row
+데이터를 가공할 수 있다. if문을 사용해서 특정 row data는 출력하지
+않는다던가, distinct로 중복되지 않는 데이터만 출력하던가, 집계함수를
+적용해서 출력한다던지, 여기서 최종 data를 manipulation한다.
+
+
 #### distinct {#distinct}
 
 distinct는 중복을 피하는 keyword다. select절에 포함된다. select절을
@@ -248,14 +256,18 @@ order by는 내림차순에 해당하는 desc, 오름차순에 해당하는 asc�
 것을 말한다. 사용법은 단순하다.
 
 ```text
-order by 컬럼 desc, 컬럼 asc
+order by col1 desc, col2 asc
 ```
 
-이런 식으로 추가하면 된다. from으로 table을 가져오고 where로 row를
-제한하고, 여기서 having과 groupby로 group화해서 table을 만든다. 여기에
-select로 원하는 table을 return하기 위해서 column을 선택한다. 그런
-다음에, order by로 정렬을 한다. order by는 너무 단순해서 예를 들진
-않겠다.
+이런 식으로 추가하면 된다. 해석은 col1의 값으로 내림차순으로
+정렬한다. 만일 col1의 값이 같다면 col2의 값으로 오름차순으로 정렬한다.
+
+from으로 table을 가져오고 where로 row를 제한하고, 여기서 having과
+groupby로 group화해서 table을 만든다. 여기에 select로 원하는 table을
+return하기 위해서 column을 선택한다. 그런 다음에, order by로 정렬을
+한다. order by는 너무 단순해서 예를 들진 않겠다. 다만 숫자가 사용될 수
+있음에 유의하자. order by 1,2는 select col1, col2, col3일때 col1 과
+col2를 의미한다.
 
 
 ### limit {#limit}
@@ -311,8 +323,8 @@ select Atable.a,Btable.b from Atable join Btable
 select SeoulElementarySchoolTeachers.a, BusanPeopleTable.b from SeoulElementarySchoolTeachers join BusanPeopleTable
 ```
 
-뭔가 불편하지 않은가? 그렇다. table 이름이나 column name이 길면 as를
-사용한다.
+뭔가 불편하지 않은가? 그렇다. 이름이 너무 길다. sql에선 as를
+제공한다. table 이름이나 column name이 길때는 as를 사용한다.
 
 
 ### as 사용법 {#as-사용법}
@@ -347,7 +359,7 @@ select Seoul.a, Busan.a from SeoulElementarySchoolTeachesr as Seoul join BusanPe
 사용하듯이 얘기했지만, 실은 원래 하나인 table을 여러개로 쪼갠 후에
 연결해서 사용하는 것이다. 즉 원래 table을 쪼개서 여러개의 table로
 만드는 것이 시간상 위에 위치하게 된다. 이것은 정규화와 관련된 얘기라서
-나중에 join을 다시 설명할때 얘기 하기로 하자.
+나중에 join을 구체적으로 다시 설명할때 얘기 하기로 하자.
 
 
 ### join의 적용 {#join의-적용}
