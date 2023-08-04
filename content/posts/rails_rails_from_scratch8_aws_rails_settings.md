@@ -12,7 +12,7 @@ draft = true
 
 <a id="figure--aws1"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws1.png" caption="<span class=\"figure-number\">Figure 1: </span>aws1" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws1.png" caption="<span class=\"figure-number\">Figure 1: </span>aws1" width="800px" >}}
 
 
 ## AWS EC2와 Web Server Settings(ROR) {#aws-ec2와-web-server-settings--ror}
@@ -24,57 +24,57 @@ draft = true
 
 <a id="figure--aws2"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws2.png" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws2.png" width="800px" >}}
 
 1.  Launch instance 실행
 
 <a id="figure--launch instance를 만들자."></a>
 
-{{< figure src="../static/img/web_monitoriing/launchinstance.png" caption="<span class=\"figure-number\">Figure 2: </span>launch instance" width="1000px" height="150px" >}}
+{{< figure src="/img/web_monitoring/launchinstance.png" caption="<span class=\"figure-number\">Figure 2: </span>launch instance" width="1000px" height="150px" >}}
 
 1.  ubuntu 20.04를 선택
 
 <a id="figure--ubuntu20.04"></a>
 
-{{< figure src="../static/img/web_monitoriing/ubuntu.png" caption="<span class=\"figure-number\">Figure 3: </span>ubuntu 20.04 image 선택" width="1000px" >}}
+{{< figure src="/img/web_monitoring/ubuntu.png" caption="<span class=\"figure-number\">Figure 3: </span>ubuntu 20.04 image 선택" width="1000px" >}}
 
 3)instance를 설정한다.
 
 <a id="figure--instance설정"></a>
 
-{{< figure src="../static/img/web_monitoriing/instance.png" caption="<span class=\"figure-number\">Figure 4: </span>instance 설정" width="1000px" >}}
+{{< figure src="/img/web_monitoring/instance.png" caption="<span class=\"figure-number\">Figure 4: </span>instance 설정" width="1000px" >}}
 
 1.  storage(EBS)설정 (돈이 들어간다.)
 
 <a id="figure--ebs 설정한다."></a>
 
-{{< figure src="../static/img/web_monitoriing/default.png" caption="<span class=\"figure-number\">Figure 5: </span>ebs  설정한다." width="1000px" >}}
+{{< figure src="/img/web_monitoring/default.png" caption="<span class=\"figure-number\">Figure 5: </span>ebs  설정한다." width="1000px" >}}
 
 1.  보안관리자(Security Group)
 
 <a id="figure--http 추가"></a>
 
-{{< figure src="../static/img/web_monitoriing/network.png" caption="<span class=\"figure-number\">Figure 6: </span>http추가" width="1000px" >}}
+{{< figure src="/img/web_monitoring/network.png" caption="<span class=\"figure-number\">Figure 6: </span>http추가" width="1000px" >}}
 
 1.  key 생성
 
 <a id="figure--key"></a>
 
-{{< figure src="../static/img/web_monitoriing/key.png" caption="<span class=\"figure-number\">Figure 7: </span>key" width="1000px" >}}
+{{< figure src="/img/web_monitoring/key.png" caption="<span class=\"figure-number\">Figure 7: </span>key" width="1000px" >}}
 
 
 ### SSH 접속 settings {#ssh-접속-settings}
 
 <a id="figure--aws3"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws3.png" caption="<span class=\"figure-number\">Figure 8: </span>aws3" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws3.png" caption="<span class=\"figure-number\">Figure 8: </span>aws3" width="800px" >}}
 
 1.  받은 pem 키를 chmod 0400으로 설정한 후 ~/.ssh/ 에 넣는다.
 2.  ec2의 주소를 check한 후 ssh로 접속해보자.
 
 <a id="figure--ssh1"></a>
 
-{{< figure src="../static/img/web_monitoriing/ssh1.png" width="1000px" >}}
+{{< figure src="/img/web_monitoring/ssh1.png" width="1000px" >}}
 
 > ssh -i ~/.ssh/ec2_keys.pem ubuntu@주소
 
@@ -82,14 +82,14 @@ aws에서 설정할 때 얻은 ssh pem 키와 주소를 사용해서 ssh접속�
 
 <a id="figure--connectio"></a>
 
-{{< figure src="../static/img/web_monitoriing/connection.png" caption="<span class=\"figure-number\">Figure 9: </span>connection" width="1000px" >}}
+{{< figure src="/img/web_monitoring/connection.png" caption="<span class=\"figure-number\">Figure 9: </span>connection" width="1000px" >}}
 
 
 ### root password설정과 root로 ssh 연결 {#root-password설정과-root로-ssh-연결}
 
 <a id="figure--root pw 설정"></a>
 
-{{< figure src="../static/img/web_monitoriing/root_pw.png" caption="<span class=\"figure-number\">Figure 10: </span>root password설정" width="1000px" >}}
+{{< figure src="/img/web_monitoring/root_pw.png" caption="<span class=\"figure-number\">Figure 10: </span>root password설정" width="1000px" >}}
 
 1.  ssh 접속을 root로 할 수 있게 설정
     -   ubuntu로 접속한다.
@@ -107,27 +107,27 @@ aws에서 설정할 때 얻은 ssh pem 키와 주소를 사용해서 ssh접속�
 
 <a id="figure--ssh처리"></a>
 
-{{< figure src="../static/img/web_monitoriing/ssh처리.png" caption="<span class=\"figure-number\">Figure 11: </span>ssh 처리" width="1000px" >}}
+{{< figure src="/img/web_monitoring/ssh처리.png" caption="<span class=\"figure-number\">Figure 11: </span>ssh 처리" width="1000px" >}}
 
 1.  root로 접근이 되는 지 확인해 본다.
 
 <a id="figure--root ssh"></a>
 
-{{< figure src="../static/img/web_monitoriing/rootssh.png" caption="<span class=\"figure-number\">Figure 12: </span>root ssh" width="1000px" >}}
+{{< figure src="/img/web_monitoring/rootssh.png" caption="<span class=\"figure-number\">Figure 12: </span>root ssh" width="1000px" >}}
 
 
 ### deploy를 위한 계정 설정 {#deploy를-위한-계정-설정}
 
 <a id="figure--aws4"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws4.png" caption="<span class=\"figure-number\">Figure 13: </span>aws4" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws4.png" caption="<span class=\"figure-number\">Figure 13: </span>aws4" width="800px" >}}
 
 1.  ssh root로 접근
 2.  deploy계정 생성
 
-<a id="orgb1b91e5"></a>
+<a id="org04a99dd"></a>
 
-<img src="../static/img/web_monitoriing/deployaccount.png" alt="deployaccount.png" width="800px" />
+<img src="/img/web_monitoring/deployaccount.png" alt="deployaccount.png" width="800px" />
 나머지 설정도 해준다.
 
 1.  deploy계정에도 ubuntu, root처럼 ssh 접근이 가능하게 설정한다.
@@ -145,11 +145,11 @@ aws에서 설정할 때 얻은 ssh pem 키와 주소를 사용해서 ssh접속�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws5.png" caption="<span class=\"figure-number\">Figure 15: </span>루비 설치" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws5.png" caption="<span class=\"figure-number\">Figure 15: </span>루비 설치" width="800px" >}}
 
 <a id="figure--deploy2"></a>
 
-{{< figure src="../static/img/web_monitoriing/deploy2.png" caption="<span class=\"figure-number\">Figure 16: </span>deploy2" width="1000px" >}}
+{{< figure src="/img/web_monitoring/deploy2.png" caption="<span class=\"figure-number\">Figure 16: </span>deploy2" width="1000px" >}}
 
 <div class="note">
 
@@ -168,11 +168,11 @@ aws에서 설정할 때 얻은 ssh pem 키와 주소를 사용해서 ssh접속�
 
 <a id="figure--aws6"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws6.png" caption="<span class=\"figure-number\">Figure 17: </span>aws6" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws6.png" caption="<span class=\"figure-number\">Figure 17: </span>aws6" width="800px" >}}
 
 <a id="figure--deploy3"></a>
 
-{{< figure src="../static/img/web_monitoriing/deploy3.png" caption="<span class=\"figure-number\">Figure 18: </span>deploy3" width="1000px" >}}
+{{< figure src="/img/web_monitoring/deploy3.png" caption="<span class=\"figure-number\">Figure 18: </span>deploy3" width="1000px" >}}
 
 <div class="note">
 
@@ -190,11 +190,11 @@ aws에서 설정할 때 얻은 ssh pem 키와 주소를 사용해서 ssh접속�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws7.png" caption="<span class=\"figure-number\">Figure 19: </span>aws7" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws7.png" caption="<span class=\"figure-number\">Figure 19: </span>aws7" width="800px" >}}
 
 <a id="figure--bundler"></a>
 
-{{< figure src="../static/img/web_monitoriing/bundler.png" caption="<span class=\"figure-number\">Figure 20: </span>bundler" width="1000px" >}}
+{{< figure src="/img/web_monitoring/bundler.png" caption="<span class=\"figure-number\">Figure 20: </span>bundler" width="1000px" >}}
 
 bundler는 최신 버전을 설치해도 되지만, 오래된 gem들은 설치가 안되는 문제가 있어서 낮은 버전의 bundler를 실행해야 한다고 한다.
 
@@ -203,11 +203,11 @@ bundler는 최신 버전을 설치해도 되지만, 오래된 gem들은 설치�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws8.png" caption="<span class=\"figure-number\">Figure 21: </span>nginx &amp; passenger" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws8.png" caption="<span class=\"figure-number\">Figure 21: </span>nginx &amp; passenger" width="800px" >}}
 
 <a id="figure--nginx & passenger"></a>
 
-{{< figure src="../static/img/web_monitoriing/nginx.png" caption="<span class=\"figure-number\">Figure 22: </span>nginx&amp;passenger" width="800px" >}}
+{{< figure src="/img/web_monitoring/nginx.png" caption="<span class=\"figure-number\">Figure 22: </span>nginx&amp;passenger" width="800px" >}}
 
 <div class="note">
 
@@ -232,13 +232,13 @@ ps: /usr/share/nginx/modules-available/에는 사용가능한 module들이 있�
 
 <a id="figure--passenger config"></a>
 
-{{< figure src="../static/img/web_monitoriing/pruby.png" caption="<span class=\"figure-number\">Figure 23: </span>passenger config" width="800px" >}}
+{{< figure src="/img/web_monitoring/pruby.png" caption="<span class=\"figure-number\">Figure 23: </span>passenger config" width="800px" >}}
 
 passenger 설정을 끝맞쳤는데 전체적인 과정을 살펴볼 필요가 있다.
 
 <a id="figure--aws9"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws9.png" caption="<span class=\"figure-number\">Figure 24: </span>aws9" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws9.png" caption="<span class=\"figure-number\">Figure 24: </span>aws9" width="800px" >}}
 
 web server는 3개로 구성되어 있다.http server에 해당하는 nginx가 있고, 동적인 문서를 만들어내기 위한 WAS에 해당하는 Phusion Passenger가 있다. 그리고 동적인 page를 만들어내는 rails application이 있다.
 http server는 정적인 파일(test.html, test.png..)을 처리한다. 반면 was는 동적인 파일(test.php,test.asp,test.rb)에 대한 처리를 담당한다. 즉 예를 들어,  gateway단에서 nginx가 요청을 받고 동적인 파일인 경우, passenger에게 넘기게 된다.
@@ -254,13 +254,13 @@ Nginx를 설치하고 passenger는 module로 설치했다. 즉 모든것인 ngin
 
 <a id="figure--nginx"></a>
 
-{{< figure src="../static/img/web_monitoriing/nginx2.png" caption="<span class=\"figure-number\">Figure 25: </span>nginx" width="800px" >}}
+{{< figure src="/img/web_monitoring/nginx2.png" caption="<span class=\"figure-number\">Figure 25: </span>nginx" width="800px" >}}
 
 1.  nginx에 우리의 app을 연결한다.
 
 <a id="figure--nginx with myapp"></a>
 
-{{< figure src="../static/img/web_monitoriing/nginx3.png" caption="<span class=\"figure-number\">Figure 26: </span>nginx associates with my app" width="800px" >}}
+{{< figure src="/img/web_monitoring/nginx3.png" caption="<span class=\"figure-number\">Figure 26: </span>nginx associates with my app" width="800px" >}}
 
 기존에 연결된 default를 제거하고, 대신 myapp을 설정한다.
 그리고 다시 nginx를 다음과 같이 reload한다.
@@ -269,19 +269,19 @@ Nginx를 설치하고 passenger는 module로 설치했다. 즉 모든것인 ngin
 
 -   **Problem**: 예상치 못한 에러 발생
 
-<a id="orge15b765"></a>
+<a id="org4cb151e"></a>
 
-<img src="../static/img/web_monitoriing/nginx4.png" alt="nginx4.png" width="1000px" />
+<img src="/img/web_monitoring/nginx4.png" alt="nginx4.png" width="1000px" />
 journalctl -xe를 실행해서 에러의 원인이 뭔지 알고 싶었다. 다음과 같은 메시지가 있었다.
 
-<a id="org4050744"></a>
+<a id="orgde1616c"></a>
 
-<img src="../static/img/web_monitoriing/pam.png" alt="pam.png" width="800px" />
+<img src="/img/web_monitoring/pam.png" alt="pam.png" width="800px" />
 더 정확한 확인을 위해서 nginx의 log를 확인해 보자
 
-<a id="orgd7ceb54"></a>
+<a id="orgce44a3a"></a>
 
-<img src="../static/img/web_monitoriing/errorlog.png" alt="errorlog.png" width="1000px" />
+<img src="/img/web_monitoring/errorlog.png" alt="errorlog.png" width="1000px" />
 위에 보면 gzip_static_on에 문제가 있어 보인다.
 
 -   **solution**: server의 site-enabled/설정파일에서  gzip_static on으로 고쳤다.
@@ -291,7 +291,7 @@ journalctl -xe를 실행해서 에러의 원인이 뭔지 알고 싶었다. 다�
 
 <a id="figure--aws10"></a>
 
-{{< figure src="../static/img/web_monitoriing/aws10.png" caption="<span class=\"figure-number\">Figure 29: </span>aws10" width="800px" >}}
+{{< figure src="/img/web_monitoring/aws10.png" caption="<span class=\"figure-number\">Figure 29: </span>aws10" width="800px" >}}
 
 1.  우선 system을 업그레이드한다.
 
@@ -316,13 +316,13 @@ journalctl -xe를 실행해서 에러의 원인이 뭔지 알고 싶었다. 다�
 
 <a id="figure--mysql"></a>
 
-{{< figure src="../static/img/web_monitoriing/connection.png" caption="<span class=\"figure-number\">Figure 30: </span>mysql connection" width="400px" >}}
+{{< figure src="/img/web_monitoring/connection.png" caption="<span class=\"figure-number\">Figure 30: </span>mysql connection" width="400px" >}}
 
 1.  mariadb에서 database와 user를 만든다.
 
 <a id="figure--db & user"></a>
 
-{{< figure src="../static/img/web_monitoriing/db_create.png" caption="<span class=\"figure-number\">Figure 31: </span>db &amp; user" width="400px" >}}
+{{< figure src="/img/web_monitoring/db_create.png" caption="<span class=\"figure-number\">Figure 31: </span>db &amp; user" width="400px" >}}
 
 rails app도 myapp으로 했지만, db에서 database도 myapp으로 통일한다.
 aws에서 만든 계정인 deploy를 db에서도 접근할 수 있게 db에도 만든다.
@@ -341,7 +341,7 @@ mysql -uroot -p로 접속해서, myapp이라는 database를 만든다. 해당 da
 
 <a id="figure--capistrano"></a>
 
-{{< figure src="../static/img/web_monitoriing/capistranod.png" caption="<span class=\"figure-number\">Figure 32: </span>capistrano" width="800px" >}}
+{{< figure src="/img/web_monitoring/capistranod.png" caption="<span class=\"figure-number\">Figure 32: </span>capistrano" width="800px" >}}
 
 1.  aws(운영서버)에 접속할 pem이 있는지 확인. pem이 있다면 ssh로 접속한다.
 2.  git을 접속할수 있는지 확인(ssh permission), ssh key가 있다면 접속
@@ -369,9 +369,9 @@ bundle을 실행하면, gemfile에 기술된 gem들이 install된다. capistrano
 cap install을 실행하면, deploy를 위한 설정 파일(.rb)들을 만들어 낸다.
 만일 cap명령어를 실행하나 수행되지 않을 때는 rbenv rehash를 하고 다시 실행한다.
 
-<a id="org88b6e54"></a>
+<a id="org36998c6"></a>
 
- <img src="../static/img/web_monitoriing/rehash.png" alt="rehash.png" width="400px" />
+ <img src="/img/web_monitoring/rehash.png" alt="rehash.png" width="400px" />
 cap으로 만들어지는 파일은 capfile, deploy.rb, staging.rb,production.rb같은 deploy같은 설정파일들이다.
 
 
@@ -391,7 +391,7 @@ capfile은 배포설정 파일을 load할 뿐이다. 실제 설정은 load되는
 
 <a id="figure--deploy septtings"></a>
 
-{{< figure src="../static/img/web_monitoriing/deploysettings.png" caption="<span class=\"figure-number\">Figure 34: </span>deploy settings" width="800px" >}}
+{{< figure src="/img/web_monitoring/deploysettings.png" caption="<span class=\"figure-number\">Figure 34: </span>deploy settings" width="800px" >}}
 
 
 ### Capistrano Error {#capistrano-error}
@@ -399,18 +399,18 @@ capfile은 배포설정 파일을 load할 뿐이다. 실제 설정은 load되는
 
 #### Thread error {#thread-error}
 
-<a id="orgcef8662"></a>
+<a id="org9a9553f"></a>
 
-<img src="../static/img/web_monitoriing/cap1.png" alt="cap1.png" width="800px" />
+<img src="/img/web_monitoring/cap1.png" alt="cap1.png" width="800px" />
 =&gt; cap은 aws에 접근할 수 있는 pem키가 없다면, cap이 진행되지 않고 바로 exception이 난다.
 ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pem을 수행한다.
 
 
 #### git:check error-permission denied error {#git-check-error-permission-denied-error}
 
-<a id="orgc797114"></a>
+<a id="orgbb98bbf"></a>
 
-<img src="../static/img/web_monitoriing/cap2.png" alt="cap2.png" width="800px" />
+<img src="/img/web_monitoring/cap2.png" alt="cap2.png" width="800px" />
    =&gt; ssh-add ~/.ssh/id-rsa 를 해보면 될 수 있다.
 
 
@@ -423,9 +423,9 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 =&gt; [arm64-darwin-20] but your local platform is x86_64-linux
 
-<a id="org5e6bb1c"></a>
+<a id="orga9a238f"></a>
 
-   <img src="../static/img/web_monitoriing/deploy_local.png" alt="deploy_local.png" width="800px" />
+   <img src="/img/web_monitoring/deploy_local.png" alt="deploy_local.png" width="800px" />
 이것의 원인은 capistrano처리중에 github에서 rails app source를 가지고 와서 배포서버의 release폴더에 넣은 후에 bundler를 실행할 때 발생되는 에러같다. bundler가 Gemfile.lock을 실행하는 데 Platform이 local에서는 arm64-darwin-20은 정해져 있으나, x86-64-linux가 기술되어 있지 않다는 것이다. local에서는 bundle lock --add-platform x86_64-linux를 실행해서 변경할 수 있다고 하는데, Gemfile.lock에서 x86_64-linux가 추가된 것을 확인할 수 있다. 그런데 실제 배포server의 release폴더에 있는 Gemfile.lock에는 반영되지 않은 것을 볼 수 있다. 이것의 원인을 찾고자, 배포 서버에 접속해서 log를 살펴보았다.
 
 > less /home/deploy/myapp/current/log/production.log
@@ -434,7 +434,7 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 <a id="figure--deploy 배포 서버"></a>
 
-{{< figure src="../static/img/web_monitoriing/deploy_server.png" caption="<span class=\"figure-number\">Figure 38: </span>deploy 배포서버" width="800px" >}}
+{{< figure src="/img/web_monitoring/deploy_server.png" caption="<span class=\"figure-number\">Figure 38: </span>deploy 배포서버" width="800px" >}}
 
 이 에러는 nokogiri를 설치할때 발생되는 에러같다. gorails에서 처음에 nokogiri를 설정할 때 처리해야 할 것들이 적힌곳이 있다. 그것과 관련이 있는지는 모르겠다. Gemfile과 Gemfile.lock은 구조가 많이 다르다. Gemfile에는 몇개의 package만 적혀 있고, Gemfile.lock에는 Gemfile에서 명시했던 package를 구성하는 세부 package들이 버전별로 나열되어 있는거 같다. nokogiri란 package는 Gemfile에는 기술 되어 있지 않으나, Gemfile.lock에는 기술되어 있는거 같다.
 
@@ -444,30 +444,30 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 ### bundler:install, Failed to build gem native extension {#bundler-install-failed-to-build-gem-native-extension}
 
-<a id="orgcf569c4"></a>
+<a id="org6f80f9a"></a>
 
-<img src="../static/img/web_monitoriing/bundle_error.png" alt="bundle_error.png" width="800px" />
+<img src="/img/web_monitoring/bundle_error.png" alt="bundle_error.png" width="800px" />
 이 문제에 대한 처리 과정은 다음과 같다.
 
-<a id="org1459b78"></a>
+<a id="org00752a0"></a>
 
-<img src="../static/img/web_monitoriing/extsolution1.png" alt="extsolution1.png" width="800px" />\\
+<img src="/img/web_monitoring/extsolution1.png" alt="extsolution1.png" width="800px" />\\
 
 우선 위에 적힌대로 해보자. 그런데, 근본적인
 문제는 mysql2 설치 문제다. 배포 서버에 들어가서 mysql2를 설치해 보자.
 동일한 에러가 발생한다.
 
-<a id="org3e9b285"></a>
+<a id="org858f740"></a>
 
-<img src="../static/img/web_monitoriing/mysql2error.png" alt="mysql2error.png" width="800px" />
+<img src="/img/web_monitoring/mysql2error.png" alt="mysql2error.png" width="800px" />
 =&gt; 해결 :  sudo apt-get install libmysqlclient-dev를 설치하니 무사히 설치되었다.
 
 
 ### deploy:migrating error {#deploy-migrating-error}
 
-<a id="org5b313a3"></a>
+<a id="orgdd2fcea"></a>
 
-   <img src="../static/img/web_monitoriing/mysqlhosterror.png" alt="mysqlhosterror.png" width="800px" />
+   <img src="/img/web_monitoring/mysqlhosterror.png" alt="mysqlhosterror.png" width="800px" />
 우선 mysql관련 설정환경을 배포 서버의 .rbenv-vars파일에 기술했었는데, 그게 문제일 수도 있다는 생각이 들었다. capistrano가 db에 접속을 해야 하는데, 접속은 URL로 하고, URL정보는 .rbenv-vars파일에 기술했기 때문이다. 그래서 다음과 같이 .rbenv-vars파일을 변경해 보았다.
 
 > vi _home/deploy/myapp_.rbenv-vars
@@ -477,13 +477,13 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 <a id="figure--mysqlsocketerror"></a>
 
-{{< figure src="../static/img/web_monitoriing/mysqlsocketerror.png" caption="<span class=\"figure-number\">Figure 43: </span>mysqlsocketerror" width="800px" >}}
+{{< figure src="/img/web_monitoring/mysqlsocketerror.png" caption="<span class=\"figure-number\">Figure 43: </span>mysqlsocketerror" width="800px" >}}
 
 배포 서버에서 mysql이 제대로 설치 되지 않은거 같다. 그래서 gorails에서 나온대로 다시 mysql-server, myssql-client, libmysqlclient-dev를 설치해본다. mysql-server 설치에 문제가 있음을 알 수 있었다. 여튼 설치를 끝내고,  sudo mysql_secure_installation를 실행하면 다음과 같은 에러가 있음을 알 수 있다.
 
 <a id="figure--secure-connection"></a>
 
-{{< figure src="../static/img/web_monitoriing/secure_connection.png" caption="<span class=\"figure-number\">Figure 44: </span>secure_connection" width="800px" >}}
+{{< figure src="/img/web_monitoring/secure_connection.png" caption="<span class=\"figure-number\">Figure 44: </span>secure_connection" width="800px" >}}
 
 
 ### db관련 에러가 계속해서 나올경우 {#db관련-에러가-계속해서-나올경우}
@@ -509,7 +509,7 @@ mysql과 mariadb를 모두 삭제한다.
 
 <a id="figure--socket error"></a>
 
-{{< figure src="../static/img/web_monitoriing/socketerror2.png" caption="<span class=\"figure-number\">Figure 45: </span>socket error" width="800px" >}}
+{{< figure src="/img/web_monitoring/socketerror2.png" caption="<span class=\"figure-number\">Figure 45: </span>socket error" width="800px" >}}
 
 이것은 /tmp/mysql.sock을 찾을 수 없다는 건데, database.yml에 보면 socket정보가 tmp/mysql.sock에 있기 때문이다. 실제 배포 서버는 socket이 저장되는 위치는 var/run/mysqld/mysql.sock이다. 그래서 이것을 바꿔줘야 하는데, database.yml에서 바꿔준 다음 반드시 github에 반영해야 한다. 왜냐면 capistrano는 github의 내용을 바탕으로 실행하기 때문이다.
 
@@ -517,7 +517,7 @@ mysql과 mariadb를 모두 삭제한다.
 
 <a id="figure--socket"></a>
 
-{{< figure src="../static/img/web_monitoriing/socketerror3.png" caption="<span class=\"figure-number\">Figure 46: </span>socket" width="800px" >}}
+{{< figure src="/img/web_monitoring/socketerror3.png" caption="<span class=\"figure-number\">Figure 46: </span>socket" width="800px" >}}
 
 db에 deploy계정이 있는지 확인해 본다. 또한 myapp이란 db가 있는지도 확인해 본다.
 myapp이란 db에 deploy가 접근할수 있도록 권한을 부여해야 하기 때문이다.
@@ -538,17 +538,17 @@ myapp이란 db에 deploy가 접근할수 있도록 권한을 부여해야 하기
 
 ### cap production deploy 하자마자 sshkit error {#cap-production-deploy-하자마자-sshkit-error}
 
-<a id="orgd461389"></a>
+<a id="org03af524"></a>
 
-<img src="../static/img/web_monitoriing/capproduction.png" alt="capproduction.png" width="800px" />
+<img src="/img/web_monitoring/capproduction.png" alt="capproduction.png" width="800px" />
 이것은 aws pem키가 등록되지 않았다는 에러다. ssh-add ~/.ssh/company-ec2-keys.pem로 등록을 해야 한다.
 
 
 ### git permission error {#git-permission-error}
 
-<a id="org865ffc7"></a>
+<a id="orgb807995"></a>
 
-<img src="../static/img/web_monitoriing/gitcheckerror.png" alt="gitcheckerror.png" width="800px" />
+<img src="/img/web_monitoring/gitcheckerror.png" alt="gitcheckerror.png" width="800px" />
 이것은 git ssh public key가 등록되지 않았다는 에러다. ssh-add ~/.ssh/id_rsa로 등록을 해준다.
 
 
@@ -556,29 +556,29 @@ myapp이란 db에 deploy가 접근할수 있도록 권한을 부여해야 하기
 
 <a id="figure--passenger error"></a>
 
-{{< figure src="../static/img/web_monitoriing/passengererror0.png" caption="<span class=\"figure-number\">Figure 49: </span>passenger error" width="800px" >}}
+{{< figure src="/img/web_monitoring/passengererror0.png" caption="<span class=\"figure-number\">Figure 49: </span>passenger error" width="800px" >}}
 
 cap production deploy했을때 별다른 이상없이 통과되어 해당 web server로 접속하면, 위와 같은 에러가 발생되는데, 다시 cap production deploy 진행과정을 보니 다음과 같은 문제가 있었다.
 
 <a id="figure--passenger error"></a>
 
-{{< figure src="../static/img/web_monitoriing/passengererror.png" caption="<span class=\"figure-number\">Figure 50: </span>passenger error" width="800px" >}}
+{{< figure src="/img/web_monitoring/passengererror.png" caption="<span class=\"figure-number\">Figure 50: </span>passenger error" width="800px" >}}
 
 <a id="figure--passenger3"></a>
 
-{{< figure src="../static/img/web_monitoriing/passengererror3.png" caption="<span class=\"figure-number\">Figure 51: </span>passenger error3" width="800px" >}}
+{{< figure src="/img/web_monitoring/passengererror3.png" caption="<span class=\"figure-number\">Figure 51: </span>passenger error3" width="800px" >}}
 
 그래서 /va/log/nginx/error.log로 가서 어떤 에러인지 확인해봤다.
 
 <a id="figure--passenger log error"></a>
 
-{{< figure src="../static/img/web_monitoriing/passengerlog.png" caption="<span class=\"figure-number\">Figure 52: </span>passenger error" width="800px" >}}
+{{< figure src="/img/web_monitoring/passengerlog.png" caption="<span class=\"figure-number\">Figure 52: </span>passenger error" width="800px" >}}
 
 근데 찝찝했던건, gorails에서 세팅을 제대로 하지 않았다는 것이다.
 
 <a id="figure--go rails settings"></a>
 
-{{< figure src="../static/img/web_monitoriing/gorails.png" caption="<span class=\"figure-number\">Figure 53: </span>gorails settings" width="800px" >}}
+{{< figure src="/img/web_monitoring/gorails.png" caption="<span class=\"figure-number\">Figure 53: </span>gorails settings" width="800px" >}}
 
 =&gt; 해결
 배포서버로 접속해서 myapp/.rbenv-vars파일을 만들고 그냥 복사 붙여넣기 했다.
@@ -590,45 +590,45 @@ cap production deploy했을때 별다른 이상없이 통과되어 해당 web se
 
 이렇게 하면 credentials를 읽을 수 있다.
 
-<a id="org979b546"></a>
+<a id="org99b01a3"></a>
 
-<img src="../static/img/web_monitoriing/credentials.png" alt="credentials.png" width="800px" />
+<img src="/img/web_monitoring/credentials.png" alt="credentials.png" width="800px" />
 그리고 secret_key_base를 볼 수 있다. 이것을 복사해서 운영서버로 가서 myapp/.rbenv-vars에 붙여넣기 한다.
 
 이렇게 하고 cap production deploy를 실행해보자.
 
 <a id="figure--result1"></a>
 
-{{< figure src="../static/img/web_monitoriing/final_deploy1.png" caption="<span class=\"figure-number\">Figure 55: </span>result1" width="800px" >}}
+{{< figure src="/img/web_monitoring/final_deploy1.png" caption="<span class=\"figure-number\">Figure 55: </span>result1" width="800px" >}}
 
 <a id="figure--result2"></a>
 
-{{< figure src="../static/img/web_monitoriing/final_deploy2.png" caption="<span class=\"figure-number\">Figure 56: </span>result2" width="800px" >}}
+{{< figure src="/img/web_monitoring/final_deploy2.png" caption="<span class=\"figure-number\">Figure 56: </span>result2" width="800px" >}}
 
 <a id="figure--result3"></a>
 
-{{< figure src="../static/img/web_monitoriing/final_deploy3.png" caption="<span class=\"figure-number\">Figure 57: </span>result3" width="800px" >}}
+{{< figure src="/img/web_monitoring/final_deploy3.png" caption="<span class=\"figure-number\">Figure 57: </span>result3" width="800px" >}}
 
 <a id="figure--result4"></a>
 
-{{< figure src="../static/img/web_monitoriing/final_deploy4.png" caption="<span class=\"figure-number\">Figure 58: </span>result4" width="800px" >}}
+{{< figure src="/img/web_monitoring/final_deploy4.png" caption="<span class=\"figure-number\">Figure 58: </span>result4" width="800px" >}}
 
 <a id="figure--result5"></a>
 
-{{< figure src="../static/img/web_monitoriing/final_deploy5.png" caption="<span class=\"figure-number\">Figure 59: </span>result5" width="800px" >}}
+{{< figure src="/img/web_monitoring/final_deploy5.png" caption="<span class=\"figure-number\">Figure 59: </span>result5" width="800px" >}}
 
 이제 <http://3.34.94.252> 에 접속해 보자.
 다음과 같은 에러가 나온다.
 
 <a id="figure--error"></a>
 
-{{< figure src="../static/img/web_monitoriing/error.png" caption="<span class=\"figure-number\">Figure 60: </span>error" width="800px" >}}
+{{< figure src="/img/web_monitoring/error.png" caption="<span class=\"figure-number\">Figure 60: </span>error" width="800px" >}}
 
 에러의 원인을 찾아보기 위해서 운영서버의 /myapp/log/production.log를 보면 다음과 같은 에러가 있다.
 
 <a id="figure--routing error"></a>
 
-{{< figure src="../static/img/web_monitoriing/routingerror.png" caption="<span class=\"figure-number\">Figure 61: </span>routing error" width="800px" >}}
+{{< figure src="/img/web_monitoring/routingerror.png" caption="<span class=\"figure-number\">Figure 61: </span>routing error" width="800px" >}}
 
 routing error다. 이것은 routes.rb에 처리하는 루틴이 없기 때문이다. 그런데 local에서는 routes.rb에 처리 루틴이 없는데도 welcome page가 보인다.  무슨 차이가 있는지 모르겠지만, capistrano를 통해서 운영서버에 배포하고 연결을 시도 했을 때는 welcome page가 보이지 않는다.  그래서 간단히 hello world를 출력하는 코드를 만들어봤다.
 
@@ -651,7 +651,7 @@ routing error다. 이것은 routes.rb에 처리하는 루틴이 없기 때문이
 
 <a id="figure--hello"></a>
 
-{{< figure src="../static/img/web_monitoriing/hello .png" caption="<span class=\"figure-number\">Figure 62: </span>hello" width="800px" >}}
+{{< figure src="/img/web_monitoring/hello .png" caption="<span class=\"figure-number\">Figure 62: </span>hello" width="800px" >}}
 
 
 ### nginx 설정과  log위치 [ubuntu] {#nginx-설정과-log위치-ubuntu}
@@ -681,31 +681,31 @@ AWS을 사용하면 root계정으로 login하면 안된다. IAM 사용자 계정
 
 <a id="figure--IAM1"></a>
 
-{{< figure src="../static/img/web_monitoriing/root1.png" caption="<span class=\"figure-number\">Figure 63: </span>ROOT" width="800px" >}}
+{{< figure src="/img/web_monitoring/root1.png" caption="<span class=\"figure-number\">Figure 63: </span>ROOT" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/root2.png" caption="<span class=\"figure-number\">Figure 64: </span>ROOT2" width="800px" >}}
+{{< figure src="/img/web_monitoring/root2.png" caption="<span class=\"figure-number\">Figure 64: </span>ROOT2" width="800px" >}}
 
 <a id="figure--root3"></a>
 
-{{< figure src="../static/img/web_monitoriing/root3.png" caption="<span class=\"figure-number\">Figure 65: </span>root3" width="800px" >}}
+{{< figure src="/img/web_monitoring/root3.png" caption="<span class=\"figure-number\">Figure 65: </span>root3" width="800px" >}}
 
 <a id="figure--root4"></a>
 
-{{< figure src="../static/img/web_monitoriing/root4.png" caption="<span class=\"figure-number\">Figure 66: </span>root4" width="800px" >}}
+{{< figure src="/img/web_monitoring/root4.png" caption="<span class=\"figure-number\">Figure 66: </span>root4" width="800px" >}}
 
 설치할 MFA기기는 가상기기이고, 내 경우, google authenticator를 설치했다.
 중간에 보면 **show QR code** 가 있다. 이것을 누르면 QR code가 보인다. 그리고 code1과 code2를 기입한다.
 
-<a id="orga62a837"></a>
+<a id="org62969cf"></a>
 
-<img src="../static/img/web_monitoriing/root5.png" alt="root5.png" width="800px" />
+<img src="/img/web_monitoring/root5.png" alt="root5.png" width="800px" />
 이제 root에 대한 MFA처리가 끝났다.
 
-<a id="org33258cb"></a>
+<a id="org7ac9a3a"></a>
 
-<img src="../static/img/web_monitoriing/root6.png" alt="root6.png" width="800px" />
+<img src="/img/web_monitoring/root6.png" alt="root6.png" width="800px" />
 앞으로 root login은 mfa로 묻는다.
 이제 IAM계정을 만든다.
 
@@ -716,35 +716,35 @@ AWS을 사용하면 root계정으로 login하면 안된다. IAM 사용자 계정
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/user1.png" caption="<span class=\"figure-number\">Figure 69: </span>user 생성" width="800px" >}}
+{{< figure src="/img/web_monitoring/user1.png" caption="<span class=\"figure-number\">Figure 69: </span>user 생성" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/user2.png" caption="<span class=\"figure-number\">Figure 70: </span>user 생성" width="800px" >}}
+{{< figure src="/img/web_monitoring/user2.png" caption="<span class=\"figure-number\">Figure 70: </span>user 생성" width="800px" >}}
 
 위와같이 user id를 만들고, pw를 설정한다. pw를 임시로 설정하고, 실제 login시 사용자가 설정하도록 한다.
 
-<a id="org68a5bb8"></a>
+<a id="orgd27b730"></a>
 
-<img src="../static/img/web_monitoriing/user3.png" alt="user3.png" width="800px" />
+<img src="/img/web_monitoring/user3.png" alt="user3.png" width="800px" />
 정책을 선택한다.
 
 <a id="figure--user 생성"></a>
 
-{{< figure src="../static/img/web_monitoriing/user4.png" caption="<span class=\"figure-number\">Figure 72: </span>user 생성" width="800px" >}}
+{{< figure src="/img/web_monitoring/user4.png" caption="<span class=\"figure-number\">Figure 72: </span>user 생성" width="800px" >}}
 
-<a id="org0f22a77"></a>
+<a id="orge3673a2"></a>
 
-<img src="../static/img/web_monitoriing/user5.png" alt="user5.png" width="800px" />
+<img src="/img/web_monitoring/user5.png" alt="user5.png" width="800px" />
 tag 생성은 넘어간다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/user6.png" caption="<span class=\"figure-number\">Figure 74: </span>user 생성" width="800px" >}}
+{{< figure src="/img/web_monitoring/user6.png" caption="<span class=\"figure-number\">Figure 74: </span>user 생성" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/user7.png" caption="<span class=\"figure-number\">Figure 75: </span>user 생성" width="800px" >}}
+{{< figure src="/img/web_monitoring/user7.png" caption="<span class=\"figure-number\">Figure 75: </span>user 생성" width="800px" >}}
 
 이제 user가 만들어졌고, login할 수 있는 account ID 가 만들어져서 접속할 수 있게 되었다.
 위에 account id를 로긴할 때 입력하면 된다.
@@ -752,82 +752,82 @@ tag 생성은 넘어간다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/user8.png" caption="<span class=\"figure-number\">Figure 76: </span>user 생성" width="800px" >}}
+{{< figure src="/img/web_monitoring/user8.png" caption="<span class=\"figure-number\">Figure 76: </span>user 생성" width="800px" >}}
 
 
 ## AWS 고정 IP 설정 {#aws-고정-ip-설정}
 
 <a id="figure--eip"></a>
 
-{{< figure src="../static/img/web_monitoriing/eip.png" caption="<span class=\"figure-number\">Figure 77: </span>elastic IP" width="800px" >}}
+{{< figure src="/img/web_monitoring/eip.png" caption="<span class=\"figure-number\">Figure 77: </span>elastic IP" width="800px" >}}
 
 AWS에서 ec2를 만들면, public ip이지만, 이것은 고정된 ip가 아니다. DHCP처럼 ec2는 재시작할 때 마다, ip를 갱신하는 과정을 거친다. 이를 고정 IP로 하기 위해선, elastic ip를 사용한다.  설정방법은 그냥 default로 진행하는건데, 이렇게 할때, option은 어떻게 설정해야 하는가? 하는 문젠데 설명이 나와 있진 않다.
 
 <a id="figure--eip2"></a>
 
-{{< figure src="../static/img/web_monitoriing/eip2.png" caption="<span class=\"figure-number\">Figure 78: </span>eip2" width="800px" >}}
+{{< figure src="/img/web_monitoring/eip2.png" caption="<span class=\"figure-number\">Figure 78: </span>eip2" width="800px" >}}
 
 위와 같이 해주면 elastic ip가 만들어졌다. 만들어진 elastic ip를 ec2와 연결하는 과정이 필요하다.
 다시 ec2 dashboard로 접속한다. 거기서 elastic ip를 선택한다.
 
 <a id="figure--eip3"></a>
 
-{{< figure src="../static/img/web_monitoriing/eip3.png" caption="<span class=\"figure-number\">Figure 79: </span>eip3" width="800px" >}}
+{{< figure src="/img/web_monitoring/eip3.png" caption="<span class=\"figure-number\">Figure 79: </span>eip3" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/eip4.png" caption="<span class=\"figure-number\">Figure 80: </span>eip4" width="800px" >}}
+{{< figure src="/img/web_monitoring/eip4.png" caption="<span class=\"figure-number\">Figure 80: </span>eip4" width="800px" >}}
 
 여기까지 하면 elastic ip를 만들고 ec2와 연동하는 것까지 완료가 되었다. 이제 확인해 보자.
 ec2 dashboard로 접근한다. 그 다음 ec2 instance의 정보를 보자.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/eip5.png" caption="<span class=\"figure-number\">Figure 81: </span>eip5" width="800px" >}}
+{{< figure src="/img/web_monitoring/eip5.png" caption="<span class=\"figure-number\">Figure 81: </span>eip5" width="800px" >}}
 
 
 ## AWS DNS 주소 할당과정 {#aws-dns-주소-할당과정}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/Route_53_1.png" caption="<span class=\"figure-number\">Figure 82: </span>route53" width="800px" >}}
+{{< figure src="/img/web_monitoring/Route_53_1.png" caption="<span class=\"figure-number\">Figure 82: </span>route53" width="800px" >}}
 
-<a id="orgcbaf16c"></a>
+<a id="orgb4413d2"></a>
 
-<img src="../static/img/web_monitoriing/route_53_1-2.png" alt="route_53_1-2.png" width="800px" />
+<img src="/img/web_monitoring/route_53_1-2.png" alt="route_53_1-2.png" width="800px" />
 위에서 원하는 domain주소를 구입할 수 있다. 가격은 그렇게 비싸지 않은듯 하다.
 domain주소를 구입한 후에 등록을 한다.
 
 <a id="figure--route53"></a>
 
-{{< figure src="../static/img/web_monitoriing/route_53_1-3.png" caption="<span class=\"figure-number\">Figure 84: </span>route53" width="800px" >}}
+{{< figure src="/img/web_monitoring/route_53_1-3.png" caption="<span class=\"figure-number\">Figure 84: </span>route53" width="800px" >}}
 
 <a id="figure--route53"></a>
 
-{{< figure src="../static/img/web_monitoriing/route_53_1-4.png" caption="<span class=\"figure-number\">Figure 85: </span>route53" width="800px" >}}
+{{< figure src="/img/web_monitoring/route_53_1-4.png" caption="<span class=\"figure-number\">Figure 85: </span>route53" width="800px" >}}
 
 <a id="figure--route53"></a>
 
-{{< figure src="../static/img/web_monitoriing/route_53_1-5.png" caption="<span class=\"figure-number\">Figure 86: </span>route53" width="800px" >}}
+{{< figure src="/img/web_monitoring/route_53_1-5.png" caption="<span class=\"figure-number\">Figure 86: </span>route53" width="800px" >}}
 
 
 ## AWS domain주소와 EC2연동 {#aws-domain주소와-ec2연동}
 
 <a id="figure--route53"></a>
 
-{{< figure src="../static/img/web_monitoriing/route_53_2.png" caption="<span class=\"figure-number\">Figure 87: </span>route53" width="800px" >}}
+{{< figure src="/img/web_monitoring/route_53_2.png" caption="<span class=\"figure-number\">Figure 87: </span>route53" width="800px" >}}
 
 <a id="figure--route53"></a>
 
-{{< figure src="../static/img/web_monitoriing/route_53_2-1.png" caption="<span class=\"figure-number\">Figure 88: </span>route53" width="800px" >}}
+{{< figure src="/img/web_monitoring/route_53_2-1.png" caption="<span class=\"figure-number\">Figure 88: </span>route53" width="800px" >}}
 
 <a id="figure--route53"></a>
 
-{{< figure src="../static/img/web_monitoriing/route_53_3.png" caption="<span class=\"figure-number\">Figure 89: </span>route 53" width="800px" >}}
+{{< figure src="/img/web_monitoring/route_53_3.png" caption="<span class=\"figure-number\">Figure 89: </span>route 53" width="800px" >}}
 
 <a id="figure--route53"></a>
 
-{{< figure src="../static/img/web_monitoriing/route_53_4.png" caption="<span class=\"figure-number\">Figure 90: </span>route 53" width="800px" >}}
+{{< figure src="/img/web_monitoring/route_53_4.png" caption="<span class=\"figure-number\">Figure 90: </span>route 53" width="800px" >}}
 
 
 ## AWS domain주소에서 www추가 방법 {#aws-domain주소에서-www추가-방법}
@@ -842,20 +842,20 @@ domain주소를 구입한 후에 등록을 한다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/www1.png" caption="<span class=\"figure-number\">Figure 91: </span>www1" width="800px" >}}
+{{< figure src="/img/web_monitoring/www1.png" caption="<span class=\"figure-number\">Figure 91: </span>www1" width="800px" >}}
 
 -   host zone을 click해서 이동한다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/www2.png" caption="<span class=\"figure-number\">Figure 92: </span>www2" width="800px" >}}
+{{< figure src="/img/web_monitoring/www2.png" caption="<span class=\"figure-number\">Figure 92: </span>www2" width="800px" >}}
 
 -   alias만드는 법
 -   create record를 선택하고 아래 그림처럼 처리하면 된다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/www3.png" caption="<span class=\"figure-number\">Figure 93: </span>www3" width="800px" >}}
+{{< figure src="/img/web_monitoring/www3.png" caption="<span class=\"figure-number\">Figure 93: </span>www3" width="800px" >}}
 
 
 ## AWS EC2 instance type변경 {#aws-ec2-instance-type변경}
@@ -884,7 +884,7 @@ t2는 cpu core2개와 memory가 2Gbits를 사용한다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/ec2_1.png" caption="<span class=\"figure-number\">Figure 94: </span>ec2_1" width="800px" >}}
+{{< figure src="/img/web_monitoring/ec2_1.png" caption="<span class=\"figure-number\">Figure 94: </span>ec2_1" width="800px" >}}
 
 <div class="note">
 
@@ -894,7 +894,7 @@ t2는 cpu core2개와 memory가 2Gbits를 사용한다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/ec2_2.png" caption="<span class=\"figure-number\">Figure 95: </span>ec2_2" width="800px" >}}
+{{< figure src="/img/web_monitoring/ec2_2.png" caption="<span class=\"figure-number\">Figure 95: </span>ec2_2" width="800px" >}}
 
 <div class="note">
 
@@ -921,11 +921,11 @@ EBS의 볼륨 확장과,  파일 시스템 확장이 필요하다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/ec2_3.png" caption="<span class=\"figure-number\">Figure 96: </span>ec2_3" width="800px" >}}
+{{< figure src="/img/web_monitoring/ec2_3.png" caption="<span class=\"figure-number\">Figure 96: </span>ec2_3" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/ec2_4.png" caption="<span class=\"figure-number\">Figure 97: </span>ec2_4" width="800px" >}}
+{{< figure src="/img/web_monitoring/ec2_4.png" caption="<span class=\"figure-number\">Figure 97: </span>ec2_4" width="800px" >}}
 
 
 ### EBS 파일 시스템 확장 {#ebs-파일-시스템-확장}
@@ -942,11 +942,11 @@ ebs볼륨을 확장한 이후에, 다시 system을 킨다. 그리고 ssh 접속�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/ec2_5.png" caption="<span class=\"figure-number\">Figure 98: </span>ec5" width="800px" >}}
+{{< figure src="/img/web_monitoring/ec2_5.png" caption="<span class=\"figure-number\">Figure 98: </span>ec5" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/ec2_6.png" caption="<span class=\"figure-number\">Figure 99: </span>ec2_6" width="800px" >}}
+{{< figure src="/img/web_monitoring/ec2_6.png" caption="<span class=\"figure-number\">Figure 99: </span>ec2_6" width="800px" >}}
 
 
 ## AWS https 접근처리 {#aws-https-접근처리}
@@ -978,11 +978,11 @@ https로 접근하기 위해서는 SSL 인증서를 발급받아야 한다. 인�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cname1.png" caption="<span class=\"figure-number\">Figure 100: </span>cname1" width="800px" >}}
+{{< figure src="/img/web_monitoring/cname1.png" caption="<span class=\"figure-number\">Figure 100: </span>cname1" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/a_record.png" caption="<span class=\"figure-number\">Figure 101: </span>a record" width="800px" >}}
+{{< figure src="/img/web_monitoring/a_record.png" caption="<span class=\"figure-number\">Figure 101: </span>a record" width="800px" >}}
 
 <div class="note">
 
@@ -993,59 +993,59 @@ https로 접근하기 위해서는 SSL 인증서를 발급받아야 한다. 인�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert1.png" caption="<span class=\"figure-number\">Figure 102: </span>certificate manager" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert1.png" caption="<span class=\"figure-number\">Figure 102: </span>certificate manager" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert2.png" caption="<span class=\"figure-number\">Figure 103: </span>certificate manager2" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert2.png" caption="<span class=\"figure-number\">Figure 103: </span>certificate manager2" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert3.png" caption="<span class=\"figure-number\">Figure 104: </span>certificate manager3" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert3.png" caption="<span class=\"figure-number\">Figure 104: </span>certificate manager3" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert4.png" caption="<span class=\"figure-number\">Figure 105: </span>certificate manager4" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert4.png" caption="<span class=\"figure-number\">Figure 105: </span>certificate manager4" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert5.png" caption="<span class=\"figure-number\">Figure 106: </span>certificate manager5" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert5.png" caption="<span class=\"figure-number\">Figure 106: </span>certificate manager5" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert6.png" caption="<span class=\"figure-number\">Figure 107: </span>certificate manager" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert6.png" caption="<span class=\"figure-number\">Figure 107: </span>certificate manager" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert7.png" caption="<span class=\"figure-number\">Figure 108: </span>cert7" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert7.png" caption="<span class=\"figure-number\">Figure 108: </span>cert7" width="800px" >}}
 
 -   domain name의 smartwatercare를 click하면, route53에 CNAME을 추가하는게 보일 것이다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert8.png" caption="<span class=\"figure-number\">Figure 109: </span>cert8" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert8.png" caption="<span class=\"figure-number\">Figure 109: </span>cert8" width="800px" >}}
 
 -   cname을 route53에 추가한다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert9.png" caption="<span class=\"figure-number\">Figure 110: </span>cert9" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert9.png" caption="<span class=\"figure-number\">Figure 110: </span>cert9" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert10.png" caption="<span class=\"figure-number\">Figure 111: </span>cert10" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert10.png" caption="<span class=\"figure-number\">Figure 111: </span>cert10" width="800px" >}}
 
 -   certificate manager로 들어가서 인증서가 발급되었는지 확인해 보자.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert11.png" caption="<span class=\"figure-number\">Figure 112: </span>cert11" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert11.png" caption="<span class=\"figure-number\">Figure 112: </span>cert11" width="800px" >}}
 
 -   route53으로 들어가서 cname이 추가되었는지 확인해보자.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/cert12.png" caption="<span class=\"figure-number\">Figure 113: </span>cert12" width="800px" >}}
+{{< figure src="/img/web_monitoring/cert12.png" caption="<span class=\"figure-number\">Figure 113: </span>cert12" width="800px" >}}
 
 
 ### load balancer 설정 {#load-balancer-설정}
@@ -1054,25 +1054,25 @@ https로 접근하기 위해서는 SSL 인증서를 발급받아야 한다. 인�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load1.png" caption="<span class=\"figure-number\">Figure 114: </span>load balancer1" width="800px" >}}
+{{< figure src="/img/web_monitoring/load1.png" caption="<span class=\"figure-number\">Figure 114: </span>load balancer1" width="800px" >}}
 
 -   load balancer를 설정한다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load2.png" caption="<span class=\"figure-number\">Figure 115: </span>load_balance2" width="800px" >}}
+{{< figure src="/img/web_monitoring/load2.png" caption="<span class=\"figure-number\">Figure 115: </span>load_balance2" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load3.png" caption="<span class=\"figure-number\">Figure 116: </span>load_balance3" width="800px" >}}
+{{< figure src="/img/web_monitoring/load3.png" caption="<span class=\"figure-number\">Figure 116: </span>load_balance3" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load4.png" caption="<span class=\"figure-number\">Figure 117: </span>load_balance4" width="800px" >}}
+{{< figure src="/img/web_monitoring/load4.png" caption="<span class=\"figure-number\">Figure 117: </span>load_balance4" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load5.png" caption="<span class=\"figure-number\">Figure 118: </span>load_balance5" width="800px" >}}
+{{< figure src="/img/web_monitoring/load5.png" caption="<span class=\"figure-number\">Figure 118: </span>load_balance5" width="800px" >}}
 
 -   error 발생
 
@@ -1087,23 +1087,23 @@ https로 접근하기 위해서는 SSL 인증서를 발급받아야 한다. 인�
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load6.png" caption="<span class=\"figure-number\">Figure 119: </span>load6" width="800px" >}}
+{{< figure src="/img/web_monitoring/load6.png" caption="<span class=\"figure-number\">Figure 119: </span>load6" width="800px" >}}
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load7.png" caption="<span class=\"figure-number\">Figure 120: </span>load7" width="800px" >}}
+{{< figure src="/img/web_monitoring/load7.png" caption="<span class=\"figure-number\">Figure 120: </span>load7" width="800px" >}}
 
 -   health check는 그냥 넘어갔다. 그리고  register target이라는 화면이 나왔다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load8.png" caption="<span class=\"figure-number\">Figure 121: </span>load8" width="800px" >}}
+{{< figure src="/img/web_monitoring/load8.png" caption="<span class=\"figure-number\">Figure 121: </span>load8" width="800px" >}}
 
 -   target group설정이 끝났다. 이제 다시 load balancer를 만드는 과정으로 다시 돌아간다. 지금 만든 target group으로 설정한다. 그러면 load balancer가 다 만들어졌다. 그런데 접속이 안된다. 443포트를 열었다.
 
 <a id="figure--"></a>
 
-{{< figure src="../static/img/web_monitoriing/load9.png" caption="<span class=\"figure-number\">Figure 122: </span>load9" width="800px" >}}
+{{< figure src="/img/web_monitoring/load9.png" caption="<span class=\"figure-number\">Figure 122: </span>load9" width="800px" >}}
 
 -   route53에서 A record를 삭제 해보았다.
 -   그래도 안된다.
