@@ -1,0 +1,400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-08-04 Fri 12:23 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[sql] programmers sql high score2</title>
+<meta name="author" content="holy" />
+<meta name="description" content="programmers 문제 풀이" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://fniessen.github.io/org-html-themes/src/readtheorg_theme/js/readtheorg.js"></script>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">[sql] programmers sql high score2</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3429f03">problem1: 강원도에 위치한 생상공장 목록 출력하기(level1)</a></li>
+<li><a href="#orgc9e7479">풀이</a>
+<ul>
+<li><a href="#org94c897e">from FOOD_FACTORY</a></li>
+<li><a href="#org642a77c">select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory</a></li>
+<li><a href="#org5a3068c">select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory order by FACTORY_ID asc</a></li>
+</ul>
+</li>
+<li><a href="#orgbe9effe">problem2: 흉부외과 또는 일반 외과 의사 목록 출력하기(level1)</a></li>
+<li><a href="#org22d8db8">풀이</a></li>
+<li><a href="#orgfeede9f">problem3: 서울에 위치한 식당 목록 출력하기(level4)</a></li>
+<li><a href="#org5484be9">풀이</a></li>
+<li><a href="#orgd8900e5">problem4: 조건에 맞는 도서 리스트 출력하기(level1)</a></li>
+<li><a href="#org9675913">풀이</a></li>
+<li><a href="#orgcecdb20">problem5: 과일로 만든 아이스크림 고르기(level1)</a></li>
+<li><a href="#org2c4633a">풀이</a></li>
+<li><a href="#orgd7d1d43">problem6: 평균 일일 대여 요금 구하기(level1)</a></li>
+<li><a href="#orga99c84e">풀이</a></li>
+<li><a href="#orgdb82bcb">problem7: 조건에 부합하는 중고거래 댓글 조회하기(level1)</a></li>
+<li><a href="#orgd9d7e08">풀이</a></li>
+<li><a href="#org31c39d1">problem8: 인기 있는 아이스크림(level1)</a></li>
+<li><a href="#org7c6fa9b">풀이</a></li>
+<li><a href="#org2ca86bf">problem9: 3월에 태어난 여성 회원 목록 출력하기(level2)</a></li>
+<li><a href="#org219a9c2">풀이</a></li>
+<li><a href="#orge0422b9">problem10: 12세 이하인 여자환자 목록 출력하기(level1)</a></li>
+<li><a href="#org6cf4334">풀이</a></li>
+<li><a href="#org24982a5">problem11: 모든 레코드 조회하기(level1)</a></li>
+<li><a href="#org9c3f65f">풀이</a></li>
+<li><a href="#org03497fa">problem12: 재구매가 일어난 상품과 회원 리스트 구하기(level2)</a></li>
+<li><a href="#org04427bc">풀이</a></li>
+<li><a href="#org82e6db5">problem13: 역순 정렬하기(level1)</a></li>
+<li><a href="#orgb6cb072">풀이</a></li>
+<li><a href="#orgbed0b13">problem14: 오프라인/온라인 판매 데이터 통합하기(level4)</a></li>
+<li><a href="#orgb86c531">풀이</a></li>
+<li><a href="#org88bc216">problem15: 아픈 동물 찾기(level1)</a></li>
+<li><a href="#org33416ef">풀이</a></li>
+<li><a href="#orgd4dce6f">problem16: 어린 동물 찾기(level1)</a></li>
+<li><a href="#org926cdd4">풀이</a></li>
+<li><a href="#orgecc02e2">problem17: 동물의 아이디와 이름(level1)</a></li>
+<li><a href="#org002b463">풀이</a></li>
+<li><a href="#orge2ceb40">problem18: 여러기준으로 정렬하기(level1)</a></li>
+<li><a href="#org55c9346">풀이</a></li>
+<li><a href="#orgb01188e">problem19: 상위 n개 레코드(level1)</a></li>
+<li><a href="#org0e45b86">풀이</a></li>
+<li><a href="#org906cfcf">problem20: 조건에 맞는 회원수 구하기(level1)</a></li>
+<li><a href="#org32577f4">풀이</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org3429f03" class="outline-2">
+<h2 id="org3429f03">problem1: 강원도에 위치한 생상공장 목록 출력하기(level1)</h2>
+<div class="outline-text-2" id="text-org3429f03">
+
+<div id="org47502d1" class="figure">
+<p><img src="../static/img/sql/p1-1.png" alt="p1-1.png" width="600px" />
+</p>
+</div>
+
+<div id="org114019d" class="figure">
+<p><img src="../static/img/sql/p1-2.png" alt="p1-2.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc9e7479" class="outline-2">
+<h2 id="orgc9e7479">풀이</h2>
+<div class="outline-text-2" id="text-orgc9e7479">
+<p>
+푸는 순서는 다음과 같다. from부터 푼다. 이문제에서 어려울것은 없다. 
+</p>
+</div>
+<div id="outline-container-org94c897e" class="outline-3">
+<h3 id="org94c897e">from FOOD_FACTORY</h3>
+</div>
+<div id="outline-container-org642a77c" class="outline-3">
+<h3 id="org642a77c">select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory</h3>
+</div>
+<div id="outline-container-org5a3068c" class="outline-3">
+<h3 id="org5a3068c">select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory order by FACTORY_ID asc</h3>
+</div>
+</div>
+
+<div id="outline-container-orgbe9effe" class="outline-2">
+<h2 id="orgbe9effe">problem2: 흉부외과 또는 일반 외과 의사 목록 출력하기(level1)</h2>
+<div class="outline-text-2" id="text-orgbe9effe">
+
+<div id="orgf183905" class="figure">
+<p><img src="../static/img/sql/p2-1.png" alt="p2-1.png" width="600px" />
+</p>
+</div>
+
+<div id="org1ee001e" class="figure">
+<p><img src="../static/img/sql/p2-2.png" alt="p2-2.png" width="600px" />
+</p>
+</div>
+
+<div id="orgb7408af" class="figure">
+<p><img src="../static/img/sql/p2-3.png" alt="p2-3.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org22d8db8" class="outline-2">
+<h2 id="org22d8db8">풀이</h2>
+</div>
+
+<div id="outline-container-orgfeede9f" class="outline-2">
+<h2 id="orgfeede9f">problem3: 서울에 위치한 식당 목록 출력하기(level4)</h2>
+<div class="outline-text-2" id="text-orgfeede9f">
+
+<div id="org11f7529" class="figure">
+<p><img src="../static/img/sql/p3-1.png" alt="p3-1.png" width="600px" />
+</p>
+</div>
+
+<div id="org7549a70" class="figure">
+<p><img src="../static/img/sql/p3-2.png" alt="p3-2.png" width="600px" />
+</p>
+</div>
+
+<div id="org5e9d7a9" class="figure">
+<p><img src="../static/img/sql/p3-3.png" alt="p3-3.png" width="600px" />
+</p>
+</div>
+
+<div id="org0fa89b9" class="figure">
+<p><img src="../static/img/sql/p3-4.png" alt="p3-4.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org5484be9" class="outline-2">
+<h2 id="org5484be9">풀이</h2>
+</div>
+
+<div id="outline-container-orgd8900e5" class="outline-2">
+<h2 id="orgd8900e5">problem4: 조건에 맞는 도서 리스트 출력하기(level1)</h2>
+<div class="outline-text-2" id="text-orgd8900e5">
+
+<div id="orgc61abac" class="figure">
+<p><img src="../static/img/sql/p4-1.png" alt="p4-1.png" width="600px" />
+</p>
+</div>
+
+<div id="org2c74da2" class="figure">
+<p><img src="../static/img/sql/p4-2.png" alt="p4-2.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9675913" class="outline-2">
+<h2 id="org9675913">풀이</h2>
+</div>
+
+<div id="outline-container-orgcecdb20" class="outline-2">
+<h2 id="orgcecdb20">problem5: 과일로 만든 아이스크림 고르기(level1)</h2>
+<div class="outline-text-2" id="text-orgcecdb20">
+
+<div id="org6c9ebdf" class="figure">
+<p><img src="../static/img/sql/p5-1.png" alt="p5-1.png" width="600px" />
+</p>
+</div>
+
+
+<div id="org12a43b2" class="figure">
+<p><img src="../static/img/sql/p5-2.png" alt="p5-2.png" width="600px" />
+</p>
+</div>
+
+
+<div id="orgfe38c2d" class="figure">
+<p><img src="../static/img/sql/p5-3.png" alt="p5-3.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org2c4633a" class="outline-2">
+<h2 id="org2c4633a">풀이</h2>
+</div>
+
+<div id="outline-container-orgd7d1d43" class="outline-2">
+<h2 id="orgd7d1d43">problem6: 평균 일일 대여 요금 구하기(level1)</h2>
+<div class="outline-text-2" id="text-orgd7d1d43">
+
+<div id="org5111cd8" class="figure">
+<p><img src="../static/img/sql/p6-1.png" alt="p6-1.png" width="600px" />
+</p>
+</div>
+
+<div id="orgc9b1be7" class="figure">
+<p><img src="../static/img/sql/p6-2.png" alt="p6-2.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga99c84e" class="outline-2">
+<h2 id="orga99c84e">풀이</h2>
+</div>
+
+<div id="outline-container-orgdb82bcb" class="outline-2">
+<h2 id="orgdb82bcb">problem7: 조건에 부합하는 중고거래 댓글 조회하기(level1)</h2>
+<div class="outline-text-2" id="text-orgdb82bcb">
+
+<div id="org8fdb722" class="figure">
+<p><img src="../static/img/sql/p7-1.png" alt="p7-1.png" width="600px" />
+</p>
+</div>
+
+<div id="org6f414f4" class="figure">
+<p><img src="../static/img/sql/p7-2.png" alt="p7-2.png" width="600px" />
+</p>
+</div>
+
+<div id="org780da98" class="figure">
+<p><img src="../static/img/sql/p7-3.png" alt="p7-3.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd9d7e08" class="outline-2">
+<h2 id="orgd9d7e08">풀이</h2>
+</div>
+
+<div id="outline-container-org31c39d1" class="outline-2">
+<h2 id="org31c39d1">problem8: 인기 있는 아이스크림(level1)</h2>
+<div class="outline-text-2" id="text-org31c39d1">
+
+<div id="org6cfbf30" class="figure">
+<p><img src="../static/img/sql/p8-1.png" alt="p8-1.png" width="600px" />
+</p>
+</div>
+
+<div id="orgeff208f" class="figure">
+<p><img src="../static/img/sql/p8-2.png" alt="p8-2.png" width="600px" />
+</p>
+</div>
+
+<div id="orgae3f565" class="figure">
+<p><img src="../static/img/sql/p8-3.png" alt="p8-3.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7c6fa9b" class="outline-2">
+<h2 id="org7c6fa9b">풀이</h2>
+</div>
+
+<div id="outline-container-org2ca86bf" class="outline-2">
+<h2 id="org2ca86bf">problem9: 3월에 태어난 여성 회원 목록 출력하기(level2)</h2>
+<div class="outline-text-2" id="text-org2ca86bf">
+
+<div id="org6cd1721" class="figure">
+<p><img src="../static/img/sql/p9-1.png" alt="p9-1.png" width="600px" />
+</p>
+</div>
+
+<div id="orgef6f756" class="figure">
+<p><img src="../static/img/sql/p9-2.png" alt="p9-2.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org219a9c2" class="outline-2">
+<h2 id="org219a9c2">풀이</h2>
+</div>
+
+
+<div id="outline-container-orge0422b9" class="outline-2">
+<h2 id="orge0422b9">problem10: 12세 이하인 여자환자 목록 출력하기(level1)</h2>
+<div class="outline-text-2" id="text-orge0422b9">
+
+<div id="org9b666f0" class="figure">
+<p><img src="../static/img/sql/p10-1.png" alt="p10-1.png" width="600px" />
+</p>
+</div>
+
+
+<div id="org8ff1cf0" class="figure">
+<p><img src="../static/img/sql/p10-2.png" alt="p10-2.png" width="600px" />
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org6cf4334" class="outline-2">
+<h2 id="org6cf4334">풀이</h2>
+</div>
+
+<div id="outline-container-org24982a5" class="outline-2">
+<h2 id="org24982a5">problem11: 모든 레코드 조회하기(level1)</h2>
+</div>
+<div id="outline-container-org9c3f65f" class="outline-2">
+<h2 id="org9c3f65f">풀이</h2>
+</div>
+
+<div id="outline-container-org03497fa" class="outline-2">
+<h2 id="org03497fa">problem12: 재구매가 일어난 상품과 회원 리스트 구하기(level2)</h2>
+</div>
+<div id="outline-container-org04427bc" class="outline-2">
+<h2 id="org04427bc">풀이</h2>
+</div>
+
+<div id="outline-container-org82e6db5" class="outline-2">
+<h2 id="org82e6db5">problem13: 역순 정렬하기(level1)</h2>
+</div>
+<div id="outline-container-orgb6cb072" class="outline-2">
+<h2 id="orgb6cb072">풀이</h2>
+</div>
+
+<div id="outline-container-orgbed0b13" class="outline-2">
+<h2 id="orgbed0b13">problem14: 오프라인/온라인 판매 데이터 통합하기(level4)</h2>
+</div>
+<div id="outline-container-orgb86c531" class="outline-2">
+<h2 id="orgb86c531">풀이</h2>
+</div>
+
+<div id="outline-container-org88bc216" class="outline-2">
+<h2 id="org88bc216">problem15: 아픈 동물 찾기(level1)</h2>
+</div>
+<div id="outline-container-org33416ef" class="outline-2">
+<h2 id="org33416ef">풀이</h2>
+</div>
+
+<div id="outline-container-orgd4dce6f" class="outline-2">
+<h2 id="orgd4dce6f">problem16: 어린 동물 찾기(level1)</h2>
+</div>
+<div id="outline-container-org926cdd4" class="outline-2">
+<h2 id="org926cdd4">풀이</h2>
+</div>
+
+<div id="outline-container-orgecc02e2" class="outline-2">
+<h2 id="orgecc02e2">problem17: 동물의 아이디와 이름(level1)</h2>
+</div>
+<div id="outline-container-org002b463" class="outline-2">
+<h2 id="org002b463">풀이</h2>
+</div>
+
+<div id="outline-container-orge2ceb40" class="outline-2">
+<h2 id="orge2ceb40">problem18: 여러기준으로 정렬하기(level1)</h2>
+</div>
+<div id="outline-container-org55c9346" class="outline-2">
+<h2 id="org55c9346">풀이</h2>
+</div>
+
+<div id="outline-container-orgb01188e" class="outline-2">
+<h2 id="orgb01188e">problem19: 상위 n개 레코드(level1)</h2>
+</div>
+<div id="outline-container-org0e45b86" class="outline-2">
+<h2 id="org0e45b86">풀이</h2>
+</div>
+
+<div id="outline-container-org906cfcf" class="outline-2">
+<h2 id="org906cfcf">problem20: 조건에 맞는 회원수 구하기(level1)</h2>
+</div>
+<div id="outline-container-org32577f4" class="outline-2">
+<h2 id="org32577f4">풀이</h2>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-08-03 Thu 00:00</p>
+<p class="author">Author: holy</p>
+<p class="date">Created: 2023-08-04 Fri 12:23</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

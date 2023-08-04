@@ -1,0 +1,25 @@
+:PROPERTIES:
+:ID:       B3BE12BE-FF2B-463D-9E2F-806743DC82D1
+:mtime:    20230804201145 20230804145054 20230804102324
+:ctime:    20230804102324
+:END:
+#+title: [emacs] database sql usage
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-04 Fri>
+#+DESCRIPTION: 
+#+HUGO_DRAFT: true
+* db client
+사람들은 db client로 GUI db client를 사용한다. 내경우 phpadmin에서
+querious로 바꿨탔다. querious3에서 querious4로 upgrade로 추가 비용을
+내라고 해서, upgrade는 안한 상태다. emacs에서 db client를 사용하는
+방법을 기술해 보자.
+* db server 설치
+** mariadb
+#+BEGIN_SRC text
+brew install mariadb
+#+END_SRC
+** postgres
+#+BEGIN_SRC emacs-lisp
+brew install postgres
+#+END_SRC

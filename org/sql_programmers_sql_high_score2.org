@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       07488BC8-0B70-4392-A031-F165B5F8F1D9
-:mtime:    20230804092528 20230803215130 20230803204122 20230803180222
+:mtime:    20230804131955 20230804121556 20230804092528 20230803215130 20230803204122 20230803180222
 :ctime:    20230803180222
 :END:
 #+title: [sql] programmers sql high score2
@@ -9,12 +9,13 @@
 #+DATE: <2023-08-03 Thu>
 #+DESCRIPTION: programmers 문제 풀이
 #+HUGO_DRAFT: true
+
 * problem1: 강원도에 위치한 생상공장 목록 출력하기(level1)
 #+attr_html: :width 600px
-#+attr_latex: :width 100px
+#+attr_latex: :width 400px
 [[../static/img/sql/p1-1.png]]
 #+attr_html: :width 600px
-#+attr_latex: :width 100px
+#+attr_latex: :width 400px
 [[../static/img/sql/p1-2.png]]
 * 풀이
 푸는 순서는 다음과 같다. from부터 푼다. 이문제에서 어려울것은 없다. 
@@ -23,7 +24,6 @@
 ** select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory order by FACTORY_ID asc
 
 * problem2: 흉부외과 또는 일반 외과 의사 목록 출력하기(level1)
-
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p2-1.png]]
@@ -35,25 +35,41 @@
 [[../static/img/sql/p2-3.png]]
 
 * 풀이
+하나의 table에서 조회하는 것이다. 풀이 순서는 동일하다. from부터
+시작한다.
+
+** from DOCTOR 
+=> table을 db에서 가져온다. 이건 어렵지않다.
+** where MCDP_CD like "CS" or  MCDP_CD like "GS"
+=> cs 나 gs인 경우, 이것도 어렵지 않다. 수치의 경우 MCDP_CD =3 이런
+식으로 나타낸다면 문자열의 경우 like를 사용한다. 정도? like는
+문자열에서 사용되는데 좋은점이 있다. date like "2002-03%" 라는 식의
+wildcard를 사용할 수 있다는 것이다.
+ #+begin_important
+ where절에서 and or not in을 사용할 수 있다. 위에서 or대신에 =in= 을
+ 사용할 수 있다.  where MCDP_CD in ('cs', 'gs')
+ #+end_important
+** select DR_NAME, DR_ID,MCDP_CD, DATE_FORMAT(HIRE_YMD,"%Y-%m-%d") as DATE_FORMAT
+=> select에선 column값을 선택만 하는게 아니라 출력형태를 바꿔서 출력할
+수 있다. 이 때, 함수를 사용하는데, 대표적인게 mmacs라는 집계함수와
+date format()이다.
+** [최종]
+#+BEGIN_SRC mysql
+select DR_NAME, DR_ID,MCDP_CD, DATE_FORMAT(HIRE_YMD,"%Y-%m-%d") as DATE_FORMAT
+#+END_SRC
+
+
 
 * problem3: 서울에 위치한 식당 목록 출력하기(level4)
-#+CAPTION: problem3-1
-#+NAME: problem3-1
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p3-1.png]]
-#+CAPTION: problem3-2
-#+NAME: problem3-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p3-2.png]]
-#+CAPTION: problem3-3
-#+NAME: problem3-3
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p3-3.png]]
-#+CAPTION: problem3-4
-#+NAME: problem3-4
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p3-4.png]]
@@ -61,14 +77,9 @@
 * 풀이
 
 * problem4: 조건에 맞는 도서 리스트 출력하기(level1)
-#+CAPTION: problem4-1
-#+NAME: problem4-1
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p4-1.png]]
-
-#+CAPTION: problem4-2
-#+NAME: problem4-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p4-2.png]]
@@ -76,20 +87,14 @@
 * 풀이
 
 * problem5: 과일로 만든 아이스크림 고르기(level1)
-#+CAPTION: problem5-1
-#+NAME: problem5-1
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p5-1.png]]
 
-#+CAPTION: problem5-2
-#+NAME: problem5-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p5-2.png]]
 
-#+CAPTION: problem5-3
-#+NAME: problem5-3
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p5-3.png]]
@@ -97,14 +102,9 @@
 * 풀이
 
 * problem6: 평균 일일 대여 요금 구하기(level1)
-#+CAPTION: problem6-1
-#+NAME: problem6-1
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p6-1.png]]
-
-#+CAPTION: problem6-2
-#+NAME: problem6-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p6-2.png]]
@@ -112,22 +112,50 @@
 * 풀이
 
 * problem7: 조건에 부합하는 중고거래 댓글 조회하기(level1)
-#+CAPTION: problem7-1
-#+NAME: problem7-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p7-1.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p7-2.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p7-3.png]]
 
 * 풀이
 
 * problem8: 인기 있는 아이스크림(level1)
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p8-1.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p8-2.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p8-3.png]]
+
 * 풀이
 
 * problem9: 3월에 태어난 여성 회원 목록 출력하기(level2)
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p9-1.png]]
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p9-2.png]]
+
 * 풀이
 
 
 * problem10: 12세 이하인 여자환자 목록 출력하기(level1)
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p10-1.png]]
+
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/sql/p10-2.png]]
 * 풀이
 
 * problem11: 모든 레코드 조회하기(level1)

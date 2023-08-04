@@ -38,24 +38,53 @@ draft = true
 
 ## 풀이 {#풀이}
 
+하나의 table에서 조회하는 것이다. 풀이 순서는 동일하다. from부터
+시작한다.
+
+
+### from DOCTOR {#from-doctor}
+
+=&gt; table을 db에서 가져온다. 이건 어렵지않다.
+
+
+### where MCDP_CD like "CS" or  MCDP_CD like "GS" {#where-mcdp-cd-like-cs-or-mcdp-cd-like-gs}
+
+=&gt; cs 나 gs인 경우, 이것도 어렵지 않다. 수치의 경우 MCDP_CD =3 이런
+식으로 나타낸다면 문자열의 경우 like를 사용한다. 정도? like는
+문자열에서 사용되는데 좋은점이 있다. date like "2002-03%" 라는 식의
+wildcard를 사용할 수 있다는 것이다.
+
+<div class="important">
+
+where절에서 and or not in을 사용할 수 있다. 위에서 or대신에 `in` 을
+사용할 수 있다.  where MCDP_CD in ('cs', 'gs')
+
+</div>
+
+
+### select DR_NAME, DR_ID,MCDP_CD, DATE_FORMAT(HIRE_YMD,"%Y-%m-%d") as DATE_FORMAT {#select-dr-name-dr-id-mcdp-cd-date-format--hire-ymd-y-m-d--as-date-format}
+
+=&gt; select에선 column값을 선택만 하는게 아니라 출력형태를 바꿔서 출력할
+수 있다. 이 때, 함수를 사용하는데, 대표적인게 mmacs라는 집계함수와
+date format()이다.
+
+
+### [최종] {#최종}
+
+```mysql
+select DR_NAME, DR_ID,MCDP_CD, DATE_FORMAT(HIRE_YMD,"%Y-%m-%d") as DATE_FORMAT
+```
+
 
 ## problem3: 서울에 위치한 식당 목록 출력하기(level4) {#problem3-서울에-위치한-식당-목록-출력하기--level4}
 
-<a id="figure--problem3-1"></a>
+{{< figure src="/img/sql/p3-1.png" width="600px" >}}
 
-{{< figure src="/img/sql/p3-1.png" caption="<span class=\"figure-number\">Figure 1: </span>problem3-1" width="600px" >}}
+{{< figure src="/img/sql/p3-2.png" width="600px" >}}
 
-<a id="figure--problem3-2"></a>
+{{< figure src="/img/sql/p3-3.png" width="600px" >}}
 
-{{< figure src="/img/sql/p3-2.png" caption="<span class=\"figure-number\">Figure 2: </span>problem3-2" width="600px" >}}
-
-<a id="figure--problem3-3"></a>
-
-{{< figure src="/img/sql/p3-3.png" caption="<span class=\"figure-number\">Figure 3: </span>problem3-3" width="600px" >}}
-
-<a id="figure--problem3-4"></a>
-
-{{< figure src="/img/sql/p3-4.png" caption="<span class=\"figure-number\">Figure 4: </span>problem3-4" width="600px" >}}
+{{< figure src="/img/sql/p3-4.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -63,13 +92,9 @@ draft = true
 
 ## problem4: 조건에 맞는 도서 리스트 출력하기(level1) {#problem4-조건에-맞는-도서-리스트-출력하기--level1}
 
-<a id="figure--problem4-1"></a>
+{{< figure src="/img/sql/p4-1.png" width="600px" >}}
 
-{{< figure src="/img/sql/p4-1.png" caption="<span class=\"figure-number\">Figure 5: </span>problem4-1" width="600px" >}}
-
-<a id="figure--problem4-2"></a>
-
-{{< figure src="/img/sql/p4-2.png" caption="<span class=\"figure-number\">Figure 6: </span>problem4-2" width="600px" >}}
+{{< figure src="/img/sql/p4-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -77,17 +102,11 @@ draft = true
 
 ## problem5: 과일로 만든 아이스크림 고르기(level1) {#problem5-과일로-만든-아이스크림-고르기--level1}
 
-<a id="figure--problem5-1"></a>
+{{< figure src="/img/sql/p5-1.png" width="600px" >}}
 
-{{< figure src="/img/sql/p5-1.png" caption="<span class=\"figure-number\">Figure 7: </span>problem5-1" width="600px" >}}
+{{< figure src="/img/sql/p5-2.png" width="600px" >}}
 
-<a id="figure--problem5-2"></a>
-
-{{< figure src="/img/sql/p5-2.png" caption="<span class=\"figure-number\">Figure 8: </span>problem5-2" width="600px" >}}
-
-<a id="figure--problem5-3"></a>
-
-{{< figure src="/img/sql/p5-3.png" caption="<span class=\"figure-number\">Figure 9: </span>problem5-3" width="600px" >}}
+{{< figure src="/img/sql/p5-3.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -95,13 +114,9 @@ draft = true
 
 ## problem6: 평균 일일 대여 요금 구하기(level1) {#problem6-평균-일일-대여-요금-구하기--level1}
 
-<a id="figure--problem6-1"></a>
+{{< figure src="/img/sql/p6-1.png" width="600px" >}}
 
-{{< figure src="/img/sql/p6-1.png" caption="<span class=\"figure-number\">Figure 10: </span>problem6-1" width="600px" >}}
-
-<a id="figure--problem6-2"></a>
-
-{{< figure src="/img/sql/p6-2.png" caption="<span class=\"figure-number\">Figure 11: </span>problem6-2" width="600px" >}}
+{{< figure src="/img/sql/p6-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -109,9 +124,11 @@ draft = true
 
 ## problem7: 조건에 부합하는 중고거래 댓글 조회하기(level1) {#problem7-조건에-부합하는-중고거래-댓글-조회하기--level1}
 
-<a id="figure--problem7-2"></a>
+{{< figure src="/img/sql/p7-1.png" width="600px" >}}
 
-{{< figure src="/img/sql/p7-1.png" caption="<span class=\"figure-number\">Figure 12: </span>problem7-1" width="600px" >}}
+{{< figure src="/img/sql/p7-2.png" width="600px" >}}
+
+{{< figure src="/img/sql/p7-3.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -119,17 +136,31 @@ draft = true
 
 ## problem8: 인기 있는 아이스크림(level1) {#problem8-인기-있는-아이스크림--level1}
 
+{{< figure src="/img/sql/p8-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p8-2.png" width="600px" >}}
+
+{{< figure src="/img/sql/p8-3.png" width="600px" >}}
+
 
 ## 풀이 {#풀이}
 
 
 ## problem9: 3월에 태어난 여성 회원 목록 출력하기(level2) {#problem9-3월에-태어난-여성-회원-목록-출력하기--level2}
 
+{{< figure src="/img/sql/p9-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p9-2.png" width="600px" >}}
+
 
 ## 풀이 {#풀이}
 
 
 ## problem10: 12세 이하인 여자환자 목록 출력하기(level1) {#problem10-12세-이하인-여자환자-목록-출력하기--level1}
+
+{{< figure src="/img/sql/p10-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p10-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
