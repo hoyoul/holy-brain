@@ -8,31 +8,32 @@ draft = true
 
 ## problem1: 강원도에 위치한 생상공장 목록 출력하기(level1) {#problem1-강원도에-위치한-생상공장-목록-출력하기--level1}
 
-<a id="figure--problem1-1"></a>
+{{< figure src="/img/sql/p1-1.png" width="600px" >}}
 
-{{< figure src="/img/sql/p1-1.png" caption="<span class=\"figure-number\">Figure 1: </span>problem1-1" width="600px" >}}
-
-<a id="figure--problem1-2"></a>
-
-{{< figure src="/img/sql/p1-2.png" caption="<span class=\"figure-number\">Figure 2: </span>problem1-2" width="600px" >}}
+{{< figure src="/img/sql/p1-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
 
+푸는 순서는 다음과 같다. from부터 푼다. 이문제에서 어려울것은 없다.
+
+
+### from FOOD_FACTORY {#from-food-factory}
+
+
+### select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory {#select-factory-id-factory-name-address-from-food-factory}
+
+
+### select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory order by FACTORY_ID asc {#select-factory-id-factory-name-address-from-food-factory-order-by-factory-id-asc}
+
 
 ## problem2: 흉부외과 또는 일반 외과 의사 목록 출력하기(level1) {#problem2-흉부외과-또는-일반-외과-의사-목록-출력하기--level1}
 
-<a id="figure--problem2-1"></a>
+{{< figure src="/img/sql/p2-1.png" width="600px" >}}
 
-{{< figure src="/img/sql/p2-1.png" caption="<span class=\"figure-number\">Figure 3: </span>problem2-1" width="600px" >}}
+{{< figure src="/img/sql/p2-2.png" width="600px" >}}
 
-<a id="figure--problem2-2"></a>
-
-{{< figure src="/img/sql/p2-2.png" caption="<span class=\"figure-number\">Figure 4: </span>problem2-2" width="600px" >}}
-
-<a id="figure--problem2-2"></a>
-
-{{< figure src="/img/sql/p2-3.png" caption="<span class=\"figure-number\">Figure 5: </span>problem2-3" width="600px" >}}
+{{< figure src="/img/sql/p2-3.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -42,19 +43,19 @@ draft = true
 
 <a id="figure--problem3-1"></a>
 
-{{< figure src="/img/sql/p3-1.png" caption="<span class=\"figure-number\">Figure 6: </span>problem3-1" width="600px" >}}
+{{< figure src="/img/sql/p3-1.png" caption="<span class=\"figure-number\">Figure 1: </span>problem3-1" width="600px" >}}
 
 <a id="figure--problem3-2"></a>
 
-{{< figure src="/img/sql/p3-2.png" caption="<span class=\"figure-number\">Figure 7: </span>problem3-2" width="600px" >}}
+{{< figure src="/img/sql/p3-2.png" caption="<span class=\"figure-number\">Figure 2: </span>problem3-2" width="600px" >}}
 
 <a id="figure--problem3-3"></a>
 
-{{< figure src="/img/sql/p3-3.png" caption="<span class=\"figure-number\">Figure 8: </span>problem3-3" width="600px" >}}
+{{< figure src="/img/sql/p3-3.png" caption="<span class=\"figure-number\">Figure 3: </span>problem3-3" width="600px" >}}
 
 <a id="figure--problem3-4"></a>
 
-{{< figure src="/img/sql/p3-4.png" caption="<span class=\"figure-number\">Figure 9: </span>problem3-4" width="600px" >}}
+{{< figure src="/img/sql/p3-4.png" caption="<span class=\"figure-number\">Figure 4: </span>problem3-4" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -64,11 +65,11 @@ draft = true
 
 <a id="figure--problem4-1"></a>
 
-{{< figure src="/img/sql/p4-1.png" caption="<span class=\"figure-number\">Figure 10: </span>problem4-1" width="600px" >}}
+{{< figure src="/img/sql/p4-1.png" caption="<span class=\"figure-number\">Figure 5: </span>problem4-1" width="600px" >}}
 
 <a id="figure--problem4-2"></a>
 
-{{< figure src="/img/sql/p4-2.png" caption="<span class=\"figure-number\">Figure 11: </span>problem4-2" width="600px" >}}
+{{< figure src="/img/sql/p4-2.png" caption="<span class=\"figure-number\">Figure 6: </span>problem4-2" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -78,15 +79,15 @@ draft = true
 
 <a id="figure--problem5-1"></a>
 
-{{< figure src="/img/sql/p5-1.png" caption="<span class=\"figure-number\">Figure 12: </span>problem5-1" width="600px" >}}
+{{< figure src="/img/sql/p5-1.png" caption="<span class=\"figure-number\">Figure 7: </span>problem5-1" width="600px" >}}
 
 <a id="figure--problem5-2"></a>
 
-{{< figure src="/img/sql/p5-2.png" caption="<span class=\"figure-number\">Figure 13: </span>problem5-2" width="600px" >}}
+{{< figure src="/img/sql/p5-2.png" caption="<span class=\"figure-number\">Figure 8: </span>problem5-2" width="600px" >}}
 
 <a id="figure--problem5-3"></a>
 
-{{< figure src="/img/sql/p5-3.png" caption="<span class=\"figure-number\">Figure 14: </span>problem5-3" width="600px" >}}
+{{< figure src="/img/sql/p5-3.png" caption="<span class=\"figure-number\">Figure 9: </span>problem5-3" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -96,11 +97,11 @@ draft = true
 
 <a id="figure--problem6-1"></a>
 
-{{< figure src="/img/sql/p6-1.png" caption="<span class=\"figure-number\">Figure 15: </span>problem6-1" width="600px" >}}
+{{< figure src="/img/sql/p6-1.png" caption="<span class=\"figure-number\">Figure 10: </span>problem6-1" width="600px" >}}
 
 <a id="figure--problem6-2"></a>
 
-{{< figure src="/img/sql/p6-2.png" caption="<span class=\"figure-number\">Figure 16: </span>problem6-2" width="600px" >}}
+{{< figure src="/img/sql/p6-2.png" caption="<span class=\"figure-number\">Figure 11: </span>problem6-2" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -110,7 +111,7 @@ draft = true
 
 <a id="figure--problem7-2"></a>
 
-{{< figure src="/img/sql/p7-1.png" caption="<span class=\"figure-number\">Figure 17: </span>problem7-1" width="600px" >}}
+{{< figure src="/img/sql/p7-1.png" caption="<span class=\"figure-number\">Figure 12: </span>problem7-1" width="600px" >}}
 
 
 ## 풀이 {#풀이}

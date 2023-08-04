@@ -10,32 +10,26 @@
 #+DESCRIPTION: programmers 문제 풀이
 #+HUGO_DRAFT: true
 * problem1: 강원도에 위치한 생상공장 목록 출력하기(level1)
-#+CAPTION: problem1-1
-#+NAME: problem1-1
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p1-1.png]]
-
-#+CAPTION: problem1-2
-#+NAME: problem1-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p1-2.png]]
 * 풀이
+푸는 순서는 다음과 같다. from부터 푼다. 이문제에서 어려울것은 없다. 
+** from FOOD_FACTORY 
+** select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory
+** select FACTORY_ID, FACTORY_NAME,ADDRESS from FOOD_Factory order by FACTORY_ID asc
 
 * problem2: 흉부외과 또는 일반 외과 의사 목록 출력하기(level1)
-#+CAPTION: problem2-1
-#+NAME: problem2-1
+
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p2-1.png]]
-#+CAPTION: problem2-2
-#+NAME: problem2-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p2-2.png]]
-#+CAPTION: problem2-3
-#+NAME: problem2-2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/sql/p2-3.png]]
