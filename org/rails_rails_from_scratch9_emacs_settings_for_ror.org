@@ -1,0 +1,67 @@
+:PROPERTIES:
+:ID:       B4973D32-B22F-4140-82F2-26EB107A4674
+:mtime:    20230804235251
+:ctime:    20230804235251
+:END:
+#+title: [rails] rails from scratch9 Emacs settings for ROR
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-04 Fri>
+#+DESCRIPTION: 옛날자료 복원
+#+HUGO_DRAFT: true
+* Emacs Settings for ROR
+** rbenv 설치와 사용법
+*** [osx]에서 설치와 사용법
+- 설치
+ #+begin_quote
+ brew install rbenv
+ #+end_quote
+- 설치 가능한 ruby목록
+   #+begin_quote
+   rbenv install -l
+   rbenv install -L
+   #+end_quote
+- 설치된 목록 확인
+   #+begin_quote
+   rbenv versions
+   #+end_quote
+- 설치된 ruby에서 global설정
+   #+begin_quote
+   rbenv global 2.6.3
+   #+end_quote
+*** [emacs]에서 설치와 사용법
+- emacs에서 설치
+   #+begin_quote
+   (use-package rbenv
+   :ensure t)
+   #+end_quote
+- emacs에서 설정
+   #+begin_quote
+   (setq rbenv-installation-dir "/opt/homebrew/rbenv")
+   #+end_quote
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream
+** Projectile-rails
+ #+begin_quote
+ C-c r c : Controllers
+ C-c r v : Views
+ C-c r m : Models
+ #+end_quote
+
+#+begin_note
+C-c r !g : generate
+#+end_note
+=======
+=======
+>>>>>>> Stashed changes
+** inf-ruby
+#+begin_note
+Ruby Repl이다.
+#+end_note
+ #+begin_quote
+ M-x inf-ruby
+ #+end_quote
+
+ 
+>>>>>>> Stashed changes
+<

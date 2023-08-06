@@ -1,5 +1,5 @@
 +++
-title = "[sql] programmers sql high score2"
+title = "[sql] programmers sql high score2-select"
 author = ["holy"]
 description = "programmers 문제 풀이"
 date = 2023-08-03T00:00:00+09:00
@@ -73,6 +73,8 @@ date format()이다.
 
 ```mysql
 select DR_NAME, DR_ID,MCDP_CD, DATE_FORMAT(HIRE_YMD,"%Y-%m-%d") as DATE_FORMAT
+from DOCTOR
+where MCDP_CD in ('cs', 'gs')
 ```
 
 

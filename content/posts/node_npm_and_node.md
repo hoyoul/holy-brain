@@ -67,7 +67,7 @@ package를 uninstall한다.
 
 package.json에 보면 다음과 같이 script가 정의되어 있다.
 
-<a id="orgde2a9ba"></a>
+<a id="org9666ecf"></a>
 
 <img src="/img/nodejs/npm.png" alt="npm.png" width="600px" /> script를 실행하는 명령어가 npm
 run이다. 여기에는 test라는 이름으로 script가 되어 있기 때문에 다음과
@@ -133,16 +133,64 @@ nvm의 version을 확인한다.
 사용할 node를 선택한다.
 
 
-### nvm install 8.0 {#nvm-install-8-dot-0}
+### nvm install v18.17.0 {#nvm-install-v18-dot-17-dot-0}
 
-node를 설치한다.
-
-
-## node로 만들어진 project를 가져오면 해야할 것 {#node로-만들어진-project를-가져오면-해야할-것}
-
-가장 먼저 해야 할 것은 사용되는 node의 version에 맞춰 가상환경을
-만드는 것이다. 그 다음, project에서 npm install로 package.json에서
-기술된 의존성 package를 모두 설치한다.
+현재 node의 최신버전은 v18.17.0이다. node -v로 확인할 수 있다. 만일 옛날 version이라면 새롭게 node를
+설치한다.
 
 
-##  {#d41d8c}
+## node로 이미 만들어진 project를 가져오면 해야할 것 {#node로-이미-만들어진-project를-가져오면-해야할-것}
+
+가장 먼저 해야 할 것은 사용되는 node의 version에 node를 선택한다.
+
+```text
+nvm list
+nvm use v18.17.0
+```
+
+그 다음, github에 서 가져온 project에서 npm install을 실행한다.
+
+```text
+npm install
+```
+
+node project를 가져올 경우, package.json에 의존성 package가 기술되어
+있다. 개발을 위해선 위 명령어를 통해 모두 설치한다.
+
+```text
+npm start
+```
+
+npm start는 보통 node [entrypoint file]을 실행하는 것과 실행된다는
+면에서만 같다. npm start가 다른건, script를 지정해주고 지정한 script가
+실행된다는 것이다. 그냥 node main.js 이렇게 하면 실행은 되지만 node
+project가 실행되는 건 아니다. node project의 실행은 pakcage.json에
+다음과 같이 지정해 주어야 한다.
+
+```shell
+{
+  "scripts": {
+    "start": "node ."
+  }
+}
+```
+
+
+## 새롭게 node project를 하려면 {#새롭게-node-project를-하려면}
+
+어떤 node project를 만들려면 우선 directory를 만든다. 그리고 그 안에서
+다음과 같은 명령을 내린다.
+
+```text
+npm init
+```
+
+그러면 package.json이 만들어진다. 이렇게 하면 node project가
+만들어진다. 필요한 package를 설치해서 사용한다.
+
+```text
+npm install color --save
+```
+
+--save는 default값이라서 생략해도 된다. 이렇게 설치하면 package.json에
+  의존성 package로 등록된다.
