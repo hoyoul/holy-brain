@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       D1955C4D-268E-48AA-AF35-C0D5DB427744
-:mtime:    20230806173901 20230805230529 20230805153318
+:mtime:    20230807231414 20230806173901 20230805230529 20230805153318
 :ctime:    20230805153318
 :END:
 #+title: [nodejs] crawling1 - naver지도 검색
@@ -8,7 +8,7 @@
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-08-05 Sat>
 #+DESCRIPTION: nodejs로 크롤링하기
-#+HUGO_DRAFT: true
+#+HUGO_DRAFT: false
 
 * 참조 사이트
 아주 오래된 내용이지만, 그래도 python이 아닌 nodejs로 된

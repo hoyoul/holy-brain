@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       A8E9FBAF-3F40-4517-97E0-88649057317F
-:mtime:    20230806213835 20230806201558 20230806175629
+:mtime:    20230807231427 20230806213835 20230806201558 20230806175629
 :ctime:    20230806175629
 :END:
 #+title: [nodejs] crawling2-session and cookies
@@ -8,7 +8,7 @@
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-08-06 Sun>
 #+DESCRIPTION: nodejs 크롤링
-#+HUGO_DRAFT: true
+#+HUGO_DRAFT: false
 * session과 쿠키
 동영상에서도 설명을 하는데, 맞는지는 모르겠다. 내가 아는 수준에서
 얘기해 보겠다. session과 cookies는 http라는 통신이 갖는 weakness를

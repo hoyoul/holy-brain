@@ -3,7 +3,7 @@ title = "[nodejs] crawling2-session and cookies"
 author = ["holy"]
 description = "nodejs 크롤링"
 date = 2023-08-06T00:00:00+09:00
-draft = true
+draft = false
 +++
 
 ## session과 쿠키 {#session과-쿠키}

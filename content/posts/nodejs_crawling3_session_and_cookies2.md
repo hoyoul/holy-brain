@@ -3,7 +3,7 @@ title = "[nodejs] crawling3-session and cookies2"
 author = ["holy"]
 description = "동영상 강의 듣고 요약."
 date = 2023-08-06T00:00:00+09:00
-draft = true
+draft = false
 +++
 
 ## daum에서 session cookie 찾기 {#daum에서-session-cookie-찾기}

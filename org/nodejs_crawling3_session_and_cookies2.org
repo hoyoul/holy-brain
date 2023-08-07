@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       BC2D6F2E-A1EB-4906-8AF0-AB9D330A7DBB
-:mtime:    20230807080809 20230806235149 20230806223514
+:mtime:    20230807231439 20230807080809 20230806235149 20230806223514
 :ctime:    20230806223514
 :END:
 #+title: [nodejs] crawling3-session and cookies2
@@ -8,7 +8,8 @@
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-08-06 Sun>
 #+DESCRIPTION: 동영상 강의 듣고 요약.
-#+HUGO_DRAFT: true
+#+HUGO_DRAFT: false
+
 * daum에서 session cookie 찾기
 session cookie를 찾기 위해서 EditThisCookie라는 plugin을 사용하는 것은
 동일하다. login하기전의 cookie와 login후의 cookie를 비교해서
