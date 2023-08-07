@@ -78,7 +78,7 @@ where MCDP_CD in ('cs', 'gs')
 ```
 
 
-## problem3: 서울에 위치한 식당 목록 출력하기(level4) {#problem3-서울에-위치한-식당-목록-출력하기--level4}
+## [어려운문제] problem3: 서울에 위치한 식당 목록 출력하기(level4) {#어려운문제-problem3-서울에-위치한-식당-목록-출력하기--level4}
 
 {{< figure src="/img/sql/p3-1.png" width="600px" >}}
 
@@ -91,6 +91,96 @@ where MCDP_CD in ('cs', 'gs')
 
 ## 풀이 {#풀이}
 
+이것은 우선 두개의 table을 join하는 문제다. join하는 문제는 난이도가
+있다. 이것도 쉬운문제는 아니다. 우선 풀이법은 from부터
+시작한다.
+
+
+### from REST_INFO as A join REST_REVIEW as B on A.REST_ID {#from-rest-info-as-a-join-rest-review-as-b-on-a-dot-rest-id}
+
+-&gt; table이 한개 더 있기 때문에 join과 on을 사용한다. 두개의
+table은 원래 하나로 설계 되었었기 때문에 primary key와 foreign key의
+관계가 반드시 있을것이고 이것을 on을 사용해서 연결해야 한다. 또한
+2개의 table을 as를 사용해서 간단하게 표현해야 한다. 그리고 on을
+살펴보면, 양쪽 table에 REST_ID를 다 사용한다. 따라서 REST_ID로
+연결한다.
+
+
+### where ADDRESS like "서울%" {#where-address-like-서울}
+
+-&gt; 그리고 where 조건은 `"서울에 위치한 식당들의"` 란 정보를
+사용한다.
+
+
+### group by B.REST_ID {#group-by-b-dot-rest-id}
+
+-&gt;그리고 `review 평균점수` 라는게 있는데, 이것은 집계함수(mmacs)를
+사용한다는 것을 알 수 있다. 그럼 group by도 사용되기 때문에, 식당마다
+review가 여러개이기 때문에 rest_id로 grouping을 해야 할 듯하다.
+
+
+### select A.REST_ID, A.REST_NAME, A.FOOD_TYPE, A.FAVORITES, A.ADDRESS, round(avg(B.REVIEW_SCORE),2) as score {#select-a-dot-rest-id-a-dot-rest-name-a-dot-food-type-a-dot-favorites-a-dot-address-round--avgb-dot-review-score--2-as-score}
+
+-&gt; 마지막으로 select문을 만들어야 한다. 문제에 `"식당 ID, 식당이름,
+음식 종류, 즐겨찾기수, 주소, 리뷰 평균 점수를 조회"` 를 참고해서
+select문을 구성한다. 그런데 여기서 review score에 제한이 걸려
+있다. 그리고 order by도 사용한다. 다음을 참조하자.
+
+<div class="important">
+
+이때 리뷰 평균점수는 소수점 세 번째 자리에서 반올림 해주시고 결과는
+평균점수를 기준으로 내림차순 정렬해주시고, 평균점수가 같다면
+즐겨찾기수를 기준으로 내림차순 정렬해주세요.
+
+</div>
+
+review_score를 round함수와 avg함수를 사용해야
+한다. round(avg(review_score,2)))로 해서 소수 3째 자리에서 반올림하게
+한다. 그리고 as score로 출력 column name을 정해준다.
+
+
+### order by score desc, A.FAVORITES desc {#order-by-score-desc-a-dot-favorites-desc}
+
+결과는 평균점수를 기준으로 내림차순 정렬해주시고, 평균점수가 같다면
+즐겨찾기수를 기준으로 내림차순 정렬해주세요. 이것에 따라 order by도
+사용된다. order by score desc, A.FAVORITES desc로 추가해준다.
+
+
+### 최종 {#최종}
+
+```sql
+select A.REST_ID, A.REST_NAME, A.FOOD_TYPE, A.FAVORITES, A.ADDRESS, round(avg(B.REVIEW_SCORE),2) as score
+from REST_INFO as A join REST_REVIEW as B on A.REST_ID
+where ADDRESS like "서울%"
+group by B.REST_ID
+order by score desc, A.FAVORITES desc
+```
+
+내가 한 방법은 결론적으로 틀렸다. on사용법을 몰랐기 때문이다. 정답은 다음과 같다.
+
+```sql
+select A.REST_ID, A.REST_NAME, A.FOOD_TYPE, A.FAVORITES, A.ADDRESS, round(avg(B.REVIEW_SCORE),2) as score
+from REST_INFO as A join REST_REVIEW as B using(REST_ID)
+where ADDRESS like "서울%"
+group by B.REST_ID
+order by score desc, A.FAVORITES desc
+```
+
+on을 사용하던 using을 사용하던 명확히 알아야 한다.
+
+<div class="important">
+
+on과 using 모두 join에 사용되는 keyword이고 primary key와 foreign
+key를 나타낸다. 따라서, on, using 모두 column명을 받아들이는데,
+사용법이 다르다. column명이 같으면 using을 사용해서 한 컬럼만
+나타내면 된다. 같은 column명이기 때문에 두개의 column을 명시할 필요가
+없는것이다. using(REST_ID)처럼, A.REST_ID도 아니고 그냥 REST_ID이다.
+만일 column이름이 다르다면 on을 사용한다. on은 column이름이
+다른 것이라서 다음과 같이 on A.REST_ID = B.REST_ID로 작성한다. 서로의
+이름이 다르기 때문이다. 사용법을 알아야 한다.
+
+</div>
+
 
 ## problem4: 조건에 맞는 도서 리스트 출력하기(level1) {#problem4-조건에-맞는-도서-리스트-출력하기--level1}
 
@@ -100,6 +190,39 @@ where MCDP_CD in ('cs', 'gs')
 
 
 ## 풀이 {#풀이}
+
+하나의 table, book에서 조회한다. 어려운건 없다. from부터
+시작한다. 조건은 2021년과 "인문" 카테고리다. 그리고 ID(BOOK_ID),
+출판일 (PUBLISHED_DATE)을 출력한다.
+
+
+### from Book {#from-book}
+
+=&gt; book table을 가져온다.
+
+
+### where PUBLISHED_DATE like "2021%" and CATEGORY like "인문" {#where-published-date-like-2021-and-category-like-인문}
+
+=&gt; 조건은 2021과 인문 카테고리, 여기서 문자열에 대한 조건이기 때문에
+like를 사용하고, %라는 wildcard를 사용한다.
+
+
+### select BOOK_ID, date_format(PUBLISHED_DATE,"%Y-%m-%d") as {#select-book-id-date-format--published-date-y-m-d--as}
+
+=&gt; 날짜를 출력할때는 date_format()를 사용한다. 여기서 년도만 대문자를
+사용한다. 날짜를 select로 출력할때는 반드시 date_format과 as를
+사용한다는것을 명심하자.
+
+
+### 최종 {#최종}
+
+```sql
+select BOOK_ID, date_format(PUBLISHED_DATE,"%Y-%m-%d") as PUBLISHED_DATE
+from Book
+where PUBLISHED_DATE like "2021%" and CATEGORY like "인문"
+```
+
+맞다. 통과했다.
 
 
 ## problem5: 과일로 만든 아이스크림 고르기(level1) {#problem5-과일로-만든-아이스크림-고르기--level1}
@@ -113,6 +236,54 @@ where MCDP_CD in ('cs', 'gs')
 
 ## 풀이 {#풀이}
 
+<div class="important">
+
+상반기 아이스크림 총주문량이 3,000보다 높으면서 아이스크림의 주 성분이
+과일인 아이스크림의 맛을 총주문량이 큰 순서대로 조회하는 SQL 문을
+작성해주세요.상반기 아이스크림 총주문량이 3,000보다 높으면서
+아이스크림의 주 성분이 과일인 아이스크림의 맛을 총주문량이 큰 순서대로
+조회하는 SQL 문을 작성해주세요.
+
+</div>
+
+문제를 보면, 두개의 table의 column들을 사용하기 때문에 join을 해야
+한다.
+
+
+### from FIRST_HALF as A join ICECREAM_INFO as B using(FLAVOR) {#from-first-half-as-a-join-icecream-info-as-b-using--flavor}
+
+join을 해야하는데, 공통으로 사용될 키를 보면 flavor가 있다. 두개의
+key의 이름이 같기 때문에 on이 아니라 using을 사용한다.
+
+
+### where A.total_order &gt; 3000 and B.INGREDIENT_TYPE like "fruit_based" {#where-a-dot-total-order-3000-and-b-dot-ingredient-type-like-fruit-based}
+
+조건문은 `"상반기 아이스크림 총주문량이 3,000보다 높으면서
+아이스크림의 주 성분이 과일"` 이다. 여기서 상반기는 table자체가 상반기
+table이기 때문에 넘어가고, 아이스크림 주문량과 주성분만 기록한다.
+
+
+### order by A.total_order desc {#order-by-a-dot-total-order-desc}
+
+`총주문량이 큰 순서` 이기 때문에 큰거 먼저 나오고 작은게 나중에 나오기 때문에 desc이다.
+
+
+### select A.FLAVOR {#select-a-dot-flavor}
+
+맛만 꺼내면 된다.
+
+
+### 결론 {#결론}
+
+```sql
+select A.FLAVOR
+from FIRST_HALF as A join ICECREAM_INFO as B using(FLAVOR)
+where A.total_order > 3000 and B.INGREDIENT_TYPE like "fruit_based"
+order by A.total_order desc
+```
+
+통과했음, 문제평을 하자면, join문을 사용해서 나올 수 있는 가장 쉬운 문제인듯.
+
 
 ## problem6: 평균 일일 대여 요금 구하기(level1) {#problem6-평균-일일-대여-요금-구하기--level1}
 
@@ -122,6 +293,48 @@ where MCDP_CD in ('cs', 'gs')
 
 
 ## 풀이 {#풀이}
+
+```text
+CAR_RENTAL_COMPANY_CAR 테이블에서 자동차 종류가 'SUV'인
+자동차들의 평균 일일 대여 요금을 출력하는 SQL문을 작성해주세요.
+이때 평균 일일 대여 요금은 소수 첫 번째 자리에서 반올림하고,
+컬럼명은 AVERAGE_FEE 로 지정해주세요.
+```
+
+문제를 읽어보면, `평균 일일 대여 요금` 이란 말이 나온다. 이것은
+집계함수를 사용하라는 말이다. 집계함수를 사용한다면 `group by` 를
+사용해야겠다.는 느낌이 든다. 여튼 from부터 시작한다.
+
+
+### from CAR_RENTAL_COMPANY_CAR {#from-car-rental-company-car}
+
+
+### where CAR_TYPE like 'SUV' {#where-car-type-like-suv}
+
+자동차 종류가 'SUV'에서 조건을 알수 있다.  group by로 car_type별로
+한후 where절에서 suv만 걸러낸다.
+
+
+### group by CAR_TYPE {#group-by-car-type}
+
+
+### select round(avg(DAILY_FEE),0) as AVERAGE_FEE {#select-round--avgdaily-fee--0-as-average-fee}
+
+소수 첫번째 자리는 0번째값만을 사용하기 때문에 0이라고 해도 되지만,
+아예 생략을 해도 무방하다.
+
+
+### 결론 {#결론}
+
+```sql
+select round(avg(DAILY_FEE),0) as AVERAGE_FEE
+from CAR_RENTAL_COMPANY_CAR
+where CAR_TYPE like 'SUV'
+group by CAR_TYPE
+```
+
+통과했음, 이 문제의 수준도 어렵지 않다. group by가 무엇이고 언제
+사용되는지 안다면 푸는데 문제가 없다.
 
 
 ## problem7: 조건에 부합하는 중고거래 댓글 조회하기(level1) {#problem7-조건에-부합하는-중고거래-댓글-조회하기--level1}
@@ -170,11 +383,17 @@ where MCDP_CD in ('cs', 'gs')
 
 ## problem11: 모든 레코드 조회하기(level1) {#problem11-모든-레코드-조회하기--level1}
 
+{{< figure src="/img/sql/p11-1.png" width="600px" >}}
+
 
 ## 풀이 {#풀이}
 
 
 ## problem12: 재구매가 일어난 상품과 회원 리스트 구하기(level2) {#problem12-재구매가-일어난-상품과-회원-리스트-구하기--level2}
+
+{{< figure src="/img/sql/p12-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p12-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -182,11 +401,19 @@ where MCDP_CD in ('cs', 'gs')
 
 ## problem13: 역순 정렬하기(level1) {#problem13-역순-정렬하기--level1}
 
+{{< figure src="/img/sql/p13-1.png" width="600px" >}}
+
 
 ## 풀이 {#풀이}
 
 
 ## problem14: 오프라인/온라인 판매 데이터 통합하기(level4) {#problem14-오프라인-온라인-판매-데이터-통합하기--level4}
+
+{{< figure src="/img/sql/p14-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p14-2.png" width="600px" >}}
+
+{{< figure src="/img/sql/p14-3.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -194,11 +421,19 @@ where MCDP_CD in ('cs', 'gs')
 
 ## problem15: 아픈 동물 찾기(level1) {#problem15-아픈-동물-찾기--level1}
 
+{{< figure src="/img/sql/p15-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p15-2.png" width="600px" >}}
+
 
 ## 풀이 {#풀이}
 
 
 ## problem16: 어린 동물 찾기(level1) {#problem16-어린-동물-찾기--level1}
+
+{{< figure src="/img/sql/p16-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p16-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -206,11 +441,17 @@ where MCDP_CD in ('cs', 'gs')
 
 ## problem17: 동물의 아이디와 이름(level1) {#problem17-동물의-아이디와-이름--level1}
 
+{{< figure src="/img/sql/p17-1.png" width="600px" >}}
+
 
 ## 풀이 {#풀이}
 
 
 ## problem18: 여러기준으로 정렬하기(level1) {#problem18-여러기준으로-정렬하기--level1}
+
+{{< figure src="/img/sql/p18-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p18-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
@@ -218,11 +459,17 @@ where MCDP_CD in ('cs', 'gs')
 
 ## problem19: 상위 n개 레코드(level1) {#problem19-상위-n개-레코드--level1}
 
+{{< figure src="/img/sql/p19-1.png" width="600px" >}}
+
 
 ## 풀이 {#풀이}
 
 
 ## problem20: 조건에 맞는 회원수 구하기(level1) {#problem20-조건에-맞는-회원수-구하기--level1}
+
+{{< figure src="/img/sql/p20-1.png" width="600px" >}}
+
+{{< figure src="/img/sql/p20-2.png" width="600px" >}}
 
 
 ## 풀이 {#풀이}
