@@ -27,10 +27,11 @@ model이라고 부른다. 6이란 결과는 기계가 만들어내는 값이다.
 제시했던 recursion한 machine조차도 deductive한 rule을 사용한다는
 것이다. 이 말은 y = 2x + 4라는 기계에서는 big data가 필요 없다는
 뜻이다.  원하는 data를 입력하면 원하는 예측치가 확정적으로 나오기
-때문이다. model이 고정적이다.  반면에 "machine learning"에서의
-machine은 inductive한 rule을 사용한다. y=2x +4라는 기계의 계수들이
-data에 의해 변한다. 양질의 그리고 많은(big) data가 제공될때의
-function과 그렇지 않을때의 function은 다른 model을 갖는 기계가 된다.
+때문이다. model이 고정적이다. model이 고정적이기 때문에 learning을 할
+필요도 없다.  반면에 "machine learning"에서의 machine은 inductive한
+rule을 사용한다. y=2x +4라는 기계의 계수들이 data에 의해
+변한다. 양질의 그리고 많은(big) data가 제공될때의 function과 그렇지
+않을때의 function은 다른 model을 갖는 기계가 된다.
 
 
 #### "Learning"이란? {#learning-이란}
