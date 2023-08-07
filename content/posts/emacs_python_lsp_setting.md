@@ -25,7 +25,7 @@ emacs python client를 말한다.
 그래서 pyright를 사용한다. pyright는 ms에서 만들었다.
 
 
-## DOING pyright 설치 {#doing-pyright-설치}
+## <span class="org-todo todo DOING">DOING</span> pyright 설치 {#pyright-설치}
 
 
 ### create env {#create-env}
