@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       CA6FF3AA-1B6D-4278-BD8E-D29533D9711D
-:mtime:    20230725193149 20230724013050 20230723212734 20230723195258 20230723185201 20230723174809 20230723162319 20230723102138
+:mtime:    20230810132751 20230725193149 20230724013050 20230723212734 20230723195258 20230723185201 20230723174809 20230723162319 20230723102138
 :ctime:    20230723102138
 :END:
 #+title: [emacs] tex install and usage (latex)
@@ -242,3 +242,27 @@ org문서에서 한글을 사용하려면, org의 header에 다음과 같은걸 
 # 페이지 마진을 줄임
 #+LATEX_HEADER: \usepackage[scale=0.8]{geometry}
 #+END_SRC
+* org에서 oblivoir
+oblivoir를 사용하려면 우선 설치해야 한다.
+#+BEGIN_SRC text
+ ~  sudo tlmgr install kotex-oblivoir
+#+END_SRC
+이렇게 설치하고 emacs의 설정파일도 설치해야 한다.
+#+BEGIN_SRC emacs-lisp
+  (add-to-list 'org-latex-classes
+            '("oblivoir"
+					"\\documentclass{oblivoir}"
+					("\\section{%s}" . "\\section*{%s}")
+					("\\subsection{%s}" . "\\subsection*{%s}")
+					("\\subsubsection{%s}" . "\\subsubsection*{%s}")
+					("\\paragraph{%s}" . "\\paragraph*{%s}")
+					("\\subparagraph{%s}" . "\\subparagraph*{%s}")))
+#+END_SRC
+이렇게 설치하면 org에서 pdf로 변환할 때 oblivior class를 사용하게
+된다. latex header에 kotex를 사용할 필요는 없고,
+
+#+OPTIONS: toc:nil num:nil \n:t
+#+latex_header: \usepackage{setspace}
+#+latex_header: \onehalfspacing
+
+

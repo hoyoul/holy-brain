@@ -19,14 +19,15 @@ session이라는 것을 만들었다. login하면 session을 만들고, session_
 서버에 저장한다. 그리고 client에게 session_id를 전달하는데, 이것이
 cookie라는 형태로 저장된다. 이것을 session cookie라고 부른다. session
 cookie던 그냥 cookie던 이것은 browser에 저장될 수도 있고, hdd에 저장될
-수도 있다.
+수도 있다. 중요한건 client side에 저장된다는 것이다.
 
 
 ## EditThisCookie plugin {#editthiscookie-plugin}
 
 크롤링하는데, session 쿠키정보를 확인할 필요가 있다. 확인하는 방법은
 plugin이다. 확인할 수 있는 chrome plugin이 있는데, EditThisCookie라는
-plugin이다.
+plugin이다. 물론 개발자 도구의 application에 보면 cookie를 확인할 수
+있다. plugin을 사용하는건 좀더 편하게 사용할 수 있기 때문이다.
 
 <a id="figure--editthiscookie"></a>
 
