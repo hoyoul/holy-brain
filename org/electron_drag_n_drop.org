@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       5CBE1B48-3D9C-4D25-86D5-3C3C605BC566
-:mtime:    20230811125149 20230811111338 20230811101336 20230811022143
+:mtime:    20230811211016 20230811125149 20230811111338 20230811101336 20230811022143
 :ctime:    20230811022143
 :END:
 #+title: [electron] drag n drop
@@ -127,7 +127,8 @@ document.addEventListener('keydown', (event) => {
 })
 
 #+END_SRC
-
+근데, 여기서 main process에서 renderrer process가 보내는 값에 따라
+에러가 발생한다.
 
 
 

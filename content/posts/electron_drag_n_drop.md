@@ -137,3 +137,6 @@ document.addEventListener('keydown', (event) => {
 })
 
 ```
+
+근데, 여기서 main process에서 renderrer process가 보내는 값에 따라
+에러가 발생한다.
