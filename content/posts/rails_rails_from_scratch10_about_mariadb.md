@@ -47,7 +47,7 @@ aws 로긴한 후에 security group으로 들어간다.
 
 현재 root는 외부에서 접속할 수 없게 되어 있다.
 
-<a id="org8dea16d"></a>
+<a id="org4ee1180"></a>
 
 <img src="/img/web_monitoring/root1.png" alt="root1.png" width="600px" />
 root를 바꾸지 말고, 개인 사용자를 만들고 외부에서 접근할 수 있게 하자.
