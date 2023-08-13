@@ -148,11 +148,6 @@ main process에서 화면의 크기를 정한다. 1200x 800으로 하자.
     })
 #+END_SRC
 
-크기나 UI를 수정하는 것은 개발자 도구를 사용해서 조절한다.
-
-#+CAPTION: ui 수정
-#+NAME: ui 수정
-#+attr_html: :width 600px
-#+attr_latex: :width 100px
-[[../static/img/electron/ui_editing.mp4]]
+크기나 UI를 수정하는 것은 개발자 도구를 사용해서 조절한다. 편집은 다음을 참조하자.
+[[file:~/hoyoul_projects/holy-brain/static/img/electron/ui_editing.mp4][편집화면]]
 
