@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       B40180D2-D6CB-4DFC-A58D-34922F02E6AC
-:mtime:    20230813133657 20230813122543 20230813090026 20230813005256
+:mtime:    20230813213712 20230813133657 20230813122543 20230813090026 20230813005256
 :ctime:    20230813005256
 :END:
 #+title: [electron] make electron app-3
@@ -149,5 +149,5 @@ main process에서 화면의 크기를 정한다. 1200x 800으로 하자.
 #+END_SRC
 
 크기나 UI를 수정하는 것은 개발자 도구를 사용해서 조절한다. 편집은 다음을 참조하자.
-[[file:~/hoyoul_projects/holy-brain/static/img/electron/ui_editing.mp4][편집화면]]
+[[file:~/hoyoul_projects/holy-brain/static/img/electron/ui_editing.mp4][편집화면]] (새창이나 새탭에서 open)
 

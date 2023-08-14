@@ -163,4 +163,4 @@ const win = new BrowserWindow({
 ```
 
 크기나 UI를 수정하는 것은 개발자 도구를 사용해서 조절한다. 편집은 다음을 참조하자.
-[편집화면](/img/electron/ui_editing.mp4)
+[편집화면](/img/electron/ui_editing.mp4) (새창이나 새탭에서 open)
