@@ -29,4 +29,7 @@ project다.
 
 ## 구현 노트 {#구현-노트}
 
-이것도 구현노트가 회사의 server와 gitlab에 보관되어 있다.
+이것도 구현노트가 회사의 server와 gitlab에 보관되어 있다. 참조된
+영상에는 smart water system의 hw부분만 담겨 있다. monitoring system은
+외부로 공개된게 아니라서 예전에는 login해서 들어갔는데, 지금은
+없어져서 화면을 찾을 수 없었다.
