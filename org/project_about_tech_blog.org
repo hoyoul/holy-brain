@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       2BEA8A54-2713-4B42-9CAD-4808923491A2
-:mtime:    20230817145510
+:mtime:    20230817155812 20230817145510
 :ctime:    20230817145510
 :END:
 #+title: [project 1] about tech blog
@@ -9,11 +9,12 @@
 #+DATE: <2023-08-17 Thu>
 #+DESCRIPTION: tech blog에 대한 간략 설명
 #+HUGO_DRAFT: true
-* 참고
+
+* 참조
 - project1: tech blog
 - project2: [[file:project_about_wayland.org][wayland]]
-- project3:
-- project4:
+- project3: [[file:project_3_about_solar_monitoring_system.org][solar monitoring system]]
+- project4: [[file:.#project_4_about_k_smart_water.org][k smart water]]
 - project5:
 
 * Idea
@@ -23,6 +24,6 @@ python을 가르치는 알바를 했었다. 개념 설명하다가 stack이
 간단한 page를 폴딩으로 보여주는 예제를 보여줬다. 이걸 기반으로 기술
 블로그를 만들었다.
 * 구체적인 구현
-[[file:website_about_my_brain_blog_and_homepage.org][여기]]에 좀더 구체적인 내용이 있다. 하지만 아직 내가 정리하지 않은
++[[file:website_about_my_brain_blog_and_homepage.org][여기]]에 좀더 구체적인 내용이 있다.+ 하지만 아직 내가 정리하지 않은
 기술적내용들이 너무 많아서 아직 정리가 다 끝나지 않았다.
 

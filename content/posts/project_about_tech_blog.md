@@ -6,12 +6,12 @@ date = 2023-08-17T00:00:00+09:00
 draft = true
 +++
 
-## 참고 {#참고}
+## 참조 {#참조}
 
 -   project1: tech blog
 -   project2: [wayland]({{< relref "project_about_wayland" >}})
--   project3:
--   project4:
+-   project3: [solar monitoring system]({{< relref "project_3_about_solar_monitoring_system" >}})
+-   project4: [k smart water]({{< relref ".#project_4_about_k_smart_water" >}})
 -   project5:
 
 
@@ -26,5 +26,5 @@ python을 가르치는 알바를 했었다. 개념 설명하다가 stack이
 
 ## 구체적인 구현 {#구체적인-구현}
 
-[여기]({{< relref "website_about_my_brain_blog_and_homepage" >}})에 좀더 구체적인 내용이 있다. 하지만 아직 내가 정리하지 않은
+~~[여기]({{< relref "website_about_my_brain_blog_and_homepage" >}})에 좀더 구체적인 내용이 있다.~~ 하지만 아직 내가 정리하지 않은
 기술적내용들이 너무 많아서 아직 정리가 다 끝나지 않았다.
