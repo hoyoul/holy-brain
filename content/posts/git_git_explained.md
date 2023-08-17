@@ -825,7 +825,7 @@ master: git merge testing(branch명)
     3 way merge가 더 일반적인 경우고 conflict가 일어날 확률이 있는 merge다. 아래에서 충돌이 일어나는 경우를 설명한다. 충돌이
     일어나지 않는 경우는 merge commit이 자동으로 만들어지고, 충돌이 일어나면 수동으로 merge commit을 만드는 차이가 있다.
 
-    <a id="orge9083a0"></a>
+    <a id="org7e18e36"></a>
 
     ![](./img/3way1.png)
     여기서 b.txt란 파일이 양쪽 linked list에 둘다 있다. 그럼 반드시 충돌이 일어나게 되어있다. 왜냐 어떤 linked list에 있는
