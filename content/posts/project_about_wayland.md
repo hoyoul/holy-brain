@@ -6,6 +6,15 @@ date = 2023-08-17T00:00:00+09:00
 draft = true
 +++
 
+## 참고 {#참고}
+
+-   project1: [tech blog]({{< relref "project_about_tech_blog" >}})
+-   project2: wayland
+-   project3:
+-   project4:
+-   project5:
+
+
 ## idea {#idea}
 
 LG에서 손목시계(watch)를 개발하기로 했었다.
@@ -19,8 +28,7 @@ LG에서 손목시계(watch)를 개발하기로 했었다.
 2개다. `첫째`, 원형 손목시계의 메모리를 최소화하는 방안에 대한 연구를
 하자. 사용되지 않는 테두리의 pixel들을 free linked-list로 묶어서 다른
 app에서 사용할 수 있게 하자. `둘째` wayland를 porting해서 기존
-방식보다 더 빠르게 동작하게 하자. 라는 아이디어의 두번째를 구현한
-것입니다.
+방식보다 더 빠르게 동작하게 하자. 이 Article은 두번째 idea.
 
 
 ## wayland란? {#wayland란}

@@ -351,9 +351,9 @@ print(id(c))
 ```
 
 ```text
-140209908914184
-140209908914184
-140209908914184
+140463407393096
+140463407393096
+140463407393096
 ```
 
 반면에 아래의 예를 보자.
@@ -379,9 +379,9 @@ print(id(c))
 ```
 
 ```text
-4336038112
-4336104080
-4336169544
+4347711712
+4347777680
+4347843144
 ```
 
 매번 새로운 객체를 만든다.
@@ -435,9 +435,9 @@ print(eval('p'))
 
 ```text
 3
-<__main__.Person instance at 0x10cc5c3f8>
+<__main__.Person instance at 0x108f983f8>
 3
-<__main__.Person instance at 0x10cc5c3f8>
+<__main__.Person instance at 0x108f983f8>
 ```
 
 객체를 evaluate했을때, literal object와 일반 object의 차이를 설명하는
@@ -793,8 +793,8 @@ attach했다.
     ```
 
     ```text
-    4514709728
-    4514709728
+    4315685088
+    4315685088
     {'a': [1, 2, 3, 4], 'b': [1, 2, 3, 4], '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
@@ -818,8 +818,8 @@ attach했다.
     ```
 
     ```text
-    4515250400
-    4515381832
+    4371943648
+    4372075080
     {'a': [1, 2, 3, 4], 'b': [1, 2, 3], '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
@@ -950,8 +950,8 @@ attach했다.
     ```
 
     ```text
-    4551921888
-    4551987856
+    4380553440
+    4380619408
     True
     False
     ```
