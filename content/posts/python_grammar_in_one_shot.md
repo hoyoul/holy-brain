@@ -217,12 +217,6 @@ print("플랫폼:", sys.platform)  # 운영 체제 플랫폼 정보
 
 ```
 
-```text
-실행 모드: /Users/fregeholy/anaconda3/envs/playground_3.10/bin/python
-환경 변수: ['', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python310.zip', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python3.10', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python3.10/lib-dynload', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python3.10/site-packages']
-플랫폼: darwin
-```
-
 
 #### (4) loading built-in function {#4--loading-built-in-function}
 
@@ -251,8 +245,8 @@ print(globals())
 ```
 
 ```text
-{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
-{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
+{'__builtins__': <module '__builtin__' (built-in)>, '__name__': '__main__', '__file__': '<stdin>', '__doc__': None, '__package__': None}
+{'__builtins__': <module '__builtin__' (built-in)>, '__name__': '__main__', '__file__': '<stdin>', '__doc__': None, '__package__': None}
 ```
 
 <!--list-separator-->
@@ -276,7 +270,7 @@ print(globals())
 
     ```text
     hello
-    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
+    {'__builtins__': <module '__builtin__' (built-in)>, '__name__': '__main__', '__file__': '<stdin>', '__doc__': None, '__package__': None}
     ```
 
     다음 예를 보자. a.py와 b.py 두개의 file이 있다고 하자. 아래는 a.py다.
@@ -364,7 +358,7 @@ print(globals())
     ```
 
     ```text
-    {'__name__': '__main__', '__doc__': ' this is doc string ', '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
+    {'__builtins__': <module '__builtin__' (built-in)>, '__name__': '__main__', '__file__': '<stdin>', '__doc__': ' this is doc string ', '__package__': None}
     ```
 
 <!--list-separator-->
@@ -483,7 +477,7 @@ print(globals())
 ```
 
 ```text
-{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
+{'__builtins__': <module '__builtin__' (built-in)>, '__name__': '__main__', '__file__': '<stdin>', '__doc__': None, '__package__': None}
 ```
 
 ```text
@@ -600,7 +594,7 @@ print(sys.path)
 ```
 
 ```text
-['', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python310.zip', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python3.10', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python3.10/lib-dynload', '/Users/fregeholy/anaconda3/envs/playground_3.10/lib/python3.10/site-packages']
+['', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python27.zip', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-darwin', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/plat-mac/lib-scriptpackages', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-tk', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-old', '/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/lib-dynload', '/Library/Python/2.7/site-packages', '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python', '/System/Library/Frameworks/Python.framework/Versions/2.7/Extras/lib/python/PyObjC']
 ```
 
 python interpreter가 초기화 될 때, sys의 path를 os의 environment
@@ -679,8 +673,8 @@ assignment를 통해서 메모리에 구조화 되는지 내부동작을 직관�
     ```
 
     ```text
-    140360451064048
-    140360451064080
+    140432680981864
+    140432680981840
     ```
 
     따라서 heap에
@@ -759,7 +753,8 @@ assignment를 통해서 메모리에 구조화 되는지 내부동작을 직관�
     ```
 
     ```text
-    3.10.12 (main, Jul  5 2023, 15:34:07) [Clang 14.0.6 ]
+    2.7.16 (default, Aug 29 2022, 10:34:32)
+    [GCC Apple LLVM 12.0.5 (clang-1205.0.19.59.6) [+internal-os, ptrauth-isa=deploy
     True
     True
     ```
@@ -840,7 +835,7 @@ assignment를 통해서 메모리에 구조화 되는지 내부동작을 직관�
     ```
 
     ```text
-    21.73913043478261
+    21
     ```
 
     500이라는 값은 binary로 나타낸다. 23도 binary로 나타내진다.
@@ -879,15 +874,6 @@ print(a1)
 print(b1)
 print(cs1)
 
-```
-
-```text
-1
-2
-[]
-1
-2
-[3, 4, 5, 6]
 ```
 
 rvalue는 1,2다. 이것은 (1,2)로도 표시될 수 있다. ()는 생략된
@@ -959,7 +945,7 @@ print(False == False) in [False]
 ```
 
 ```text
-True
+False
 ```
 
 ```python

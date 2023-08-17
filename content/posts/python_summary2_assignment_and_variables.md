@@ -314,9 +314,7 @@ print(id(15))
 ```
 
 ```text
-['__abs__', '__add__', '__and__', '__bool__', '__ceil__', '__class__', '__delattr__', '__dir__', '__divmod__', '__doc__', '__eq__', '__float__', '__floor__', '__floordiv__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__gt__', '__hash__', '__index__', '__init__', '__init_subclass__', '__int__', '__invert__', '__le__', '__lshift__', '__lt__', '__mod__', '__mul__', '__ne__', '__neg__', '__new__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__round__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'as_integer_ratio', 'bit_count', 'bit_length', 'conjugate', 'denominator', 'from_bytes', 'imag', 'numerator', 'real', 'to_bytes']
-b'\x00\x0f'
-140249234899632
+['__abs__', '__add__', '__and__', '__class__', '__cmp__', '__coerce__', '__delattr__', '__div__', '__divmod__', '__doc__', '__float__', '__floordiv__', '__format__', '__getattribute__', '__getnewargs__', '__hash__', '__hex__', '__index__', '__init__', '__int__', '__invert__', '__long__', '__lshift__', '__mod__', '__mul__', '__neg__', '__new__', '__nonzero__', '__oct__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdiv__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'bit_length', 'conjugate', 'denominator', 'imag', 'numerator', 'real']
 ```
 
 따라서 b와 15를 mapping해서 b:15를 symbol table에
@@ -353,9 +351,9 @@ print(id(c))
 ```
 
 ```text
-140544757170416
-140544757170416
-140544757170416
+140614283859560
+140614283859560
+140614283859560
 ```
 
 반면에 아래의 예를 보자.
@@ -381,9 +379,9 @@ print(id(c))
 ```
 
 ```text
-140620274578048
-140620274627520
-140620274581120
+4455743712
+4455809680
+4455875144
 ```
 
 매번 새로운 객체를 만든다.
@@ -437,9 +435,9 @@ print(eval('p'))
 
 ```text
 3
-<__main__.Person object at 0x7f9e49963f40>
+<__main__.Person instance at 0x10a7e03f8>
 3
-<__main__.Person object at 0x7f9e49963f40>
+<__main__.Person instance at 0x10a7e03f8>
 ```
 
 객체를 evaluate했을때, literal object와 일반 object의 차이를 설명하는
@@ -713,7 +711,7 @@ attach했다.
     ```
 
     ```text
-    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': 4, 'b': 3}
+    {'a': 4, 'b': 3, '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
     a = 3은 assignment이기 때문에 새로운 객체를 생성하거나
@@ -762,7 +760,7 @@ attach했다.
     ```
 
     ```text
-    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': 4, 'b': 3}
+    {'a': 4, 'b': 3, '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
     이것은 일반적인 assignment를 수행한다. a = a + 1에서 rvalue를
@@ -795,9 +793,9 @@ attach했다.
     ```
 
     ```text
-    140314157406656
-    140314157406656
-    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': [1, 2, 3, 4], 'b': [1, 2, 3, 4]}
+    4549595360
+    4549595360
+    {'a': [1, 2, 3, 4], 'b': [1, 2, 3, 4], '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
     여기서 interpreter는 a = [1,2,3]에서 [1,2,3]이라는 객체를 생성하고
@@ -820,9 +818,9 @@ attach했다.
     ```
 
     ```text
-    140290348734912
-    140290348809920
-    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': [1, 2, 3, 4], 'b': [1, 2, 3]}
+    4373688544
+    4373819976
+    {'a': [1, 2, 3, 4], 'b': [1, 2, 3], '__builtins__': <module '__builtin__' (built-in)>, '__file__': '<stdin>', '__package__': None, '__name__': '__main__', '__doc__': None}
     ```
 
     a = a + [4]에서 interpreter는 rvalue의 type에 해당하는 list 객체를
@@ -952,8 +950,8 @@ attach했다.
     ```
 
     ```text
-    140641289296320
-    140641289418112
+    4510036192
+    4510102160
     True
     False
     ```
@@ -1233,7 +1231,7 @@ print(isinstance(a,float))
 ```
 
 ```text
-<class 'int'>
+<type 'int'>
 False
 ```
 

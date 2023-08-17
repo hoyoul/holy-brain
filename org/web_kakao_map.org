@@ -1,0 +1,48 @@
+:PROPERTIES:
+:ID:       3EA639C8-E49F-44BD-828A-FD0F60EE07F9
+:mtime:    20230815125831
+:ctime:    20230815125831
+:END:
+#+title: [web] kakao map
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-15 Tue>
+#+DESCRIPTION: kakao 지도 사용하기
+#+HUGO_DRAFT: true
+* 개발자 등록
+1. login한다.
+#+CAPTION: 1st
+#+NAME: 1st
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/web/map/kmap1.png]]
+2. 애플리케션을 만든다.
+#+CAPTION: 2nd
+#+NAME: 2nd
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/web/map/kmaap2.png]]
+3. 애플리케이션을 등록한다.
+#+CAPTION: 3rd
+#+NAME: 3rd
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/web/map/kmap3.png]]
+4. 플랫폼에 들어간다.
+#+CAPTION: 4th
+#+NAME: 4th
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/web/map/kmap4.png]]
+5. web 플랫폼에 들어간다.
+#+CAPTION: 5th
+#+NAME: 5th
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/web/map/kmap6.png]]
+6. web 플랫폼을 등록한다.
+#+CAPTION: 6th
+#+NAME: 6th
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/web/map/kmap7.png]]

@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       2767325B-DD65-4FD2-9171-CD979E29D4FD
+:mtime:    20230814170718
+:ctime:    20230814170718
+:END:
+#+title: [electron] about selecting directory in electron
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-14 Mon>
+#+DESCRIPTION: selecting directory in electron
+#+HUGO_DRAFT: true
+* electron에서 folder에 접근하기에 대한 생각
+내가 만드는 webtoon downloader의 경우 폴더를 선택하고, 선택된 폴더에
+저장하는 기능이 있다. electron의 web browser(chromium)에서 local의
+file system에 접근하는 건 보안때문에 제대로 동작하지 않는다. 그래서
+그것에 대한 조사가 필요했다.
+** webkitdirectory
+html page에서 choose input 폴더는 <input>태그에 webkit directory
+option을 줘서 만든다.
+
+
