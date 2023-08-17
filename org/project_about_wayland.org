@@ -3,7 +3,7 @@
 :mtime:    20230817151413 20230817140138
 :ctime:    20230817140138
 :END:
-#+title: [project] about wayland
+#+title: [project 2] about wayland
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-08-17 Thu>
@@ -12,8 +12,8 @@
 * 참고
 - project1: [[file:project_about_tech_blog.org][tech blog]]
 - project2: wayland
-- project3:
-- project4:
+- project3: [[file:project_3_about_solar_monitoring_system.org][solar monitoring system]]
+- project4: [[file:project_4_about_k_smart_water.org][k smart water]]
 - project5:
 
 * idea

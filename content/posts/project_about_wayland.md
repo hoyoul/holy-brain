@@ -1,5 +1,5 @@
 +++
-title = "[project] about wayland"
+title = "[project 2] about wayland"
 author = ["holy"]
 description = "wayland 개발에 대한 설명"
 date = 2023-08-17T00:00:00+09:00
@@ -10,8 +10,8 @@ draft = true
 
 -   project1: [tech blog]({{< relref "project_about_tech_blog" >}})
 -   project2: wayland
--   project3:
--   project4:
+-   project3: [solar monitoring system]({{< relref "project_3_about_solar_monitoring_system" >}})
+-   project4: [k smart water]({{< relref "project_4_about_k_smart_water" >}})
 -   project5:
 
 
