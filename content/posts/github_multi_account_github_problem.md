@@ -187,6 +187,36 @@ git@github.com-hoyoul:hoyoul/holy-brain.git
 ```
 
 
+## github profile 설정 {#github-profile-설정}
+
+git으로 commit을 만들때, username과 email주소가 들어간다. 이것은
+.gitconfi의 내용이 들어간다. 하나의 계정만 사용될때는 root에서
+.gitconfig만 정의해주면 된다. 다음과 같이
+
+<a id="figure--git config"></a>
+
+{{< figure src="/img/github/gitconfig.png" caption="<span class=\"figure-number\">Figure 2: </span>git config" width="600px" >}}
+
+하지만, 여러개의 github계정을 사용하기 때문에 다른 계정에 대한 처리도
+해줘야 한다. root에서 사용되는 계정 정보외에도 다른 계정의 정보도
+적는다. 양식은 다음과 같다. root의 .gitconfig에 설정한다.
+
+```text
+[user]
+   name = holy frege
+   email = hoyoul.park@gmail.com
+
+[includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
+   path = ~/Documents/MyBlogs/myproject/.gitconfig
+[includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
+   path = ~/Documents/MyBlogs/myproject/.gitconfig
+[includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
+   path = ~/Documents/MyBlogs/myproject/.gitconfig
+```
+
+나는 나머지도 동일한 이름과 email로 했다.
+
+
 ## braindump와 homepage에서 multiple 계정으로 인한 submodule trouble shooting {#braindump와-homepage에서-multiple-계정으로-인한-submodule-trouble-shooting}
 
 multiple 계정을 사용하기 위해서 ssh방식으로 바뀌면서 homepage와
