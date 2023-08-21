@@ -6,33 +6,73 @@ date = 2023-06-16T00:00:00+09:00
 draft = true
 +++
 
-## [My homepage setting from scratch] {#my-homepage-setting-from-scratch}
+## my blogs {#my-blogs}
+
+나는 3개의 blog를 운영하고 있다. main-blog,braindump,portfolio다.
 
 
-### 기본정보 {#기본정보}
+### main-blog(holy2frege) {#main-blog--holy2frege}
+
+
+#### 기본정보 {#기본정보}
 
 -   참조: [from here]({{< relref "website_make_main_homepage" >}}) (만들당시 기록한 note)
 -   homepage 운영 주소: <https://frege2godel.me/>
--   github source 주소:
 -   github address: <https://github.com/holy2frege/main-blog>
 -   github id: holy2frege
--   github email:
--   github repo(dev,publish): main-blog,holy2frege.github.io
--   pat:
+-   github email: holy2frege.nil@gmail.com
+-   github repo(dev,publish): main-blog(submodule:holy2frege.github.io)
+-   pat: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
 
 
-### 사용법 {#사용법}
+### braindump {#braindump}
 
 
-#### [step1] repo가져오기 (clone) {#step1-repo가져오기--clone}
+#### 기본정보 {#기본정보}
+
+-   참조:
+-   homepage 운영 주소: <https://braindump.frege2godel.me/>
+-   github address: <https://github.com/hoyoul/holy-brain>
+-   github id: hoyoul
+-   github email: hoyoul.park@gmail.com
+-   github repo(dev,publish): holy-brain(submodule:hoyoul.github.io)
+-   pat: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
+
+
+### portfolio(holytofrege) {#portfolio--holytofrege}
+
+
+#### 기본정보 {#기본정보}
+
+-   참조:
+-   homepage 운영 주소: <https://frege2godel.me/>
+-   github address: <https://github.com/holyToFrege/holyToFrege.github.io>
+-   github id: holytofrege
+-   github email: holy_frege@fastmail.com
+-   github repo(dev,publish): holytofrege (submodule이 없다.)
+-   pat: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
+
+
+## my blogs 설치 {#my-blogs-설치}
+
+
+#### local에 repo설치 {#local에-repo설치}
 
 <!--list-separator-->
 
--  기본 정보
+-  clone하기
 
     local에 repo가 clone되어 있지 않다면 main-blog를 clone부터
     한다. clone할때는 ssh방식으로 한다. ssh를 하는 이유는 multiple
-    account문제 때문이다. 관련된 글은 [여기]({{< relref "github_multi_account_github_problem" >}})를 참조한다.  clone하면 아래와
+    account문제 때문이다. 관련된 글은 [여기]({{< relref "github_multi_account_github_problem" >}})를 참조한다. ssh처리를 마친 후에
+    clone한다. 참조에도 나와 있듯이 prefix를 github.com에 붙여서
+    clone한다. 예를 들어서 holytofrege의 경우 아래와 같이 clone한다.
+
+    ```text
+    git clone git@github.com-holytofrege:holyToFrege/holyToFrege.github.io.git
+    ```
+
+    clone하면 아래와
     같은 directory구조를 볼 수 있다.
 
     <a id="figure--main page"></a>
@@ -43,56 +83,93 @@ draft = true
 
 -  git pull
 
-    git pull을 해서 sync를 맞춘다.
+    우선, 처음 clone했기 때문에 git pull을 해서 sync를 맞춘다.
+
+    ```text
+    git pull
+    ```
 
 <!--list-separator-->
 
 -  git submodule init &amp; git submodule update
 
-    이제 publishing repo를 가져와야 한다. publishing repo는
-    holy2frege.github.io다. 이 repo는 main-blog안에 public폴더와
-    mapping되어 있다. 현재는 비워져 있다. public폴더로 진입해서 git
-    clone으로 가져와야 할까? 가져오지 않는다. mapping되어 있다는것은
-    main-blog에서 mapping정보를 가지고 있기 때문에, 다른 방법을
-    사용한다. mapping에 대한 정보는 main-blog의 .gitmodules에 있다. git
-    submodule init과 git submodule update를 통해서
-    holy2.frege.github.io를 가져올 수 있다. 이렇게 가져온 repo는 HEAD가
-    detach되어 있다.
+    이제 publishing repo를 가져와야 한다. 가져오면 public폴더에 다운받게
+    된다. submodule이 있는 blog는 main-blog와 braindump다. 두개의 blog는
+    개발 repo와 publish repo 두개를 운영한다. main-blog나 braindump를
+    clone했으면, 아래 작업을 해준다.
+
+    ```text
+    git submodule init
+    git submodule update
+    ```
+
+    이렇게 하면 .gitmodules에 정의된 주소에서 데이터를 가져온다. 만일
+    문제가 있다면, .gitmodules를 살펴봐야 한다. 성공했다면 public 폴더로
+    들어간다.
+
+    ```text
+    cd public
+    git status
+    ```
+
+    보면 HEAD가 detach되어 있다.
 
 <!--list-separator-->
 
 -  git checkout main
 
-    git submodule foreach git checkout main: 그래서 git submodule foreach
-    git checkout main을 해준다. git status를 해도 detach되어 있다면 git
-    checkout main을 다시 해준다. git submodule update --remote --merge
-    해서 다시 update를 했다. 그런데도 detached head라서 git checkout
-    main을 해주었다.
+    ```text
+    git checkout main
+    git status
+    ```
+
+    떨어진 HEAD를 붙여준다. git status하면 HEAD가 main에 있는 것을 확인할
+    수 있다.
+
+    여기서 다음과 같이 하라고 하는데
+
+    ```text
+    git submodule foreach git checkout main
+    git submodule update --remote --merge
+    git checkout main
+    ```
 
 <!--list-separator-->
 
 -  git pull
 
-    git pull (in public): 그리고 public 폴더에서 git pull을 했다.
+    다시 한번 sync를 해준다.
+
+    ```text
+    git pull
+    ```
 
 
-#### [step 2] article 수정 {#step-2-article-수정}
+## main-blog 사용법 {#main-blog-사용법}
 
-이제 문서를 만들거나 수정하면 된다. org 폴더에 가면 index.org파일
-하나밖에 없다.  2nd-level의 headline에 보면 'CUSTOM_ID: page'가
-보일텐데, 그 headline이 articles를 모아놓은 page라고 보면 된다. 거기서
-원하는 page를 생성하거나 수정하면 된다. 수정이 끝나면 다음 단계로
-가자.
+local에 설치는 대략적으로 끝났다. 이제 local에서 사용방법을 살펴보자.
 
 
-#### [step 3] m-x org-publish-all {#step-3-m-x-org-publish-all}
+### main-blog 사용법 {#main-blog-사용법}
+
+
+#### [step 1] article 수정 {#step-1-article-수정}
+
+이제 문서를 만들거나 수정하면 된다. main-blog의 org 폴더에 가면
+index.org파일 하나밖에 없다.  2nd-level의 headline에 보면 'CUSTOM_ID:
+page'가 보일텐데, 그 headline이 articles를 모아놓은 page라고 보면
+된다. 거기서 원하는 page를 생성하거나 수정하면 된다. 수정이 끝나면
+다음 단계로 가자.
+
+
+#### [step 2] m-x org-publish-all {#step-2-m-x-org-publish-all}
 
 emacs의 설정파일에는 위 명령어를 수행하는 code가 이미 있다. html변환과
 css,js를 처리를 구현하고 있다. 따라서 수행하면 public/index.html이
 만들어진다.
 
 
-#### [step 4] git 반영 {#step-4-git-반영}
+#### [step 3] git 반영 {#step-3-git-반영}
 
 dev repo인 main-blog 폴더로 간다. git pull을 하고 git push를
 한다. main-blog/public으로 이동한다. 마찬가지로 git 반영을 한다. 만일
@@ -114,69 +191,17 @@ keychain이 만들어지고 push가 된다.
     </div>
 
 
-## [My braindump blog setting from scratch] {#my-braindump-blog-setting-from-scratch}
-
-
-### 기본 정보 {#기본-정보}
-
--   homepage 운영주소: <https://braindump.frege2godel.me/?stackedPages=%2F>
--   github source 주소:
--   github repo(dev,publish):holy-brain, hoyoul.github.io
--   github address: <https://github.com/hoyoul/holy-brain>
--   github id: hoyoul
--   github email: hoyoul.park@gmail.com
--   pat:
-
-    <div class="verse">
-
-    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<br />
-
-    </div>
+## braindump 사용법 {#braindump-사용법}
 
 
 ### 사용법 {#사용법}
 
 
-#### [step1] repo 가져오기 clone {#step1-repo-가져오기-clone}
-
-<div class="verse">
-
-git clone <https://github.com/hoyoul/holy-brain.git><br />
-
-</div>
-
-git pull을 한다.
-
-
-#### [step2] submodule 가져오기 {#step2-submodule-가져오기}
-
--   public과 mapping된 submodule을 가져온다.
-
-    <div class="verse">
-
-    git submodule init<br />
-    git submodule update<br />
-
-    </div>
--   public폴더로 들어가서 update한다.
-
-    <div class="verse">
-
-    git submodule foreach git checkout main<br />
-    git submodule update --remote --merge<br />
-    git checkout main<br />
-
-    </div>
-
-git checkout main을 하고 git status를 하면 HEAD detach가
-사라진다. 위에서 git checkout main만 해도 될듯한데, 잘 모르겠다. 그
-다음 git pull을 한다.
-
-
-#### [step3] 문서 작성및 수정 {#step3-문서-작성및-수정}
+#### [step1] 문서 작성및 수정 {#step1-문서-작성및-수정}
 
 org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로가
-맞는지 확인한다.
+맞는지 확인한다. 매번 computer 설치시 위치가 바뀌기 때문에 알아서 잘
+설정한다.
 
 <div class="verse">
 
@@ -184,21 +209,102 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
 
 </div>
 
+emacs로 들어간다.
+
 -   C-c r f로 문서를 수정하거나 만든다. 만들때는 영어로 title을 만들어야 한다.
--   만든 문서에는 org_head_for_blog라는 미리만든 yasnippet의 형식에 맞춰
-    문서를 작성한다. 제목,날짜, description template을 채우는 것이다.
+-   만든 문서에 yasnippet(C-c s)를 눌러서 org_head_for_blog라는 미리만든
+    yasnippet추가한다. 그리고 문서를 작성한다. 이 snippet은 별거
+    없다. 제목,날짜, description template을 채우는 것이다.
 
 
-#### [step3-추가] 문서 작성 tip {#step3-추가-문서-작성-tip}
+#### [step 2] make all {#step-2-make-all}
+
+문서 작성이 끝났으면, shell로 나간다. shell에서 다음과 같이 입력한다.
+
+```shell
+cd holy-brain
+make all
+```
+
+terminal에서 make all을 하면 org파일이 모두 md로 바뀐다.
+
+
+#### [step 3] hugo -d {#step-3-hugo-d}
+
+이미 hugo는 깔려있어야 한다. 안 깔려 있다면, brew install hugo를
+실행해서 설치한다.
+
+```shell
+brew install hugo
+hugo -D
+```
+
+이상태에서 hugo -d를 하면 md가 html로 바뀌면서
+public폴더에 들어가게 된다.
+
+
+#### [step 6] git push {#step-6-git-push}
+
+git add, commit, push를 한다.
+
+```shell
+git add .
+git commit -m "create sth"
+git push
+```
+
+다음과 같은 에러가 날 수 있다.
+
+<div class="verse">
+
+remote: Permission to hoyoul/holy-brain.git denied to holy2frege.<br />
+fatal: unable to access 'https://github.com/hoyoul/holy-brain.git/': The requested URL returned error: 403<br />
+
+</div>
+
+이전에 사용했던 github 정보때문이다. holy2frege라는 user name으로
+push할려니 문제가 생기는 것이다. 우선 급한대로 다음과 같이 하자.
+
+<div class="verse">
+
+git remote set-url origin <https://hoyoul@github.com/hoyoul/holy-brain.git><br />
+
+</div>
+
+그리고 pw를 물어보면 아래 값을 넣자.
+
+-   pat
+
+<div class="verse">
+
+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<br />
+
+</div>
+
+
+#### [step 7] public 폴더 {#step-7-public-폴더}
+
+실제 반영되는 publish 폴더다. 이것을 git push해줘야 웹페이지가
+반영된다.
+
+```shell
+git add .
+git commit -m "create sth"
+git push
+```
+
+이렇게 해주면 반영이 끝난다.
+
+
+#### [step2] 문서 작성 tip {#step2-문서-작성-tip}
 
 <!--list-separator-->
 
 -  fieldset legend
 
-    roam으로 문서를 만들고 yasnippet(C-c s)에서 org_head_for_blog를
-    선택하면 모든 blog의 article이 가져야 하는
-    time,author,email,description정보가 들어가고, 그것은 main.css의
-    fieldset legend로 css처리를 한다.
+    위에서 org_head_for_blog에서 설정한 time, author, email,
+    description정보를 기입하면, 그것은 main.css의 fieldset legend와
+    mapping되서 legend css처리를 한다.
 
     <a id="figure--legend"></a>
 
@@ -336,52 +442,11 @@ org-roam에서 문서를 작성하기 때문에 emacs.org에서 org-roam 경로�
     | 4  | 10        |
 
 
-#### [step 4] make all {#step-4-make-all}
+## portfolio 사용법 {#portfolio-사용법}
 
-terminal에서 make all을 하면 org파일이 모두 md로 바뀐다.
-
-
-#### [step 5] hugo -d {#step-5-hugo-d}
-
-이미 hugo는 깔려있어야 한다. 안 깔려 있다면, brew install hugo를
-실행해서 설치한다. 이상태에서 hugo -d를 하면 md가 html로 바뀌면서
-public폴더에 들어가게 된다.
-
-
-#### [step 6] git push {#step-6-git-push}
-
-git add, commit, push를 한다. 다음과 같은 에러가 날 수 있다.
-
-<div class="verse">
-
-remote: Permission to hoyoul/holy-brain.git denied to holy2frege.<br />
-fatal: unable to access 'https://github.com/hoyoul/holy-brain.git/': The requested URL returned error: 403<br />
-
-</div>
-
-이전에 사용했던 github 정보때문이다. holy2frege라는 user name으로
-push할려니 문제가 생기는 것이다. 우선 급한대로 다음과 같이 하자.
-
-<div class="verse">
-
-git remote set-url origin <https://hoyoul@github.com/hoyoul/holy-brain.git><br />
-
-</div>
-
-그리고 pw를 물어보면 아래 값을 넣자.
-
--   pat
-
-<div class="verse">
-
-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<br />
-
-</div>
-
--   public folder: 이것도 마찬가지다.
-
-
-## [ portfolio page ] {#portfolio-page}
+portfolio는 새로 추가한건데, 다른 blog를 추가할 때 참조하면
+된다. holytofrege라는 github repo를 사용하는것에
+유념하자. holy2frege라는 main-blog하고 햇갈릴 수 있기 때문이다.
 
 
 ### domain설정 {#domain설정}
@@ -395,18 +460,15 @@ CNAME의 domain을 설정했다.
 {{< figure src="/img/blog_homepage/domain.png" caption="<span class=\"figure-number\">Figure 17: </span>domain" width="600px" >}}
 
 
-### 기본 정보 {#기본-정보}
+### 사용법 {#사용법}
 
--   homepage 운영주소: <https://portfolio.frege2godel.me>
--   github source 주소:
--   github repo(dev,publish):holytofrege.github.io
--   github address: <https://github.com/holytofrege/holytofrege>
--   github id: holytofrege
--   github email: holy.frege@fastmail.com
--   pat:
+portfolio는 publish폴더가 없다. reveal을 사용하기 때문에, emacs에서
+index.org를 수정하고, export할때 reveal을 사용하면 index.html이
+만들어진다.
 
-    <div class="verse">
-
-    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<br />
-
-    </div>
+```text
+cd holytofrege
+git add .
+git commit
+git push
+```
