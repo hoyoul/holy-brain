@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       2E9B2FD3-0A5D-4CD2-8CFF-EBBCCE7C923D
+:mtime:    20230823171946
+:ctime:    20230823171946
+:END:
+#+title: [flutter] how to install flutter on bigsur
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-23 Wed>
+#+DESCRIPTION: bigsur 옛날 computer에 flutter설치
+#+HUGO_DRAFT: true
+* 요구 사항
+flutter는 최신 기기와 sw를 요구한다. 오래된 컴퓨터는 사용할 수
+없다. 그런데 사용하려고 한다. 방법은 있다. 다음은 requirement다.
+#+BEGIN_SRC text
+- bigsur os
+- xcode 13.2.1
+- flutter sdk 2.8.1
+#+END_SRC
+최신을 설치하면 안된다. 다 옛날 버전에 맞춰서 설치한다.
