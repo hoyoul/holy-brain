@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       BA98C2BF-580C-4FA7-8F66-DC8827454E34
+:mtime:    20230823185525
+:ctime:    20230823185525
+:END:
+#+title: [os] install from scratch1
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-23 Wed>
+#+DESCRIPTION: 맥북 처음 설치시 해야할것들.
+#+HUGO_DRAFT: true
+
+* system preference
+제일 먼저할 것은 우선 system preference에서 설정한다.
+#+CAPTION: system
+#+NAME: res
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/install/system.png]]
+* App Store
+App store login 에서 필요한것들 다 다운 받는다. 그 중 res를
+다운받는다. 왜냐하면 모니터 세팅부터 해야 하기 때문이다.
+#+CAPTION: res
+#+NAME: res
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/install/res.png]]
+
+* karabiner
+karabiner를 다운받고 caps-lock을 설정한다.
+#+CAPTION: caps lock
+#+NAME: caps lock
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/install/karabiner.png]]
+
+* Iterm
