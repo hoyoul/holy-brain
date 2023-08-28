@@ -178,4 +178,3 @@ a = 3
 {{< figure src="/img/python/bytecode1.png" caption="<span class=\"figure-number\">Figure 2: </span>bytecode1" width="600px" >}}
 
 a.py라는 file로 저장될때 위와 같이 저장될까? 그렇지 않다.
-r
