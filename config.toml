@@ -1,4 +1,4 @@
-baseURL = "https://braindump.frege2godel.me/"
+baseURL = "https://bd.frege2godel.me/"
 # baseURL = "http://localhost:1313/"
 title = "Holy Frege"
 email = "hoyoul.park@gmail.com"

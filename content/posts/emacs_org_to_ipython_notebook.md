@@ -45,7 +45,7 @@ John Kitchin이라는 교수가 만든 github이다. [from here](https://github.
 
 #### 사용법 {#사용법}
 
-다운 받은 repo에는 [example.org]({{< relref "example" >}})라는 파일이 있다. 해당파일을 open해서
+다운 받은 repo에는 example.org라는 파일이 있다. 해당파일을 open해서
 ipynb로 변환하면 된다.
 
 

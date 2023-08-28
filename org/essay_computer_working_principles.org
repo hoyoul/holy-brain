@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       7EDDFAB8-25F2-41FD-A17A-710E9263E4C8
-:mtime:    20230812210631 20230721211757
+:mtime:    20230828092128 20230812210631 20230721211757
 :ctime:    20230721211757
 :END:
 #+title: [essay] computer working principles
@@ -175,6 +175,7 @@ a = 3
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/python/bytecode1.png]]
+
 
 a.py라는 file로 저장될때 위와 같이 저장될까? 그렇지 않다.
 

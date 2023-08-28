@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       F5AEC599-2DC2-4D2B-8135-CC54DC229FFC
-:mtime:    20230615153916 20230615143024 20230615102839
+:mtime:    20230828092809 20230615153916 20230615143024 20230615102839
 :ctime:    20230615102839
 :END:
 #+title: [emacs] org to ipython notebook
@@ -40,7 +40,7 @@ John Kitchin이라는 교수가 만든 github이다. [[https://github.com/jkitch
       [[../static/img/jupyter/ox-ipynb1.png]]
       
 *** 사용법
-다운 받은 repo에는 [[file:example.org][example.org]]라는 파일이 있다. 해당파일을 open해서
+다운 받은 repo에는 example.org라는 파일이 있다. 해당파일을 open해서
 ipynb로 변환하면 된다.
 *** 문제점
 org모드에서 사용되는 image가 ipynb로 변환될때, image size가 조절되지 않는다.
