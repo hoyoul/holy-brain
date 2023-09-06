@@ -17,7 +17,18 @@ flutter는 최신 기기와 sw를 요구한다. 오래된 컴퓨터는 사용할
 - flutter sdk 2.8.1
 ```
 
-최신을 설치하면 안된다. 다 옛날 버전에 맞춰서 설치한다.
+최신을 설치하면 안된다. 다 옛날 버전에 맞춰서 설치한다. 그런데
+computer와 xcode, flutter sdk만 버전을 낮춘다고 모든 조건이 만족되는게
+아니다. ios app을 만들고 이를 실 ios 폰에서 봐야 하는데, xcode가
+지원하는 실 아이폰의 os version이 있다.
+
+```text
+iOS 15.2, iPadOS 15.2, tvOS 15.2, watchOS 8.3, and macOS Monterey
+12.1.
+```
+
+현재 내폰은 16.2라서 xcode와 연결해서 app을 실행할 수 없다. 15.2
+이하로 downgrade하거나, 옛날폰이 있어야 한다.
 
 
 ## xcode {#xcode}

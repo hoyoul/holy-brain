@@ -1,5 +1,5 @@
 +++
-title = "[dart] practice4- aync programming"
+title = "[dart] practice4- async programming"
 author = ["holy"]
 description = "async programming 알아야할 최소한의 것들."
 date = 2023-08-27T00:00:00+09:00
@@ -8,16 +8,44 @@ draft = true
 
 ## 동기와 비동기 {#동기와-비동기}
 
-순차적으로 코드가 실행되면, 동기화 program이라고 한다. 좀 더 정확히는
-하나의 코드 instruction이 실행이 끝난 후 다음 instruction이 실행 하는
-것이다. 장점은 어떤 instruction의 결과값을 다음 instruction이
-이용하기때문에 자연스러운 방식이다. 단점, cpu를 사용하지 않고 i/o
-stream의 경우 lock이 걸리는 모습을 보인다.
+
+### 동기 {#동기}
+
+순차적으로 코드가 실행되면, 동기화 program이라고 한다. 동기화
+program은 하나의 코드 instruction이 실행이 끝난 후, 즉 완료한 다음에
+다음 instruction이 시작 된다.
+
+
+### 비동기 {#비동기}
+
+비동기 program은 instruction이 실행이 완료되기전에 다음 instruction이
+실행 된다.
+
+
+## 동기와 비동기의 장단점 {#동기와-비동기의-장단점}
+
+
+### 동기 {#동기}
+
+ 장점은 어떤 instruction의 결과값을 다음 instruction이 이용하기때문에
+자연스러운 방식이다. 단점, cpu를 사용하지 않고 i/o stream의 경우
+lock이 걸리는 모습을 보인다.
+
+
+### 비동기 {#비동기}
 
 비동기 프로그램은 이전 instruction이 끝나기도 전에 다음 instruction이
 시작된다. 장점은 cpu를 사용하지 않는 서버연결과 같은 작업으로 인한
 lock이 걸리는 모습이 보이지 않는다는 것이다. 단점은 코드 실행이
 뒤죽박죽이 되어 버린다.
+
+
+## 동기와 비동기 mechanism {#동기와-비동기-mechanism}
+
+
+### 동기 {#동기}
+
+동기는 일반적인 프로그래밍이라서 call stack을 이용한다.
 
 
 ## 우리의 목적 {#우리의-목적}
@@ -191,7 +219,7 @@ Future<void> addNumbers(int num1, int num2) async {
 -   stream은 Future처럼 언제 끝날지 모르는 작업을 처리하는
     방식이다. 원격서버와 연결해서 file을 가져온다면 그냥 Future를
     사용하면 되지만, 채팅을 한다고 생각해보면, future를 사용할 수
-    없다. 왜냐면 끝이 없기 때문이다. 이 때 Stream을 사용한다. stream은
+    없다. 왜냐면 끝이 없기 때문이다. 또한,  이 때 Stream을 사용한다. stream은
     채팅처럼 끝이 없고, 상대방이 보낸 메시지를 그때 그때 처리한다는
     특징이 있다. 이것을 yield로 구현하겠지만, 이런 특징을 가지고
     있다는 것만 알자. stream이란 용어는 예전부터 있던 용어다. socket이나

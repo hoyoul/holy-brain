@@ -1,0 +1,29 @@
+:PROPERTIES:
+:ID:       FF7C41DD-CCE5-4823-88A1-59C08FB82D07
+:mtime:    20230830001913
+:ctime:    20230830001913
+:END:
+#+title: [audacity] change playspeed and the export
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-30 Wed>
+#+DESCRIPTION: audacity에서 속도 늦춘후 저장하기
+#+HUGO_DRAFT: true
+* [step1] 영역 설정
+#+CAPTION: 영역설정
+#+NAME: 영역설정
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/audacity/auda1.png]]
+* [step2] 속도 조절
+#+CAPTION: 속도 조절1
+#+NAME: 속도 조절1
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/audacity/auda2.png]]
+
+#+CAPTION: 속도 조절2
+#+NAME: 속도 조절2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/audacity/auda3.png]]

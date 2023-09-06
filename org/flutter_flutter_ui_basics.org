@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       BBC7A320-F729-4A7A-921E-23737FF0C586
+:mtime:    20230901172713
+:ctime:    20230901172713
+:END:
+#+title: [flutter] flutter UI basics
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-09-01 Fri>
+#+DESCRIPTION: flutter ui의 기본 구조.
+#+HUGO_DRAFT: true
+* flutter UI의 사용
+다음 그림 부터 보자.
+
+#+CAPTION: flutter ui structure
+#+NAME: flutter ui structure
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/flutter/flutterui1.png]]
+
+UI를 만든다고 하면, widget을 2개 만든다. 
