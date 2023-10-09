@@ -1,0 +1,147 @@
+:PROPERTIES:
+:ID:       D6AAFE62-F1A0-4CD7-A055-900373667D3A
+:mtime:    20230922152910 20230922134045 20230922123747 20230922112005
+:ctime:    20230922112005
+:END:
+#+title: [rails7] install ruby on rails7
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-09-22 Fri>
+#+DESCRIPTION: ruby on rails7 설치하기
+#+HUGO_DRAFT: true
+* gorails로 설치
+[[https://gorails.com/setup/macos/13-ventura][GoRails]]에 보면 설치 과정이 쉽게 나와 있다. 이대로 따르면 된다.
+** ruby 설치
+*** asdf 설치
+[[https://asdf-vm.com/guide/getting-started.html][참고]], asdf는 node.js와 ruby의 version관리를 할 수 있다. rvm이나 rbenv
+대신 asdf로 ruby버전을 관리하는 이유는, node도 관리할 수 있기
+때문이다. asdf page에 나온방식으로 설치할 수도 있꼬, gorails에서
+설치한 방법으로 설치할 수도 있다.
+**** asdf 공식 
+prerequisite이 있다.
+#+BEGIN_SRC shell
+brew install coreutils curl git
+#+END_SRC
+
+그리고 asdf를 설치한다.
+
+#+BEGIN_SRC shell
+brew install asdf
+#+END_SRC
+
+asdf를 shell path에 등록한다.
+#+BEGIN_SRC shell
+echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+#+END_SRC
+**** gorails
+#+BEGIN_SRC shell
+cd
+git clone https://github.com/excid3/asdf.git ~/.asdf
+echo '. "$HOME/.asdf/asdf.sh"' >> ~/.zshrc
+echo '. "$HOME/.asdf/completions/asdf.bash"' >> ~/.zshrc
+echo 'legacy_version_file = yes' >> ~/.asdfrc
+exec $SHELL
+#+END_SRC
+*** asdf에서 ruby, node 설치
+plugin을 설치한다. 아래는 ruby와 nodejs를 version관리할 수 있는
+plugin을 설치하는 것이다.
+#+BEGIN_SRC shell
+asdf plugin add ruby
+asdf plugin add nodejs
+#+END_SRC
+
+현재 ruby의 추천은 3.2.2다. 3.2.2를 설치하자.
+
+#+BEGIN_SRC shell
+asdf install ruby 3.2.2
+asdf global ruby 3.2.2
+
+# Update to the latest Rubygems version
+gem update --system
+#+END_SRC
+
+설치된 ruby version을 확인한다.
+
+#+BEGIN_SRC shell
+which ruby
+#=> /Users/username/.asdf/shims/ruby
+ruby -v
+#=> 3.2.2
+#+END_SRC
+
+이제 node를 설치해보자.
+
+#+BEGIN_SRC shell
+  asdf install nodejs 18.16.1
+  asdf global nodejs 18.16.1
+  which node
+  #=> /Users/username/.asdf/shims/node
+  node -v
+  #=> 18.16.1
+
+  # Install yarn for Rails jsbundling/cssbundling or webpacker
+  npm install -g yarn
+#+END_SRC
+** rails 설치
+7.0.6 최신 버전을 설치한다.
+
+#+BEGIN_SRC shell
+gem install rails -v 7.0.6
+#+END_SRC
+
+만일 permission문제가 있다면, sudo를 붙여서 사용한다.
+
+#+BEGIN_SRC shell
+rails -v
+#+END_SRC
+** database 설정
+*** sqlite3
+sqlite3를 설치한다. mac에는 built-in database로 sqlite3가 이미
+설치되어 있다. file기반의 단순한 db다. 이것이 특정 버전에선 문제가
+있기 때문에 brew로 다시 설치하자.
+
+#+BEGIN_SRC shell
+brew install sqlite3
+#+END_SRC
+*** postgresql
+rails에서 db를 사용한다고 하면, sqlite3를 사용하진 않는다. 보통
+mysql이나 postgresql을 사용한다. postgresql을 강추하기 때문에
+postgresql을 설치하자.
+
+#+BEGIN_SRC shell
+brew install postgresql
+#+END_SRC
+
+postgresql이나 mysql은 데몬이다. local에서 computer가 시작하자마자
+실행하려고 하면 brew service를 이용하면 된다.
+
+#+BEGIN_SRC shell
+brew services start postgresql
+#+END_SRC
+** final
+최종적으로 몇몇 gem들은 system의 C를 사용한다. C의 header파일을
+참조하는데, 이것의 위치가 mojave좀 바뀌었다. 그래서 그것에 대한 처리를
+해준다. 나는 ventura를 사용하기 때문에 처리하지 않아도
+될듯하다. 처리할려면 path를 변경해야 한다.
+
+#+BEGIN_SRC shell
+sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /
+#+END_SRC
+* Test Program
+새로운 project를 만든다. sqlite3를 사용하는 project는 다음과 같이
+만든다.
+#+BEGIN_SRC shell
+rails new myapp
+#+END_SRC
+
+db와 연동하는 project일 경우, 다음과 같이 만든다.
+#+BEGIN_SRC shell
+  rails new myapp -d mysql or
+  rails new myapp -d postgresql
+#+END_SRC
+그리고 project에 들어가서, server를 실행시키면 된다.
+#+BEGIN_SRC shell
+  cd myapp
+  rails server
+#+END_SRC
+

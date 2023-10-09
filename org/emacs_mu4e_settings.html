@@ -1,0 +1,905 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2023-10-06 Fri 13:14 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>[emacs] mu4e settings</title>
+<meta name="author" content="holy" />
+<meta name="description" content="emacs에서 mail관리" />
+<meta name="generator" content="Org Mode" />
+<style>
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">[emacs] mu4e settings</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org82adeb2">1. 개요</a></li>
+<li><a href="#orgff70ae3">2. [step 1] remote email server setting</a>
+<ul>
+<li><a href="#org1d65b89">2.1. gmail settings</a></li>
+<li><a href="#orge72a197">2.2. fastmail settings</a></li>
+</ul>
+</li>
+<li><a href="#orgb7057f2">3. [step 2] Client Daemon (mbsync) setting</a>
+<ul>
+<li><a href="#orgb69c5b3">3.1. mbsync 설치</a></li>
+<li><a href="#org419711d">3.2. 인증 작업1 (openssl)</a>
+<ul>
+<li><a href="#orgd92304d">3.2.1. openssl 설치</a></li>
+<li><a href="#org6b563d9">3.2.2. openssl로 인증서 가져오기</a></li>
+</ul>
+</li>
+<li><a href="#org4e1adbe">3.3. 인증작업2 (app password)</a>
+<ul>
+<li><a href="#orgc87bb6a">3.3.1. app password</a></li>
+<li><a href="#org606d2d9">3.3.2. app password 발급 방법</a></li>
+</ul>
+</li>
+<li><a href="#orgcb92ade">3.4. .mbsyncrc 저장소 설정</a></li>
+<li><a href="#org188ae39">3.5. .mbsyncrc test</a></li>
+<li><a href="#org7f2b91d">3.6. 기본 개념</a>
+<ul>
+<li><a href="#org9088d36">3.6.1. 용어들</a></li>
+<li><a href="#org2953988">3.6.2. 참고</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org81fb2b0">4. [step 3] mu (mbsync addon) 설치</a>
+<ul>
+<li><a href="#org1f811ac">4.1. mu설치</a></li>
+<li><a href="#org66b631e">4.2. mu 초기화</a></li>
+<li><a href="#org6703e4c">4.3. mu testing</a></li>
+</ul>
+</li>
+<li><a href="#org253c390">5. [step3] mu4e 설정</a>
+<ul>
+<li><a href="#orgd819f51">5.1. mu4e 설정</a></li>
+</ul>
+</li>
+<li><a href="#org6f2f03f">6. mu4e 기본 사용법</a></li>
+<li><a href="#org3a10791">7. mu4e 사용법 (update)</a></li>
+<li><a href="#org5f4872f">8. mu4e 사용법 (편지 쓰기)</a></li>
+<li><a href="#orgdcdd0ed">9. mu4e 사용법 (답장 편지)</a></li>
+<li><a href="#org6f8b07a">10. mu4e 사용법 (org mode에서 편지쓰기)</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org82adeb2" class="outline-2">
+<h2 id="org82adeb2"><span class="section-number-2">1.</span> 개요</h2>
+<div class="outline-text-2" id="text-1">
+<div class="note" id="org2425e2f">
+<p>
+emacs에서 email을 읽으려고 한다. 언뜻 생각하면, gmail, fastmail같은
+email server에 접속해서 mail을 가져와서 보여주면 되는거 아닌가? 그렇게
+생각할 수 있다. 근데 내부적으로는 복잡하다. emacs가 email client 같은
+역할을 하지 않기때문이다. 즉, emacs는 외부에 있는 email server에 직접
+연결하지 않는다. 이런 behind scene을 알아야 설정과 설치가
+가능하다. 우선 emacs에서 mail server에 접속해서 mail을 보여주는 것처럼
+하는 package는 mu4e다. 그리고 내부동작을 간단히 설명하면 local
+computer에 daemon을 하나 만든다. 이 daemon은 mbsync, offline imap과
+같은게 있다. 이 daemon이 gmail이나 fastmail과 통신을 해서 자체적으로
+email보관함에 넣어두는 역할을 한다. 그래서 emacs의 mu4e가 내부
+daemon에 저장된 mail을 꺼내서 보여주는 형태다.
+</p>
+
+
+<div id="orgc7502da" class="figure">
+<p><img src="../static/img/mu4e/mu4e1.png" alt="mu4e1.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 1: </span>overview mu4e</p>
+</div>
+
+</div>
+
+<p>
+우리는 mbsync라는 daemon을 사용할 것이다. mbsync는 gmail과 같은 email
+server와 통신을 해서 email을 가져오거나 보낸다. 둘사이에 통신방법을 정해야
+하는데, 그 과정이 step1에 있다. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgff70ae3" class="outline-2">
+<h2 id="orgff70ae3"><span class="section-number-2">2.</span> [step 1] remote email server setting</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org1d65b89" class="outline-3">
+<h3 id="org1d65b89"><span class="section-number-3">2.1.</span> gmail settings</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+먼저 mail server를 setting한다. gmail과 mbsync와 imap을 사용해서
+email을 다운받을 것이다. setting 방법은 다음과 같이 gmail에서
+설정한다.
+</p>
+
+<ul class="org-ul">
+<li><p>
+[gmail settings]
+</p>
+
+<div id="org4b89f97" class="figure">
+<p><img src="../static/img/mu4e/mu4e2.png" alt="mu4e2.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 2: </span>gmail settings</p>
+</div>
+
+
+<div id="orgc2279a3" class="figure">
+<p><img src="../static/img/mu4e/mu4e3.png" alt="mu4e3.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 3: </span>gmail settings2</p>
+</div></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orge72a197" class="outline-3">
+<h3 id="orge72a197"><span class="section-number-3">2.2.</span> fastmail settings</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+fastmail에서는 imap을 enable하지 않아도 된다.
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgb7057f2" class="outline-2">
+<h2 id="orgb7057f2"><span class="section-number-2">3.</span> [step 2] Client Daemon (mbsync) setting</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+mbysync가 하는 일은 인증작업과 mail을 저장할 저장소를 만드는 것이다. 
+</p>
+</div>
+<div id="outline-container-orgb69c5b3" class="outline-3">
+<h3 id="orgb69c5b3"><span class="section-number-3">3.1.</span> mbsync 설치</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+mbsync를 local에 설치한다. mac에서 mbsync는 isync다.
+</p>
+<pre class="example" id="org372908e">
+brew install isync
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org419711d" class="outline-3">
+<h3 id="org419711d"><span class="section-number-3">3.2.</span> 인증 작업1 (openssl)</h3>
+<div class="outline-text-3" id="text-3-2">
+</div>
+<div id="outline-container-orgd92304d" class="outline-4">
+<h4 id="orgd92304d"><span class="section-number-4">3.2.1.</span> openssl 설치</h4>
+<div class="outline-text-4" id="text-3-2-1">
+<p>
+mbsync가 gmail이나 fastmail과 같은 email에 연결하기 위해선 인증
+작업을 해야 한다. openssl을 설치하고 opessl로 인증서를 가져온다.
+</p>
+
+<pre class="example" id="org103e7a2">
+brew install openssl
+brew link openssl --force
+</pre>
+</div>
+</div>
+<div id="outline-container-org6b563d9" class="outline-4">
+<h4 id="org6b563d9"><span class="section-number-4">3.2.2.</span> openssl로 인증서 가져오기</h4>
+<div class="outline-text-4" id="text-3-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgbcf6ba7"></a>gmail<br />
+<div class="outline-text-5" id="text-3-2-2-1">
+<pre class="example" id="org6835b20">
+openssl s_client -connect imap.gmail.com:993 -showcerts
+</pre>
+<p>
+위 명령을 내리면, 3개의 fingerprint가 출력되는 데(즉,
+begin<sub>certificate</sub>, end<sub>certificate로</sub> 끝난다.), 이것이 모두
+인증서다. 이것을 복사해서 저장해야 한다. 저장 위치를 난
+<i>Users/fregeholy</i>.maildir/certs 여기에 했다. 파일 이름은 순서대로,
+gmail.crt, google.crt, Equifax.crt로 저장 한다.  이것을 .mbsyncrc라는
+설정파일에 다음과 같이 기술한다.
+</p>
+
+<pre class="example" id="org091a410">
+CertificateFile /Users/hoyoul/.maildir/certs/gmail.crt
+CertificateFile /Users/hoyoul/.maildir/certs/google.crt
+CertificateFile /Users/hoyoul/.maildir/certs/Equifax.crt
+</pre>
+
+<p class="verse">
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-07-23 Sun&gt; </span></span> 수정 사항<br />
+이전에는 위의 certificatefile을 .mbsyncrc에 기술했으나, 제대로 되지 않았다.<br />
+그래서 위 파일은 저장만 하고, .mbsyncrc에는 다음과 같이 기술 했다.<br />
+[이전 방식]<br />
+SSLType IMAPS<br />
+CertificateFile <i>Users/holy</i>.maildir/certs/gmail.crt<br />
+CertificateFile <i>Users/holy</i>.maildir/certs/google.crt<br />
+CertificateFile <i>Users/holy</i>.maildir/certs/Equifax.crt<br />
+[변경된 방법]<br />
+SSLType IMAPS<br />
+SSLVersions TLSv1.2<br />
+CertificateFile /usr/local/etc/openssl@3/cert.pem<br />
+<br />
+</p>
+</div>
+</li>
+
+<li><a id="orgc125ded"></a>fastmail<br />
+<div class="outline-text-5" id="text-3-2-2-2">
+<pre class="example" id="org5d360cb">
+openssl s_client -connect imap.fastmail.com:993 -showcerts
+</pre>
+<p>
+fastmail은 2개의 certs가 있다.
+</p>
+<pre class="example" id="org8b2d9dc">
+CertificateFile /Users/hoyoul/.maildir/certs/fm.crt
+CertificateFile /Users/hoyoul/.maildir/certs/fastmail.crt
+</pre>
+
+<p class="verse">
+<span class="timestamp-wrapper"><span class="timestamp">&lt;2023-07-23 Sun&gt; </span></span> 수정 사항<br />
+fastmail도 위의 gmail처럼 certificate file을 만들어 저장만 하고 .mbsyncrc는 아래처럼 변경했다.<br />
+[이전 방법]<br />
+SSLType IMAPS<br />
+CertificateFile <i>Users/holy</i>.maildir/certs/fm.crt<br />
+CertificateFile <i>Users/holy</i>.maildir/certs/fastmail.crt<br />
+[변경된 방법]<br />
+SSLType IMAPS<br />
+SSLVersions TLSv1.2<br />
+CertificateFile /usr/local/etc/openssl@3/cert.pem<br />
+<br />
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+
+<div id="outline-container-org4e1adbe" class="outline-3">
+<h3 id="org4e1adbe"><span class="section-number-3">3.3.</span> 인증작업2 (app password)</h3>
+<div class="outline-text-3" id="text-3-3">
+</div>
+<div id="outline-container-orgc87bb6a" class="outline-4">
+<h4 id="orgc87bb6a"><span class="section-number-4">3.3.1.</span> app password</h4>
+<div class="outline-text-4" id="text-3-3-1">
+<p>
+.mbsynce를 설정하기에 앞서서, 인증관련 처리를 하나 더 해줘야
+한다. 여기서는 gmail에서 mail을 가져오거나, 보내야 하는데,
+app-password를 발급받아야 한다.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org606d2d9" class="outline-4">
+<h4 id="org606d2d9"><span class="section-number-4">3.3.2.</span> app password 발급 방법</h4>
+<div class="outline-text-4" id="text-3-3-2">
+</div>
+<ol class="org-ol">
+<li><a id="orged04fc4"></a>gmail<br />
+<div class="outline-text-5" id="text-3-3-2-1">
+
+<div id="orgc769464" class="figure">
+<p><img src="../static/img/mu4e/app_pwd.png" alt="app_pwd.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 4: </span>app pw</p>
+</div>
+
+<p>
+이전 위치에서 좀 변경되었다.
+</p>
+
+
+
+<div id="orgcd79d72" class="figure">
+<p><img src="../static/img/mu4e/app_pwd2.png" alt="app_pwd2.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 5: </span>app pw2</p>
+</div>
+
+<p>
+=&gt; iznmiohdszmezubo
+여기서 발급받은 key는 뒤에 설정할 .mbsyncrc에 pass에 넣어준다.
+</p>
+</div>
+</li>
+
+<li><a id="orgb53ec49"></a>fastmail<br />
+<div class="outline-text-5" id="text-3-3-2-2">
+
+<div id="org8982c0b" class="figure">
+<p><img src="../static/img/mu4e/app_pw_fastmail.png" alt="app_pw_fastmail.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 6: </span>app pw for fastmail</p>
+</div>
+
+<p>
+=&gt; eadu273mnpjmpt74
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgcb92ade" class="outline-3">
+<h3 id="orgcb92ade"><span class="section-number-3">3.4.</span> .mbsyncrc 저장소 설정</h3>
+<div class="outline-text-3" id="text-3-4">
+<ul class="org-ul">
+<li>~/.mbsyncrc라는 mbsync 설정파일을 만든다. 아래 내용을 복사해서 사용한다.</li>
+</ul>
+<pre class="example" id="orgdb1227b">
+#------------------------------------------------------
+# 2개의 imap을 사용한다. 각각의 이름을 Imap account라고 한다.
+# (1) gmail =&gt; gmailcon
+# (2) fastmail =&gt; fastmailcon
+#------------------------------------------------------
+IMAPAccount gmailcon
+Host imap.gmail.com
+Port 993
+User hoyoul.park@gmail.com
+Pass gsrupwxkyiepvjwh
+AuthMechs LOGIN
+#SSLType IMAPS
+#CertificateFile /Users/holy/.maildir/certs/gmail.crt
+#CertificateFile /Users/holy/.maildir/certs/google.crt
+#CertificateFile /Users/holy/.maildir/certs/Equifax.crt
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /usr/local/etc/openssl@3/cert.pem
+#------------------------------------------------------
+# gmail의 store를 정의한다. store는 group of mailbox이며,
+# 원격에 있는 gmail store와 다운받은 local의 store가 있다.
+#------------------------------------------------------
+
+IMAPStore gmail-store
+Account gmailcon
+
+MaildirStore local-store
+Path ~/.maildir/Gmail/
+Inbox ~/.maildir/Gmail/Inbox
+SubFolders Verbatim
+# -----------------------------------------------------------
+#[gmail channel] channel은 동기화를 담당한다. channel을 만들면
+# master와 slave의 동기화를 하겠다는 뜻이다.  master와 slave는 gmail과
+# local의 store를 말한다. patterns의 *는 모든 mail box를
+# 뜻한다. local에서 mailbox를 만들어도 gmail에 동일하게 mailbox가
+# 만들어지고, gmail에서 mailbox를 만들어도 local에 생긴다.  그런데,
+# maildirstore에 보면 inbox라는 mailbox가 기술된것을 볼 수 있다.
+# inbox는 default mailbox로 gmail server에 있다.  master와 slave에
+# 있는 모든(*) mailboxes를 동기화 한다.  양쪽에 없는 mailbox가 있다면
+# 만든다.
+#------------------------------------------------------
+
+#All mail
+Channel my-channel
+Far :gmail-store:
+Near :local-store:
+Patterns *
+Create Both
+Sync Pull
+SyncState *
+
+
+#------------------------------------------------------
+# [fastmail 설정]
+#------------------------------------------------------
+IMAPAccount fastmailcon
+Host imap.fastmail.com
+Port 993
+User holy_frege@fastmail.com
+Pass eadu273mnpjmpt74
+AuthMechs LOGIN
+#SSLType IMAPS
+#CertificateFile /Users/holy/.maildir/certs/fm.crt
+#CertificateFile /Users/holy/.maildir/certs/fastmail.crt
+SSLType IMAPS
+SSLVersions TLSv1.2
+CertificateFile /usr/local/etc/openssl@3/cert.pem
+
+IMAPStore fastmail-remote
+Account fastmailcon
+
+MaildirStore fastmail-local
+Path ~/.maildir/Fastmail/
+Inbox ~/.maildir/Fastmail/INBOX/
+Trash ~/.maildir/Fastmail/Trash/
+SubFolders Verbatim
+
+Channel fastmail
+Far :fastmail-remote:
+Near :fastmail-local:
+Patterns *
+Expunge None
+CopyArrivalDate yes
+Sync All
+Create Both
+SyncState *
+</pre>
+<p>
+.maildir/Gmail과 .maildir/Fastmail 폴더가 없다면 생성한다.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org188ae39" class="outline-3">
+<h3 id="org188ae39"><span class="section-number-3">3.5.</span> .mbsyncrc test</h3>
+<div class="outline-text-3" id="text-3-5">
+<p>
+실제 email server에서 local로 메일을 가져오는지 test한다.
+</p>
+<pre class="example" id="orge77f98b">
+mbsync -a
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org7f2b91d" class="outline-3">
+<h3 id="org7f2b91d"><span class="section-number-3">3.6.</span> 기본 개념</h3>
+<div class="outline-text-3" id="text-3-6">
+</div>
+<div id="outline-container-org9088d36" class="outline-4">
+<h4 id="org9088d36"><span class="section-number-4">3.6.1.</span> 용어들</h4>
+<div class="outline-text-4" id="text-3-6-1">
+</div>
+<ol class="org-ol">
+<li><a id="orgcd6a8b5"></a>store<br />
+<div class="outline-text-5" id="text-3-6-1-1">
+<p>
+stores: mailbox들을 group화한게 store가 있다. store는 remote와 local이
+있다. remote와 마찬가지로 local에도 mapping되는 store가 있다.
+</p>
+
+
+<div id="orgceb1f14" class="figure">
+<p><img src="../static/img/mu4e/store.png" alt="store.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 7: </span>remote store</p>
+</div>
+</div>
+</li>
+
+<li><a id="org434f276"></a>channel<br />
+<div class="outline-text-5" id="text-3-6-1-2">
+<p>
+channel: remote와 local의 mailbox들은 서로 대응되어 연결되어
+있다. 이것을 channel이라고 한다.
+</p>
+</div>
+</li>
+<li><a id="orgd461669"></a>mailbox<br />
+<div class="outline-text-5" id="text-3-6-1-3">
+<p>
+mailbox: store에는 mailbox들이 있다.
+</p>
+
+<div id="org3a17623" class="figure">
+<p><img src="../static/img/mu4e/mu4e4.png" alt="mu4e4.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 8: </span>mail box</p>
+</div>
+</div>
+</li>
+</ol>
+</div>
+
+<div id="outline-container-org2953988" class="outline-4">
+<h4 id="org2953988"><span class="section-number-4">3.6.2.</span> 참고</h4>
+<div class="outline-text-4" id="text-3-6-2">
+<ol class="org-ol">
+<li><a href="http://manpages.ubuntu.com/manpages/xenial/man1/mbsync.1.html">http://manpages.ubuntu.com/manpages/xenial/man1/mbsync.1.html</a></li>
+<li><a href="https://manpages.debian.org/testing/isync/mbsync.1.en.html">https://manpages.debian.org/testing/isync/mbsync.1.en.html</a></li>
+<li>group: channel을 묶은것을 의미한다.</li>
+<li>maildir stores: store는 mailbox의 collection을
+의미한다. maildir은 local을 의미한다.</li>
+<li>IMAP stores: IMAP을 사용하는 server의 mailbox collection을
+의미한다. gmail에 있는 모든 mailbox들을 나타낸다고 봐도 된다.</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org81fb2b0" class="outline-2">
+<h2 id="org81fb2b0"><span class="section-number-2">4.</span> [step 3] mu (mbsync addon) 설치</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-org1f811ac" class="outline-3">
+<h3 id="org1f811ac"><span class="section-number-3">4.1.</span> mu설치</h3>
+<div class="outline-text-3" id="text-4-1">
+<p>
+mu는 mbsync addon으로 생각하면 된다.  mbsync에서 설치한 maildir에 있는
+mail들을 indexing해서 빠른 검색을 가능하게 해준다. 또한 emacs(mu4e)에서
+사용할 수 있는 mu4e interface를 제공한다. mu를 설치하자.
+</p>
+
+<pre class="example" id="org183c5fb">
+brew install mu 
+</pre>
+
+<p>
+mu를 설치하면 사용할 수 있는 emacs lisp파일을 제공한다. 다음 경로에
+mu4e를설정시에 사용된다.
+</p>
+<pre class="example" id="orgec701cb">
+/usr/local/share/emacs/site-lisp/mu/mu4e
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org66b631e" class="outline-3">
+<h3 id="org66b631e"><span class="section-number-3">4.2.</span> mu 초기화</h3>
+<div class="outline-text-3" id="text-4-2">
+<p>
+mu init으로 db를 만든다. mbsync로 email server로 부터 다운받은
+mail저장소를 mu에게 알려주면 db에 저장한다.
+</p>
+<pre class="example" id="org8fee80d">
+mu init --maildir=.maildir
+</pre>
+
+
+<div id="org7abe110" class="figure">
+<p><img src="../static/img/mu4e/mu4e5.png" alt="mu4e5.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 9: </span>mu init</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6703e4c" class="outline-3">
+<h3 id="org6703e4c"><span class="section-number-3">4.3.</span> mu testing</h3>
+<div class="outline-text-3" id="text-4-3">
+<p>
+mu index하면 db를 indexing을 한다.
+</p>
+<pre class="example" id="org6cbf1c7">
+mu index
+mu find google
+</pre>
+
+<p>
+결과는 다음과 같다.
+</p>
+
+
+<div id="org8a50632" class="figure">
+<p><img src="../static/img/mu4e/mu-find.png" alt="mu-find.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 10: </span>mu find</p>
+</div>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org253c390" class="outline-2">
+<h2 id="org253c390"><span class="section-number-2">5.</span> [step3] mu4e 설정</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+mu를 설치했기 때문에, db가 만들어졌고 indexing을 할 수 있다. 이제
+mu4e를 emacs에 설치해서 mu에 있는 db를 가져와서 보여주면 된다.
+</p>
+</div>
+
+<div id="outline-container-orgd819f51" class="outline-3">
+<h3 id="orgd819f51"><span class="section-number-3">5.1.</span> mu4e 설정</h3>
+<div class="outline-text-3" id="text-5-1">
+<p>
+mu4e는 다음과 같이 설정하면 된다.
+</p>
+
+<pre class="example" id="org4413526">
+#(add-to-list 'load-path "/usr/local/Cellar/mu/1.10.5/share/emacs/site-lisp/mu/mu4e/")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/mu/mu4e/")
+(require 'mu4e)
+(require 'smtpmail)
+(setq mu4e-maildir (expand-file-name "~/.maildir"))
+
+(setq mail-user-agent 'mu4e-user-agent)
+(setq mu4e-drafts-folder "/[Gmail].Drafts")
+(setq mu4e-sent-folder   "/[Gmail].Sent Mail")
+(setq mu4e-trash-folder  "/[Gmail].Trash")
+
+;; smtp mail setting; these are the same that `gnus' uses.
+(setq
+   message-send-mail-function   'smtpmail-send-it
+   smtpmail-default-smtp-server "smtp.gmail.com"
+   smtpmail-smtp-server         "smtp.gmail.com"
+   smtpmail-local-domain        "gmail.com")
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f2f03f" class="outline-2">
+<h2 id="org6f2f03f"><span class="section-number-2">6.</span> mu4e 기본 사용법</h2>
+<div class="outline-text-2" id="text-6">
+<div class="note" id="orgcea561d">
+<p>
+기본 사용법은 아래를 참고한다.
+</p>
+
+
+<div id="org9803572" class="figure">
+<p><img src="../static/img/mu4e/mu4e6.png" alt="mu4e6.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 11: </span>기본 사용법</p>
+</div>
+
+<p>
+key binding은 다음과 같다.
+</p>
+
+<div id="org1728679" class="figure">
+<p><img src="../static/img/mu4e/mu4e7-1.png" alt="mu4e7-1.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 12: </span>key binding</p>
+</div>
+
+
+<div id="org0205652" class="figure">
+<p><img src="../static/img/mu4e/mu4e7-2.png" alt="mu4e7-2.png" width="600px" />
+</p>
+<p><span class="figure-number">Figure 13: </span>keybinding2</p>
+</div>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org3a10791" class="outline-2">
+<h2 id="org3a10791"><span class="section-number-2">7.</span> mu4e 사용법 (update)</h2>
+<div class="outline-text-2" id="text-7">
+<div class="note" id="orgb28d135">
+<p>
+C-c C-u: 언제 어디서나 update할 수 있다.
+</p>
+
+</div>
+</div>
+</div>
+<div id="outline-container-org5f4872f" class="outline-2">
+<h2 id="org5f4872f"><span class="section-number-2">8.</span> mu4e 사용법 (편지 쓰기)</h2>
+<div class="outline-text-2" id="text-8">
+<div class="note" id="orgd78b9c8">
+<ol class="org-ol">
+<li>M-x mu4e로 들어간다.</li>
+<li>편지 쓰기 (C를 누른다) ;; 언제 어디서든 Capital C를 누르면 된다.</li>
+<li>attachment( C-c C-a를 누른다. )</li>
+<li>작성을 완료한다. ( C-c C-c )</li>
+
+<li>cc 추가</li>
+<li>C-c C-f C-c (cc field가 만들어진다.)</li>
+
+<li>bcc 추가</li>
+<li>C-c C-f C-b (bcc field가 만들어진다.)</li>
+</ol>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgdcdd0ed" class="outline-2">
+<h2 id="orgdcdd0ed"><span class="section-number-2">9.</span> mu4e 사용법 (답장 편지)</h2>
+<div class="outline-text-2" id="text-9">
+<div class="note" id="org97abf91">
+<ol class="org-ol">
+<li>편지 읽기</li>
+<li>R(reply)를 누른다.</li>
+<li>작성을 완료한다.(C-c C-c)</li>
+</ol>
+
+</div>
+</div>
+</div>
+
+<div id="outline-container-org6f8b07a" class="outline-2">
+<h2 id="org6f8b07a"><span class="section-number-2">10.</span> mu4e 사용법 (org mode에서 편지쓰기)</h2>
+<div class="outline-text-2" id="text-10">
+<ul class="org-ul">
+<li><p>
+mu4e-org를 사용한다.
+</p>
+<pre class="example" id="orgb666eee">
+(require 'mu4e-org)
+</pre></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Date: 2023-07-22 Sat 00:00</p>
+<p class="author">Author: holy</p>
+<p class="date">Created: 2023-10-06 Fri 13:14</p>
+<p class="validation"><a href="https://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

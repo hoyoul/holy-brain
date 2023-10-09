@@ -1,0 +1,20 @@
+:PROPERTIES:
+:ID:       A2AB640E-6CC0-49F9-8805-D17A91C2E260
+:mtime:    20230920144730 20230920133511
+:ctime:    20230920133511
+:END:
+#+title: [emacs] perspective package
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-09-20 Wed>
+#+DESCRIPTION: perspective package에 관해
+#+HUGO_DRAFT: true
+* perspective package
+perspective는 workspace의 다른말이다. emacs에서 여러개의 workspace를
+사용하게 해준다. 이것은 Mac에서의 spaces로 생각하면 된다.
+* perspective 설정
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
+

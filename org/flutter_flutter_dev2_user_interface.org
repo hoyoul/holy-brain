@@ -1,0 +1,27 @@
+:PROPERTIES:
+:ID:       27BA355F-892C-4726-B742-2415928B8BFA
+:mtime:    20230918121718 20230918014249 20230914110513 20230912132847 20230912122829
+:ctime:    20230912122829
+:END:
+#+title: [flutter] flutter.dev2-User Interface-introduction-hello world
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-09-12 Tue>
+#+DESCRIPTION: User interface's introduction
+#+HUGO_DRAFT: true
+* Hello world
+#+BEGIN_SRC dart
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(
+    const Center(
+      child: Text(
+        'Hello, world!',
+        textDirection: TextDirection.ltr,
+      ),
+    ),
+  );
+#+END_SRC
+
+

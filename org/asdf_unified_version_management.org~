@@ -1,0 +1,55 @@
+:PROPERTIES:
+:ID:       7B73D14A-554E-4074-B94A-C2073403608F
+:mtime:    20230923020600 20230922154915
+:ctime:    20230922154915
+:END:
+#+title: [asdf] unified version management
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-09-22 Fri>
+#+DESCRIPTION: asdf 통합 버전 관리 시스템
+#+HUGO_DRAFT: true
+* asdf
+asdf는 version manager다. 여러 programming 언어는 제 각기 version
+manager를 가지고 있다. node는 nvm, ruby는 rvm, rbenv, python은 pyenv,
+conda 등등, 각 언어들은 version manager를 가지고 있다. 그래서, 이것을
+통합한 version manager로 asdf가 나왔다. 좀 아이러니한게 common
+lisp에서 사용하는 package 관리자가 asdf이다.
+[[https://asdf-vm.com/][공식페이지]] 참조.
+* asdf 설치
+#+BEGIN_SRC shell
+# install dependencies
+brew install coreutils curl git
+
+# install asdf
+brew install asdf
+
+# add to shell
+echo -e "\n. $(brew --prefix asdf)/asdf.sh" >> ~/.zshrc
+#+END_SRC
+* asdf plugin 설치
+설치가 끝나면, version관리를 할 plugin을 설치한다.
+#+BEGIN_SRC shell
+  asdf plugin add nodejs
+  asdf plugin add ruby
+#+END_SRC
+* asdf 설치가능한 version list보기
+plugin이 설치되었으면 해당 plugin의 설치가능한 version list를 볼 수
+있다.
+#+BEGIN_SRC shell
+  asdf list-all nodejs
+  asdf list-all ruby
+#+END_SRC
+* asdf version 설치
+plugin을 설치했기 때문에, 원하는 version을 설치할 수 있다.
+
+#+BEGIN_SRC shell
+  asdf install nodejs 18.16.1
+  asdf install ruby 3.2.2
+#+END_SRC
+* 설치된 version 확인
+#+BEGIN_SRC shell
+  asdf list nodejs
+  asdf list ruby
+#+END_SRC
+* asdf에서 사용 (local, global)
