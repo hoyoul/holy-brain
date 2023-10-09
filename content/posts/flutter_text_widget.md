@@ -1,0 +1,70 @@
++++
+title = "[flutter] Text widget"
+author = ["holy"]
+description = "Text widget"
+date = 2023-09-14T00:00:00+09:00
+draft = true
++++
+
+## Text widget {#text-widget}
+
+flutter에서 제공하는 primitive한 widget이다. primitive한 위젯이라서
+다른 widget의 child나 children에 많이 사용된다.
+
+
+## 자주 사용되는 패턴 {#자주-사용되는-패턴}
+
+Text위젯은 display할 string이 반드시 있어야 한다. display할 string은
+필수적이다. 그리고 style이 있어야 한다. 이 두가지 요소가 자주 사용된다.
+
+
+### [1] basic Text {#1-basic-text}
+
+Text widget을 가장 가볍게 사용하는 방법은 string만 넣으면 된다.
+
+```dart
+child: Text('Hello, world!')
+```
+
+
+### [2] style text {#2-style-text}
+
+
+#### TextStyle {#textstyle}
+
+단순히 string으로 Text 위젯을 생성하면 DefaultTextStyle 위젯이
+설정된다. 우리가 원하는 색상,font,color,모양과 같은 style을
+적용하려면, TextStyle이란 객체를 만들어서 설정한다.
+
+```dart
+child: Text(
+  'this is test',
+  style: TextStyle(
+        fontSize: 25,
+        color: Colors.black54,
+      );
+    )
+```
+
+
+#### Theme {#theme}
+
+text의 style을 TextStyle로 설정하면 중구난방의 모양이 될 수 있다. 즉,
+어떤 text에선 굴림체로 되어 있고, 다른 text는 고딕체로 되어 있을 수
+있다. 개발자가 맘대로 StyleText에서 정하기 때문에, 중구난방이
+되어버린다. 그래서 app의 일관적인 모양을 유지하기 위해서 theme을
+사용한다. theme을 사용할려면, themeData라는 객체를 MaterialApp에서
+설정하고, 설정된 theme을 필요한 곳에서 가져와서 사용하는
+방식이다. app에서 사용될 theme을 미리 materialapp에서 정하는 것이다.
+
+```dart
+child:  Text(
+    'Example title',
+    style: Theme.of(context) //
+    .primaryTextTheme
+    .titleLarge,
+  ),
+```
+
+
+### [3] 잘 사용되는 예 {#3-잘-사용되는-예}

@@ -12,7 +12,7 @@ print(sys.version_info)
 ```
 
 ```text
-sys.version_info(major=2, minor=7, micro=16, releaselevel='final', serial=0)
+sys.version_info(major=3, minor=11, micro=4, releaselevel='final', serial=0)
 ```
 
 
