@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       CA6FF3AA-1B6D-4278-BD8E-D29533D9711D
-:mtime:    20230810132751 20230725193149 20230724013050 20230723212734 20230723195258 20230723185201 20230723174809 20230723162319 20230723102138
+:mtime:    20231010171423 20230810132751 20230725193149 20230724013050 20230723212734 20230723195258 20230723185201 20230723174809 20230723162319 20230723102138
 :ctime:    20230723102138
 :END:
 #+title: [emacs] tex install and usage (latex)
@@ -28,7 +28,8 @@ tlmgr은 brew와 같은 package manager다. brew처럼 저장소에서 package�
 가져와서 설치한다. CTAN이 저장소에 해당한다. 영어로된 package는 ctan을
 사용하면 되지만, 한글관련해서는 KTUG를 repository로 등록해서
 한글폰트같은것을 down받아 사용할려면, KTUG도 등록해서 사용해야 한다.
-[[http://wiki.ktug.org/wiki/wiki.php/KtugPrivateRepository][여기]]를 참조했다.
+[[http://wiki.ktug.org/wiki/wiki.php/KtugPrivateRepository][여기]]를 참조했다. macTex를 설치했는데, tlmgr이 shell에서 보이지
+않는다면 shell를 restart하자.
 ** main repo 변경
 #+BEGIN_SRC text
 sudo tlmgr option repository https://mirror.kakao.com/CTAN/systems/texlive/tlnet/

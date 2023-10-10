@@ -316,7 +316,7 @@ print(id(15))
 ```text
 ['__abs__', '__add__', '__and__', '__bool__', '__ceil__', '__class__', '__delattr__', '__dir__', '__divmod__', '__doc__', '__eq__', '__float__', '__floor__', '__floordiv__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__getstate__', '__gt__', '__hash__', '__index__', '__init__', '__init_subclass__', '__int__', '__invert__', '__le__', '__lshift__', '__lt__', '__mod__', '__mul__', '__ne__', '__neg__', '__new__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__round__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'as_integer_ratio', 'bit_count', 'bit_length', 'conjugate', 'denominator', 'from_bytes', 'imag', 'numerator', 'real', 'to_bytes']
 b'\x00\x0f'
-4339394200
+4343686808
 ```
 
 따라서 b와 15를 mapping해서 b:15를 symbol table에
@@ -353,9 +353,9 @@ print(id(c))
 ```
 
 ```text
-4350190808
-4350190808
-4350190808
+4377584856
+4377584856
+4377584856
 ```
 
 반면에 아래의 예를 보자.
@@ -381,9 +381,9 @@ print(id(c))
 ```
 
 ```text
-4371748160
-4371848576
-4372491200
+4380923200
+4381023616
+4381666240
 ```
 
 매번 새로운 객체를 만든다.
@@ -437,9 +437,9 @@ print(eval('p'))
 
 ```text
 3
-<__main__.Person object at 0x101213250>
+<__main__.Person object at 0x1015ab250>
 3
-<__main__.Person object at 0x101213250>
+<__main__.Person object at 0x1015ab250>
 ```
 
 객체를 evaluate했을때, literal object와 일반 object의 차이를 설명하는
@@ -795,8 +795,8 @@ attach했다.
     ```
 
     ```text
-    4347139392
-    4347139392
+    4379006272
+    4379006272
     {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': [1, 2, 3, 4], 'b': [1, 2, 3, 4]}
     ```
 
@@ -820,8 +820,8 @@ attach했다.
     ```
 
     ```text
-    4373239104
-    4373982144
+    4342945088
+    4343688128
     {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': [1, 2, 3, 4], 'b': [1, 2, 3]}
     ```
 
@@ -952,8 +952,8 @@ attach했다.
     ```
 
     ```text
-    4342240576
-    4342340992
+    4377056576
+    4377156992
     True
     False
     ```

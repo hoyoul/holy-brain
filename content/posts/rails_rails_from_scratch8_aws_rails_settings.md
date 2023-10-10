@@ -125,7 +125,7 @@ aws에서 설정할 때 얻은 ssh pem 키와 주소를 사용해서 ssh접속�
 1.  ssh root로 접근
 2.  deploy계정 생성
 
-<a id="org573c42a"></a>
+<a id="orgbb7e87f"></a>
 
 <img src="/img/web_monitoring/deployaccount.png" alt="deployaccount.png" width="600px" />
 나머지 설정도 해준다.
@@ -269,17 +269,17 @@ Nginx를 설치하고 passenger는 module로 설치했다. 즉 모든것인 ngin
 
 -   **Problem**: 예상치 못한 에러 발생
 
-<a id="org01f282c"></a>
+<a id="org4213d20"></a>
 
 <img src="/img/web_monitoring/nginx4.png" alt="nginx4.png" width="1000px" />
 journalctl -xe를 실행해서 에러의 원인이 뭔지 알고 싶었다. 다음과 같은 메시지가 있었다.
 
-<a id="org24a3b4a"></a>
+<a id="org8cea5b8"></a>
 
 <img src="/img/web_monitoring/pam.png" alt="pam.png" width="600px" />
 더 정확한 확인을 위해서 nginx의 log를 확인해 보자
 
-<a id="org7739abc"></a>
+<a id="org3eab19b"></a>
 
 <img src="/img/web_monitoring/errorlog.png" alt="errorlog.png" width="1000px" />
 위에 보면 gzip_static_on에 문제가 있어 보인다.
@@ -369,7 +369,7 @@ bundle을 실행하면, gemfile에 기술된 gem들이 install된다. capistrano
 cap install을 실행하면, deploy를 위한 설정 파일(.rb)들을 만들어 낸다.
 만일 cap명령어를 실행하나 수행되지 않을 때는 rbenv rehash를 하고 다시 실행한다.
 
-<a id="org4c6d0e0"></a>
+<a id="orgf463860"></a>
 
  <img src="/img/web_monitoring/rehash.png" alt="rehash.png" width="400px" />
 cap으로 만들어지는 파일은 capfile, deploy.rb, staging.rb,production.rb같은 deploy같은 설정파일들이다.
@@ -399,7 +399,7 @@ capfile은 배포설정 파일을 load할 뿐이다. 실제 설정은 load되는
 
 #### Thread error {#thread-error}
 
-<a id="orgf4a54f4"></a>
+<a id="org9fa7a3c"></a>
 
 <img src="/img/web_monitoring/cap1.png" alt="cap1.png" width="600px" />
 =&gt; cap은 aws에 접근할 수 있는 pem키가 없다면, cap이 진행되지 않고 바로 exception이 난다.
@@ -408,7 +408,7 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 #### git:check error-permission denied error {#git-check-error-permission-denied-error}
 
-<a id="orga7c4383"></a>
+<a id="org59e0e2d"></a>
 
 <img src="/img/web_monitoring/cap2.png" alt="cap2.png" width="600px" />
    =&gt; ssh-add ~/.ssh/id-rsa 를 해보면 될 수 있다.
@@ -423,7 +423,7 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 =&gt; [arm64-darwin-20] but your local platform is x86_64-linux
 
-<a id="orgde18132"></a>
+<a id="org3733906"></a>
 
    <img src="/img/web_monitoring/deploy_local.png" alt="deploy_local.png" width="600px" />
 이것의 원인은 capistrano처리중에 github에서 rails app source를 가지고 와서 배포서버의 release폴더에 넣은 후에 bundler를 실행할 때 발생되는 에러같다. bundler가 Gemfile.lock을 실행하는 데 Platform이 local에서는 arm64-darwin-20은 정해져 있으나, x86-64-linux가 기술되어 있지 않다는 것이다. local에서는 bundle lock --add-platform x86_64-linux를 실행해서 변경할 수 있다고 하는데, Gemfile.lock에서 x86_64-linux가 추가된 것을 확인할 수 있다. 그런데 실제 배포server의 release폴더에 있는 Gemfile.lock에는 반영되지 않은 것을 볼 수 있다. 이것의 원인을 찾고자, 배포 서버에 접속해서 log를 살펴보았다.
@@ -444,12 +444,12 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 ### bundler:install, Failed to build gem native extension {#bundler-install-failed-to-build-gem-native-extension}
 
-<a id="orgb455a97"></a>
+<a id="orgd42ae38"></a>
 
 <img src="/img/web_monitoring/bundle_error.png" alt="bundle_error.png" width="600px" />
 이 문제에 대한 처리 과정은 다음과 같다.
 
-<a id="org7783124"></a>
+<a id="org20be8ab"></a>
 
 <img src="/img/web_monitoring/extsolution1.png" alt="extsolution1.png" width="600px" />\\
 
@@ -457,7 +457,7 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 문제는 mysql2 설치 문제다. 배포 서버에 들어가서 mysql2를 설치해 보자.
 동일한 에러가 발생한다.
 
-<a id="org93996bf"></a>
+<a id="org9accd60"></a>
 
 <img src="/img/web_monitoring/mysql2error.png" alt="mysql2error.png" width="600px" />
 =&gt; 해결 :  sudo apt-get install libmysqlclient-dev를 설치하니 무사히 설치되었다.
@@ -465,7 +465,7 @@ ssh-add 를 사용해서 key를 등록한다. ssh-add ~/.ssh/company-ec2-keys.pe
 
 ### deploy:migrating error {#deploy-migrating-error}
 
-<a id="orgfc70c73"></a>
+<a id="org82210d1"></a>
 
    <img src="/img/web_monitoring/mysqlhosterror.png" alt="mysqlhosterror.png" width="600px" />
 우선 mysql관련 설정환경을 배포 서버의 .rbenv-vars파일에 기술했었는데, 그게 문제일 수도 있다는 생각이 들었다. capistrano가 db에 접속을 해야 하는데, 접속은 URL로 하고, URL정보는 .rbenv-vars파일에 기술했기 때문이다. 그래서 다음과 같이 .rbenv-vars파일을 변경해 보았다.
@@ -538,7 +538,7 @@ myapp이란 db에 deploy가 접근할수 있도록 권한을 부여해야 하기
 
 ### cap production deploy 하자마자 sshkit error {#cap-production-deploy-하자마자-sshkit-error}
 
-<a id="orgdcfe045"></a>
+<a id="org2b086aa"></a>
 
 <img src="/img/web_monitoring/capproduction.png" alt="capproduction.png" width="600px" />
 이것은 aws pem키가 등록되지 않았다는 에러다. ssh-add ~/.ssh/company-ec2-keys.pem로 등록을 해야 한다.
@@ -546,7 +546,7 @@ myapp이란 db에 deploy가 접근할수 있도록 권한을 부여해야 하기
 
 ### git permission error {#git-permission-error}
 
-<a id="org3a395f4"></a>
+<a id="orgd1e1cc6"></a>
 
 <img src="/img/web_monitoring/gitcheckerror.png" alt="gitcheckerror.png" width="600px" />
 이것은 git ssh public key가 등록되지 않았다는 에러다. ssh-add ~/.ssh/id_rsa로 등록을 해준다.
@@ -590,7 +590,7 @@ cap production deploy했을때 별다른 이상없이 통과되어 해당 web se
 
 이렇게 하면 credentials를 읽을 수 있다.
 
-<a id="orgf9848a7"></a>
+<a id="org9878641"></a>
 
 <img src="/img/web_monitoring/credentials.png" alt="credentials.png" width="600px" />
 그리고 secret_key_base를 볼 수 있다. 이것을 복사해서 운영서버로 가서 myapp/.rbenv-vars에 붙여넣기 한다.
@@ -698,12 +698,12 @@ AWS을 사용하면 root계정으로 login하면 안된다. IAM 사용자 계정
 설치할 MFA기기는 가상기기이고, 내 경우, google authenticator를 설치했다.
 중간에 보면 **show QR code** 가 있다. 이것을 누르면 QR code가 보인다. 그리고 code1과 code2를 기입한다.
 
-<a id="orgb0ff70b"></a>
+<a id="org5724c3a"></a>
 
 <img src="/img/web_monitoring/root5.png" alt="root5.png" width="600px" />
 이제 root에 대한 MFA처리가 끝났다.
 
-<a id="orgaa17b1a"></a>
+<a id="orgd93f174"></a>
 
 <img src="/img/web_monitoring/root6.png" alt="root6.png" width="600px" />
 앞으로 root login은 mfa로 묻는다.
@@ -724,7 +724,7 @@ AWS을 사용하면 root계정으로 login하면 안된다. IAM 사용자 계정
 
 위와같이 user id를 만들고, pw를 설정한다. pw를 임시로 설정하고, 실제 login시 사용자가 설정하도록 한다.
 
-<a id="org0c473fe"></a>
+<a id="org072d3fb"></a>
 
 <img src="/img/web_monitoring/user3.png" alt="user3.png" width="600px" />
 정책을 선택한다.
@@ -733,7 +733,7 @@ AWS을 사용하면 root계정으로 login하면 안된다. IAM 사용자 계정
 
 {{< figure src="/img/web_monitoring/user4.png" caption="<span class=\"figure-number\">Figure 72: </span>user 생성" width="600px" >}}
 
-<a id="org05be1ce"></a>
+<a id="orgc1df121"></a>
 
 <img src="/img/web_monitoring/user5.png" alt="user5.png" width="600px" />
 tag 생성은 넘어간다.
@@ -792,7 +792,7 @@ ec2 dashboard로 접근한다. 그 다음 ec2 instance의 정보를 보자.
 
 {{< figure src="/img/web_monitoring/Route_53_1.png" caption="<span class=\"figure-number\">Figure 82: </span>route53" width="600px" >}}
 
-<a id="orge7468e2"></a>
+<a id="orgd56d32b"></a>
 
 <img src="/img/web_monitoring/route_53_1-2.png" alt="route_53_1-2.png" width="600px" />
 위에서 원하는 domain주소를 구입할 수 있다. 가격은 그렇게 비싸지 않은듯 하다.

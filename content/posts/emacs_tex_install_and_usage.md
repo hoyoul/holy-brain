@@ -32,7 +32,8 @@ tlmgr은 brew와 같은 package manager다. brew처럼 저장소에서 package�
 가져와서 설치한다. CTAN이 저장소에 해당한다. 영어로된 package는 ctan을 <br/>
 사용하면 되지만, 한글관련해서는 KTUG를 repository로 등록해서 <br/>
 한글폰트같은것을 down받아 사용할려면, KTUG도 등록해서 사용해야 한다. <br/>
-[여기](http://wiki.ktug.org/wiki/wiki.php/KtugPrivateRepository)를 참조했다. <br/>
+[여기](http://wiki.ktug.org/wiki/wiki.php/KtugPrivateRepository)를 참조했다. macTex를 설치했는데, tlmgr이 shell에서 보이지 <br/>
+않는다면 shell를 restart하자. <br/>
 
 
 ### main repo 변경 {#main-repo-변경}

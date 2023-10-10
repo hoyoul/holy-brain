@@ -28,7 +28,7 @@ cycle이 있고 무한 루프를 돈다. event에 의해서 동작된다. 말이
 electron은 다른 app과 비슷한 구조일 뿐이다. electron structure에 대한
 좋은 그림이 있어서 가져왔다.
 
-<a id="orgce29a70"></a>
+<a id="org87d9055"></a>
 
 <img src="/img/electron/electron_structure.png" alt="electron_structure.png" width="600px" />
 참조주소: [다음](https://kadamon.tistory.com/30) 과 같다.

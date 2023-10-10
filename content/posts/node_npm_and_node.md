@@ -67,7 +67,7 @@ package를 uninstall한다.
 
 package.json에 보면 다음과 같이 script가 정의되어 있다.
 
-<a id="org4da3138"></a>
+<a id="orgb4a0654"></a>
 
 <img src="/img/nodejs/npm.png" alt="npm.png" width="600px" /> script를 실행하는 명령어가 npm
 run이다. 여기에는 test라는 이름으로 script가 되어 있기 때문에 다음과
