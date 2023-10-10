@@ -1,0 +1,21 @@
+:PROPERTIES:
+:ID:       C12D0184-0D89-4F91-8E10-40BC359F17C8
+:mtime:    20231010161928
+:ctime:    20231010161928
+:END:
+#+title: [test] domain test
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-10 Tue>
+#+DESCRIPTION: test
+#+HUGO_DRAFT: true
+* domain test
+Lorem ipsum dolor sit amet, consectetuer adipiscing elit.  Donec
+hendrerit tempor tellus.  Donec pretium posuere tellus.  Proin quam
+nisl, tincidunt et, mattis eget, convallis nec, purus.  Cum sociis
+natoque penatibus et magnis dis parturient montes, nascetur ridiculus
+mus.  Nulla posuere.  Donec vitae dolor.  Nullam tristique diam non
+turpis.  Cras placerat accumsan nulla.  Nullam rutrum.  Nam vestibulum
+accumsan nisl.
+
+
