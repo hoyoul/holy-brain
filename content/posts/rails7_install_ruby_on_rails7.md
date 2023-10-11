@@ -2,13 +2,14 @@
 title = "[rails7] install ruby on rails7"
 author = ["holy"]
 description = "ruby on rails7 설치하기"
-date = 2023-09-22T00:00:00+09:00
+date = 2023-10-10T00:00:00+09:00
 draft = true
 +++
 
 ## gorails로 설치 {#gorails로-설치}
 
 [GoRails](https://gorails.com/setup/macos/13-ventura)에 보면 설치 과정이 쉽게 나와 있다. 이대로 따르면 된다.
+내 computer는 m1 mac이고, os는 ventura를 사용한다.
 
 
 ### ruby 설치 {#ruby-설치}
@@ -67,11 +68,12 @@ asdf plugin add ruby
 asdf plugin add nodejs
 ```
 
-현재 ruby의 추천은 3.2.2다. 3.2.2를 설치하자.
+현재 ruby의 추천은 3.2.2다. 그런데 project는 3.2.1이다. 3.2.1, 3.2.2 둘다 설치하자.
 
 ```shell
 asdf install ruby 3.2.2
-asdf global ruby 3.2.2
+asdf install ruby 3.2.1
+asdf global ruby 3.2.1
 
 # Update to the latest Rubygems version
 gem update --system
@@ -86,7 +88,7 @@ ruby -v
 #=> 3.2.2
 ```
 
-이제 node를 설치해보자.
+이제 node를 설치해보자. node는 project에 나와 있지 않아서 그대로 설치한다.
 
 ```shell
 asdf install nodejs 18.16.1
@@ -103,10 +105,10 @@ npm install -g yarn
 
 ### rails 설치 {#rails-설치}
 
-7.0.6 최신 버전을 설치한다.
+gorails는 7.0.6을 추천하지만, project는 7.0.8 이상을 설치하기 때문에 맞춰서 설치하자.
 
 ```shell
-gem install rails -v 7.0.6
+gem install rails -v 7.0.8
 ```
 
 만일 permission문제가 있다면, sudo를 붙여서 사용한다.

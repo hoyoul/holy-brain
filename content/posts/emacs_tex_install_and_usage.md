@@ -32,7 +32,8 @@ tlmgr은 brew와 같은 package manager다. brew처럼 저장소에서 package�
 가져와서 설치한다. CTAN이 저장소에 해당한다. 영어로된 package는 ctan을 <br/>
 사용하면 되지만, 한글관련해서는 KTUG를 repository로 등록해서 <br/>
 한글폰트같은것을 down받아 사용할려면, KTUG도 등록해서 사용해야 한다. <br/>
-[여기](http://wiki.ktug.org/wiki/wiki.php/KtugPrivateRepository)를 참조했다. <br/>
+[여기](http://wiki.ktug.org/wiki/wiki.php/KtugPrivateRepository)를 참조했다. macTex를 설치했는데, tlmgr이 shell에서 보이지 <br/>
+않는다면 shell를 restart하자. <br/>
 
 
 ### main repo 변경 {#main-repo-변경}
@@ -95,10 +96,11 @@ sudo tlmgr update --all --self
 ```
 
 
-## [Local-step6] XELATEX를 위한 font 설정 {#local-step6-xelatex를-위한-font-설정}
+## [Local-step6] XELATEX를 위한 font 설정 [주의] {#local-step6-xelatex를-위한-font-설정-주의}
 
-[여기](http://wiki.ktug.org/wiki/wiki.php/%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0MacOSX/MacTeX)에 보면 Mactex를 설치하기의 xelatex설정 부분이 있다. 이것을 <br/>
-따라한다. <br/>
+ps: mac에서 보면, ?문자가 생기는 문제가 있는데, 아마도 여기서 폰트를 <br/>
+설정하기 때문인거 같다. 이부분을 pass하자.  [여기](http://wiki.ktug.org/wiki/wiki.php/%EC%84%A4%EC%B9%98%ED%95%98%EA%B8%B0MacOSX/MacTeX)에 보면 Mactex를 <br/>
+설치하기의 xelatex설정 부분이 있다. 이것을 따라한다. <br/>
 
 참고로 tex는 크게 tex계열과 latex계열이 있다. 두개는 모두 사용법도 다르고 <br/>
 구조도 다르다. 나는 tex문서를 만들고 pdf로 만들려는 목적이기 때문에 <br/>
@@ -156,7 +158,14 @@ ln -s /Library/TeX/Root/texmf-dist/fonts/opentype ~/Library/Fonts/
 ```
 
 예를 들어서, emacs에서 위와 같이 hello.tex를 만들고, C-c C-c를 누르면 <br/>
-pdf메뉴가 보인다. <br/>
+pdf메뉴가 보인다. 근데, 최근 m2에서는 이 pdflatex가 보이지 <br/>
+않는다. pdfxelatex가 보인다. 또한 중요한게 tex에서 pdf를 뽑아내려면 <br/>
+auctex를 사용해야 한다. auctex를 설치하는 것은 다음과 같이 한다. <br/>
+
+```shell
+M-x list-package
+i, x
+```
 
 <a id="figure--tex1"></a>
 

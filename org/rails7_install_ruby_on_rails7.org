@@ -1,16 +1,18 @@
 :PROPERTIES:
 :ID:       D6AAFE62-F1A0-4CD7-A055-900373667D3A
-:mtime:    20231002023345 20230922152910 20230922134045 20230922123747 20230922112005
+:mtime:    20231010192024 20231002023345 20230922152910 20230922134045 20230922123747 20230922112005
 :ctime:    20230922112005
 :END:
 #+title: [rails7] install ruby on rails7
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
-#+DATE: <2023-09-22 Fri>
+#+DATE: <2023-10-10 Tue>
 #+DESCRIPTION: ruby on rails7 설치하기
 #+HUGO_DRAFT: true
 * gorails로 설치
 [[https://gorails.com/setup/macos/13-ventura][GoRails]]에 보면 설치 과정이 쉽게 나와 있다. 이대로 따르면 된다.
+내 computer는 m1 mac이고, os는 ventura를 사용한다.
+
 ** ruby 설치
 *** asdf 설치
 [[https://asdf-vm.com/guide/getting-started.html][참고]], asdf는 node.js와 ruby의 version관리를 할 수 있다. rvm이나 rbenv
@@ -33,6 +35,7 @@ asdf를 shell path에 등록한다.
 #+BEGIN_SRC shell
 echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 #+END_SRC
+
 **** gorails
 #+BEGIN_SRC shell
 cd
@@ -50,14 +53,15 @@ asdf plugin add ruby
 asdf plugin add nodejs
 #+END_SRC
 
-현재 ruby의 추천은 3.2.2다. 3.2.2를 설치하자.
+현재 ruby의 추천은 3.2.2다. 그런데 project는 3.2.1이다. 3.2.1, 3.2.2 둘다 설치하자.
 
 #+BEGIN_SRC shell
-asdf install ruby 3.2.2
-asdf global ruby 3.2.2
+    asdf install ruby 3.2.2
+    asdf install ruby 3.2.1
+    asdf global ruby 3.2.1
 
-# Update to the latest Rubygems version
-gem update --system
+    # Update to the latest Rubygems version
+    gem update --system
 #+END_SRC
 
 설치된 ruby version을 확인한다.
@@ -69,7 +73,7 @@ ruby -v
 #=> 3.2.2
 #+END_SRC
 
-이제 node를 설치해보자.
+이제 node를 설치해보자. node는 project에 나와 있지 않아서 그대로 설치한다.
 
 #+BEGIN_SRC shell
   asdf install nodejs 18.16.1
@@ -83,10 +87,10 @@ ruby -v
   npm install -g yarn
 #+END_SRC
 ** rails 설치
-7.0.6 최신 버전을 설치한다.
+gorails는 7.0.6을 추천하지만, project는 7.0.8 이상을 설치하기 때문에 맞춰서 설치하자.
 
 #+BEGIN_SRC shell
-gem install rails -v 7.0.6
+gem install rails -v 7.0.8
 #+END_SRC
 
 만일 permission문제가 있다면, sudo를 붙여서 사용한다.
