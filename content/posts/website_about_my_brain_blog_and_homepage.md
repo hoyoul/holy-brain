@@ -472,32 +472,3 @@ git add .
 git commit
 git push
 ```
-
-
-## FAQ {#faq}
-
-
-### git push시 에러 {#git-push시-에러}
-
-<a id="figure--push error"></a>
-
-{{< figure src="/img/blog_homepage/error1.png" caption="<span class=\"figure-number\">Figure 18: </span>push error" width="400px" >}}
-
-이것은 http로 git repo를 clone했기 때문에 발생한다. 내가 사용한 인증은
-ssh다. 따라서 해결책은 git을 clone할때 ssh로 받는것이다. http로 받으면 pat
-token인증을 하기 때문이다.
-
-
-### git clone시 에러 {#git-clone시-에러}
-
-<a id="figure--clone error"></a>
-
-{{< figure src="/img/blog_homepage/error2.png" caption="<span class=\"figure-number\">Figure 19: </span>clone error" width="400px" >}}
-
-clone시에 @github.com-holy2frege처럼 postfix를 붙여줘야 한다. 여러개의
-repo를 사용하기 때문에 postfix가 필요하다. postfix는 root의
-.gitconfig에 정의된 host명으로 해야 한다. 예를 들면, 다음과 같다.
-
-```text
-git clone git@github.com-holytofrege:holyToFrege/holyToFrege.github.io.git portfolio
-```

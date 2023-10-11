@@ -1,0 +1,34 @@
+:PROPERTIES:
+:ID:       A3FCD7B0-9814-468C-9BFA-063D47AEF418
+:mtime:    20230908212544 20230908180348 20230908170246
+:ctime:    20230908170246
+:END:
+#+title: [lsp] how to use lsp
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-09-08 Fri>
+#+DESCRIPTION: how to use lsp
+#+HUGO_DRAFT: true
+
+* LSP mode(client)
+LSP는 server/client로 동작한다. client는 emacs다. emacs에서 lsp-mode를
+적용하면 emacs는 lsp client가 된다. 그러면 server는 어디에 있는가?
+
+* LSP server
+LSP server는 system에 설치해야 한다. brew로 설치할 수도 있고, 각
+언어의 package manager에서 설치할 수도 있다.
+
+* LSP-ui (lsp-mode extension)
+LSP-mode라는 기본 기능에 추가하는 기능이다. flycheck와 같은 문법체킹
+기능이나 pep8과 같은 style에 대한 정보, code lense와 같이 참조하는
+symbol에 대한 정보를 오른쪽 side에 warning형식으로
+보여준다. 개인적으로는 이런 정보를 좋아하지 않는다. 나는 설치를 하지
+않는다. lsp-ui는 별도로 설치해야 한다.
+* LSP-treemacs (lsp-mode extension)
+#+BEGIN_SRC text
+lsp-mode + treemacs = lsp-treemacs
+#+END_SRC
+
+
+
+

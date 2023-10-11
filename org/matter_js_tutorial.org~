@@ -1,0 +1,15 @@
+:PROPERTIES:
+:ID:       18477AC6-558D-45B8-A200-AC09B0E893B7
+:mtime:    20230729225250 20230729122752
+:ctime:    20230729122752
+:END:
+#+title: [matter.js] tutorial
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-07-29 Sat>
+#+DESCRIPTION: 재밌는 matter.js
+#+HUGO_DRAFT: true
+* Getting started
+matter.js는 물리엔진이다. 물리엔진을 가지고 노는것은 즐겁다. js파일을
+실행하기 위해선 node가 필요하다. node의 기초적인 사용법은 따로 link를
+걸겠다.

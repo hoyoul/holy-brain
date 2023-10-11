@@ -1,0 +1,814 @@
+:PROPERTIES:
+:ID:       36349AB1-58C2-43AA-AF3B-795AFBBD8B78
+:mtime:    20230824181601 20230824154945 20230824143747 20230824133217 20230824123143 20230824112929 20230824102809
+:ctime:    20230824102809
+:END:
+#+title: [dart] practice1- basic
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE:<2023-08-24 Thu>
+#+DESCRIPTION: dart 매일 해야하는것들
+#+HUGO_DRAFT: true
+* [1] hello world
+#+BEGIN_SRC dart
+void main(){
+   print('hello world');
+}
+#+END_SRC
+* [2-var] var (var로 값 만들고 출력)
+- 값에 따라 type이 결정, build time(compile time)에 결정.
+
+#+BEGIN_SRC dart
+  void main(){
+    var name1 = 'holy';
+
+    print(name1);
+
+    name1 = 'frege';
+
+    print(name1);
+
+  }
+#+END_SRC
+
+#+RESULTS:
+: holy
+: frege
+* [3-var] var로 값 변경하고 출력
+#+BEGIN_SRC dart
+  void main(){
+    var name1 = 'holy';
+    name1 = 'frege';
+    print(name1);
+    }
+#+END_SRC
+
+#+RESULTS:
+: frege
+* [4-int] int 선언 출력
+#+BEGIN_SRC dart
+  void main(){
+    int number1 = 10;
+    print(number1);
+    int number2 = 15;
+    print(number2);
+    int number3 = -10;
+    print(number3);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 10
+: 15
+: -10
+
+* [5-int] int 계산 4가지
+#+BEGIN_SRC dart
+  void main(){
+    int number1 = 10;
+    int number2 = 15;
+    print(number1 + number2);
+    print(number1 - number2);
+    print(number1 * number2);
+    print(number1 / number2);  
+  }
+#+END_SRC
+
+#+RESULTS:
+: 25
+: -5
+: 150
+: 0.6666666666666666
+
+* [6-double] double 선언 및 출력
+#+BEGIN_SRC dart
+  void main(){
+    double number1 = 0.5;
+    double number2 = 1.0;
+    print(number1);
+    print(number2);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 0.5
+: 1.0
+
+* [7-double] double의 계산 4가지
+#+BEGIN_SRC dart
+  void main(){
+    double number1 = 1.0;
+    double number2 = 0.5;
+
+    print(number1 + number2);
+    print(number1 * number2);    
+    print(number1 - number2);
+    print(number1 / number2);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 1.5
+: 0.5
+: 0.5
+: 2.0
+
+* [8-bool] bool 의 선언및 출력
+#+BEGIN_SRC dart
+  void main(){
+  bool isTrue = true;
+  bool isFalse = false;
+
+  print(isTrue);
+  print(isFalse);
+}
+#+END_SRC
+
+#+RESULTS:
+: true
+: false
+
+* [9-String] String 선언과 출력
+- string을 사용할때 String의 S는 대문자다.
+#+BEGIN_SRC dart
+  void main(){
+  String name1 = 'redvelvet';
+  String name2 = 'holy';
+
+  print(name1);
+  print(name2);
+  }
+#+END_SRC
+
+#+RESULTS:
+: redvelvet
+: holy
+
+* [10-string] var와 string의 차이(runtimeType)
+- var도 문자열을 값으로 가질수 있고, String도 문자열을 가질 수 있다.
+- var는 int도 가질수 있고 bool도 가질 수 있는데, assign되는 value에
+  의해 type이 결정된다. build time때 결정되지만, runtimeType으로
+  확인할 수 있다. runtimeType은 함수가 아니다.
+- var,dynamic은 type이 아니다.
+  #+BEGIN_SRC dart
+    void main(){
+    var name3 = 'holy';
+    var number = 20;
+
+    print(name3.runtimeType);
+    print(number.runtimeType);    
+}
+  #+END_SRC
+
+  #+RESULTS:
+  : String
+  : int
+
+* [11-String] string 덧셈
+#+BEGIN_SRC dart
+  void main(){
+    String name1 = 'holy';
+    String name2 = 'frege';
+
+    print(name1 + name2);
+  }
+#+END_SRC
+
+#+RESULTS:
+: holyfrege
+
+* [12-String] embedded string
+- 두가지 형태가 있다. {}을 안치면 변수만 가능, {}를 치면 함수도 가능.
+#+BEGIN_SRC dart
+  void main(){
+    String name1 = 'holy';
+    print('this is ${name1}');
+    print('this is $name1');
+    print('this is ${name1.runtimeType}');    
+  }
+#+END_SRC
+
+#+RESULTS:
+: this is holy
+: this is holy
+: this is String
+
+* [13-dynamic] dynamic 선언과 출력
+- dynamic은 모든 type의 value를 받을 수 있다.
+- dynamic은 build time때 Object type을 갖는데, runtime때 value에 따라
+  type이 결정된다.
+
+
+#+BEGIN_SRC dart
+  void main(){
+    dynamic name = 'holy';
+    print(name);
+
+    dynamic number = 1;
+    print(number);
+  }
+#+END_SRC
+
+#+RESULTS:
+: holy
+: 1
+
+* [14-dynamic] var과 dynamic의 차이
+- var는 build time때 value를 보고 type이 만들어진다.
+- dynamic은 runtime때 value를 보고 type이 만들어진다.
+- var로 선언된 변수의 값을 다른 type의 값으로 변경은
+  불가능하다. dynamic은 가능하다.
+
+#+BEGIN_SRC dart
+  void main(){
+    var name = 'holy';
+    dynamic name2 = 'frege';
+
+    name2 = 3;
+    print(name);
+    print(name2);
+}
+#+END_SRC
+
+#+RESULTS:
+: holy
+: 3
+
+* [15-nullable] ?
+- Null class가 있다.
+- String, int, double,bool같은 type은 일반적으로 null값을 가질 수 없다.
+- type에 ?을 추가하면 Null을 상속받아서 null값을 가질 수 있다.
+
+
+#+BEGIN_SRC dart
+  void main(){
+    String name = 'holy';
+    String? name2 = null;
+
+    print(name);
+    print(name2);
+  }
+#+END_SRC
+
+#+RESULTS:
+: holy
+: null
+* [16-nullable] !
+- !는 symbol 뒤에 표시한다. null값을 가질 수 없다는 의미다.
+- 보통 함수 호출시 parameter를 받을때 사용한다.
+
+#+BEGIN_SRC dart
+  void main(){
+    String? name = null;
+
+    print(name!);
+  }
+#+END_SRC
+
+#+RESULTS:
+
+* [17-final] final keyword 선언과 출력
+- 한번 선언하면 그 값을 바꿀수 없다.
+#+BEGIN_SRC dart
+  void main(){
+    final String name = 'holy';
+    // name = 'frege';
+    print(name);
+
+  }
+#+END_SRC
+
+#+RESULTS:
+: holy
+
+* [18-const] const의 선언과 출력
+- const로 한번 선언하면 그 값을 바꿀 수 없다.
+
+
+#+BEGIN_SRC dart
+  void main(){
+    const String name = 'holy';
+    // name = 'frege';
+    print(name);
+  }
+#+END_SRC
+
+#+RESULTS:
+
+* [19-final vs const] final vs const 공통점1
+- final과 const는 한번 선언되면 그 값을 바꿀수 없다.
+
+#+BEGIN_SRC dart
+  void main(){
+    final String name = 'holy';
+    print(name);
+    const String name2 = 'frege';
+    print(name2);
+    
+  }
+#+END_SRC
+
+#+RESULTS:
+: holy
+: frege
+
+* [20-final vs const] final vs const 공통점2 - using it without type
+- final과 const는 var가 포함되어 있다.
+- final과 const는 값에 따라 type이 결정된다.
+
+#+BEGIN_SRC dart
+  void main(){
+    final name = 'holy';
+    print(name);
+    const name2 = 'frege';
+    print(name2);
+  }
+#+END_SRC
+
+* [21-final vs const] final vs const 차이점 -DateTime
+- final과 const의 차이는 값이 runtime때 결정되냐? compile때 결정되냐의
+  차이다.
+- const는 compile때 값이 결정된다. final은 runtime때 결정된다.
+- DateTime.now()는 runtime에 값이 결정되는 함수다. final은 가능하지만, const는 불가능하다.
+
+#+BEGIN_SRC dart
+  void main(){
+    DateTime now = DateTime.now();
+    print(now);
+
+    final DateTime now1 = DateTime.now();
+    print(now1);
+
+    // const DateTime now2 = DateTime.now();
+    // print(now2);    
+  }
+#+END_SRC
+
+#+RESULTS:
+
+* [22-operator] 4칙 연산 operator
+#+BEGIN_SRC dart
+  void main(){
+    final number1 = 3;
+    final number2 = 5;
+    print('$number1 + $number2 = ${number1 + number2}');
+    print('$number1 * $number2 = ${number1 * number2}');
+    print('$number1 / $number2 = ${number1 / number2}');
+    print('$number1 - $number2 = ${number1 - number2}');    
+  }
+#+END_SRC
+
+#+RESULTS:
+: 3 + 5 = 8
+: 3 * 5 = 15
+: 3 / 5 = 0.6
+: 3 - 5 = -2
+
+* [23-operator] % operator
+- 나머지 연산자
+#+BEGIN_SRC dart
+  void main(){
+    final number1 = 10;
+    final number2 = 5;
+
+    print('$number1 % $number2 = ${number1 % number2}');
+  }
+#+END_SRC
+
+#+RESULTS:
+: 10 % 5 = 0
+  
+* [24-operator] ++,-- operator
+- ++,--는 전위 후위가 가능하다.
+- 값을 변경하기 때문에, final은 사용할 수 없다.
+#+BEGIN_SRC dart
+  void main(){
+    // final int number1 = 3;
+    int number1 = 3;
+    print('$number1++ = ${number1++}');
+
+    int number2 = 6;
+    print('$number1++ = ${++number1}');    
+
+    }
+#+END_SRC
+
+#+RESULTS:
+: 3++ = 3
+: 4++ = 5
+
+* [25-operator] +=, -=
+#+BEGIN_SRC dart
+  void main(){
+    int number = 4;
+
+    number += 5;
+    print(number);
+
+    int number2 = 9;
+    number2 -= 3;
+    print(number2);
+
+  }
+#+END_SRC
+
+#+RESULTS:
+: 9
+: 6
+
+* [26-operator] ??=
+- nullable operator
+- ??= 변수가 null이면 assign한다. null이 아니면 그대로.
+#+BEGIN_SRC dart
+  void main(){
+    int? number1 = null;
+
+    number1 ??= 3;
+    print(number1);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 3
+  
+
+* [27-operator] <, >, >=,<=, ==, != 비교 연산자 출력
+
+#+BEGIN_SRC dart
+  void main(){
+    int number1 = 10;
+    int number2 = 5;
+
+    print(number1 > number2);
+    print(number1 < number2);
+    print(number1 >= number2);
+    print(number1 <= number2);
+    print(number1 == number2);
+    print(number1 != number2);        
+  }
+#+END_SRC
+
+#+RESULTS:
+: true
+: false
+: true
+: false
+: false
+: true
+
+* [28-operator] is 와 is!
+#+BEGIN_SRC dart
+  void main(){
+    int number1 = 10;
+
+    print(number1 is int);
+    print(number1 is! int);
+  }
+#+END_SRC
+
+#+RESULTS:
+: true
+: false
+
+* [29-operator] logic operator && ||
+#+BEGIN_SRC dart
+  void main(){
+    bool results = 12 >10 && 1>0;
+    print(results);
+
+    bool results2 = 1<5 || 12 > 0;
+    print(results2);
+  }
+#+END_SRC
+
+#+RESULTS:
+: true
+: true
+
+* [30-list] List 생성과 출력
+- 대문자로 시작
+- List는 data를 넣는 container, 어떤 data를 넣을 지 generic으로 선언해야 한다.
+
+#+BEGIN_SRC dart
+  void main(){
+    print('==================');    
+    List<String> member = ['a' 'b', 'c', 'd'];
+    print(member);
+    print('==================');    
+    List<int> numbers = [1,2,3,4,5];
+    print(numbers);
+  }
+#+END_SRC
+
+#+RESULTS:
+: ==================
+: [ab, c, d]
+: ==================
+: [1, 2, 3, 4, 5]
+
+* [31-List] List에서 값꺼내기
+#+BEGIN_SRC dart
+  void main(){
+    List<String> members =['harry','George','john'];
+    print(members[0]);
+    print(members[1]);
+    print(members[2]);    
+  }
+#+END_SRC
+
+#+RESULTS:
+: harry
+: George
+: john
+
+* [32-List] 전체 List의 길이를 알기
+- length를 사용
+
+#+BEGIN_SRC dart
+  void main(){
+    List<String> members = ['harry','George', 'Jed'];
+    print(members.length);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 3
+
+* [33-List] List의 add, remove, indexOf 함수 사용
+
+#+BEGIN_SRC dart
+  void main(){
+    print('---------------------');
+    List<String> members = ['harry','George','Jed'];
+    members.add('ted');
+    print(members);
+    members.remove('harry');
+    print(members);
+    int num = members.indexOf('Jed');
+    print(num);
+  }
+#+END_SRC
+
+#+RESULTS:
+: ---------------------
+: [harry, George, Jed, ted]
+: [George, Jed, ted]
+: 1
+* [34-Map] Map의 생성과 출력
+- Map은 key value를 가진 하나의 객체다.
+#+BEGIN_SRC dart
+  void main(){
+    Map<String,String> dict = {
+      'age': '43',
+      'name': 'holy',
+      'address': 'jeju',
+      };
+      print(dict);
+  }
+#+END_SRC
+
+#+RESULTS:
+: {age: 43, name: holy, address: jeju}
+
+* [35-Map] Map에 값을 추가하기 - addAll()
+- addAll()에 인자로 Map을 추가하면 된다.
+#+BEGIN_SRC dart
+  void main(){
+    Map<String,bool> casting = {
+      "George": true,
+    };
+    casting.addAll(
+      {"Jed": false,});
+    print(casting);
+  }
+#+END_SRC
+
+#+RESULTS:
+: {George: true, Jed: false}
+
+* [36-Map] Map에 값을 추가하기 - index사용
+#+BEGIN_SRC dart
+  void main(){
+    Map<String,bool> casting = {
+      "lingo": true,
+      "George": true,
+      "Queen": false,
+      };
+    casting['blur']=false;
+    print(casting);
+  }
+#+END_SRC
+
+#+RESULTS:
+: {lingo: true, George: true, Queen: false, blur: false}
+
+* [37-Map] Map의 값을 변경
+#+BEGIN_SRC dart
+  void main(){
+    Map<String, bool> casting = {
+      'jed': true,
+      'George':false,
+  };
+  casting['jed'] = false;
+  print(casting);
+}
+#+END_SRC
+
+#+RESULTS:
+: {jed: false, George: false}
+
+* [38-Map] Map의 값을 삭제 remove()사용.
+- remove는 함수다. 이 함수를 사용해서 삭제할 수 있다.
+#+BEGIN_SRC dart
+  void main(){
+    Map<String,bool> casting = {
+      'George': true,
+      'Fat': false,
+  };
+  casting.remove('George');
+  print(casting);
+  }
+#+END_SRC
+
+#+RESULTS:
+: {Fat: false}
+
+* [39-Map] keys와 values 가져오기
+- keys와 values는 변수다.
+- kesy와 values는 iterable을 return한다.
+#+BEGIN_SRC dart
+  void main(){
+    Map<String,int> people = {
+      "Harry":33,
+      "potter": 22,
+      "John": 88,
+      "Shelly": 86,
+      };
+   print(people.keys);
+   print(people.values);
+
+  }
+#+END_SRC
+
+#+RESULTS:
+: (Harry, potter, John, Shelly)
+: (33, 22, 88, 86)
+
+* [40-Set] Set의 생성과 출력
+- 중복을 허용하지 않는다.
+  #+BEGIN_SRC dart
+    void main(){
+      Set<String> strset = {
+        'George',
+        'Harry',
+        'Potter',
+        };
+        print(strset);
+    }
+  #+END_SRC
+
+  #+RESULTS:
+  : {George, Harry, Potter}
+
+* [41-set] set에 add, remove
+#+BEGIN_SRC dart
+  void main(){
+    Set<String> strset = {
+      'john',
+      'Mccarthy',
+      'edward',
+      };
+      strset.add('mac');
+      print(strset);
+      strset.remove('john');
+      print(strset);
+  }
+#+END_SRC
+
+#+RESULTS:
+: {john, Mccarthy, edward, mac}
+: {Mccarthy, edward, mac}
+
+* [42-set] contain(),포함여부 확인
+#+BEGIN_SRC dart
+  void main(){
+    Set<String> strset = {
+      'john',
+      'mccarthy',
+      'holy',
+
+      };
+
+      print(strset.contains('holy'));
+  }
+#+END_SRC
+
+#+RESULTS:
+: true
+
+* [43-if] if,else if, else 기본 사용법
+- if,else if,else 사용법
+  #+BEGIN_SRC dart
+    void main(){
+      int number = 3;
+      if (number % 3 ==0)
+      {
+        print('remainder 0');
+      } else if (number % 3 == 1)
+      {
+          print('remainder 1');
+      }else
+      {
+            print('remainder 2');
+      }
+  }
+  #+END_SRC
+
+  #+RESULTS:
+  : remainder 0
+
+* [44-switch] switch문 기본 사용법
+- 각 case에는 break를 넣어야 한다.
+- default case를 잊지 말아야 한다.
+  #+BEGIN_SRC dart
+    void main()
+    {
+      int number = 3;
+
+      switch(number % 3){
+        case 0:
+        print("remainder 0");
+        break;
+        case 1:
+        print("remainder 1");
+        break;
+        case 2:
+        print("remainder 2");
+        break;
+        }
+    }
+  #+END_SRC
+
+  #+RESULTS:
+  : remainder 0
+
+* [45-for] for-loop
+#+BEGIN_SRC dart
+  void main(){
+    for(int i=0;i< 10;i++){
+      print(i);
+      }
+  }
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+0
+1
+2
+3
+4
+5
+6
+7
+8
+9
+#+end_example
+
+* [46-for] list for-loop
+- for ~ in 사용법
+- in 을 사용할 때 함수처럼 ()에 기술한다. 이것이 좀 특이하다.
+#+BEGIN_SRC dart
+  void main(){
+    int total = 0;
+    List<int> numbers = [1,2,3,4,5];
+    for(int i in numbers){
+      total += i;
+      }
+    print(total);
+  }
+#+END_SRC
+
+#+RESULTS:
+: 15
+
+* [47-while] while 기본 사용법
+#+BEGIN_SRC dart
+  void main(){
+    int total = 0;
+
+    while(total <10){
+      
+      }
+
+
+  }
+#+END_SRC
+* [48]
+* [49]
+* [50]
+* [51]
+* [52]
+* [53]
+* [54]
+* [55]

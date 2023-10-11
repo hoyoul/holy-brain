@@ -1,0 +1,112 @@
+:PROPERTIES:
+:ID:       2F198627-D7BA-4D50-A9EF-5EEA1E8155CF
+:mtime:    20231011112250 20231011100647
+:ctime:    20231011100647
+:END:
+#+title: [github] multiple account and cooperate team
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-11 Wed>
+#+DESCRIPTION: team협업시에 계정문제
+#+HUGO_DRAFT: true
+* 계요
+나는 지금 whitebrew 개발팀에 합류했고, github으로 협업하게
+되었다. 팀에서는 협업을 위해서 내 github email주소를 요청했다. 그리고
+team에서는 내 email로 협업자로 등록을 해주었다. email만 전달했는데,
+team에서 등록했다고 연락이 왔다. 그리고 github에 보면 다음과 같이 team들이
+보였다.
+
+#+CAPTION: team1
+#+NAME: team1
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/team1.png]]
+* 문제
+그런데, 해당 team의 link로 들어가서 여러 repo들을 다운 받을려고 보니,
+왠걸 다운이 안되는 것이다. clone이 안 된다. 인증 문제가 있었다. 해당
+repo들이 private으로 설정되어서 그런 것인가?
+#+CAPTION: promblem 0
+#+NAME: problem 0
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/team0.png]]
+
+그런데, team member로 들어가면 private이던 public이던 상관없이 clone이
+된다고 한다. 그럼 이문제는 아니다. 좀 더team의 repo들을 살펴보기로
+했다.
+
+* 문제분석1 (contributer와 team member)
+team page에 가보니까, 다음과 같이 되어 있었다. team member이지만,
+contributer가 아니라서?
+
+#+CAPTION: team2
+#+NAME: team2
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/team2.png]]
+
+#+CAPTION: team3
+#+NAME: team3
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/team3.png]]
+
+그런데, team contributer는 team repo에 commit할 권한만
+주어진다. local로 clone하고 write하고 commit하는것과는 관련이
+없다. 정상적이라면, commit이 되어야 한다. 즉, 이 문제는 아니다.
+
+* 문제분석2
+나한테 문제가 있는 건 아닐까? 나는 multiple github 계정을 사용하고
+있다. 어떤 형태이냐면, 그림으로 보면 다음과 같다.
+
+#+CAPTION: my githubs
+#+NAME: my githubs
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/mygithub.jpg]]
+
+3개의 계정이 있고, 각각은 ssh로 연결된 상태다. 그리고 맨 오른쪽,
+계정은 team member로 등록된 상황이다. 그러면 team github account에도
+ssh연결을 위해서 내 공개키를 등록해서 ssh연결을 해야하는거 아닌가?
+라는 생각이 들었다. 그래서 그것을 물어봤다. 아..그런데 내
+착각이였다. 내가 가진 ssh로 연결된 계정들은 모두 검증된
+계정?들이다. 즉 그 계정들이 다른 github계정의 팀 멤버가 된다면, 나의
+계정을 통해서 그 team의 repo에 접근이 가능한것이다. 즉 나는 맨 오른쪽
+github의 repo를 clone하거나 push할때, postfix로 -hoyoul을 붙여서
+접근한다. 그러면 그 계정과 연결된 다른 repo들을 clone하거나 push 할때
+마찬가지로 postfix인 -hoyoul을 사용해서 local을 가져오는것이다. 이렇게
+해결을 했다.
+
+#+CAPTION: ssh
+#+NAME: ssh
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/ssh1.png]]
+
+위에처럼 github.com-hoyoul이라는 postfix를 사용했다.  postfix를
+사용하는 이유는, 서버의 주소는 github.com이고, github에 포함된
+account를 표현하기 위해서 account마다 postfix를 붙여준것이다.
+
+* multiple 계정에 대해서...
+multiple계정에 대해서 말을 하는게 약간 핀트가 벗어나지만, 여튼 얘길
+하자면, multiple github계정을 local computer(특히 mac)에서 그냥
+사용하면 짜증난다. 매번 push할 때마다,osx keychain에서 github에
+해당하는 credentials를 지우고 다시 설정한다. 한번 설정하면, 그런 고민
+없이 그냥 사용하고 싶었다. ssh연결을 통하면 이런 불편없이
+multiple계정을 사용할 수 있다. github 계정마다 ssh키를 만들고,
+공개키를 각각의 계정마다 설정했다. push나 clone을 하기 위해서, 해당
+계정으로 접속하는건 .ssh/config에서 처리를 해준다. 이렇게 처리하는것은
+내 블로그에 써놓았다. 이 방식은 postfix를 사용하는 방식인데, 좀
+tricky하다. 왜냐면 매번 push나 clone할때, postfix를 붙여야 하기
+때문이다.
+
+* 요약
+내가 관리하는 github account들은 내 local computer와 ssh로 연결되어
+있다. 각각의 github계정들은 나라고 보면된다. team에서 나의 github을
+등록했다는것은 내가 team의 repo를 접근할 수 있게 허락했다는
+것이다. 내가 team의 repo를 local computer에 접근할려면, 멤버가 된
+나의 github에 접근하듯이 접근해야 한다. 즉 post-fix를 사용해서 접근한다.
+
+
+
+

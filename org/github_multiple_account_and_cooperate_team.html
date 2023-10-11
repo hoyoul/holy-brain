@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>[github] multiple account and cooperate team</title>
+<meta name="author" content="holy"/>
+<meta name="description" content="team협업시에 계정문제"/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="./reveal.js/css/reveal.css"/>
+
+<link rel="stylesheet" href="./reveal.js/css/theme/moon.css" id="theme"/>
+
+
+<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+<script>
+    if( window.location.search.match( /print-pdf/gi ) ) {
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = './reveal.js/css/print/pdf.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    }
+</script>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">[github] multiple account and cooperate team</h1><p class="subtitle"></p>
+<h2 class="author">holy</h2><h2 class="date">2023-10-11 Wed 00:00</h2><p class="date">Created: 2023-10-11 Wed 11:06</p>
+</section>
+<section id="sec-table-of-contents"><div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#/slide-org59b5e9c">1. 계요</a></li>
+<li><a href="#/slide-org312edef">2. 문제</a></li>
+<li><a href="#/slide-org31a5464">3. 문제분석1 (contributer와 team member)</a></li>
+<li><a href="#/slide-orgbcd5aab">4. 문제분석2</a></li>
+</ul>
+</div>
+</div>
+</section>
+<section>
+<section id="slide-org59b5e9c">
+<h2 id="org59b5e9c"><span class="section-number-2">1.</span> 계요</h2>
+<p>
+나는 지금 whitebrew 개발팀에 합류했고, github으로 협업하게
+되었다. 팀에서는 협업을 위해서 내 github email주소를 요청했다. 그리고
+team에서는 내 email로 협업자로 등록을 해주었다. email만 전달했는데,
+team에서 등록했다고 연락이 왔다. 그리고 github에 보면 다음과 같이 team들이
+보였다.
+</p>
+
+
+<div id="org0894b66" class="figure">
+<p><img src="../static/img/github/team1.png" alt="team1.png" width="400px" />
+</p>
+<p><span class="figure-number">Figure 1: </span>team1</p>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org312edef">
+<h2 id="org312edef"><span class="section-number-2">2.</span> 문제</h2>
+<p>
+그런데, 해당 team의 link로 들어가서 여러 repo들을 다운 받을려고 보니,
+왠걸 다운이 안되는 것이다. clone이 안 된다. 인증 문제가 있었다. 해당
+repo들이 private으로 설정되어서 그런 것인가?
+</p>
+
+<div id="org8fb11b5" class="figure">
+<p><img src="../static/img/github/team0.png" alt="team0.png" width="400px" />
+</p>
+<p><span class="figure-number">Figure 2: </span>promblem 0</p>
+</div>
+
+<p>
+그런데, team member로 들어가면 private이던 public이던 상관없이 clone이
+된다고 한다. 그럼 이문제는 아니다. 좀 더team의 repo들을 살펴보기로
+했다.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org31a5464">
+<h2 id="org31a5464"><span class="section-number-2">3.</span> 문제분석1 (contributer와 team member)</h2>
+<p>
+team page에 가보니까, 다음과 같이 되어 있었다. team member이지만,
+contributer가 아니라서?
+</p>
+
+
+<div id="org8b2ee39" class="figure">
+<p><img src="../static/img/github/team2.png" alt="team2.png" width="400px" />
+</p>
+<p><span class="figure-number">Figure 3: </span>team2</p>
+</div>
+
+
+<div id="orgbeb88e7" class="figure">
+<p><img src="../static/img/github/team3.png" alt="team3.png" width="400px" />
+</p>
+<p><span class="figure-number">Figure 4: </span>team3</p>
+</div>
+
+<p>
+그런데, team contributer는 team repo에 commit할 권한만
+주어진다. local로 clone하고 write하고 commit하는것과는 관련이
+없다. 정상적이라면, commit이 되어야 한다. 즉, 이 문제는 아니다.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-orgbcd5aab">
+<h2 id="orgbcd5aab"><span class="section-number-2">4.</span> 문제분석2</h2>
+<p>
+나한테 문제가 있는 건 아닐까? 나는 multiple github을 사용하고
+있다. github계정이 여러개이기 때문이다. 그래서 push나 clone할때
+일반적으로 repo의 주소를 그대로 clone하거나 push하지 않는다. postfix를
+붙여서 처리하는데, 그것은 약간 tricky하다.
+</p>
+</section>
+</section>
+</div>
+</div>
+<script src="./reveal.js/js/reveal.js"></script>
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+
+// Optional libraries used to extend on reveal.js
+dependencies: [
+ { src: './reveal.js/plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+ { src: './reveal.js/plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+ { src: './reveal.js/plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }]
+
+});
+
+</script>
+</body>
+</html>

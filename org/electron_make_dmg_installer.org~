@@ -1,0 +1,100 @@
+:PROPERTIES:
+:ID:       88573CCD-915B-41DD-B573-91434C76BC82
+:mtime:    20230810110851 20230810093649 20230810083244 20230809232528 20230809221209 20230809192942
+:ctime:    20230809192942
+:END:
+#+title: [electron] make dmg installer
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-09 Wed>
+#+DESCRIPTION: make dmg installer
+#+HUGO_DRAFT: true
+
+* dmg installer란?
+우선 dmg installer가 뭔지 알아야 한다. dmg installer는 아래와 같은
+모양이다.
+#+CAPTION: dmg installer
+#+NAME: dmg installer
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/electron/dmginstaller.png]]
+
+mac에서 실행되는 app을 다른 사람에게 배포할때 사용하는 program을 dmg
+installer라고 부른다. 간단히 말해서 dmg라는 설치 파일을 만드는 것이다.
+
+* node electron to mac app
+우리의 원래 계획은 electron으로 어플을 만들고, mac app으로 변환한 후,
+dmg파일로 만들어 배포하는 것이다. swift로 mac app을 만들고 dmg로
+만드는게 아니다. 여튼 만들면 mac에서 더블 클릭만 해서 사용할 수 있다.
+
+* dmg installer만들기
+project를 만들고, mac app을 만들어야 한다. mac app
+** electron app을 만들자.
+electron project를 만들어야 한다. electron project를 만드는 법은
+여러가지가 있다.
+*** node project만들기
+폴더를 만든다. 그리고
+#+BEGIN_SRC text
+  npm init
+  npm install --save-dev electron    
+#+END_SRC
+electron을 만들기 위해서 electron을 설치한다. electron으로 원하는
+app을 만든다.
+
+
+*** npx create-electron-app
+electron dmg app을 만들 수 있는 project를 만들 수도 있다.
+
+간단하게 npx를 사용하기로 하자. npx로 electron app을 만들면 electron을
+따로 설치할 필요가 없다. 또한 electron-forge도 설치할 필요가
+없다. electron-forge는 mac에서 사용하는 app을 만들어주는
+package다. project를 만들기 위해서 최신 node로 설정하자.
+
+#+BEGIN_SRC text
+nvm use v18.0.0
+#+END_SRC
+project를 만들자.
+
+#+BEGIN_SRC sh
+npx create-electron-app simpleapp
+#+END_SRC
+** electron dmg app을 만들자.
+simpleapp으로 들어간다. src폴더에 index.html을 수정한다. 간단한
+예제라서 h1 tag내용을 바꾸고, shell에서 다음을 실행한다.
+
+#+BEGIN_SRC text
+npm run make
+#+END_SRC
+out이라는 폴더가 만들어지고, mac에서 사용하는 어플이 만들어진다.
+#+CAPTION: dmg app
+#+NAME: dmg app
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/electron/dmgapp.png]]
+
+클릭하면 다음과 같은 app을 볼 수 있다.
+#+CAPTION: dmg app2
+#+NAME: dmg app2
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/electron/dmgapp2.png]]
+
+즉, out에서 simple .app으로 끝나는 어플이 생성되었음을 확인할 수 있다.
+** dmg installer 만들기
+여기까지 했다면, mac용 app이 만들어졌기 때문에 dmg installer를 만드는
+것은 electron과는 상관없는 작업이 된다. installer를 만드는 것은 여러
+방법이 있다. 가장 유명한 create-dmg를 사용해서 만들어보겠다.
+*** prerequisites
+- create-dmg download
+- 배포용 dmg icon
+- 배포용 dmg-background.png
+- .DS_Store: icon의 위치 크기를 결정함.
+*** create-dmg 설치
+brew로 설치할수도 있고, node에서 제공하는 package를 사용할 수 도
+있다. 나는 node의 package를 사용하기로 한다. create-dmg는 뭘로
+설치해도 어차피 shell에서 실행한다.
+#+BEGIN_SRC text
+  npm install -g create-dmg
+  brew install create-dmg  
+#+END_SRC
+

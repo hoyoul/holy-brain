@@ -1,0 +1,114 @@
+:PROPERTIES:
+:ID:       FAA6E4E2-C816-4B2E-B3CD-BF4ECD295AAF
+:mtime:    20230806131454
+:ctime:    20230806131454
+:END:
+#+title: [unity] about unity settings
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-06 Sun>
+#+DESCRIPTION: 옛날 자료 취합중
+#+HUGO_DRAFT: true
+* 설치
+** unityhub 다운
+-  [[https://unity.com/download#how-get-started][여기]]에서 unity hub를 다운받는다.
+  #+CAPTION: unity hub
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/unityhub1.png]]
+** unity 다운
+- unityhub는 여러개의 unity가 설치될 수 있는 hub다. unity를 설치해보자.
+ #+CAPTION: unity1
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/unity1.png]]
+- unity version 선택
+  #+CAPTION: unity2
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/unity2.png]]
+- android, ios 추가 설치
+  #+CAPTION: unity3
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/unity3.png]]
+
+- unity 설치 진행
+  #+CAPTION: unity4
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/unity4.png]]
+** android, ios 관련 설치
+- ios 는 xcode가 필요.
+- android는 android studio가 필요하다. xcode나 android studio가 없다면, 없는것을 설치한다.
+* Project 실행
+- project 생성
+  #+CAPTION: project1
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/project1.png]]
+- Project 만들기
+  #+CAPTION: project2
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/project2.png]]
+
+ #+begin_warning
+ project를 만들수 없다. valid license가 없다는 에러가 나오면서 진행되지 않는다. License를 만든후 진행하면 만들어지는 것을 확인할 수 있다.
+ #+end_warning
+* License를 만들기
+- login
+  license는 login을 해야 한다. login후 manual activation을 해도 된다.
+* Project 실행
+- project 실행 화면
+  #+CAPTION: project
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/project3.png]]
+* 사용법
+** emacs를 편집기로 사용
+- lsp C#(ommisharp)을 위해서 mono를 다운받는다.
+  [[https://www.mono-project.com/download/stable/][여기]]에서 stable channel에서 다운받는다. 그리고 설치된 위치에서 다음을 설정해야 한다.
+  -참조
+  https://elizadev.medium.com/using-unity-editor-with-emacs-9316eb441411
+  bin_dir=/Library/Frameworks/Mono.framework/Versions/Current/bin
+  https://github.com/OmniSharp/omnisharp-roslyn/issues/1948
+  
+** C# code를 visual studio와 연동하기
+#+CAPTION: editor1
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/editor1.png]]
+** script 작성하기
+#+begin_note
+project창의 아래를 보면 좌측엔  project라는 메뉴가 보인다. 우측에는 asset창이 보인다. asset창에서 마우스  오른쪽 버튼을 누르고 create-> c#script를 선택하면 script파일이 만들어진다.
+#+end_note
+** game과 scene
+#+begin_note
+scene은 전지적 시점에서 보는 영상이다.  카메라,조명, object를 설정하고 놓을수 있다. 반면 game에서는 camera에서 보는 영상이다.
+#+end_note
+** 도형추가방법
+#+begin_note
+아래 그림에서 +를 누르면, 3D object를 화면에 추가할 수 있다.
+#+end_note
+#+CAPTION: object
+#+NAME: 
+#+attr_html: :width 800px
+#+attr_latex: :width 400px
+[[./img/object1.png]]
+* 2d 게임 만들기1 (roullette)
+** Project를 만든다.
+#+begin_note
+2d 게임으로 Roulette라는 이름으로 project를 만든다.
+#+end_note
+** 사용할 resource를 asset창에 drag & drop한다. 
+

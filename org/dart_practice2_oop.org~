@@ -1,0 +1,297 @@
+:PROPERTIES:
+:ID:       5E68E68B-0A08-4746-92A8-423474D8B17D
+:mtime:    20230825184425 20230825162734 20230825152500 20230825142003 20230825124332
+:ctime:    20230825124332
+:END:
+#+title: [dart] practice2 - oop
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-08-25 Fri>
+#+DESCRIPTION: dart oop summary
+#+HUGO_DRAFT: true
+* [1-class] class만들고 instance의 member 변수,함수 출력하기
+#+BEGIN_SRC dart
+   void main(){
+
+     Idol black = Idol();
+     print(black.name);
+     print(black.members);
+     black.sayHello();
+     black.introduce();
+
+   }
+
+   class Idol {
+     String name = "blackpink";
+     List<String> members = [       'harry','john','paul'];
+
+     void sayHello(){
+       print("hi blackpink");
+       }
+     void introduce(){
+       print("저희는 3명입니다");
+       }
+  }
+#+END_SRC
+
+#+RESULTS:
+: blackpink
+: [harry, john, paul]
+: hi blackpink
+: 저희는 3명입니다
+
+* [2-class] constructor 만들기 (가장 기본형)
+- class에서 member변수를 설정하면, 매번 instance를 만들때 마다 동일한
+  instance가 만들어진다.
+- 함수가 parameter를 통해서 다양한 값에 대해 동일한 body로 처리하는
+  것과 같이, 생성자로 다양한 instance를 만들 수 있다.
+- 가장 기본형은 인자를 받지 않는것이다.
+
+#+BEGIN_SRC dart
+  void main(){
+    Idol idol = new Idol();
+    idol.sayHello();
+  }
+
+  class Idol{
+    String name = 'black';
+    List<String> members = ['holy','frege'];
+    Idol();
+    void sayHello(){
+      print('hi');
+      }
+
+    void introduce(){
+      print("hi we are band");
+    }
+  }
+#+END_SRC
+
+#+RESULTS:
+: hi
+
+* [3-class] constructor (positional parameter)
+- constructor를 만드는게 특이하다. 다른 언어와 많이 다르다.
+- member 변수는 선언만 하는게 가능해진다.
+- 생성자에서 선언만 된 member변수를 assign해준다.
+#+BEGIN_SRC dart
+    void main(){
+      Idol idol = Idol('holy2', ['c','d']);
+      print(idol.name);
+      print(idol.members);
+      idol.sayHello();
+
+    }
+
+    class Idol{
+      String name;
+      List<String> members;
+
+      Idol(String name, List<String> members):
+      this.name = name,
+      this.members = members;
+
+      void sayHello(){
+        print("hello");
+        }
+
+      void introduce(){
+        print("introduce");
+        }
+  }
+
+#+END_SRC
+
+#+RESULTS:
+: holy2
+: [c, d]
+: hello
+* [4-class] 여러개의 instance 만들기
+- 생성자를 만들면 여러개의 instance를 만들수 있다.
+
+#+BEGIN_SRC dart
+  void main(){
+    Idol bts = Idol("bts", ['a','b','c']);
+    print(bts.name);
+    print(bts.members);
+    bts.sayHello();
+    bts.introduce();
+
+    Idol black = Idol("black", ['ab','bb','cb']);
+    print(black.name);
+    print(black.members);
+    black.sayHello();
+    black.introduce();
+    
+  }
+  class Idol{
+    String name;
+    List<String> members;
+
+    Idol(String name, List<String> members):
+    this.name = name, this.members = members;
+
+    void sayHello(){
+      print("hello");
+    }
+    void introduce(){
+      print("hi");
+    }
+
+  }
+#+END_SRC
+
+#+RESULTS:
+: bts
+: [a, b, c]
+: hello
+: hi
+: black
+: [ab, bb, cb]
+: hello
+: hi
+
+* [5-class] member함수를 this 사용해서 처리
+#+BEGIN_SRC dart
+  void main(){
+    Idol bts = Idol("bts", ['a','b','c']);
+    print(bts.name);
+    print(bts.members);
+    bts.sayHello();
+    bts.introduce();
+
+    Idol black = Idol("black", ['ab','bb','cb']);
+    print(black.name);
+    print(black.members);
+    black.sayHello();
+    black.introduce();
+    
+  }
+  class Idol{
+    String name;
+    List<String> members;
+
+    Idol(String name, List<String> members):
+    this.name = name, this.members = members;
+
+    void sayHello(){
+      print("hello ${this.name}");
+    }
+    void introduce(){
+      print("hi ${this.members}");
+    }
+
+  }
+#+END_SRC
+
+#+RESULTS:
+: bts
+: [a, b, c]
+: hello bts
+: hi [a, b, c]
+: black
+: [ab, bb, cb]
+: hello black
+: hi [ab, bb, cb]
+
+* [6-class] 간략한 생성자 사용하기. this 사용.
+#+BEGIN_SRC dart
+  void main(){
+    Idol bts = Idol('bts', ['a','b','c']);
+    print("=============");
+    print(bts.members);
+  }
+
+  class Idol{
+    String name;
+    List<String> members;
+
+    Idol(this.name, this.members);
+
+    void sayHello(){
+      print("hello $name");
+    }
+    void introduce(){
+      print("hi $members");
+      }
+  }
+#+END_SRC
+
+#+RESULTS:
+: =============
+: [a, b, c]
+
+* [7-class] named constructor
+- contructor의 이름은 class이름과 같지만, 다르게 특정함수를 사용했다.
+- 함수를 사용하지만, 생성자를 초기화하듯이 body를 {}대신에 :을
+  사용해서 정의하는게 다르다.
+- 매우 생경한 방식이다.
+
+#+BEGIN_SRC dart
+  void main(){
+    Idol bts = Idol.fromMembers(
+      [
+        ['a','b'],'bts'
+        ]);
+     print(bts.name);
+  }
+  class Idol {
+
+    String name;
+    List<String> members;
+
+    Idol.fromMembers(List values)
+    : this.members = values[0],
+    this.name = values[1];
+
+  }
+
+
+
+#+END_SRC
+
+#+RESULTS:
+: bts
+  
+* [8-class] encapsulation member변수
+- 객체 지향언어의 한 속성이다.
+- class의 member 변수가 외부에서 접근하면 안된다. 그래서 java에서는
+  private으로 설정한다.
+- dart에서는 member변수를 final로 선언한다.
+
+
+#+BEGIN_SRC dart
+  void main(){
+    Idol bts = Idol.fromList(
+      [
+        'bts', ['a','b']
+      ]);
+    bts.sayHello();
+  }
+
+  class Idol{
+    final String name;
+    final List<String> members;
+
+    Idol.fromList(List values)
+    : this.name = values[0], this.members = values[1];
+
+    void sayHello(){
+      print("hello $name");
+    }
+
+    void introduce(){
+      print('hi $members');
+    }
+  }
+#+END_SRC
+
+#+RESULTS:
+: hello bts
+
+* [9-class] const contructor
+- const와 final은 한번 
+* [10-class]
+* [11-class]
+* [12-class]
+* [13-class]
