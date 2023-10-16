@@ -1,6 +1,6 @@
-:PROPERTIES:
+a:PROPERTIES:
 :ID:       31E225F4-4071-4D4D-8302-021C91903B49
-:mtime:    20230827100518 20230827090224 20230827020035 20230826222824
+:mtime:    20231013085829 20231012194828 20231012101822 20230827100518 20230827090224 20230827020035 20230826222824
 :ctime:    20230826222824
 :END:
 #+title: [dart] install dart and flutter on emacs
@@ -9,6 +9,7 @@
 #+DATE: <2023-08-26 Sat>
 #+DESCRIPTION: install dart and flutter.
 #+HUGO_DRAFT: true
+
 * dart lsp
 ** install dart sdk
 local system에 dart sdk를 설치한다.
@@ -50,7 +51,7 @@ emacs에서 확장자가 .dart인 파일을 열면 자동으로 dart lsp가
 #+CAPTION: dart1
 #+NAME: dart1
 #+attr_html: :width 600px
-#+attr_latex: :width 100px
+#+attr_latex: :width 400px
 [[../static/img/dart/dart1.png]]
 * flutter 설치
 flutter를 설치하기 위해선, dart-mode가 이미 활성화되었다고
@@ -106,4 +107,5 @@ M-x flutter run
 ** tip hot-restart
 android studio에 보면 hot-restart라는 기능이 있다. ios simulator를
 실행하고 재시작없이 변경된 코드만 simulator에 적용하는 기술이다.
-
+* emacs 편집 방법
+** company-capf

@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       065AED23-1284-49D2-B7D9-790E0AAFF0D5
+:mtime:    20231016150640
+:ctime:    20231016150640
+:END:
+#+title: [flutter] ios simulator add
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-16 Mon>
+#+DESCRIPTION: ios simulator 추가하기
+#+HUGO_DRAFT: true
+* ios simulator 추가
+open -a simulator에서 나오는 ios simulator는 iphone15 pro max로 되어
+있다. 다른 simulator를 사용하기 위해서, simulator를 추가하고
+싶었다. 이방법이 맞는지는 모르겠지만, 다음과 같이 해봤다.
+** open terminal
+** xcrun simctl list
+현재 xcode에서 가용한 simulator list들이 보여진다.
+** udid를 복사한다.
+** terminal에 다음을 실행한다.
+#+BEGIN_SRC shell
+open -a Simulator --args -CurrentDeviceUDID 987F89FE-6FB3-432E-BA87-4449592D4B99
+#+END_SRC

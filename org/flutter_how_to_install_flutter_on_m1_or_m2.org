@@ -1,0 +1,86 @@
+:PROPERTIES:
+:ID:       155DAB24-8290-451F-91E9-24A0253C801A
+:mtime:    20231011224537 20231011185631 20231011142108 20231011131514
+:ctime:    20231011131514
+:END:
+#+title: [flutter] how to install flutter on m1 or m2
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-11 Wed>
+#+DESCRIPTION: m1이나 m2에서 flutter설치
+#+HUGO_DRAFT: true
+* flutter 설치
+[[https://docs.flutter.dev/get-started/install][여기]]에 설치법이 나와 있다.
+* rosetta 설치
+#+BEGIN_SRC shell
+sudo softwareupdate --install-rosetta --agree-to-license
+#+END_SRC
+* SDK 설치
+SDK는 intel과 silicon이 다르기 때문에, 구분에서 다운받아서
+설치한다. 설치위치는 Document폴더에 WorkSpace를 만들고, root에서
+접근할수 있게 link를 걸었다.
+* Run Flutter doctor
+flutter doctor를 하면 부족한 utility를 알려준다.
+#+BEGIN_SRC shell
+flutter doctor
+#+END_SRC
+flutter doctor를 설치하면 welcome메시지가 나온다. 조금 기다리면
+분석결과가 나온다.
+
+#+CAPTION: welcome1
+#+NAME: welcome1
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/flutter/welcome1.png]]
+
+분석 결과는 다음과 같다.
+#+CAPTION: flutter doctor결과
+#+NAME: flutter doctor결
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/flutter/fdoctor.png]]
+
+이제 문제점을 해결해 보자.
+* android toolchain 문제
+android studio를 설치하면 해결된다고 한다. 다운받아서 설치하면
+된다. import setting은 하지 않고, 통계도 don't send한다. 설치가
+끝나고, sdk tools도 처리해야 한다.
+** cmdline-tools component is missing problem
+이것은 cmdline tool을 설치해야 한다.
+
+#+CAPTION: android SDK install
+#+NAME: android sdk install
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/flutter/sdktools1.png]]
+** ! Some Android licenses not accepted. To resolve this, run: flutter doctor --android-licenses
+flutter doctor --android-licenses를 하고 y를 계속 누른다.
+ 
+* xcode 설치 문제
+https://developer.apple.com/xcode/
+설치하고 다음 문제가 있다.
+
+** Xcode installation is incomplete; a full installation is necessary for iOS and macOS development.
+위에서 나온대로 해결할 수 있다.
+** CocoaPods not installed.
+sudo gem install cocoapods로 설치한다.
+* 완료
+#+CAPTION: flutter doctor completed
+#+NAME: flutter doctor completed
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/flutter/flutter2.png]]
+* android studio 설정
+android studio를 실행하고, plugins의 marketplace에서 dart, flutter를
+설치한다.
+#+CAPTION: plugin
+#+NAME: plugin
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/flutter/install.png]]
+
+이렇게 하면 new flutter project가 보이게 된다.
+* project의 실행
+github으로 다운받은 project나 이미 있는 project를 다운받았다면 어떻게
+실행할까?
+

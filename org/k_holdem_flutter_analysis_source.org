@@ -1,0 +1,36 @@
+:PROPERTIES:
+:ID:       D3549740-FEC9-4D25-82D6-DFA894F7E3B3
+:mtime:    20231012133505 20231012113749
+:ctime:    20231012113749
+:END:
+#+title: [k-holdem-flutter] analysis source- import
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-12 Thu>
+#+DESCRIPTION: flutter import문
+#+HUGO_DRAFT: true
+* flutter import문
+소스코드를 처음 보면 import문이 나온다. import문이 무엇이고 어떻게
+사용하는지 보자. import는 package나 library를 가져와서 사용하는
+것이다. 그래야 거기에 있는 함수나 변수를 사용할 수 있기
+때문이다. dart언어의 관점에서 기본적인 함수를 빼놓고는 package에
+정의된 함수를 사용하기 때문이다. 그래서 program을 작성할때 package를
+import하는것이 반드시 들어간다.
+* package에 대해서 (내부 package와 외부 package)
+package는 내부 package와 외부 package가 있다. dart언어의 package는
+내부 package로 볼 수 있고, flutter나, github 혹은 다른 사람이 만든
+package는 외부 package로 볼 수 있다. 내부 package냐? 외부 package냐?에
+따라서 처리방법이 다르다.
+** 내부 package
+내부 package는 dart package고 android studio를 설치하고 dart sdk를
+plugin으로 설치하면 내부 package를 사용할 수 있다. dart package가
+어디에 있는지는 잘모른다. android studio 내부에 있다고 한다. 별도로
+설치한 경우가 아니면 그렇다고 한다. 예를 들어 다음과 같이 import만
+하면 가져온다.
+#+BEGIN_SRC dart
+  import 'dart:convert';
+  import 'dart:async';
+#+END_SRC
+** 외부 package
+외부 package는 flutter도 외부 package이고 github에서 다운 받은
+package나 sdk도 외부 package다. 이것들은

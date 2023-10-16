@@ -123,6 +123,8 @@ rails -v
 
 #### sqlite3 {#sqlite3}
 
+project에는 postgresql을 사용한다. 설치법만 설명한다.
+
 sqlite3를 설치한다. mac에는 built-in database로 sqlite3가 이미
 설치되어 있다. file기반의 단순한 db다. 이것이 특정 버전에선 문제가
 있기 때문에 brew로 다시 설치하자.
@@ -134,20 +136,32 @@ brew install sqlite3
 
 #### postgresql {#postgresql}
 
-rails에서 db를 사용한다고 하면, sqlite3를 사용하진 않는다. 보통
-mysql이나 postgresql을 사용한다. postgresql을 강추하기 때문에
-postgresql을 설치하자.
+<!--list-separator-->
 
-```shell
-brew install postgresql
-```
+-  postgresql 설치와 실행
 
-postgresql이나 mysql은 데몬이다. local에서 computer가 시작하자마자
-실행하려고 하면 brew service를 이용하면 된다.
+    rails에서 db를 사용한다고 하면, sqlite3를 사용하진 않는다. 보통
+    mysql이나 postgresql을 사용한다. postgresql을 강추하기 때문에
+    postgresql을 설치하자.
 
-```shell
-brew services start postgresql
-```
+    ```shell
+    brew tap homebrew/core
+    brew install postgresql
+    ```
+
+    postgresql이나 mysql은 데몬이다. local에서 computer가 시작하자마자
+    실행하려고 하면 brew service를 이용하면 된다. postgresql이 daemon으로
+    떠 있어야 rails를 local에서 실행할때도 사용할 수 있다.
+
+    ```shell
+    brew services start postgresql
+    ```
+
+<!--list-separator-->
+
+-  postgresql database 생성
+
+    database를
 
 
 ### final {#final}
@@ -184,6 +198,19 @@ rails new myapp -d postgresql
 cd myapp
 rails server
 ```
+
+
+## project local 실행 {#project-local-실행}
+
+rails s로 바로 서버를 실행하기전, 해야 할 것이 있다.
+
+
+### bundle install로 gem을 모두 설치한다. {#bundle-install로-gem을-모두-설치한다-dot}
+
+
+### pg db를 사용하고 있기 때문에, postgresql을 start해야 한다. {#pg-db를-사용하고-있기-때문에-postgresql을-start해야-한다-dot}
+
+port를 알아야 하는데, port는 database.yml에 기술되어 있다. port는 5432
 
 
 ## ruby관련 emacs packages {#ruby관련-emacs-packages}

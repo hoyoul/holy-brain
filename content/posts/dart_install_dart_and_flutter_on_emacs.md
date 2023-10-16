@@ -6,6 +6,14 @@ date = 2023-08-26T00:00:00+09:00
 draft = true
 +++
 
+a:PROPERTIES:
+:ID:       31E225F4-4071-4D4D-8302-021C91903B49
+:mtime:    20231013085829 20231012194828 20231012101822 20230827100518 20230827090224 20230827020035 20230826222824
+:ctime:    20230826222824
+
+:END:
+
+
 ## dart lsp {#dart-lsp}
 
 
@@ -139,3 +147,9 @@ M-x flutter run
 
 android studio에 보면 hot-restart라는 기능이 있다. ios simulator를
 실행하고 재시작없이 변경된 코드만 simulator에 적용하는 기술이다.
+
+
+## emacs 편집 방법 {#emacs-편집-방법}
+
+
+### company-capf {#company-capf}

@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       6BB718A2-D534-4F13-BECF-1A469881BD45
+:mtime:    20231013100443 20231013085959 20231012104713
+:ctime:    20231012104713
+:END:
+#+title: [emacs] company mode
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-12 Thu>
+#+DESCRIPTION: 
+#+HUGO_DRAFT: true
+* capf(Completion At Point Functions)
+company mode를 사용하는 이유중 하나는 capf때문에 사용한다. 어떤 객체가
+있을때, 그 객체에서 사용할수 있는 method를 popup menu로 보여주기
+때문이다. 사용하는 방법은
+

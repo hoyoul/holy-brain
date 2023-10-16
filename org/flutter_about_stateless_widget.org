@@ -1,0 +1,11 @@
+:PROPERTIES:
+:ID:       B0F7FD3C-CFC0-4C25-AA43-C21BE98CD835
+:mtime:    20231013113616
+:ctime:    20231013113616
+:END:
+#+title: [flutter] about stateless widget
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-13 Fri>
+#+DESCRIPTION: about stateless widget
+#+HUGO_DRAFT: true

@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       804925DF-68DD-40CC-805F-B92540F769F1
+:mtime:    20231016124659 20231016081605 20231015091607 20231014121556 20231014105013 20231013221611 20231013165428 20231013145855 20231013133020 20231013120353 20231012101543
+:ctime:    20231012101543
+:END:
+#+title: [flutter] flutter from scratch (1)
+#+AUTHOR: holy
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-10-12 Thu>
+#+DESCRIPTION: flutter 처음 시작하면서 적는 note1
+#+HUGO_DRAFT: true
+
+* 개요
+Mobile App을 만드는 데 사용되는 Flutter의 구조와 동작 방식을
+생각해 본다. 그러기 위해선 Dart도 살펴봐야 한다. 순전히 뇌피셜이고,
+나만의 재해석이라서 틀리거나 잘못된 점이 많다.
+* About Dart
+** Dart programming language 
+Dart는 programming language다. 언어 자체는 system과는 연결점이 없는 붕
+뜬 존재다. 단순히 grammar만 정의하기 때문이다. dart문법에 맞는 code를
+file에 작성해 봤자, 그것은 실행할 수 없는 data에 불과하다. just! text
+file이다. 그래서 언어를 정의했다면, system에서 돌아갈 수 있는
+compiler나 interpreter, runtime환경과 같이 개발도구,실행도구등을
+모은것이 있다. 보통 이것을 SDK(Software Development Kit) 라고 부른다.
+** Dart SDK
+Dart SDK에는 다음과 같은것들이 포함되어 있다.
+ #+begin_example
+(1) Dart 컴파일러 (dart) 
+(2) Dart VM (dart): dart instruction을 수행하는 runtime 환경.
+(3) Pub 패키지 관리자 (pub): package 관리자.
+(5) Dart 라이브러리: 내장 library 
+ #+end_example
+*** Dart Compiler
+compiler는 dart언어로 작성된 class,function,variable같은 code를 dart
+vm의 dart instruction으로 변환한다. underlying platform인 Android or
+Ios instruction이 아니라, Dart instruction이다. Dart Compiler는 dart
+code를 Dart instruction으로 변환한다.
+*** Dart VM
+dart vm은 java vm처럼 어떤 platform에도 동작가능하게 설계되어 있다.
+Dart Compiler에서도 말했지만, Dart언어로 작성된 class, function,
+variable, async같은 코드들, 주로 cpu,memory를 사용하는 code들은 dart
+instruction으로 변환되고 Dart VM에서 돌아간다. 그런데 I/O관련 code들은
+Dart instruction으로 변환되도, native instruction과 mapping되어 있어서
+외부에서 실행될 수 있다. 
+
+*** pub package manager
+external library나 framework을 사용하려면, programmer가 만든 code에
+import해서 사용해야 한다. 그러면 외부에서 package를 먼저 다운로드를
+받아야만, programmer가 만든 code에 load할 수 있다. 이런 작업을 손쉽게
+해주는게 있는데, package 관리자 pub이다.
+
+*** dart library
+위에서 말했지만, Dart에선 i/o관련 framework는 외부 package로
+존재한다. 하지만, 외부 package만 있는 건 아니다. file system이나
+network관련 package는 내부 package로도 존재한다. 그러나 외부 package를
+가져와서 더 많이 사용한다.
+
+** Dart Frameworks
+*** flutter
+flutter는 dart언어에서 사용되는 UI관련 framework다.
+* 

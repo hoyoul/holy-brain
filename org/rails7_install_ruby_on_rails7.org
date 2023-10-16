@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       D6AAFE62-F1A0-4CD7-A055-900373667D3A
-:mtime:    20231010192024 20231002023345 20230922152910 20230922134045 20230922123747 20230922112005
+:mtime:    20231014104453 20231013223938 20231011170137 20231011154734 20231010192024 20231002023345 20230922152910 20230922134045 20230922123747 20230922112005
 :ctime:    20230922112005
 :END:
 #+title: [rails7] install ruby on rails7
@@ -100,28 +100,35 @@ rails -v
 #+END_SRC
 ** database 설정
 *** sqlite3
+project에는 postgresql을 사용한다. 설치법만 설명한다.
+
 sqlite3를 설치한다. mac에는 built-in database로 sqlite3가 이미
 설치되어 있다. file기반의 단순한 db다. 이것이 특정 버전에선 문제가
-있기 때문에 brew로 다시 설치하자.
+있기 때문에 brew로 다시 설치하자. 
 
 #+BEGIN_SRC shell
 brew install sqlite3
 #+END_SRC
 *** postgresql
+**** postgresql 설치와 실행
 rails에서 db를 사용한다고 하면, sqlite3를 사용하진 않는다. 보통
 mysql이나 postgresql을 사용한다. postgresql을 강추하기 때문에
 postgresql을 설치하자.
 
 #+BEGIN_SRC shell
+brew tap homebrew/core
 brew install postgresql
 #+END_SRC
 
 postgresql이나 mysql은 데몬이다. local에서 computer가 시작하자마자
-실행하려고 하면 brew service를 이용하면 된다.
+실행하려고 하면 brew service를 이용하면 된다. postgresql이 daemon으로
+떠 있어야 rails를 local에서 실행할때도 사용할 수 있다.
 
 #+BEGIN_SRC shell
 brew services start postgresql
 #+END_SRC
+**** postgresql database 생성
+database를 
 ** final
 최종적으로 몇몇 gem들은 system의 C를 사용한다. C의 header파일을
 참조하는데, 이것의 위치가 mojave좀 바뀌었다. 그래서 그것에 대한 처리를
@@ -148,4 +155,10 @@ db와 연동하는 project일 경우, 다음과 같이 만든다.
   cd myapp
   rails server
 #+END_SRC
+* project local 실행
+rails s로 바로 서버를 실행하기전, 해야 할 것이 있다.
+** bundle install로 gem을 모두 설치한다.
+** pg db를 사용하고 있기 때문에, postgresql을 start해야 한다.
+port를 알아야 하는데, port는 database.yml에 기술되어 있다. port는 5432
+
 * ruby관련 emacs packages
