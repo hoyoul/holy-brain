@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       C2FA9C6E-D3CD-49ED-A8AB-FCECC8575338
-:mtime:    20230821085058 20230724214615 20230721163513 20230720195001 20230616162720 20230616140021 20230616124555
+:mtime:    20231019195603 20230821085058 20230724214615 20230721163513 20230720195001 20230616162720 20230616140021 20230616124555
 :ctime:    20230616124555
 :END:
 #+title: [github] multi account github problem
@@ -10,28 +10,17 @@
 #+DESCRIPTION: multiple github을 사용할때 git push,pull 안되는 경우
 #+HUGO_DRAFT: true
 
-* multiple github account사용에 대한 알아야 할것들
-** github clone 방식
-clone은 3가지의 방식이 있다. http,ssh,cli가 있는데, 여기서는
-multi-account를 해결하는 방식으로 ssh방식을 사용하고 설명한다.
+* github 연결 방식
+local computer에서 github에 연결하는 방식은 크게 3가지가 있다. http,
+ssh, github cli다. local에서 github을 사용한다는 것은 인증이 필수로
+들어간다. http연결에는 PAT라는 token이, ssh연결에는 public key가
+필요하다.
 
-
-** push의 인증 문제
-public repo를 다운받거나 clone하는 것은 문제가 없다. 하지만,
-push할때는 인증이 필요하다. http는 pat를 사용하고 ssh는 ssh는
-public/private key를 사용한 rsa방식을 사용해야 한다.
-
-** http 사용 push의 문제
-http를 사용할 경우, pat로 인증을해서 push하면 된다. 하지만 multi
-계정에선 복잡해진다. 왜냐면 pat가 osxkeychain에 등록되고 보관되는데,
-한개만 보관되기 때문이다. github.com에 대한 한개의 pat만
-보관된다. 여러개를 하려면 매번 keychain에서 계정을 지우고 다시
-등록해야 한다. 그래서 http보단 ssh가 선호된다.
-
-** ssh로 설정해서 통신
-ssh를 설정하는 이유는 multiple account를 사용할 수 있기 때문이다.
-
-* multiple github account 사용법
+* multiple github account 문제점
+github은 host가 github.com하나다. 여기에 여러개의 계정이 있을때,
+연결에 문제가 있다. 한번에 하나의 account만 접속이 된다는
+것이다. 이것을 해결하는 가장 대중적인 방식은 ssh로 multiple
+account처리를 하는 것이다.
 
 * ssh키로 multiple accounts 설정
 ** ssh key 생성
@@ -50,13 +39,16 @@ ssh-keygen -t ed25519 -C "hoyoul.park@gmail.com" -f ~/.ssh/id_hoyoul
 #+BEGIN_SRC shell
 ssh-keygen -t ed25519 -C "holytofrege@fastmail.com" -f ~/.ssh/id_holytofrege
 #+END_SRC
+
 ** ssh public key 등록
-만들어진 key를 각 github에 등록한다.
+~/.ssh폴더에 public key와 private key가 만들어진다. 여기서 public
+key를 github에 등록한다. public key를 복사해서 붙여넣기 해야하는데,
+아래처럼 따라하면 된다.
 #+BEGIN_SRC emacs-lisp
 cd ~/.ssh
 #+END_SRC
-위에 경로에 보면 pub라는 postfix를 가진 파일이 있다. 이것을 복사해서
-github->settings->ssh & gpg에 등록한다.
+위에 경로에 보면 pub라는 postfix를 가진 파일이 public key다. 이것을
+에디터로 열어서 복사해서 github->settings->ssh & gpg에 붙여넣는다.
 
 ** ~/.ssh/config 설정과 agent
 매번 다른 github에 연결해서 push를 할때 key 인증이 실행되는데,
@@ -145,9 +137,12 @@ git@github.com-hoyoul:hoyoul/holy-brain.git
 #+END_SRC
 
 * github profile 설정
-git으로 commit을 만들때, username과 email주소가 들어간다. 이것은
-.gitconfi의 내용이 들어간다. 하나의 계정만 사용될때는 root에서
-.gitconfig만 정의해주면 된다. 다음과 같이
+이제 계정에 접속해서 clone하는건 문제없이 된다. 그런데 commit을 push할
+때 문제가 될 수 있다. git으로 commit을 만들때, username과 email주소가
+원하는대로 안들어가는 문제다. 이것은 ~/.gitconfig에 있는 default
+내용이 들어가기 때문이다. 물론 하나의 계정만 사용될때는 위의
+config파일에 있는 username과 email을 사용해서 commit을 만들면 된다.
+다음과 같이...
 
 #+CAPTION: git config
 #+NAME: git config

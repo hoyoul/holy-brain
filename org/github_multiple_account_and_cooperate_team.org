@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       2F198627-D7BA-4D50-A9EF-5EEA1E8155CF
-:mtime:    20231011112250 20231011100647
+:mtime:    20231019184132 20231011112250 20231011100647
 :ctime:    20231011100647
 :END:
 #+title: [github] multiple account and cooperate team
@@ -9,7 +9,7 @@
 #+DATE: <2023-10-11 Wed>
 #+DESCRIPTION: team협업시에 계정문제
 #+HUGO_DRAFT: true
-* 계요
+* 개요
 나는 지금 whitebrew 개발팀에 합류했고, github으로 협업하게
 되었다. 팀에서는 협업을 위해서 내 github email주소를 요청했다. 그리고
 team에서는 내 email로 협업자로 등록을 해주었다. email만 전달했는데,
@@ -98,7 +98,7 @@ multiple계정을 사용할 수 있다. github 계정마다 ssh키를 만들고,
 계정으로 접속하는건 .ssh/config에서 처리를 해준다. 이렇게 처리하는것은
 내 블로그에 써놓았다. 이 방식은 postfix를 사용하는 방식인데, 좀
 tricky하다. 왜냐면 매번 push나 clone할때, postfix를 붙여야 하기
-때문이다.
+때문이다. 참고로 multiple계정 설정은 [[file:github_multi_account_github_problem.org][여기에]] 작성했다.
 
 * 요약
 내가 관리하는 github account들은 내 local computer와 ssh로 연결되어

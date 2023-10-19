@@ -1,0 +1,16 @@
+:PROPERTIES:
+:ID:       766FE55C-9294-42A4-A9E0-6BFE127F7941
+:mtime:    20231017004055
+:ctime:    20231017004055
+:END:
+#+title: [oauth] google login using oauth2.0-principles
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-17 Tue>
+#+DESCRIPTION: google login using oauth2.0
+#+HUGO_DRAFT: true
+* OAuth(Open Authorization)란?
+OAuth는 인증 프로토콜로 알려져 있다. 내 생각엔 OAuth는
+인증(Authentification)보다는 resource를 사용할 권한(Authorization)에
+방점이 있는듯하다.
+* OAuth 

@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       EA78E30C-ACAB-4CBB-8D44-AE0D5180CE1B
+:mtime:    20231018101151
+:ctime:    20231018101151
+:END:
+#+title: [k-holdem-flutter] dealt with oauth2.0
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-18 Wed>
+#+DESCRIPTION: oauth 구현 분석
+#+HUGO_DRAFT: true
+* 개요 - Oauth(Open Authorization)를 사용하는 이유
+보통 app에선 회원가입을 하고 인증처리를 한다. 그런데,우리 app에선
+google login을 통해서 인증을 처리할 것이다. 그러면 app에서
+회원가입처리를 하지 않아도 된다. google에서 대신 처리한다. 이것이
+oauth를 사용하는 이유다.
+* oauth에 대한 보충 설명
+Oauth는 약자에서 보듯이, Authrorization이다. GCP(Google Cloud
+Platform)의 api를 처리할 권한을 사용자에게 주는 open protocol이고,
+이때 authentication을 사용할 수 있는데, 우리는 이 기능을 사용할
+것이다. 사족이지만, 이것을 'open id connect'라고 부른다. 그리고, oauth
+consent 화면 설정시 scopes처리를 한다. scope에서 openId를 선택할 수
+있다. scope에 대한 설명은 scope나올때 설명하기로 한다.
+
