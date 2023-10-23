@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       C2FA9C6E-D3CD-49ED-A8AB-FCECC8575338
-:mtime:    20231019195603 20230821085058 20230724214615 20230721163513 20230720195001 20230616162720 20230616140021 20230616124555
+:mtime:    20231024032209 20231019195603 20230821085058 20230724214615 20230721163513 20230720195001 20230616162720 20230616140021 20230616124555
 :ctime:    20230616124555
 :END:
 #+title: [github] multi account github problem
@@ -155,16 +155,18 @@ config파일에 있는 username과 email을 사용해서 commit을 만들면 된
 적는다. 양식은 다음과 같다. root의 .gitconfig에 설정한다.
 
 #+BEGIN_SRC text
-  [user]
-     name = holy frege
-     email = hoyoul.park@gmail.com
-   
-  [includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
-     path = ~/Documents/MyBlogs/myproject/.gitconfig
-  [includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
-     path = ~/Documents/MyBlogs/myproject/.gitconfig
-  [includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
-     path = ~/Documents/MyBlogs/myproject/.gitconfig      
+[user]
+   name = holy frege
+   email = hoyoul.park@gmail.com
+
+[includeIf "gitdir:~/Documents/Blogs/holy-brain"]
+   path = ~/Documents/Blogs/holy-brain/.gitconfig
+[includeIf "gitdir:~/Documents/Blogs/main-blog/"]
+   path = ~/Documents/Blogs/main-blog/.gitconfig
+[includeIf "gitdir:~/Documents/Blogs/portfolio/"]
+   path = ~/Documents/Blogs/portfolio/.gitconfig
+[includeIf "gitdir:~/Documents/Projects/Work/"]
+   path = ~/Documents/Projects/Work/.gitconfig     
 #+END_SRC
 나는 나머지도 동일한 이름과 email로 했다.
 

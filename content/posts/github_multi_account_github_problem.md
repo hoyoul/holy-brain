@@ -194,12 +194,14 @@ config파일에 있는 username과 email을 사용해서 commit을 만들면 된
    name = holy frege
    email = hoyoul.park@gmail.com
 
-[includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
-   path = ~/Documents/MyBlogs/myproject/.gitconfig
-[includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
-   path = ~/Documents/MyBlogs/myproject/.gitconfig
-[includeIf "gitdir:~/Documents/MyBlogs/myproject/"]
-   path = ~/Documents/MyBlogs/myproject/.gitconfig
+[includeIf "gitdir:~/Documents/Blogs/holy-brain"]
+   path = ~/Documents/Blogs/holy-brain/.gitconfig
+[includeIf "gitdir:~/Documents/Blogs/main-blog/"]
+   path = ~/Documents/Blogs/main-blog/.gitconfig
+[includeIf "gitdir:~/Documents/Blogs/portfolio/"]
+   path = ~/Documents/Blogs/portfolio/.gitconfig
+[includeIf "gitdir:~/Documents/Projects/Work/"]
+   path = ~/Documents/Projects/Work/.gitconfig
 ```
 
 나는 나머지도 동일한 이름과 email로 했다.

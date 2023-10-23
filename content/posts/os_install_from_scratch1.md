@@ -124,7 +124,7 @@ prompt_context() {
 
 ## prompt 설정- current directory 설정 {#prompt-설정-current-directory-설정}
 
-<a id="org02ffe6f"></a>
+<a id="org00e0d4f"></a>
 
 <img src="/img/os/dcolor1.png" alt="dcolor1.png" width="400px" />
 위 color를 변경하는 것은 theme에서 설정한다.
