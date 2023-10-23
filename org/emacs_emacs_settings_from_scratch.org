@@ -1,0 +1,102 @@
+:PROPERTIES:
+:ID:       DC3EB760-B6D6-47B6-BFCF-A6EE38E82AEC
+:mtime:    20231022131802 20231022120642 20231022095815
+:ctime:    20231022095815
+:END:
+#+title: [emacs] emacs settings from scratch
+* pre processing
+emacs를 처음 실행해서 편집하려면, 불편한 사항이 몇개 있다. 이것을 미리
+해둔다.
+** keybindings
+keybinding이 제대로 되어 있지 않기 때문에, 매우 불편하다. 그래서
+2가지가 실행되어야 한다.
+*** caps-lock to left control
+첫번째, caps-lock을 left-control로 바꾼다. 이것은 외부 program인
+karabiner를 사용한다.
+
+#+CAPTION: karabiner
+#+NAME: karabiner
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/emacs/emacs.png]]
+*** right commmand to right meta
+두번째는 right command key를 right meta키로 바꾸는건데,
+emacs설정파일에 있다.
+#+BEGIN_SRC emacs-lisp
+   (setq ns-command-modifier 'meta)
+#+END_SRC
+블로그를 보고 설정한다면 scratch버퍼에서 위 명령어를 copy해서 실행하면
+된다. 
+
+** gnu coreutil 사용
+처음 emacs를 실행해서 dired를 실행하면 dired가 동작되지 않을 수
+있다. 왜냐면 나는 gnu ls명령어를 사용하기 위해서 emacs에서 gnu ls를
+binding했기 때문이다. brew로 coreutils를 설치한다.
+
+#+BEGIN_SRC emacs-lisp
+brew install coreutils
+#+END_SRC
+
+그리고 .zshrc에 다음을 추가한다. 나는 ls만 gnu ls를 사용할 것이기
+때문에 alias를 걸어둔다.
+#+BEGIN_SRC emacs-lisp
+# For M1 Mac
+alias ls="/opt/homebrew/opt/coreutils/libexec/gnubin/ls"
+#+END_SRC
+
+** emacs.org 설정파일 preprocessing
+icloud에 있는 emacs.org를 link걸고, 필요한 elisp package를 local에
+다운 받는 preprocessing작업이 필요하다. 이것은 emacs_preprocess.sh라는
+파일을 $Home에 복사한 후 실행한다.
+
+#+BEGIN_SRC shell
+  cp Documents/emacs/emacs_preprocess.sh $HOME
+  cd $HOME
+  chmod 755 ./emacs_preprocess.sh
+  ./emacs_preprocess.sh
+#+END_SRC
+
+이 파일이 하는것은 Documents/emacs/emacs.org를 link걸고, melpa에 없는
+package들을 .emacs.d/lisp폴더에 복사한다.
+* emacs.org 실행
+emacs의 설정파일은 icloud에 있는 emacs.org를 공유해서 사용한다. mac을
+처음 세팅할 때, icloud공유 폴더로 Documents를 설정했다. 여기에 emacs란
+폴더에 emacs.org를 넣어놨다.
+
+** emacs.org 실행
+
+- 처음 실행: 만일 emacs를 처음 사용한다면, emacs를 열고,
+  ~/Documents/emacs/emacs.org를 연다. 그리고 M-x org-buffer-tangle을
+  실행해서 local에 init.el을 생성한다. 이제 cloud의 emacs.org를 사용할
+  일은 없다.
+  
+- 변경후 실행: 만일 cloud의 emacs설정을 변경했다거나, 다른 컴퓨터에서
+  emacs설정을 변경했다면, 다시 emacs를 실행하고 emacs.org를 open한 후
+  org-babel-tangle을 실행한다.
+  
+** icolud emacs 연동 방식
+모든 computer들은 icloud의 emacs.org파일을 공유한다. 컴퓨터 사용자들은
+icloud(Documents/emacs)에 있는 emacs.org를 수정하고 변경한다. A라는
+computer에서 수정했다고 B라는 computer의 emacs가 영향을 받지
+않는다. 왜냐면 각자 자신의 ~/.emacs.d/init.el을 실행할 뿐이기
+때문이다. 그래서 emacs를 처음에 실행할 때만, icloud의 emacs.org를
+emacs로 연후에 M-x org-babel-tangle을 사용해서 init.el을 만들어
+사용하면 된다. 만일 emacs설정을 바꿔야 한다면, icloud의 emacs.org를
+변경하고 org-babel-tangle로 init.el을 갱신하는 것이다.
+
+
+사용한다. emacs를 새롭게 설치를 했다면, emacs를 열고
+icloud의 emacs.org를 open한다. 그리고 org-buffer-tangle을 하면, local
+computer의 .emacs.d폴더아래에 init.el이 생기게 된다.  그러면 다음
+emacs를 실행할때 init.el에 기술된 package를 .emacs.d에 설치하게 된다.
+
+** icloud에서 공통으로 사용되는 파일들 (모든 컴퓨터에서 공유하는 Documents폴더)
+- emacs.org
+- elfeeddb
+- elfeed.org
+- lisp/ox-ipynb
+- lisp/plantuml.jar
+- snippets
+- lisp/org2md
+
+  

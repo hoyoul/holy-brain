@@ -11,10 +11,6 @@ import sys
 print(sys.version_info)
 ```
 
-```text
-sys.version_info(major=3, minor=11, micro=5, releaselevel='final', serial=0)
-```
-
 
 ## textwrap {#textwrap}
 

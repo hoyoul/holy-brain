@@ -217,12 +217,6 @@ print("플랫폼:", sys.platform)  # 운영 체제 플랫폼 정보
 
 ```
 
-```text
-실행 모드: /opt/homebrew/anaconda3/bin/python
-환경 변수: ['', '/opt/homebrew/anaconda3/lib/python311.zip', '/opt/homebrew/anaconda3/lib/python3.11', '/opt/homebrew/anaconda3/lib/python3.11/lib-dynload', '/opt/homebrew/anaconda3/lib/python3.11/site-packages', '/opt/homebrew/anaconda3/lib/python3.11/site-packages/aeosa']
-플랫폼: darwin
-```
-
 
 #### (4) loading built-in function {#4--loading-built-in-function}
 
@@ -250,11 +244,6 @@ print(locals())
 print(globals())
 ```
 
-```text
-{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
-{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
-```
-
 <!--list-separator-->
 
 -  __name\_\_ symbol
@@ -274,21 +263,11 @@ print(globals())
     print(locals())
     ```
 
-    ```text
-    hello
-    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
-    ```
-
     다음 예를 보자. a.py와 b.py 두개의 file이 있다고 하자. 아래는 a.py다.
 
     ```python
     print("this is a.py")
     print(__name__)
-    ```
-
-    ```text
-    this is a.py
-    __main__
     ```
 
     b.py는 아래와 같다.
@@ -363,10 +342,6 @@ print(globals())
     print(locals())
     ```
 
-    ```text
-    {'__name__': '__main__', '__doc__': ' this is doc string ', '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
-    ```
-
 <!--list-separator-->
 
 -  '<span class="underline"><span class="underline">package</span></span>' symbol
@@ -383,11 +358,6 @@ print(globals())
     ```python
     print('hi')
     print(__package__)
-    ```
-
-    ```text
-    hi
-    None
     ```
 
     ```text
@@ -480,10 +450,6 @@ table에 저장한다.
 
 ```python
 print(globals())
-```
-
-```text
-{'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None}
 ```
 
 ```text
@@ -599,10 +565,6 @@ import sys
 print(sys.path)
 ```
 
-```text
-['', '/opt/homebrew/anaconda3/lib/python311.zip', '/opt/homebrew/anaconda3/lib/python3.11', '/opt/homebrew/anaconda3/lib/python3.11/lib-dynload', '/opt/homebrew/anaconda3/lib/python3.11/site-packages', '/opt/homebrew/anaconda3/lib/python3.11/site-packages/aeosa']
-```
-
 python interpreter가 초기화 될 때, sys의 path를 os의 environment
 variable PATH를 읽어서 세팅하다. 그래서 import문을 보면 load할
 module이나 package의 위치를 찾을 수 있는 것이다. 만일 package나
@@ -676,11 +638,6 @@ assignment를 통해서 메모리에 구조화 되는지 내부동작을 직관�
     b = 2
     print(id(1))
     print(id(2))
-    ```
-
-    ```text
-    4336919768
-    4336919800
     ```
 
     따라서 heap에
@@ -758,12 +715,6 @@ assignment를 통해서 메모리에 구조화 되는지 내부동작을 직관�
     print(c is d)
     ```
 
-    ```text
-    3.11.5 (main, Sep 11 2023, 08:31:25) [Clang 14.0.6 ]
-    True
-    True
-    ```
-
     <a id="figure--results"></a>
 
     {{< figure src="/img/python/integer3.png" caption="<span class=\"figure-number\">Figure 8: </span>results" width="600px" >}}
@@ -839,10 +790,6 @@ assignment를 통해서 메모리에 구조화 되는지 내부동작을 직관�
     print(a)
     ```
 
-    ```text
-    21.73913043478261
-    ```
-
     500이라는 값은 binary로 나타낸다. 23도 binary로 나타내진다.
 
     ```python
@@ -851,12 +798,6 @@ assignment를 통해서 메모리에 구조화 되는지 내부동작을 직관�
     print(a)
     print(b)
     print(500 << 23)
-    ```
-
-    ```text
-    0b111110100
-    0b10111
-    4194304000
     ```
 
 
@@ -881,15 +822,6 @@ print(cs1)
 
 ```
 
-```text
-1
-2
-[]
-1
-2
-[3, 4, 5, 6]
-```
-
 rvalue는 1,2다. 이것은 (1,2)로도 표시될 수 있다. ()는 생략된
 것이다. ()가 있다고 생각하면, 이것은 primitive data를 ()로 packing한
 것이다. 여기서 tuple객체가 만들어진다. tuple객체가 처음 생성되면
@@ -907,11 +839,6 @@ a = 1,2,3
 print(a)
 c,d,e = a
 print(c)
-```
-
-```text
-(1, 2, 3)
-1
 ```
 
 ```python
@@ -939,10 +866,6 @@ e,f,g,h = [1,2,3]
 print(e)
 ```
 
-```text
-a
-```
-
 
 #### float {#float}
 
@@ -950,70 +873,34 @@ a
 print(5 == 5.0 == 5)
 ```
 
-```text
-True
-```
-
 ```python
 print(False == False) in [False]
-```
-
-```text
-True
 ```
 
 ```python
 print(False == (False in [False]))
 ```
 
-```text
-False
-```
-
 ```python
 print(False == False in [False])
-```
-
-```text
-True
 ```
 
 ```python
 print(5 == 5.0 > 4)
 ```
 
-```text
-True
-```
-
 ```python
 print(.1+.1+.1 == .3)
-```
-
-```text
-False
 ```
 
 ```python
 print(.1+.1 == .2)
 ```
 
-```text
-True
-```
-
 ```python
 print (5 == True)
 ```
 
-```text
-False
-```
-
 ```python
 print(True > 4)
-```
-
-```text
-False
 ```

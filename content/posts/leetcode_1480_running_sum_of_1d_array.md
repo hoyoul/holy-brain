@@ -78,10 +78,6 @@ def test():
 print(test())
 ```
 
-```text
-[1, 3, 6, 10]
-```
-
 
 ## 의도 {#의도}
 
@@ -144,10 +140,6 @@ return lst
 from itertools import accumulate
 a = [1,3,4]
 print(list(accumulate(a)))
-```
-
-```text
-[1, 4, 8]
 ```
 
 ```python

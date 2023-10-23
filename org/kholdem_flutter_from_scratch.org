@@ -1,9 +1,9 @@
 :PROPERTIES:
 :ID:       804925DF-68DD-40CC-805F-B92540F769F1
-:mtime:    20231016124659 20231016081605 20231015091607 20231014121556 20231014105013 20231013221611 20231013165428 20231013145855 20231013133020 20231013120353 20231012101543
+:mtime:    20231021094831 20231020184942 20231020164549 20231016124659 20231016081605 20231015091607 20231014121556 20231014105013 20231013221611 20231013165428 20231013145855 20231013133020 20231013120353 20231012101543
 :ctime:    20231012101543
 :END:
-#+title: [flutter] flutter from scratch (1)
+#+title: [flutter] flutter from scratch (1) - princple concepts
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-10-12 Thu>
@@ -57,5 +57,24 @@ network관련 package는 내부 package로도 존재한다. 그러나 외부 pac
 
 ** Dart Frameworks
 *** flutter
-flutter는 dart언어에서 사용되는 UI관련 framework다.
-* 
+flutter는 dart언어에서 사용되는 UI관련 framework다. [[file:pl_about_frameworks.org][framework]]에 대한
+소개는 link를 참조하면 된다. flutter는 dart위에서 돌아간다. dart vm은
+framework을 포함하고 있는데, 여기에 사용되는 dart framework은 file
+system에 관한것이라고 보면된다. framework를 사용하지 않는 기본적인
+program은 memory와 cpu사이에서 돌아가기 때문에 async같은 memory관련
+library,print()나 key입력같은 기본 I/O를 제공한다. dart framework에도
+print()같은 display할 수 있는 api가 있는데, flutter framework이 필요한
+이유는 무엇인가? network관련 api도 dart에서 제공하는데, DIO라는
+framework이 필요한 이유는 무엇인가? 우선 print()를 보면, 이것은
+console i/o라고 부르는데, memory가 display와 직접 연결되어
+있다. keyboard의 자판에 해당하는 문자열이 ascii code에 따른 dot형태의
+그림으로 display(모니터)에 내장되어 있고, monitor는 text-mode로
+동작시에 키보드로 입력한 memory의 내용을 그대로 모니터에 전달하고
+80x24같은 형태로 출력한다. 그런데 이미지의 경우는 다르다. 이미지는
+렌더링과정을 cpu거나 gpu에서 처리한다. 그리고 display(monitor)로
+전달한다. monitor에는 graphics mode가 있어서 받은 이미지를 더 높은
+해상도로 출력할 수 있다. console i/o는 얼마안되는 문자열이고, 그것을
+그냥 display에 전달해서 보여주면 되지만, graphics mode를 사용하는
+경우에는 렌더링 하는 시간이 필요하다.
+
+
