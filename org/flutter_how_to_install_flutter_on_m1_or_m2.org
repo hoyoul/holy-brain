@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       155DAB24-8290-451F-91E9-24A0253C801A
-:mtime:    20231023124517 20231023113922 20231011224537 20231011185631 20231011142108 20231011131514
+:mtime:    20231024025404 20231024004856 20231023233152 20231023124517 20231023113922 20231011224537 20231011185631 20231011142108 20231011131514
 :ctime:    20231011131514
 :END:
 #+title: [flutter] how to install flutter on m1 or m2
@@ -116,10 +116,17 @@ https://developer.apple.com/xcode/
 #+BEGIN_SRC shell
   sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
   sudo xcodebuild -runFirstLaunch
+
 #+END_SRC
 첫번째는 xcode가 여러개 설정될수 있기 때문에, 사용할 xcode를
-선택하는 것이고, 두번째는 enter치고 agree를 치면 된다. xcode license에
-동의하는 것이다.
+선택하는 것이다. 
+
+xcode를 실행하면, license동의하는게 나오는데, xcode를 실행하지 않고,
+shell에서 다음을 입력하자.
+#+BEGIN_SRC shell
+  sudo xcodebuild -license
+#+END_SRC
+enter치고 agree를 치면 된다. xcode license에 동의하는 것이다.
 
 ** [2] simulator list 못가져오는 문제
 아래처럼 shell에서 해도 되고, xcode실행해서 simulator를 설치해도
@@ -128,19 +135,26 @@ https://developer.apple.com/xcode/
 xcodebuild -downloadPlatform iOS
 #+END_SRC
 
+테스트 해보자.
+#+BEGIN_SRC shell
+open -a Simulator
+#+END_SRC
 ** [3] CocoaPods not installed.
+
 cocoapods은 ruby로 만들어졌다. 하는일은 object-c나 swift library를
 사용할 수 있게 해준다. cocoapods이 ios native library를 dart와
 통합시켜주기 때문이다. ruby가 맥북에 이미 있지만, 너무
 오래됐다. asdf로 최신버전을 설치하자. [[file:rails7_install_ruby_on_rails7.org][이 문서]]를 참고해서 ruby를
 설치한다. rails에서도 ruby를 설치해야하기 때문에, 어차피 설치해야
-한다. 참고하기 귀찮아서 여기에, asdf설치까지 작성한다.
-
-*** asdf ruby install
+한다. 참고하기 귀찮아서 여기에, asdf설치까지 작성한다. ps:m1
+chip에서는 아래와 같이 하면 안된다. asdf를 하면 안되고, m1 chip을 위한
+별도 section에서 설명하겠다. 아래는 m2나 intel에서 적용된다. 여튼 먼저
 asdf의 prerequisite을 설치한다.
 #+BEGIN_SRC shell
 brew install coreutils curl git
 #+END_SRC
+
+*** asdf ruby install (m2 or intel)
 
 그리고 asdf를 설치한다.
 
@@ -159,7 +173,7 @@ asdf plugin add ruby
 #+END_SRC
 
 현재 gorails에서 rails버전에 맞는 ruby의 추천은 3.2.2다. 그런데
-kholdem project는 3.2.1을 사용한다.. 3.2.1, 3.2.2 둘다 설치하자.
+kholdem project는 3.2.1을 사용한다. 3.2.1, 3.2.2 둘다 설치하자.
 
 #+BEGIN_SRC shell
   asdf install ruby 3.2.2
@@ -183,10 +197,38 @@ ruby -v
 #=> 3.2.1
 #+END_SRC
 
-그 다음 아래를 실행한다.
-#+BEGIN_SRC emacs-lisp
+**** ps: asdf 설치시 주의 사항.
+asdf에서 version을 설치하면, .asdf폴더아래에, installs라는 폴더에
+설치된 언어(plugin)과 설치된 version이 폴더로 모아져 있다. 특정
+version이 제대로 안된다면 설치된 내용이 다를 것이다. 비교가 필요하다.
+
+**** 그 다음 아래를 실행한다.
+#+BEGIN_SRC shell
 sudo gem install cocoapods
 #+END_SRC
+그리고 silicon mac의 경우, 다음을 실행해야 한다.
+#+BEGIN_SRC shell
+sudo gem uninstall ffi && sudo gem install ffi -- --enable-libffi-alloc
+#+END_SRC
+
+*** cocoapods for m1 chip
+ruby를 설정한다거나, sudo gem install cocoapods 혹은 ffi제거 같은걸
+하지 않고, 아래처럼 brew로 설치만 하면 된다고 한다.
+#+BEGIN_SRC shell
+brew install cocoapods
+#+END_SRC
+그리고, flutter doctor로 확인한다. 확인이 된 이후에 asdf를 사용하면
+된다.
+
+
+ps: <내경우는 asdf로 ruby버전을 변경했고, sudo gem install
+cocoapods을 하니 에러가 났다. 에러를 고치지 못한채 brew install
+cocoapods로 하고 flutter doctor를 하니 설치게 제대로 됐다고
+한다. 그런데 sudo gem install cocoapods을 다시 하면 에러가 나고,
+document에는 brew install cocoapods를 하라는 얘기는 없다. 여튼 flutter
+doctor에선 문제가 없다고 하니 그냥 넘어간다. m2를 빌려서 사용해
+봤는데, m2는 document대로 sudo gem install cocoapods하니
+문제없었다. 그리고 내 intel pc도 문제가 없었다.
 
 * 완료
 #+CAPTION: flutter doctor completed
