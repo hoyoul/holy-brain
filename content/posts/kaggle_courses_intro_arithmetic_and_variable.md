@@ -17,12 +17,21 @@ draft = true
 print("hello world")
 ```
 
+```text
+hello world
+```
+
 
 ### Arithemetic {#arithemetic}
 
 ```python
 print(1+2)
 print(9-5)
+```
+
+```text
+3
+4
 ```
 
 

@@ -183,11 +183,24 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
             print(i)
         ```
 
+        ```text
+        0
+        1
+        2
+        3
+        4
+        ```
+
     -   example2
         ```python
         for i in [0,1,2,3,4]:
             if i % 2:
                 print(i, "is odd")
+        ```
+
+        ```text
+        1 is odd
+        3 is odd
         ```
 
     -   example3: for loop을 돌리면 iterable객체에서 값을 꺼내오지 index를
@@ -196,6 +209,12 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
         a = [5,3,2]
         for i,v in enumerate(a):
             print(i,v)
+        ```
+
+        ```text
+        0 5
+        1 3
+        2 2
         ```
 
 <!--list-separator-->
@@ -224,6 +243,14 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
         print(i,"번째")
     ```
 
+    ```text
+    0 번째
+    1 번째
+    2 번째
+    3 번째
+    4 번째
+    ```
+
     -   example2
 
     <!--listend-->
@@ -233,6 +260,14 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
         print(i,"번째")
     ```
 
+    ```text
+    1 번째
+    2 번째
+    3 번째
+    4 번째
+    5 번째
+    ```
+
     -   example3
 
     <!--listend-->
@@ -240,6 +275,14 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
     ```python
     for i in range(1,10,2):
         print(i,"번째")
+    ```
+
+    ```text
+    1 번째
+    3 번째
+    5 번째
+    7 번째
+    9 번째
     ```
 
 <!--list-separator-->
@@ -255,10 +298,30 @@ loop의 기본 생각은 연산을 100번 200번 적용하는 방법이다. 함�
             print(c)
         ```
 
+        ```text
+        T
+        h
+        i
+        s
+
+        i
+        s
+
+        t
+        e
+        x
+        t
+        ```
+
     -   dictionary
         ```python
         for key in {"text":1, "word":2}:
             print(key)
+        ```
+
+        ```text
+        text
+        word
         ```
     -   dictionary에 enumerate
 

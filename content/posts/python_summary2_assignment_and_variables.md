@@ -313,6 +313,12 @@ print((15).to_bytes(2,byteorder="big"))
 print(id(15))
 ```
 
+```text
+['__abs__', '__add__', '__and__', '__bool__', '__ceil__', '__class__', '__delattr__', '__dir__', '__divmod__', '__doc__', '__eq__', '__float__', '__floor__', '__floordiv__', '__format__', '__ge__', '__getattribute__', '__getnewargs__', '__getstate__', '__gt__', '__hash__', '__index__', '__init__', '__init_subclass__', '__int__', '__invert__', '__le__', '__lshift__', '__lt__', '__mod__', '__mul__', '__ne__', '__neg__', '__new__', '__or__', '__pos__', '__pow__', '__radd__', '__rand__', '__rdivmod__', '__reduce__', '__reduce_ex__', '__repr__', '__rfloordiv__', '__rlshift__', '__rmod__', '__rmul__', '__ror__', '__round__', '__rpow__', '__rrshift__', '__rshift__', '__rsub__', '__rtruediv__', '__rxor__', '__setattr__', '__sizeof__', '__str__', '__sub__', '__subclasshook__', '__truediv__', '__trunc__', '__xor__', 'as_integer_ratio', 'bit_count', 'bit_length', 'conjugate', 'denominator', 'from_bytes', 'imag', 'numerator', 'real', 'to_bytes']
+b'\x00\x0f'
+4303447704
+```
+
 따라서 b와 15를 mapping해서 b:15를 symbol table에
 기록한다.  (3)의 경우는 evaluate하면 symbol table에서 b를 찾아서
 가져온다. 15를 가져오지만, 그 값은 쓰여지지 않는다. 이후 print를 해서 그
@@ -346,6 +352,12 @@ print(id(b))
 print(id(c))
 ```
 
+```text
+4340819160
+4340819160
+4340819160
+```
+
 반면에 아래의 예를 보자.
 
 ```text
@@ -366,6 +378,12 @@ c = [1,2,3]
 print(id(a))
 print(id(b))
 print(id(c))
+```
+
+```text
+4340569408
+4340669824
+4341312384
 ```
 
 매번 새로운 객체를 만든다.
@@ -415,6 +433,13 @@ print(a)
 print(p)
 print(eval('a'))
 print(eval('p'))
+```
+
+```text
+3
+<__main__.Person object at 0x1052a7250>
+3
+<__main__.Person object at 0x1052a7250>
 ```
 
 객체를 evaluate했을때, literal object와 일반 object의 차이를 설명하는
@@ -687,6 +712,10 @@ attach했다.
     print(locals())
     ```
 
+    ```text
+    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': 4, 'b': 3}
+    ```
+
     a = 3은 assignment이기 때문에 새로운 객체를 생성하거나
     update한다. 그리고 symbol table에 등록한다. 따라서 Int 객체 3을
     생성하고 symbol table에 a:3을 등록한다. 그 다음, b = a를 수행
@@ -732,6 +761,10 @@ attach했다.
     print(locals())
     ```
 
+    ```text
+    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': 4, 'b': 3}
+    ```
+
     이것은 일반적인 assignment를 수행한다. a = a + 1에서 rvalue를
     계산해보자. a가 참조하는 객체 3을 가지고 와서 객체 1과
     더한다. primitive 객체의 연산은 새로운 객체를 만들어낸다. 객체1에 있는
@@ -761,6 +794,12 @@ attach했다.
     print(locals())
     ```
 
+    ```text
+    4303099200
+    4303099200
+    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': [1, 2, 3, 4], 'b': [1, 2, 3, 4]}
+    ```
+
     여기서 interpreter는 a = [1,2,3]에서 [1,2,3]이라는 객체를 생성하고
     a:[1,2,3]을 symbol table에 등록한다. 그 다음, b = a를 보고, a를
     symbol테이블에서 꺼낸 객체 [1,2,3]을 b와 함께 symbol table에
@@ -778,6 +817,12 @@ attach했다.
     print(id(b))
     print(id(a))
     print(locals())
+    ```
+
+    ```text
+    4307359040
+    4308102016
+    {'__name__': '__main__', '__doc__': None, '__package__': None, '__loader__': <class '_frozen_importlib.BuiltinImporter'>, '__spec__': None, '__annotations__': {}, '__builtins__': <module 'builtins' (built-in)>, '__file__': '<stdin>', '__cached__': None, 'a': [1, 2, 3, 4], 'b': [1, 2, 3]}
     ```
 
     a = a + [4]에서 interpreter는 rvalue의 type에 해당하는 list 객체를
@@ -904,6 +949,13 @@ attach했다.
     print(id(b))
     print(a == b)
     print(a is b)
+    ```
+
+    ```text
+    4345419072
+    4345519488
+    True
+    False
     ```
 
     interpreter는 [1,2]라는 list객체를 생성하고 heap넣는다. heap이나
@@ -1178,6 +1230,11 @@ attach했다.
 a = 123
 print(type(a))
 print(isinstance(a,float))
+```
+
+```text
+<class 'int'>
+False
 ```
 
 123을 interpreter는 문자열을 읽고 cache에서 123이라는 Int객체를

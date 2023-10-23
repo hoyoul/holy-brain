@@ -63,6 +63,18 @@ for i in arr:
 
 ```
 
+```text
+9
+8
+7
+6
+5
+4
+3
+2
+1
+```
+
 continue를 사용해서 filtering효과를 낼수 있다. 즉 데이터에서 홀수만
 출력하고 짝수는 출력하지 않는다.
 
@@ -74,6 +86,14 @@ for i in arr:
     print(i)
 ```
 
+```text
+9
+7
+5
+3
+1
+```
+
 break를 사용해서 machine을 중간에 멈출 수도 있다.
 
 ```python
@@ -82,6 +102,11 @@ for i in arr:
     if i == 7:
         break
     print(i)
+```
+
+```text
+9
+8
 ```
 
 
