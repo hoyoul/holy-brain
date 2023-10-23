@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       155DAB24-8290-451F-91E9-24A0253C801A
-:mtime:    20231011224537 20231011185631 20231011142108 20231011131514
+:mtime:    20231023124517 20231023113922 20231011224537 20231011185631 20231011142108 20231011131514
 :ctime:    20231011131514
 :END:
 #+title: [flutter] how to install flutter on m1 or m2
@@ -42,28 +42,152 @@ flutter doctor를 설치하면 welcome메시지가 나온다. 조금 기다리�
 
 이제 문제점을 해결해 보자.
 * android toolchain 문제
-android studio를 설치하면 해결된다고 한다. 다운받아서 설치하면
-된다. import setting은 하지 않고, 통계도 don't send한다. 설치가
-끝나고, sdk tools도 처리해야 한다.
-** cmdline-tools component is missing problem
-이것은 cmdline tool을 설치해야 한다.
+** [1] unable to locate Android SDK
+android sdk를 찾을수 없다고 한다. 이것은 android studio를 설치하면
+해결된다. android studio를 다운받아서 설치하면 된다. 처음 android
+studio를 실행하면, 여러 설정이 있는데, 여기서 import setting은 하지
+않고, 통계도 don't send한다. theme은 dracula를 설치했다. sdk설치
+동의가 끝나면 android설치가 시작된다. 대충 1-2분 걸린다.
+*** android 설치
+[[https://developer.android.com/studio?gclid=CjwKCAjwkNOpBhBEEiwAb3MvvRlexOOMtS8UO8llKf3DfqBa-y2wJzZOpoEmtfaJHvnwGamnpGyfkhoCy7MQAvD_BwE&gclsrc=aw.ds][여기]]로 가서 android studio를 설치한다.
+#+CAPTION: android studio
+#+NAME: android studio
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/flutter/as1.png]]
 
-#+CAPTION: android SDK install
+이렇게 설치하면 android sdk는 다음 위치에 설치된다.
+#+BEGIN_SRC shell
+/Users/hoyoul/Library/Android/sdk
+#+END_SRC
+
+android sdk 설치 위치를 확인하는 법은 다음과 같다.
+#+CAPTION: android sdk 설치확인
+#+NAME: android sdk 설치 확인
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/flutter/as3.png]]
+*** android sdk path
+android sdk를 path에 추가한다.
+#+BEGIN_SRC shell
+export ANDROID_HOME=/Users/hoyoul/Library/Android/sdk
+export PATH="$PATH:$ANDROID_HOME/tools"
+export PATH="$PATH:$ANDROID_HOME/tools/bin"
+export PAtH="$PATH:$ANDROID_HOME/platform-tools"
+export PATH="/opt/homebrew/opt/curl/bin:$PATH"
+#+END_SRC
+
+** [2] cmdline-tools component is missing problem
+android studio가 설치됐으면, 바로 메뉴에서 settings을 클릭한다. 만일
+close했다면, 다시 studio를 열고 메뉴에서 settings를 선택해서 cmdline
+tool을 설치한다.
+#+CAPTION: cmdline tools
+#+NAME: cmdline tools
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/flutter/as2.png]]
+
+android sdk를 검색하고 sdk tools를 보면 command line tools가
+보인다. check하고 설치한다.
+
+#+CAPTION: cmdline tools2
 #+NAME: android sdk install
 #+attr_html: :width 400px
-#+attr_latex: :width 100px
+#+attr_latex: :width 400px
 [[../static/img/flutter/sdktools1.png]]
-** ! Some Android licenses not accepted. To resolve this, run: flutter doctor --android-licenses
-flutter doctor --android-licenses를 하고 y를 계속 누른다.
+
+** [3] android license problem
+#+BEGIN_SRC shell
+[!] Some Android licenses not accepted. To resolve this, run: flutter doctor --android-licenses
+#+END_SRC
+위와 같은 error는 shell에서 다음 명령어를 쳐서 해결할 수 있다.
+#+BEGIN_SRC shell
+flutter doctor --android-licenses
+#+END_SRC
+y를 계속 누른다.
  
 * xcode 설치 문제
-https://developer.apple.com/xcode/
-설치하고 다음 문제가 있다.
 
-** Xcode installation is incomplete; a full installation is necessary for iOS and macOS development.
-위에서 나온대로 해결할 수 있다.
-** CocoaPods not installed.
-sudo gem install cocoapods로 설치한다.
+** [1] Xcode installation is incomplete;
+xcode를 다운로드 해야한다. 아래 link에서 다운받아서 설치한다.
+https://developer.apple.com/xcode/
+설치하고 다음을 설정한다.
+
+#+BEGIN_SRC shell
+  sudo xcode-select --switch /Applications/Xcode.app/Contents/Developer
+  sudo xcodebuild -runFirstLaunch
+#+END_SRC
+첫번째는 xcode가 여러개 설정될수 있기 때문에, 사용할 xcode를
+선택하는 것이고, 두번째는 enter치고 agree를 치면 된다. xcode license에
+동의하는 것이다.
+
+** [2] simulator list 못가져오는 문제
+아래처럼 shell에서 해도 되고, xcode실행해서 simulator를 설치해도
+된다. 나는 아래와 같이 했다.
+#+BEGIN_SRC shell
+xcodebuild -downloadPlatform iOS
+#+END_SRC
+
+** [3] CocoaPods not installed.
+cocoapods은 ruby로 만들어졌다. 하는일은 object-c나 swift library를
+사용할 수 있게 해준다. cocoapods이 ios native library를 dart와
+통합시켜주기 때문이다. ruby가 맥북에 이미 있지만, 너무
+오래됐다. asdf로 최신버전을 설치하자. [[file:rails7_install_ruby_on_rails7.org][이 문서]]를 참고해서 ruby를
+설치한다. rails에서도 ruby를 설치해야하기 때문에, 어차피 설치해야
+한다. 참고하기 귀찮아서 여기에, asdf설치까지 작성한다.
+
+*** asdf ruby install
+asdf의 prerequisite을 설치한다.
+#+BEGIN_SRC shell
+brew install coreutils curl git
+#+END_SRC
+
+그리고 asdf를 설치한다.
+
+#+BEGIN_SRC shell
+brew install asdf
+#+END_SRC
+
+asdf를 shell path에 등록한다.
+#+BEGIN_SRC shell
+echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
+#+END_SRC
+
+plugin은 관리할 programming language다. 다음과 같이 설치한다.
+#+BEGIN_SRC shell
+asdf plugin add ruby
+#+END_SRC
+
+현재 gorails에서 rails버전에 맞는 ruby의 추천은 3.2.2다. 그런데
+kholdem project는 3.2.1을 사용한다.. 3.2.1, 3.2.2 둘다 설치하자.
+
+#+BEGIN_SRC shell
+  asdf install ruby 3.2.2
+  asdf install ruby 3.2.1
+  
+#+END_SRC
+
+terminal을 다시 시작한 후 아래를 실행한다.
+#+BEGIN_SRC shell
+  asdf global ruby 3.2.1
+  # Update to the latest Rubygems version
+  gem update --system
+
+#+END_SRC
+설치된 ruby version을 확인한다.
+
+#+BEGIN_SRC shell
+which ruby
+#=> /Users/username/.asdf/shims/ruby
+ruby -v
+#=> 3.2.1
+#+END_SRC
+
+그 다음 아래를 실행한다.
+#+BEGIN_SRC emacs-lisp
+sudo gem install cocoapods
+#+END_SRC
+
 * 완료
 #+CAPTION: flutter doctor completed
 #+NAME: flutter doctor completed
