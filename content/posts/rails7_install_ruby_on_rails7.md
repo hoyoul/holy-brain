@@ -8,11 +8,18 @@ draft = true
 
 ## gorails로 설치 {#gorails로-설치}
 
-[GoRails](https://gorails.com/setup/macos/13-ventura)에 보면 설치 과정이 쉽게 나와 있다. 이대로 따르면 된다.
-내 computer는 m1 mac이고, os는 ventura를 사용한다.
+[GoRails](https://gorails.com/setup/macos/13-ventura)에 보면 설치 과정이 쉽게 나와 있다. 이대로 따르면 된다.  내
+computer는 m1 mac이고, os는 ventura를 사용한다. kholdem에서
+설치했던것도 [여기에]({{< relref "k_holdem_rails_analysis_source" >}}) 있다. 참조해본다.
 
 
 ### ruby 설치 {#ruby-설치}
+
+ruby는 version 관리를 해야하는데, 예전에는 rbenv나 rvm을 사용했는데,
+요즘은 asdf를 사용한다고 해서 사용했는데, 너무 불안정하다. asdf
+global로 system설정도 제대로 안되고 asdf install로 설치시 제대로
+안되는 문제도 있다. 어떤것을 사용할 지 고민이 된다. asdf는 명령어를
+실행한 후 매번 source .zshrc를 해줘야만, 적용이 그나마 제대로 된다.
 
 
 #### asdf 설치 {#asdf-설치}
@@ -43,6 +50,8 @@ draft = true
     ```shell
     echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
     ```
+
+    이렇게 하고 반드시 terminal을 restart해야 한다. gorails는
 
 <!--list-separator-->
 
@@ -105,15 +114,21 @@ npm install -g yarn
 
 ### rails 설치 {#rails-설치}
 
-gorails는 7.0.6을 추천하지만, project는 7.0.8 이상을 설치하기 때문에 맞춰서 설치하자.
+gorails는 7.0.6을 추천하지만, project는 7.0.8 이상을 설치하기 때문에
+맞춰서 설치하자. 아래와 같이 설치하면 system level에서 rails를
+설치하게 된다.
 
 ```shell
 gem install rails -v 7.0.8
+
 ```
 
-만일 permission문제가 있다면, sudo를 붙여서 사용한다.
+project level에서 rails를 사용하려면, Gemfile에 기술된 gem들을
+설치하면 된다.
 
 ```shell
+cd kholdem-server
+bundle install
 rails -v
 ```
 

@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       9FD80178-D948-4CA3-B95D-C77C0BDB65CF
-:mtime:    20231016124539 20231016113833 20231016103439
+:mtime:    20231024093820 20231016124539 20231016113833 20231016103439
 :ctime:    20231016103439
 :END:
 #+title: [k-holdem-rails] local server
@@ -136,27 +136,38 @@ brew tap homebrew/core
 brew install postgresql
 #+END_SRC
 
-server는 db를 이용하기 때문에 시작과 함께 실행 시킨다. 나는 원래 직접
-필요할 때만 실행 시켰지만, 상관없다. 아래와 같이 하는게 편하다.
+server는 db를 이용하기 때문에 system 시작과 함께 실행 시킨다. 나는
+원래 직접 필요할 때만 실행 시켰지만, 상관없다. 아래와 같이 하는게
+편하다.
+
 #+BEGIN_SRC shell
 brew services start postgresql
 #+END_SRC
+
+아래처럼 login item에 등록된다.
+#+CAPTION: login item
+#+NAME: login item
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/k-holdem/loginitem1.png]]
+
 * local에서 실행
-local에서 rails s로 바로 server를 실행시키면 안된다. bundler후에 db처리를 해줘야
-한다. db가 텅비워져 있기 때문이다.
+local에서 rails s로 바로 server를 실행시키면 안된다. project가
+사용하는 gem을 설치하고, db도 처리를 해줘야 한다. db가 텅비워져 있기
+때문이다.
 ** bundler
 project의 root에서
-
 #+BEGIN_SRC shell
 bundle install
 #+END_SRC
-하면 된다.
+하면 gemfile에 있는 gem들이 설치된다.
 ** db 처리
 *** database 생성
-db에 database를 만든다. 만드는건 수동으로 만들어도 되지만, rails
-db:create로 자동으로 만들자. rake를 써도 상관없다. db:create는 rails
-root project의 config/database.yml에 지정된 database를 참조해서
-database를 만든다. database이름은 kholdem_server_development다.
+postgresql에 database를 만든다. database를 만들어야 안에 table을 만들
+수 있다. database를 만들때, db에 접속해서 sql을 사용해서 수동으로
+만들어도 되지만, rails에는 db:create란 명령어가 있다.  db:create는
+rails root project의 config/database.yml에 지정된 database를 참조해서
+database를 자동으로 만든다. database이름은 kholdem_server_development다.
 
 #+CAPTION: db1
 #+NAME: db1
@@ -164,9 +175,12 @@ database를 만든다. database이름은 kholdem_server_development다.
 #+attr_latex: :width 400px
 [[../static/img/k-holdem/db1.png]]
 
+아래는 rails명령어를 썼지만, rake를 사용해도 된다.
+
 #+BEGIN_SRC shell
 rails db:create
 #+END_SRC
+
 *** schema load
 처음 db를 setting하면 schema를 load하면 된다. 기존의 table이 있다면
 migrate만 하면 되겠지만, 나는 어차피 database만 있고 table이 하나도
@@ -178,7 +192,32 @@ rails db:schema:load
 #+END_SRC
 *** db 확인
 나는 mysql을 사용했기 때문에 querious라는 mysql전용 db client를
-썼다. postgresql이라서 TablePlus로 확인했다.
+썼다. postgresql이라서 TablePlus를 사용하기로 했다. 우선 설치를 한다.
+
+#+BEGIN_SRC shell
+brew install --cask tableplus
+#+END_SRC
+그리고 다음과 같이 설정한다.
+
+#+CAPTION: db_set1
+#+NAME: db_set1
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/k-holdem/db_set1.png]]
+
+#+CAPTION: db_set2
+#+NAME: db_set2
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/k-holdem/db_set2.png]]
+
+#+CAPTION: db_set3
+#+NAME: db_set3
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/k-holdem/db_set3.png]]
+
+그리고 posgresql에서 접속해서 table을 확인한다.
 
 #+CAPTION: table1
 #+NAME: table1

@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       D6AAFE62-F1A0-4CD7-A055-900373667D3A
-:mtime:    20231014104453 20231013223938 20231011170137 20231011154734 20231010192024 20231002023345 20230922152910 20230922134045 20230922123747 20230922112005
+:mtime:    20231024091749 20231024035007 20231014104453 20231013223938 20231011170137 20231011154734 20231010192024 20231002023345 20230922152910 20230922134045 20230922123747 20230922112005
 :ctime:    20230922112005
 :END:
 #+title: [rails7] install ruby on rails7
@@ -10,10 +10,16 @@
 #+DESCRIPTION: ruby on rails7 설치하기
 #+HUGO_DRAFT: true
 * gorails로 설치
-[[https://gorails.com/setup/macos/13-ventura][GoRails]]에 보면 설치 과정이 쉽게 나와 있다. 이대로 따르면 된다.
-내 computer는 m1 mac이고, os는 ventura를 사용한다.
+[[https://gorails.com/setup/macos/13-ventura][GoRails]]에 보면 설치 과정이 쉽게 나와 있다. 이대로 따르면 된다.  내
+computer는 m1 mac이고, os는 ventura를 사용한다. kholdem에서
+설치했던것도 [[file:k_holdem_rails_analysis_source.org][여기에]] 있다. 참조해본다.
 
 ** ruby 설치
+ruby는 version 관리를 해야하는데, 예전에는 rbenv나 rvm을 사용했는데,
+요즘은 asdf를 사용한다고 해서 사용했는데, 너무 불안정하다. asdf
+global로 system설정도 제대로 안되고 asdf install로 설치시 제대로
+안되는 문제도 있다. 어떤것을 사용할 지 고민이 된다. asdf는 명령어를
+실행한 후 매번 source .zshrc를 해줘야만, 적용이 그나마 제대로 된다.
 *** asdf 설치
 [[https://asdf-vm.com/guide/getting-started.html][참고]], asdf는 node.js와 ruby의 version관리를 할 수 있다. rvm이나 rbenv
 대신 asdf로 ruby버전을 관리하는 이유는, node도 관리할 수 있기
@@ -35,7 +41,7 @@ asdf를 shell path에 등록한다.
 #+BEGIN_SRC shell
 echo -e "\n. $(brew --prefix asdf)/libexec/asdf.sh" >> ${ZDOTDIR:-~}/.zshrc
 #+END_SRC
-
+이렇게 하고 반드시 terminal을 restart해야 한다. gorails는 
 **** gorails
 #+BEGIN_SRC shell
 cd
@@ -87,16 +93,22 @@ ruby -v
   npm install -g yarn
 #+END_SRC
 ** rails 설치
-gorails는 7.0.6을 추천하지만, project는 7.0.8 이상을 설치하기 때문에 맞춰서 설치하자.
+gorails는 7.0.6을 추천하지만, project는 7.0.8 이상을 설치하기 때문에
+맞춰서 설치하자. 아래와 같이 설치하면 system level에서 rails를
+설치하게 된다.
 
 #+BEGIN_SRC shell
 gem install rails -v 7.0.8
+
 #+END_SRC
 
-만일 permission문제가 있다면, sudo를 붙여서 사용한다.
+project level에서 rails를 사용하려면, Gemfile에 기술된 gem들을
+설치하면 된다.
 
 #+BEGIN_SRC shell
-rails -v
+  cd kholdem-server
+  bundle install 
+  rails -v
 #+END_SRC
 ** database 설정
 *** sqlite3
