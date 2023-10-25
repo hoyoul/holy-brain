@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       EA78E30C-ACAB-4CBB-8D44-AE0D5180CE1B
-:mtime:    20231018101151
+:mtime:    20231024101136 20231018101151
 :ctime:    20231018101151
 :END:
 #+title: [k-holdem-flutter] dealt with oauth2.0
@@ -9,6 +9,9 @@
 #+DATE: <2023-10-18 Wed>
 #+DESCRIPTION: oauth 구현 분석
 #+HUGO_DRAFT: true
+
+* our goal
+
 * 개요 - Oauth(Open Authorization)를 사용하는 이유
 보통 app에선 회원가입을 하고 인증처리를 한다. 그런데,우리 app에선
 google login을 통해서 인증을 처리할 것이다. 그러면 app에서

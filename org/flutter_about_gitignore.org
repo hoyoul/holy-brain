@@ -1,0 +1,61 @@
+:PROPERTIES:
+:ID:       1703188C-7019-47F9-9468-3B02E4BB5BC9
+:mtime:    20231025112321 20231025093628 20231024222638 20231024212138
+:ctime:    20231024212138
+:END:
+#+title: [flutter] about .gitignore
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-24 Tue>
+#+DESCRIPTION: about .gitignore
+#+HUGO_DRAFT: true
+* flutter project에서 .gitignore
+flutter project를 만들고, flutter pub get을 하고, ios폴더에 들어가서
+pod install을 하면서 만들어지는 파일들이 있다. 이것을 artifacts라고
+한다. 부산물? 그런뜻이다. 실행하면 생기는 파일들, 이것은
+.gitignore에서 처리해주지 않으면 불편하다. 어떻게 처리할 것인가?
+* Another question
+내가 project를 만든다고 할때, git관리는 어떻게 할것이며? 혹은 어떻게
+관리 되고 있는가? 할줄 아는가? 모른다. 어떻게 해야 할것인가?
+** create project
+아래와 같이 flutter프로젝을 만들었다. 
+#+BEGIN_SRC shell
+flutter create about_git
+#+END_SRC
+.git폴더가 있는가? 없다. git status를 하니, repo가 없다고 나온다.
+#+CAPTION: git status
+#+NAME: git status
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/flutter/gitstatus.png]]
+
+그런데 특이하게도 .gitignore는 있다. repo는 없이 .gitignore만
+있는것인가? .gitignore는 마치 vscode를 위해서 이미 만들어
+놓은듯하다. 왜냐고?  아래와 같은 문장이 있다.
+
+#+BEGIN_SRC text
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+#+END_SRC
+** 어떻게 git repo를 만들고, 어떻게 github으로 보낼 것인가?
+그냥 떠오르는 생각은 local에 git init으로 repo를 만들고, 원격에
+해당하는 github에 repo를 만들어서 보내면 된다. 대충 이렇게 할 것 같다.
+** 그러면 .gitignore는 어떻게 할 것인가?
+ios나 android를 실행할때 생기는 artifacts가 뭐가 있는지 알아야 하고
+그중 어떤것이 git으로 tracking하면서 관리될 필요가 있는지 알아야
+한다. 그런데 이렇게 하기엔 너무나 알아야 할것이 많다. 과연 legit
+.gitignore는 존재할까? 여기서 한가지 확실한게 있다. android studio나
+flutter create project를 통해서 만들어지는 .gitignore는 ios나
+android의 artifacts에 대해선 전혀 처리하고 있지 않다. 그래서 많은
+사람들이 그 .gitignore를 사용하지 않는다는 것이다. 인터넷에 찾아보면
+거의 정답 비슷한 flutter legit .gitignore가 있는것을 발견할 수
+있다. 그것은 ios와 android에 대한 처리가 되어 있다.
+** legit .gitignore
+legin flutter .gitignore로 언급되는게, flutter의 github에 있는
+.gitignore를 사용하는 것이다.
+[[https://github.com/flutter/flutter/blob/master/.gitignore][여기]]에 가면 .gitignore를 찾을 수 있다.
+* flutter project에서의 .gitignore의 문제점
+자세한 내용은 [[file:flutter_faq.org][여기]]를 참조한다.
+

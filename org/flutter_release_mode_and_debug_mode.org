@@ -1,0 +1,12 @@
+:PROPERTIES:
+:ID:       DC10297E-CE7E-45EB-9867-6011F36DD277
+:mtime:    20231024114051
+:ctime:    20231024114051
+:END:
+#+title: [flutter] release mode and debug mode
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-24 Tue>
+#+DESCRIPTION: debug mode and release mode
+#+HUGO_DRAFT: true
+* 

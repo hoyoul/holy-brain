@@ -1,0 +1,106 @@
+:PROPERTIES:
+:ID:       EE7E9511-194B-4F46-88DF-2207D88EE505
+:mtime:    20231026033710 20231026022407 20231026003125 20231025233059 20231025220850 20231025203630 20231025145912 20231025135845 20231025112735 20231024211533
+:ctime:    20231024211533
+:END:
+#+title: [flutter,ios] about apple certificates.
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2022-5-24 Tue>
+#+DESCRIPTION: about apple certificates
+#+HUGO_DRAFT: true
+* ios, android app 인증과 보안에 관해
+internet으로 연결된 모든 것엔 인증과 보안이 있다. 어떤것에 연결될때는
+resource를 사용하는 거라서 인증이 필수다. 예를 들어, github에서
+연결하는것도 인증이 필요하고, 특정 web server에 접속할때도 인증이
+필요하다. 그렇다면 android app이나 ios app을 파는 google play, app
+store 모두 인증처리를 한다. 그러면 app자체에도 인증처리가 필요한가?
+app을 만드는 과정에서도 인증은 필요한가? 내가 궁극적으로 궁금한건,
+app을 개발할때 마주치게 되는 인증이나 보안관련해서 이해를 제대로
+못한다는 것이다.
+* apple device의 특징
+apple에서 만드는 device에선 app을 설치할 수 없다. 오직 apple에서 만든
+app만이 설치되고 실행된다. 이게 기본 방침이라고 한다. apple에서 만든
+app이외의 app은 기본적으로 믿질 못한다. 그렇기 때문에 device에
+app설치를 막아놨다. 물론 예외가 있다. Apple이 정한 배포 방식에 따라서
+배포된 app은 device에 설치될 수 있다. 예를 들어서, app store에 배포된
+app은 device에 설치할 수도 있고, 실행할 수도 있다. 또한 개발자들은
+test때문에 app을 device에서 설치할 필요가 있다. 그래서 development와
+distribution이 apple device에 apple app이외의 app을 설치하는
+방법이다. 이것은 apple이 이렇게 해도 된다라는 일종의 인증을 거쳐야만
+device에 app을 설치할 수 있는데, 그런 인증,허락을 받는게 provisioning
+profile이라고 보면 된다.
+
+이왕 얘기한거, provisioning profile과 배포에 대해서 말해보자.
+
+* Developer provisioning profile과 xcode
+위에서 말했듯이, 개발시에 test를 위해서 app을 devcie에 install해야
+한다. 이렇게 하려면, apple에 허락,인증을 받아야 한다고 했다. 인증을
+받는 과정은 다음과 같다. apple developement center에 가서, 몇몇
+요구사항에 맞춰서 작성하면된다. apple id(사용자), bundle ID(app),
+UDID(device)를 제출하면, 인증서와 developer provision profile을
+제공한다. 이때 apple Id와 사용자이메일과 public key를 CSR이란 형태의
+파일로 만들어 제출한다. 여튼 인증서와 provisioning profile을 받으면
+이를 이용해서 허용된 device에 허용된 app을 설치해서 test용으로 사용할
+수 있게 해준다.  그런데 한계는 있다. 우선 지정된 device와 app만을
+허용한다는 것이다. 그러면 지정된 device에서 지정되지 않은 app을
+설치하겠다고 한다면 어떤일이 일어날까?  fail이 발생한다. 해당
+provisioning profile에 등록된 app이 아닌 다른 app을 build 조차 하지
+못한다.
+
+#+CAPTION: provisioning
+#+NAME: provisioning
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/flutter/provisioning2.png]]
+
+simulator 실행을 할려고 하면, warning이 난다. warning이라서 그런지
+simulator는 실행할 수 있다.
+
+#+CAPTION: provisioning
+#+NAME: provisioning
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/flutter/provisioning1.png]]
+
+이렇게 developer provisioning을 받으면 test를 위해서 usb에 연결해서
+app을 설치할 수 있다. 이것도 일종의 배포라고 할수도 있다.
+
+* free apple developer account provisioning
+위에서 말했듯이, apple developer membership에 유료로 가입한 사람은
+device에 원하는 app을 설치할 권한을 얻는다. 모든 app에 대해서 모든
+device에 설치할 권한을 얻는건 아니고, 지정된 device, 지정된 app에
+대해서 provisioning profile을 apple로 부터 받아서 사용한다. 예를
+들어서, 5개의 app을 만든다면, 5개의 provisioning profile을 xcode에
+갖게 되고 이를 선택해서 사용한다. 그런데, apple developer
+memebership에 가입하지 않고도 free account계정을 사용해서도 device에
+app을 설치할 수 있다. free account의 특징은, device에 올릴수 있는
+app은 3개만 가능하다. 유료로 memebership에 가입된 계정은 무한개의
+app을 provisioning profile과 인증서를 얻어서 사용하지만, free
+account는 1개의 provisioning profile로 3개의 app을 설치하고 사용하는데
+provisioning profile을 3개 만들 필요는 없다.
+* Distribution
+개발자 provisioning profile을 통해서 app에 install하는것을 일명 code
+signing이라고 하는데, 이 code signing을 배포를 통해서 할 수도
+있다. 배포를 위해선 별도의 provisioning profile을 발급받아야
+한다. 크게 배포는 4종류가 있다.
+
+1. development: 이건 위에서 말한 developemnt provisioning profile로
+   usb를 사용해서 app을 인스톨한다.
+2. enterprise: 이것은 기업이나 학교에서 app을 배포하게 하는걸 가능하게 해준다.
+3. ad-hoc: 100대 이하의 device를 지정해서 해당 device에 app을
+   install하는것을 가능하게 해준다.
+4. apple store connect: 이것은 apple store에 app을 올려놓고 배포하는
+   방식이다.
+
+
+1번을 제외한 나머지는 별도의 provisioning profile을 발급받고 처리에
+맞춰 배포해야 한다.
+* test flight
+이것은 apple store connect를 사용해서 배포하는 방식이다. 이것도 apple
+store 배포용 provisioning profile을 발급받아서 처리한다.
+* 요약
+개발과 배포는 code signing과정이 이루어지기 때문에 각각의 목적에 맞는
+provisioning profile을 만들어야 한다. 이것에 대한 처리는 실제 할때
+정리할 필요가 있다. 여기서는 간단히 provisioning profile과 인증서에
+대한 내용만 알면된다.

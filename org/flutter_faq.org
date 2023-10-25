@@ -1,0 +1,87 @@
+:PROPERTIES:
+:ID:       7B4F1354-F06D-4C26-8377-BE54809DB7C5
+:mtime:    20231025121510 20231025102546 20231024134043
+:ctime:    20231024134043
+:END:
+#+title: [flutter] FAQ
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-24 Tue>
+#+DESCRIPTION: flutter faq
+#+HUGO_DRAFT: true
+* MaterialIcons-Regular.otf path error
+#+CAPTION: path problem
+#+NAME: path problem
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/path1.png]]
+
+이 에러의 해결법은 flutter sdk를 다시 까는 거라고 한다. 그냥 지우고
+다시 해본다.
+* build settings
+flutter project를 xcode에서 실행하게 되면, 다음과 같은 build
+settings를 적용하는 popup dialog가 나온다. recommend하는건, Quoted
+Frameheader와 enable Sandingbox가 check되어 있다. 그런데, 이렇게
+수행하면, 아래에도 보겠지만, rsync나 import,included warning이 엄청
+뜨게 된다. 그래서 아래와 같이 dialog에서 Build Settings에서 option을
+check 해제하면 된다.
+
+#+CAPTION: warning problem
+#+NAME: warning problem
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/warning1.png]]
+
+
+* rsync problem
+flutter project에서 ios simulator를 동작시키기 위해서, xcode에서
+runner project를 실행을 하게 되는데, 이 때 발생되는 에러다.
+#+CAPTION: rsync problem
+#+NAME: rsync problem
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/rsync1.png]]
+
+이 에러의 해결법은 xcode에서 runner target의 USER_SCRIPT_SANDINGBOX를
+no로 선택하면 된다.
+#+CAPTION: rsync problem2
+#+NAME: rsync problem2
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/rsync2.png]]
+* git ignore 문제
+flutter로 project를 만들고, ios simulator를 동작 시키면, xcode에서
+실행을 위해서 다음과 같은 file을 만들어 낸다. 이 파일들은
+artifacts라고 해서 부산물이다. xcode가 project를 실행하기 위해서
+만들어내는 부산물인데, git에서 추적을 관리할 필요가 없다. pbxproj는
+project build관련된 파일이고, xcscheme은 scheme과 관련한
+파일이다. scheme이란건, 동일한 code base에서 free버전, paid버전, test
+버전을 만들어내는 flavor를 뜻한다. 이것은 parameter나 configuration을
+설정하면서 이루어지는데, parameter나 configuration은 git에 의해서
+관리된다. xcscheme는 parameter나 configuration을 runtime에 실행할때
+매번 만들어지기 때문에 git으로 관리될 필요가 없다.
+#+CAPTION: git ignore
+#+NAME: git ignore
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/ignore.png]]
+
+매번 ios simulator가 실행될 때, 만들어지는 파일을 git에서 관리하지
+않으려면 .gitignore를 실행하면 된다. flutter project를 만들면 자동으로
+만들어주는 .gitignore에 이 부분이 빠진듯하다. flutter의 공식 github
+repo에서 사용하는 .gitignore를 [[https://github.com/flutter/flutter/blob/master/.gitignore][여기]]에서 받아서 적용해준다. 적용 방법은
+다음과 같다.
+
+#+BEGIN_SRC shell
+git rm -r --cached .
+git add. 
+git commit -m "커밋메세지"
+git push
+#+END_SRC
+* version warning
+이것은 xcode 초기 setting이 11.0으로 되어 있기 때문이다. 이것을 12.0으로 바꾸면 해결된다.
+#+BEGIN_SRC text
+  The iOS Simulator deployment target 'IPHONEOS_DEPLOYMENT_TARGET' is
+  set to 11.0, but the range of supported deployment target versions is
+  12.0 to 17.0.99.
+#+END_SRC

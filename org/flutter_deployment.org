@@ -1,0 +1,32 @@
+:PROPERTIES:
+:ID:       DC10297E-CE7E-45EB-9867-6011F36DD277
+:mtime:    20231024130907 20231024114051
+:ctime:    20231024114051
+:END:
+#+title: [flutter] Deployment
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-24 Tue>
+#+DESCRIPTION: Deployment 공부
+#+HUGO_DRAFT: true
+* Deployment
+** obfuscate
+*** obfuscate Dart code
+dart code가 디컴파일되는것을 막기위해서 obfuscate를 한다. 이 과정은
+release때 한다. 최종적인 android build target인 apk,aar,appbundle이라던가,
+ios build target인 ipa,ios는 이런 obfuscate가 적용되었다고 보면된다.
+*** obfuscate 적용
+app에 obfuscate를 적용하기 위해서, 다음과 같이 한다.
+#+BEGIN_SRC shell
+flutter build apk --obfuscate --split-debug-info=/<project-name>/<directory>
+#+END_SRC
+** flavor
+flavor라는 용어는, 동일한 code base인데, build configuration에 따라서
+full fledged production app(paid version)으로 만들 수 있고, 제한된
+free app을 만들수도 있고, test app을 만들수도 있다. 즉
+build-configuration을 어떻게 하는지에 따라서 다른 flavor를 갖는다고
+말한다.
+*** flavor의 적용
+compile때는 configuration을 설정해서, runtime때는 parameter를
+설정해서 flavor를 만들어 낼 수 있다. ios와 android가 별개인데,
+*** ios에서 적용방법
