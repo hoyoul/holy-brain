@@ -2,7 +2,7 @@
 title = "[dart] practice2 - oop"
 author = ["holy"]
 description = "dart oop summary"
-date = 2023-08-25T00:00:00+09:00
+date = 2023-10-18T00:00:00+09:00
 draft = true
 +++
 

@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       FF7C41DD-CCE5-4823-88A1-59C08FB82D07
-:mtime:    20230830001913
+:mtime:    20231029141308 20230830001913
 :ctime:    20230830001913
 :END:
 #+title: [audacity] change playspeed and the export
@@ -15,15 +15,33 @@
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/audacity/auda1.png]]
+
+영역설정을 해서 편집하는 과정은 [[file:audacity_selection_and_zoom_in_out.org][여기]]에도 있다.
 * [step2] 속도 조절
-#+CAPTION: 속도 조절1
-#+NAME: 속도 조절1
+속도를 조절하는것은 menu에 있는데, menu를 선택하고 pitch에
+보면,speed와 tempo가 있다.
+
+#+CAPTION: tempo
+#+NAME: tempo
+#+attr_html: :width 600px
+#+attr_latex: :width 100px
+[[../static/img/audacity/auda0.png]]
+
+tempo를 선택하자. speed와 tempo의 차이를 알아야 하는데, speed만 줄이면
+pitch 같은 소리의 특징을 일정하게 만든후 속도를 줄이기 때문에,
+목소리가 모두 똑같다. 대신에 잡음없이 매끄럽다. 반면 tempo는 voice의
+특징을 그대로 살리면서 즉, pitching을 유지하면서 빠르기를 줄여주거나
+늘려주기때문에, 목소리의 특징은 그대로 남아있다. 하지만, 잡음이
+포함되어 있다. 나는 tempo를 조절한다.
+
+#+CAPTION: tempo 조절1
+#+NAME: tempo 조절1
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
 [[../static/img/audacity/auda2.png]]
 
-#+CAPTION: 속도 조절2
-#+NAME: 속도 조절2
+#+CAPTION: tempo 조절2
+#+NAME: tempo 조절2
 #+attr_html: :width 600px
 #+attr_latex: :width 100px
-[[../static/img/audacity/auda3.png]]
+[[../static/img/audacity/auda4.png]]

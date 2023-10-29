@@ -1,0 +1,117 @@
+:PROPERTIES:
+:ID:       7C8EF25B-82D1-421C-8652-840F80467D42
+:mtime:    20231027092423 20231027082219 20231026200203 20231026190158 20231026173613
+:ctime:    20231026173613
+:END:
+#+title: [flutter] flutter from scratch (2) - create app
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-26 Thu>
+#+DESCRIPTION: create app
+#+HUGO_DRAFT: true
+* flutter app
+flutter에서 app을 만든다는 것은 widget들의 조합으로 만든다. widget마다
+역할이 있고, widget을 조합하는 방법이 있다. 내가 보는 app은 page들을
+묶어놓은 책과 같다. 책을 나타내는 materialApp과 같은 widget이 있고,
+page를 나타내는 widget이 있고, page안의 content를 나타내는 widget이
+있다.
+* 기본 구조
+** code
+#+BEGIN_SRC flutter
+import 'package:flutter/material.dart';
+
+void main() {
+  runApp(const MaterialApp(
+      home: Scaffold(
+      body: Text("hi holy"))
+  )
+);
+}
+#+END_SRC
+** material package
+material design은 android app만이 가지고 있는 theme가 있다. 이게
+있어서, 이 theme를 지원해주는 package다. MaterialApp이란 material로
+디자인된 widget도 제공한다.
+** runApp()
+entry point 함수다. widget tree의 root widget을 지정한다.
+
+** MaterialApp widget
+widget에도 여러 종류가 있다고 했다. MaterialApp은 app을 나타내는
+widget이다. app이 책으로 비유한다면, 모든 page의 design에 관여한다고
+보면된다.
+
+** scaffold widget
+page를 나타내는 widget으로 보면된다.
+
+** Text widget
+content를 나타내는 widget이다.
+
+* about widgets
+content widget들을 많이 사용하는데, content widget들은 child나
+children이라는 속성을 가지고 있다. 반면에 page를 나타내는 scaffold
+widget은 body라는 속성으로 자식을 받는다. 그리고 materialApp이라는 app
+widget은 home이라는 속성을 갖는다. 그래서 이 구조는 외워야 한다. 나는
+"마! 홈 스 바디"로 외웠는데, 모르겠다. materialApp은 home속성이 있고,
+home에는 scaffold widget이 들어가고, scaffold에는 body속성이 있다. 뭐
+이정도.
+
+* how am I make flutter programming?
+그러면 flutter widget은 어떻게 짤까? 위에서 만든 기본형태대로
+짤것인가? 아니다. 보통은 stateless widget이던, stateful widget을
+만든다. 여러 content widget들을 레고블럭처럼 묶어서 page에 들어갈 모든
+것들을 widget을 만들어서 scaffold page에 붙여넣던가, 아니면 scaffold
+page를 구분지어서 각각의 구분마다 widget을 만들어 붙인다. widget을
+어쨋거나 만들어서 붙여야 한다. 요약 programmer들은 widget들을 만들어서
+programming한다.
+
+* stateless vs stateful widget
+flutter로 app을 만든다는건, 어차피 widget을 만들어야 하는데, 선택의
+기로가 있다. stateless로 만들어서 붙일것인가? 아니면 stateful로 만들어
+붙일 것인가? 근데 대부분은 stateful로 만들어서 붙인다. 왜냐면, app의
+각 page는 변하지 않는 문서를 보여주는게 아니거든. 터치에 대한 반응을
+통해서 변경된 화면을 보여주던가 해야 하기때문에 stateful을 사용할
+수밖에 없다. 그러면 stateful과 stateless에 대해서 작성할 줄도
+알아야하고 차이도 알아야 한다. 이건 [[file:flutter_flutter_from_scratch_3_stateless_vs_stateful.org][여기]]서 정리하자.
+
+* 상태와 상태관리
+개발자가 flutter로 app을 만든다는 것은, 이미 만들어진 widget을 묶는
+widget을 만드는 경우가 많다. stateless widget은 timeless한
+widget이다. 즉 시간에 영향받지 않는 widget이라서 늘 그대로인
+widget이다. 그래서 내가 버튼을 누르면 text에 버튼을 누른 횟수를
+표현하는 page를 stateless widget으로 만든다면, 이것은 화면에 표시되지
+않는다.
+
+
+
+
+하지만, stateful widget은 시간에 따라 appearence가 변하는
+widget이다. appearence가 변하는 것은 appearence에서 표현하는 data의
+값이 변한다는 것이다. appearence는 data에 기반하기 때문이다. data는
+var 변수로 표현된다. var 변수는 시간에 따라 변하는 data를 가리키기
+때문이다. 시간에 따라 변하지 않는 data를 const나 final을 사용하는것의
+차이를 알아야 한다. 모든것은 시간과 연관되어 있다. timeless
+proposition을 knowledge라고 하는것처럼 말이다. 
+
+* app의 동작 과정
+app을 처음 실행했을때, flutter framework는 app의 entry point인
+main()를 실행하고 runApp()라는 entry point를 호출한다. runApp()는
+widget tree를 만든다. 처음에 만드는 widget tree는 node하나 없이,
+tree를 구성하는 facility만을 만든다. 첫번째 인자로 들어오는 인자는
+widget 생성을 하고 widget tree의 root로 삽입한다.
+
+* hot reload 와  hot restart
+
+* 
+* widget lifecycle
+
+* rendering과정
+
+* new code
+위에서 "마 홈 스 바디"로 page 하나짜리 app을 만들었다. 근데 page에
+body:에 text라는 content widget 하나만 사용하는 app은 쓸모가
+없다. 그래서 무조건 programmer는 stateless widget이던 stateful
+widget을 만들어서 끼워넣는 식으로 한다고 했다. content widget들 같은
+것들을 레고블럭처럼 조립하는 custom widget을 만들어서 widget tree의
+root에 넣던, widget tree의 특정 node에 끼워 넣어야 한다.
+
+* 여러 page 만들기

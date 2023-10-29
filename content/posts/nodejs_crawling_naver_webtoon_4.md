@@ -107,7 +107,7 @@ img태그를 찾을 수 있어야 한다.
 
 <a id="figure--jquery"></a>
 
-{{< figure src="../static/img/crawling/jquery1.png" caption="<span class=\"figure-number\">Figure 1: </span>jquery" width="600px" >}}
+{{< figure src="/img/crawling/jquery1.png" caption="<span class=\"figure-number\">Figure 1: </span>jquery" width="600px" >}}
 
 아마도 web toon image viewer를 뜻하는 거 같은데, class명으로 선택해서
 img를 찾을수가 있다.

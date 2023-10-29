@@ -62,7 +62,7 @@ subscript와 superscript를 어떻게 표시하는지를 결정한다.
 기본적으로 section들은 numbering이 된다. 이것을 없애려면 nil로
 setting한다.
 
-<a id="org20e967c"></a>
+<a id="orga162f62"></a>
 
 ㄱ<img src="/img/reveal/num.png" alt="num.png" width="600px" />
 

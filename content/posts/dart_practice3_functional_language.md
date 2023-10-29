@@ -2,7 +2,7 @@
 title = "[dart] practice3 functional language"
 author = ["holy"]
 description = "functional language"
-date = 2023-08-26T00:00:00+09:00
+date = 2023-10-20T00:00:00+09:00
 draft = true
 +++
 

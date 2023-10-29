@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<title>[dart] practice4- async programming</title>
+<meta name="author" content="holy"/>
+<meta name="description" content="async programming 알아야할 최소한의 것들."/>
+<meta name="keywords" content=""/>
+<style type="text/css">
+.underline { text-decoration: underline; }
+</style>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.css"/>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js/dist/theme/moon.css" id="theme"/>
+
+<link rel="stylesheet" href="./modifications.css"/>
+</head>
+<body>
+<div class="reveal">
+<div class="slides">
+<section id="sec-title-slide"><h1 class="title">[dart] practice4- async programming</h1><em></em><br><br>holy<br>2023-10-23 Mon 00:00
+</section>
+
+<section>
+<section id="slide-org569686d">
+<h2 id="org569686d">동기와 비동기</h2>
+<div class="outline-text-2" id="text-org569686d">
+</div>
+</section>
+<section id="slide-org0fbef70">
+<h3 id="org0fbef70">동기</h3>
+<p>
+순차적으로 코드가 실행되면, 동기화 program이라고 한다. 동기화
+program은 하나의 코드 instruction이 실행이 끝난 후, 즉 완료한 다음에
+다음 instruction이 시작 된다.
+</p>
+</section>
+<section id="slide-org5a54915">
+<h3 id="org5a54915">비동기</h3>
+<p>
+비동기 program은 instruction이 실행이 완료되기전에 다음 instruction이
+실행 된다.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org23743c2">
+<h2 id="org23743c2">동기와 비동기의 장단점</h2>
+<div class="outline-text-2" id="text-org23743c2">
+</div>
+</section>
+<section id="slide-org9ff78a0">
+<h3 id="org9ff78a0">동기</h3>
+<p>
+ 장점은 어떤 instruction의 결과값을 다음 instruction이 이용하기때문에
+자연스러운 방식이다. 단점, cpu를 사용하지 않고 i/o stream의 경우
+lock이 걸리는 모습을 보인다.
+</p>
+</section>
+<section id="slide-orgaa21fdb">
+<h3 id="orgaa21fdb">비동기</h3>
+<p>
+비동기 프로그램은 이전 instruction이 끝나기도 전에 다음 instruction이
+시작된다. 장점은 cpu를 사용하지 않는 서버연결과 같은 작업으로 인한
+lock이 걸리는 모습이 보이지 않는다는 것이다. 단점은 코드 실행이
+뒤죽박죽이 되어 버린다.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org82afd6e">
+<h2 id="org82afd6e">동기와 비동기 mechanism</h2>
+<div class="outline-text-2" id="text-org82afd6e">
+</div>
+</section>
+<section id="slide-org860521d">
+<h3 id="org860521d">동기</h3>
+<p>
+동기는 일반적인 프로그래밍이라서 call stack을 이용한다.
+</p>
+
+
+
+
+
+
+
+</section>
+</section>
+<section>
+<section id="slide-org2ef9090">
+<h2 id="org2ef9090">우리의 목적</h2>
+<p>
+동기방식의 단점을 Future를 사용해서 없애고, 비동기의 단점을 async &amp;
+await로 없애자는 게 목적이다. 즉 cpu자원 낭비와 lock이 걸린것처럼
+보이는 문제를 해결하기 위해선 무조건 비동기를 써야 한다. 하지만,
+비동기는 뒤죽박죽이기 때문에 동기방식이 갖는, 순차적 실행결과를
+이용하게 처리해야 한다. 요약하면 실행하면 동기처럼 실행하지만,
+내부적으로는 비동기로 동작하는 코드를 작성하는게 우리의 목표다.
+</p>
+
+
+</section>
+</section>
+<section>
+<section id="slide-orgac376b0">
+<h2 id="orgac376b0">비동기가 필요한 이유</h2>
+<p>
+cpu를 사용하지 않는 작업들, I/O stream을 연결해서 사용하는 작업들,
+socket, file과 같은 작업들은 cpu를 사용하지 않고 언제 끝날지 알수
+없다. program이 이런 코드들을 실행하면 block된다. lock이 걸린다.는
+표현을 한다. 허송세월 기다리는 이런 코드들을 비동기로 처리해야
+한다. flutter의 경우 app프로그램을 짠다. app에서 반응속도는 매우
+중요하다. 즉 비동기 프로그램은 flutter에서 없어서는 안되는 기본이다.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org493a26b">
+<h2 id="org493a26b">[1- future] 비동기가 필요한 상황 simulation (동기화 코드)</h2>
+<ul>
+<li>비동기 program을 할수 밖에 없는 상황을 우선 만들어야 한다.
+block되는 상황을 만들고, 그런 다음에 여기서 비동기 programming을 가능케하는
+keyword를 붙여서, 와! 비동기가 되네하는 그런 느낌을 피부로 느끼게 해야한다.</li>
+<li>block되는 상황을 만드는 code는 sleep()가 있다. 그런데 강의에선
+delayed()로 예를 든다. 왜냐하면 Future가 제공되기 때문이다. 즉,
+Future.delayed()는 sleep()의 비동기 코드다. 반면 sleep()는 동기화
+코드다.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #948ae3;">import</span> <span style="color: #fce566;">'dart:io'</span>;
+<span style="color: #5ad4e6;">void</span> main(){
+  addNumbers(<span style="color: #948ae3;">3</span>,<span style="color: #948ae3;">5</span>);
+}
+<span style="color: #5ad4e6;">void</span> addNumbers(<span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">number1</span>, <span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">number2</span>){
+  print(<span style="color: #fce566;">"&#44228;&#49328; &#49884;&#51089;: </span><span style="color: #f7f1ff;">$number1</span><span style="color: #fce566;"> + </span><span style="color: #f7f1ff;">$number2</span><span style="color: #fce566;">"</span>);
+  sleep(<span style="color: #5ad4e6;">Duration</span>(seconds: <span style="color: #948ae3;">2</span>));
+  print(<span style="color: #fce566;">"&#44228;&#49328; &#50756;&#47308;: </span><span style="color: #f7f1ff;">$number1</span><span style="color: #fce566;"> + </span><span style="color: #f7f1ff;">$number2</span><span style="color: #fce566;">"</span>);
+}
+</code></pre>
+</div>
+<p>
+addNumbers를 계산할 때, sleep코드를 실행하면 block이 된다. sleep이
+socket통신이나, file i/o stream이라고 가정해서 테스트했지만, 동기화
+코드는 화면이 lock이 걸린것처럼 된다.
+</p>
+</section>
+</section>
+<section>
+<section id="slide-org21d6aa4">
+<h2 id="org21d6aa4">[2- future] 비동기가 필요한 상황 simulation 해결(비동기 코드)</h2>
+<ul>
+<li>sleep대신에 Future.delayed()를 사용하면 비동기로 처리할 수 있다.</li>
+<li>sleep을 서버와의 통신이나 시간이 오래걸리는 file작업을 은유한
+코드지만, 어쨋든 동일하다. 이런 코드들은 비동기로 처리해야
+한다. 그래야 화면에 lock이 걸리지 않는다.</li>
+<li>참고로 future.delayed()는 duration객체와 callback function을 인자로
+받을 수 있다.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #5ad4e6;">void</span> main(){
+  addNumbers(<span style="color: #948ae3;">3</span>,<span style="color: #948ae3;">2</span>);
+}
+<span style="color: #5ad4e6;">void</span> addNumbers(<span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num1</span>, <span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num2</span>){
+  print(<span style="color: #fce566;">"before calculate"</span>);
+  <span style="color: #5ad4e6;">Future</span>.delayed(<span style="color: #5ad4e6;">Duration</span>(seconds:<span style="color: #948ae3;">2</span>),(){
+      print(<span style="color: #fce566;">"calculating"</span>);
+    }
+  );
+  print(<span style="color: #fce566;">"after calculate"</span>);
+}
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org8beeb00">
+<h2 id="org8beeb00">[3- future] 비동기 코드의 문제점과 해결 (await &amp; async)</h2>
+<ul>
+<li>위에서 Future.delayed()는 비동기로 처리되었다. 바로 다음 명령어가
+실행되었기 때문이다.</li>
+<li>그런데 다음 명령어가 오래걸리는 future 비동기 명령어와 연관관계가
+있다면 문제가 생긴다. 예를 들어서 server에서 data를 가져와서 그
+데이터를 조작하는 명령이 다음 명령어라면, 무조건 data가 있어야 그
+명령어가 사용된다. 그러면 다시 동기화 프로그래밍을 해야 하는가?</li>
+<li>그런 경우가 의외로 많다. 그렇다고 동기화하면 lock이 걸리는 현상을
+보일 것이다. 어떻게 할것인가? 그래서 await와 async라는 keyword가
+사용된다. Future가 사용되는 block앞에 async라는 keyword를 넣고,
+Future에는 await keyword를 넣는다. 이렇게 하면 await 이하 명령어들은
+겉으로 봤을때는 동기화 program처럼 순차적으로 실행된다. 하지만
+실제는 비동기로 실행된다.</li>
+<li>즉 async,await를 사용하면 비동기 코드의 결과값을 사용하는 다음
+명령어가 비동기 코드의 결과값을 가지고 조작 연산을 가능하게
+보장한다는 것이다.</li>
+<li>await이하를 하나의 묶음으로 봐도 된다.</li>
+
+</ul>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #5ad4e6;">void</span> main(){
+  addNumbers(<span style="color: #948ae3;">3</span>,<span style="color: #948ae3;">3</span>);
+}
+
+<span style="color: #5ad4e6;">void</span> <span style="color: #7bd88f;">addNumbers</span>(<span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num1</span>, <span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num2</span>) <span style="color: #5ad4e6;">async</span>{
+
+  print(<span style="color: #fce566;">"before calculate"</span>);
+ <span style="color: #5ad4e6;">await</span> <span style="color: #5ad4e6;">Future</span>.delayed(<span style="color: #5ad4e6;">Duration</span>(seconds:<span style="color: #948ae3;">2</span>), (){
+      print(<span style="color: #fce566;">"calculating.."</span>);
+      });
+  print(<span style="color: #fce566;">"after calculating"</span>);
+
+}
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org1ba9c29">
+<h2 id="org1ba9c29">[4- future] 비동기로 실행되는 함수의 문제점</h2>
+<ul>
+<li>우리의 목표는 동기처럼 실행되지만, 내부적으로는 비동기적으로
+돌아가는 코드를 만드는 것이다. 여기서는 뒤죽박죽 비동기처럼
+실행된다. addNumbers(1,1)을 실행하면 동기처럼 실행된 후 ,
+addNumbers(3,3)이 뒤이어서 실행되는 모습을 만들기 위해선
+addNumbers를 async &amp; await로 처리해줘야 한다.</li>
+
+</ul>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #5ad4e6;">void</span> main(){
+  addNumbers(<span style="color: #948ae3;">1</span>,<span style="color: #948ae3;">1</span>);
+  addNumbers(<span style="color: #948ae3;">3</span>,<span style="color: #948ae3;">3</span>);    
+}
+
+<span style="color: #5ad4e6;">void</span> <span style="color: #7bd88f;">addNumbers</span>(<span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num1</span>, <span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num2</span>) <span style="color: #5ad4e6;">async</span>{
+  print(<span style="color: #fce566;">"before calculating: </span><span style="color: #f7f1ff;">$num1</span><span style="color: #fce566;">, </span><span style="color: #f7f1ff;">$num2</span><span style="color: #fce566;">"</span>);
+  <span style="color: #5ad4e6;">await</span> <span style="color: #5ad4e6;">Future</span>.delayed(<span style="color: #5ad4e6;">Duration</span>(seconds:<span style="color: #948ae3;">2</span>),(){
+      print(<span style="color: #fce566;">"calculating...</span><span style="color: #f7f1ff;">$num1</span><span style="color: #fce566;">,</span><span style="color: #f7f1ff;">$num2</span><span style="color: #fce566;">"</span>);
+      });
+  print(<span style="color: #fce566;">"after calculating: </span><span style="color: #f7f1ff;">$num1</span><span style="color: #fce566;">, </span><span style="color: #f7f1ff;">$num2</span><span style="color: #fce566;">"</span>);    
+}
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-orgdc9dcf7">
+<h2 id="orgdc9dcf7">[5- future] 비동기로 실행되는 함수의 문제점 해결</h2>
+<ul>
+<li>비동기 코드를 사용하는 함수를 사용하면 비동기처럼 뒤죽박죽
+실행된다. 비록 비동기 코드를 사용하지만, 실행될때 마치 동기화된
+코드처럼 실행하는게 우리가 비동기코드를 사용할때 목표, 지향점이다.</li>
+<li>addNumbers를 실행하면 뒤죽박죽 실행되는것을 볼 수 있다.</li>
+<li>위의 코드를 동기화 프로그램이 실행되는 것처럼 보이게 하려면 async
+await를 사용해야 한다.</li>
+
+</ul>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #5ad4e6;">void</span> <span style="color: #7bd88f;">main</span>() <span style="color: #5ad4e6;">async</span> {
+  <span style="color: #5ad4e6;">await</span> <span style="color: #7bd88f;">addNumbers</span>(<span style="color: #948ae3;">2</span>,<span style="color: #948ae3;">2</span>);
+  <span style="color: #5ad4e6;">await</span> <span style="color: #7bd88f;">addNumbers</span>(<span style="color: #948ae3;">3</span>,<span style="color: #948ae3;">3</span>);
+}
+
+<span style="color: #5ad4e6;">Future</span>&lt;<span style="color: #5ad4e6;">void</span>&gt; <span style="color: #7bd88f;">addNumbers</span>(<span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num1</span>, <span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">num2</span>) <span style="color: #5ad4e6;">async</span> {
+  print(<span style="color: #fce566;">"before calculate </span><span style="color: #f7f1ff;">$num1</span><span style="color: #fce566;">,</span><span style="color: #f7f1ff;">$num2</span><span style="color: #fce566;">"</span>);
+  <span style="color: #5ad4e6;">await</span> <span style="color: #5ad4e6;">Future</span>.delayed(<span style="color: #5ad4e6;">Duration</span>(seconds:<span style="color: #948ae3;">2</span>),(){
+      print(<span style="color: #fce566;">"calculating </span><span style="color: #f7f1ff;">$num1</span><span style="color: #fce566;">,</span><span style="color: #f7f1ff;">$num2</span><span style="color: #fce566;">"</span>);
+      });
+  print(<span style="color: #fce566;">"after calculate </span><span style="color: #f7f1ff;">$num1</span><span style="color: #fce566;">,</span><span style="color: #f7f1ff;">$num2</span><span style="color: #fce566;">"</span>);    
+}
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org9319685">
+<h2 id="org9319685">[6-stream] stream의 개념</h2>
+<ul>
+<li>stream은 Future처럼 언제 끝날지 모르는 작업을 처리하는
+방식이다. 원격서버와 연결해서 file을 가져온다면 그냥 Future를
+사용하면 되지만, 채팅을 한다고 생각해보면, future를 사용할 수
+없다. 왜냐면 끝이 없기 때문이다. 또한,  이 때 Stream을 사용한다. stream은
+채팅처럼 끝이 없고, 상대방이 보낸 메시지를 그때 그때 처리한다는
+특징이 있다. 이것을 yield로 구현하겠지만, 이런 특징을 가지고
+있다는 것만 알자. stream이란 용어는 예전부터 있던 용어다. socket이나
+file 입출력작업을 모두 I/O Stream이라고 불렀다.</li>
+<li>dart에선 stream을 observer pattern으로 구현했다. observer pattern은
+youtube구독 시스템과 비슷하다. subject가 동영상을 올리면 등록했던
+관찰자들에게 noti가 간다. 비슷하게 Dart에선 StreamController의
+sink와 stream이란게 있다. sink는 subject에 해당한다. sink에서 data를
+게시하면, observer에 해당하는 stream에게 noti가 가고, stream은
+listener를 통해서 데이터를 받을 수 있다.</li>
+<li>요약하면, 두가지 특징이 있다. observer pattern과 yield다.</li>
+
+</ul>
+
+</section>
+</section>
+<section>
+<section id="slide-org21f3410">
+<h2 id="org21f3410">[7-stream] 간단한 stream의 예.</h2>
+<ul>
+<li>stream을 사용하려면 StreamController가 필요하다. dart:async를 import한다.</li>
+<li>streamController가 가진 sink와 stream을 꺼내서 data를 올리고 noti받는다.</li>
+<li>observer pattern을 이용하는 법을 배운다.</li>
+
+</ul>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #948ae3;">import</span> <span style="color: #fce566;">'dart:async'</span>;
+<span style="color: #5ad4e6;">void</span> main()
+{
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">control</span> = <span style="color: #5ad4e6;">StreamController</span>();
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">stream</span>  = control.stream;
+
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">streamListener1</span> = stream.listen((<span style="color: #f7f1ff;">val</span>) {
+      print(val);
+      });
+
+   control.sink.add(<span style="color: #948ae3;">1</span>);
+   control.sink.add(<span style="color: #948ae3;">2</span>);
+   control.sink.add(<span style="color: #948ae3;">3</span>);     
+   control.sink.add(<span style="color: #948ae3;">4</span>);
+   control.sink.add(<span style="color: #948ae3;">5</span>);          
+}
+
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org7f5991b">
+<h2 id="org7f5991b">[8-stream] 여러명의 구독자(관찰자,stream)이 있는 경우</h2>
+<ul>
+<li>stream은 youtube에서 구독자에 해당한다고 했다. 그런데 구독자가
+여러명을 하려면 stream이 asBroadcastStream()를 호출해야 한다.</li>
+
+</ul>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #948ae3;">import</span> <span style="color: #fce566;">'dart:async'</span>;
+<span style="color: #5ad4e6;">void</span> main(){
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">control</span> = <span style="color: #5ad4e6;">StreamController</span>();
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">stream</span>  = control.stream.asBroadcastStream();
+
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">listener1</span> = stream.listen((val){
+      print(<span style="color: #fce566;">'listener1: </span><span style="color: #f7f1ff;">$val</span><span style="color: #fce566;">'</span>);
+      });
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">listener2</span> = stream.listen((val){
+      print(<span style="color: #fce566;">'listerner2: </span><span style="color: #f7f1ff;">$val</span><span style="color: #fce566;">'</span>);
+      });        
+
+  control.sink.add(<span style="color: #948ae3;">1</span>);
+  control.sink.add(<span style="color: #948ae3;">2</span>);
+  control.sink.add(<span style="color: #948ae3;">3</span>);    
+}
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org8f14980">
+<h2 id="org8f14980">[9-stream] 2개의 streamlistener에서 하나는 짝수만, 하나는 홀수 출력</h2>
+<ul>
+<li>where을 사용해서 처리한다.</li>
+
+</ul>
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #948ae3;">import</span> <span style="color: #fce566;">'dart:async'</span>;
+<span style="color: #5ad4e6;">void</span> main(){
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">control</span> = <span style="color: #5ad4e6;">StreamController</span>();
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">stream</span> = control.stream.asBroadcastStream();
+
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">listerner1</span> = stream.where((<span style="color: #f7f1ff;">x</span>) =&gt; x %2 == <span style="color: #948ae3;">0</span> ).listen((value){
+      print(<span style="color: #fce566;">"listener1 : </span><span style="color: #f7f1ff;">$value</span><span style="color: #fce566;">"</span>);
+      });
+  <span style="color: #5ad4e6;">final</span> <span style="color: #f7f1ff;">listerner2</span> = stream.where((<span style="color: #f7f1ff;">x</span>) =&gt; x %2 ==<span style="color: #948ae3;">1</span>).listen((value){
+      print(<span style="color: #fce566;">"listener2 : </span><span style="color: #f7f1ff;">$value</span><span style="color: #fce566;">"</span>);
+      });        
+
+  control.sink.add(<span style="color: #948ae3;">1</span>);
+  control.sink.add(<span style="color: #948ae3;">2</span>);
+  control.sink.add(<span style="color: #948ae3;">3</span>);
+  control.sink.add(<span style="color: #948ae3;">4</span>);
+  control.sink.add(<span style="color: #948ae3;">5</span>);    
+
+}
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org5513955">
+<h2 id="org5513955">[10-stream] yield simulation.</h2>
+<ul>
+<li>지금까지는 observer pattern 관점에서 stream을 테스트했다.</li>
+<li>stream의 다른 한가지 특징인 yield에 대해서 테스트 할것이다.</li>
+<li>채팅같은 stream에서는 상대방의 메시지가 올때마다 보여주는 처리를
+해야하기 때문에 yield가 사용된다.</li>
+<li>yield를 simulation하기 위해서 for-loop을 사용해보자.</li>
+<li>for loop로 5번 return하게 만들자.</li>
+<li>불가능하다. for-loop로 5번 return을 불가능하기 때문이다.</li>
+
+</ul>
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #948ae3;">import</span> <span style="color: #fce566;">'dart:async'</span>;
+<span style="color: #5ad4e6;">void</span> main(){
+  print(calculate(<span style="color: #948ae3;">10</span>));
+
+}
+<span style="color: #5ad4e6;">int</span> calculate(<span style="color: #5ad4e6;">int</span> <span style="color: #5ad4e6;">num</span>){
+  <span style="color: #5ad4e6;">for</span> (<span style="color: #5ad4e6;">int</span> <span style="color: #f7f1ff;">i</span> =<span style="color: #948ae3;">0</span>; i&lt; <span style="color: #948ae3;">5</span>; i++){
+    <span style="color: #5ad4e6;">return</span> i * <span style="color: #5ad4e6;">num</span>;
+  }
+}
+</code></pre>
+</div>
+
+</section>
+</section>
+<section>
+<section id="slide-org1297f83">
+<h2 id="org1297f83">[11-stream] for-loop를 stream으로 만들기.</h2>
+<ul>
+<li>정상적인 상황이라면 for-loop을 stream처럼 사용하기 어렵다. 그런데
+stream을 만들면 된다.</li>
+<li>stream은 lis</li>
+
+</ul>
+
+
+<div class="org-src-container">
+
+<pre  class="src src-dart"   ><code trim><span style="color: #948ae3;">import</span> <span style="color: #fce566;">'dart:async'</span>;
+<span style="color: #5ad4e6;">void</span> main(){
+
+}
+
+<span style="color: #5ad4e6;">int</span> calculate(<span style="color: #5ad4e6;">int</span> <span style="color: #5ad4e6;">num</span>){
+
+}
+
+</code></pre>
+</div>
+</section>
+</section>
+<section>
+<section id="slide-org6defde9">
+<h2 id="org6defde9"></h2>
+</section>
+</section>
+</div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/markdown/markdown.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/zoom/zoom.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js/plugin/notes/notes.js"></script>
+
+
+<script>
+// Full list of configuration options available here:
+// https://github.com/hakimel/reveal.js#configuration
+Reveal.initialize({
+plugins: [RevealMarkdown, RevealZoom, RevealNotes],
+transition: 'linear'
+});
+
+</script>
+</body>
+</html>

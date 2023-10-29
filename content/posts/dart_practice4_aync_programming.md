@@ -2,7 +2,7 @@
 title = "[dart] practice4- async programming"
 author = ["holy"]
 description = "async programming 알아야할 최소한의 것들."
-date = 2023-08-27T00:00:00+09:00
+date = 2023-10-23T00:00:00+09:00
 draft = true
 +++
 

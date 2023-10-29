@@ -2,7 +2,7 @@
 title = "[dart] practice1- basic"
 author = ["holy"]
 description = "dart 매일 해야하는것들"
-date = 2023-08-24T00:00:00+09:00
+date = 2023-10-16T00:00:00+09:00
 draft = true
 +++
 
