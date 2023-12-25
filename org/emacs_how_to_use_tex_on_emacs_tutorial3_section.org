@@ -1,9 +1,20 @@
 :PROPERTIES:
 :ID:       32474902-FAAB-497B-8166-5363E7AAB687
-:mtime:    20231220150006 20231220135913
+:mtime:    20231225185132 20231220150006 20231220135913
 :ctime:    20231220135913
 :END:
 #+title: [emacs] how to use tex on emacs tutorial3- section
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-12-25 Mon>
+#+DESCRIPTION: how to make tex using emacs
+#+HUGO_DRAFT: true
+* 참조
+[[file:emacs_how_to_use_tex_on_emacs_tutorial2_pagelayout.org][page layout]]
+[[file:emacs_how_to_use_tex_on_emacs.org][basic tex]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial4_figures.org][about figure]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial5_table.org][table]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial10_cv.org][about cv]]
 * section
 tex문서에서 section은 heading으로 봐도 된다.다음 예를 보자.
 

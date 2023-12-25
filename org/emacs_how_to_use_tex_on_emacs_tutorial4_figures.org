@@ -1,9 +1,20 @@
 :PROPERTIES:
 :ID:       1ACFAA16-2523-4758-902A-DAFA6B10D74F
-:mtime:    20231222154707 20231222143244 20231222124145 20231222000835 20231220214535 20231220195516 20231220183048 20231220162059 20231220151711
+:mtime:    20231225185241 20231222154707 20231222143244 20231222124145 20231222000835 20231220214535 20231220195516 20231220183048 20231220162059 20231220151711
 :ctime:    20231220151711
 :END:
 #+title: [emacs] how to use tex on emacs tutorial4-figures
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-12-25 Mon>
+#+DESCRIPTION: how to make tex from emacs.
+#+HUGO_DRAFT: true
+* 참조
+[[file:emacs_how_to_use_tex_on_emacs_tutorial2_pagelayout.org][page layout]]
+[[file:emacs_how_to_use_tex_on_emacs.org][basic tex]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial3_section.org][section]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial5_table.org][table]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial10_cv.org][about cv]]
 * figure
 figure는 그림이다. 이것을 어떻게 문서에 나타낼것인가? 인데, 우선
 image파일이 같은 경로에 있는 경우를 살펴보자. image파일이 필요하다.
