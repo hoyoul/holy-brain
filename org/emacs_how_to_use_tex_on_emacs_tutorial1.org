@@ -1,11 +1,19 @@
 :PROPERTIES:
 :ID:       61AD3F94-F8F8-4431-9895-E226C6D168C4
-:mtime:    20231225141724 20231225122757 20231218003256 20231217220407
+:mtime:    20231225181235 20231225141724 20231225122757 20231218003256 20231217220407
 :ctime:    20231217220407
 :END:
 #+title: [emacs] how to use tex on emacs tutorial1
-
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-12-25 Mon>
+#+DESCRIPTION: make sth from tex using emacs.
+#+HUGO_DRAFT: false
 * 참조
+[[file:emacs_how_to_use_tex_on_emacs_tutorial2_pagelayout.org][about_pagelayout]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial3_section.org][about section]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial4_figures.org][about figure]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial10_cv.org][about cv]]
 https://www.youtube.com/watch?v=jufEPC-7v0s&list=PLLybgCU6QCGU2Hh8R3oCwZnVZry-ICY5R
 * tutorial1
 ** 용어 (command, environment, package)

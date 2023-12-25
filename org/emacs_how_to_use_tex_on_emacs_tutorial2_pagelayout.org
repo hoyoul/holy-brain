@@ -1,9 +1,19 @@
 :PROPERTIES:
 :ID:       E64D14D7-3D4D-43D6-BC29-5067D13CDAE1
-:mtime:    20231220130529 20231220031646 20231218004829
+:mtime:    20231225181831 20231220130529 20231220031646 20231218004829
 :ctime:    20231218004829
 :END:
 #+title: [emacs] how to use tex on emacs tutorial2-pagelayout
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2023-12-25 Mon>
+#+DESCRIPTION: make sth from tex on emacs
+#+HUGO_DRAFT: true
+* 참조
+[[file:emacs_how_to_use_tex_on_emacs.org][basic tex]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial3_section.org][about section]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial4_figures.org][about figure]]
+[[file:emacs_how_to_use_tex_on_emacs_tutorial10_cv.org][about cv]]
 * letter
 page의 size나 margin을 조절하는 가장 간단한 방법은 letter로 설정하는 것이다.
 
