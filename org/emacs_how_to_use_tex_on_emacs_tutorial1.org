@@ -8,7 +8,7 @@
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-12-25 Mon>
 #+DESCRIPTION: make sth from tex using emacs.
-#+HUGO_DRAFT: false
+#+HUGO_DRAFT: true
 * 참조
 [[file:emacs_how_to_use_tex_on_emacs_tutorial2_pagelayout.org][about_pagelayout]]
 [[file:emacs_how_to_use_tex_on_emacs_tutorial3_section.org][about section]]
