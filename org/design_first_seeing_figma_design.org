@@ -1,0 +1,119 @@
+:PROPERTIES:
+:ID:       E4A88F7E-0D4A-4617-B311-FCCEAB979051
+:mtime:    20231031114144
+:ctime:    20231031114144
+:END:
+#+title: [design] first seeing figma design
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-31 Tue>
+#+DESCRIPTION: figma 처음 받았을때
+#+HUGO_DRAFT: true
+* figma design을 처음 받았을때
+디자이너로 부터 design을 받고 웹이나 앱으로 구현을 해야한다. 좀 막막할
+수 있다. 옛날에는 그냥 디자인오면 이미지와 대충 color,size정보만
+얻어서 사용했다. 그런데 요즘은 그렇게 하진 않을거 같다. app이나
+web에서 얻을 figma 정보는 무엇이고 어떻게 사용하는지 정리해본다.
+
+** 이미지 다운로드
+figma에서 작성된 도안에서 image경우 web이나 app에 그대로 가져다 써도
+된다. figma에서 export를 사용해서 image를 추출할 수 있다.
+
+#+CAPTION: extract image
+#+NAME: extract image
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/image.png]]
+이렇게 image를 추출해서 app이나 web에서 사용하면 된다.
+** color
+figma에서 color picker나 eyedropper를 사용해서 color값을 가져올 수
+있다. 이것을 web이나 app에서 이용할 수 있다.
+#+CAPTION: extract color
+#+NAME: extract color
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/pickColor1.png]]
+** 도형 size 정보 & corner radius
+component를 click하면 size정보(넓이 높이)를 알 수 있다. 그리고 corner
+radius 정보도 알 수 있다.
+#+CAPTION: corner radius
+#+NAME: corner radius
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/radius_size.png]]
+** layout 정보
+figma design에서의 크기는 가변적이다. device마다 다르기
+때문이다. 그래서 layout을 설정하는데, 감으로 했다. 예를 들면 다음과
+같은 방식으로 했다.
+#+CAPTION: layout
+#+NAME: layout
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/layout1.png]]
+
+Log in or sign up이란 text가 대략 114만큼 떨어져 있다고 생각하고
+배치를 하는데, 이건 device마다 전체 크기가 다르기 때문에 고정적인
+크기로 할순 없다. 대략적인 비율을 계산해야 한다. 즉 디자이너가 만든
+폰화면은 height가 812다. 여기에 114만큼 떨어져 있다면, 전체 폰크기의
+1/8만큼 떨어져 있다고 가정해서 처리했다.
+*** 참고
+다른 개발자도 비율처리로 하지만, 디자이너의 코치를 받거나 대화를
+통해서 해결한다고 한다. open chat에서 물어본 결과다. 즉, 옛날이나
+지금이나 다 비슷비슷하다.
+
+** font 정보
+font 정보는 다음과 같이 알 수 있다.
+#+CAPTION: font 정보 
+#+NAME: font 정보
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/font.png]]
+** font에 대한 부가적 내용
+android나 ios는 기본 한글 폰트와 영문폰트를 가지고 있다. 이것이
+system에 설치되어 있어야, font missing을 없앨수 있다. 또한 web figma를
+사용할때 system의 font와 web figma의 font는 서로 별도로 관리되기
+때문에 이어주는 작업이 필요하다고 한다.[[https://www.youtube.com/watch?v=22yeayhXwZk][여기]] 참조.
+*** font installer(figma agent) 설치
+[[https://www.figma.com/downloads/][여기]]에서 설치한다. 이건 web에서 figma에서 font missing문제를 해결한다.
+
+#+CAPTION: font installer
+#+NAME: font installer
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/font1.png]]
+*** apple font 다운로드
+ios영문은 SF Pro Display를 다운받아야 한다. ios한글은 Apple SD Gothic
+Neo라고 한다. ios 한글 폰트는 기본적으로 설치되어 있기 때문에 설치하지
+않아도 된다.  [[https://developer.apple.com/fonts/][여기로]] 간다
+#+CAPTION: sf pro download
+#+NAME: sf pro download
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/font2.png]]
+
+
+*** 안드로이드 font 다운로드
+android 한글폰트는 noto Sans CJK KR폰트를 사용한다. 영문은 Roboto를
+사용한다. 둘다 google font다. system에 설치한다. 폰트는 다음 위치에서
+다운받는다. [[https://fonts.google.com/][google font]]에서 검색한다.
+- [[https://fonts.google.com/noto/specimen/Noto+Sans+KR][Noto Sans Korean]]
+- [[https://fonts.google.com/specimen/Roboto?query=roboto&noto.query=roboto][Roboto]]
+down받은후 static폴더로 들어가거나, 없으면 여러 font를 선택한 후 open
+with에서 fontbook을 선택하면 된다.
+
+*** web figma에서 google font pairing
+system에서 설치된 android 관련 google font들은 web figma에선 사용할 수
+없다고 한다. 물론 figma agent를 설치했기 때문에 사용할수 있다고
+생각했는데, 영상에서는 web figma를 위해 별도로 pairing을
+해준다. 중복하는거 같지만, 그래도 하기로한다.  [[https://www.figma.com/google-fonts/][여기]]에 가면 figma to
+google font pairing할 수 있다. Roboto를 선택해서 pairing해준다.
+
+#+CAPTION: pairing1
+#+NAME: pairing1
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/figma/pairing1.png]]
+
+
+
+

@@ -1,60 +1,55 @@
 :PROPERTIES:
 :ID:       B4973D32-B22F-4140-82F2-26EB107A4674
-:mtime:    20230804235251
+:mtime:    20231112221639 20231111140406 20231111123148 20230804235251
 :ctime:    20230804235251
 :END:
 #+title: [rails] rails from scratch9 Emacs settings for ROR
 #+AUTHOR: holy
 #+EMAIL: hoyoul.park@gmail.com
 #+DATE: <2023-08-04 Fri>
-#+DESCRIPTION: 옛날자료 복원
+#+DESCRIPTION: rails emacs설정
 #+HUGO_DRAFT: true
-* Emacs Settings for ROR
-** rbenv 설치와 사용법
-*** [osx]에서 설치와 사용법
-- 설치
- #+begin_quote
- brew install rbenv
- #+end_quote
-- 설치 가능한 ruby목록
-   #+begin_quote
-   rbenv install -l
-   rbenv install -L
-   #+end_quote
-- 설치된 목록 확인
-   #+begin_quote
-   rbenv versions
-   #+end_quote
-- 설치된 ruby에서 global설정
-   #+begin_quote
-   rbenv global 2.6.3
-   #+end_quote
-*** [emacs]에서 설치와 사용법
-- emacs에서 설치
-   #+begin_quote
-   (use-package rbenv
-   :ensure t)
-   #+end_quote
-- emacs에서 설정
-   #+begin_quote
-   (setq rbenv-installation-dir "/opt/homebrew/rbenv")
-   #+end_quote
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-** Projectile-rails
- #+begin_quote
- C-c r c : Controllers
- C-c r v : Views
- C-c r m : Models
- #+end_quote
 
+* emacs for ror
+** Projectile-rails
+*** 설치
+https://github.com/asok/projectile-rails
+ #+begin_example
+  (use-package projectile-rails
+  :ensure t
+  :config
+  (projectile-rails-global-mode)
+  (define-key projectile-rails-mode-map (kbd "M-p") 'projectile-rails-command-map)
+  )
+ #+end_example
+projectile-rails를 설치하고, global mode로 설정한 후, key map을 binding한다.
+default key map은 다음과 같다.
+ #+begin_example
+(define-key projectile-rails-mode-map (kbd "C-c r") 'projectile-rails-command-map)
+ #+end_example
+
+*** 사용법
+**** 이동하는 명령어
+ #+begin_quote
+ M-p c : Controller로 이동
+ M-p v : View로 이동
+ M-p m : Model로 이동
+ #+end_quote
+**** 만드는 명령어
 #+begin_note
 C-c r !g : generate
 #+end_note
-=======
-=======
->>>>>>> Stashed changes
+
+** syntax check (rubocop)
+*** 설치
+ #+begin_example
+(use-package rubocop
+:ensure t)
+ #+end_example
+
+
 ** inf-ruby
+
 #+begin_note
 Ruby Repl이다.
 #+end_note
@@ -62,6 +57,32 @@ Ruby Repl이다.
  M-x inf-ruby
  #+end_quote
 
+** lsp 설치
+lsp mode는 emacs client다. server가 특이한데, system에 설치된 ruby가
+server역할을 할 수 있게 gem을 추가시켜야 한다는 것이다. 예를 들면
+rubocop을 gem으로 설치해야만, lsp mode에서 rubocop을 사용할 수
+있다. 아래는 client를 설치하는 것이고 server는 그 아래 있다.
+
+*** client
+ #+begin_example
+  ;; Install and configure 'lsp-mode' and 'lsp-ruby'
+  (use-package lsp-mode
+    :ensure t
+    :commands lsp
+    :hook ((ruby-mode . lsp))
+    :init
+    (setq lsp-ruby-solargraph-use-bundler t)
+    :config
+    (add-to-list 'exec-path "/Users/hoyoul/.asdf/shims/ruby/") ; Add Ruby binaries to the exec-path
+    )
+ #+end_example
  
->>>>>>> Stashed changes
-<
+*** server
+ #+begin_example
+gem update rubocop
+gem install solargraph
+ #+end_example
+
+
+ 
+

@@ -1,0 +1,234 @@
+:PROPERTIES:
+:ID:       AEEC6B11-4026-4260-A593-3A32C6A8BC9F
+:mtime:    20231208114936 20231208084945 20231207201713 20231207144648 20231207133655 20231207110645 20231207094652
+:ctime:    20231207094652
+:END:
+#+title: [flutter] oauth login practice1
+
+* google sign in 구현
+gcp는 Google Cloud Platform이라고 한다. cloud는 단순하게 storage와
+computation만을 판매하지 않는다. google이 가진 resource나 service도
+판매한다. google에서 제공하는 service와 resource는 대표적으로 google에
+접속한 사용자 정보, map정보, spreadsheet와 같은 office제품 서비스,
+machine learning같은 서비스를 들수 있다. 이런것을 이용하려면 api를
+사용해서 접근하는데, 이 api는 외부에서 아무나 호출해서 사용하는게
+아니다. 왜냐면 google이 관리하는 resource와 service가 매우 많고,
+누구에게나 제공하지 않는다. 그렇기 때문에, google계정으로 gcp에
+login한 후에 자신이 사용할 google resource나 service를 명시하고
+google이 제공한다. 이것을 project를 만들어서 해결한다. 즉, 해당 api를
+gcp에서 제공하는 식이다. 그래서 GCP(Google Cloud Platform)에서
+project를 만들고 어떤 api를 사용할지를 선택해야 한다. 그런데, google
+Sign In은 GCP의 특정 api를 사용하지 않는다. 필요한건 사용자의
+login정보인데, 이것은 GCP에서 api로 관리하지 않기 때문에 project를
+만들어서 ClientID만 만들면 된다. clientID는 app마다 부여해야
+한다. android,ios마다 다른 절차로 clientID를 발급받고, 발급받은
+clientID에는 consent screen화면과, 설정한 scope가 연결되어
+있다. 따라서 ios던 android던, 개발자는 google login버튼을 만들어놓고,
+user가 click하면, google의 signin sdk의 siginIn()를 호출하면,
+clientID가 있는 googleServiceInfo.plist나 googleServices.json에서
+clientID를 뽑아내서 gcp에 접속한다. gcp에서는 해당 app과 연결된
+consent screen과 scope를 user의 화면에 보여주고, login form도 처리하고
+인증까지 한다. 이 과정을 다 마치면 token을 return한다.
+
+* google sign in process
+
+** 사용자가 app이나 web에 있는 google sign-in button을 누른다.
+
+** app은 button listener에서 signIn()라고 google이 제공하는 sdk의 함수를 호출한다.
+- 이렇게 되면 signin처리가 app에서 google로 넘어가게 된다. 그러면
+  google이 consent screen과 login form을 화면에 보여준다. 즉
+  google에서 제어하는것이다. google이 제공하는 sign in()를 사용해서
+  인증하기 때문에 google signIn방식이라는 이름이 붙었다.
+- 좀 더 덧붙이자면, app개발자는 이미 consent screen과 scope(권한)을
+  만들었다. 만들면 clientID가 포함되어 있는
+  GoogleServiceInfo.plist라는 파일을 다운받는다. 이 파일은 ios root에
+  저장되어 있다. flutter에서 사용하는 GoogleSignIn package의
+  signIn()가 호출되면, googleService-info.plist에 있는 clientID값을
+  꺼내서 google에 접속한다. google에는 해당 app정보와 client id가
+  등록되어 있기 때문에, signIn()가 clientID를 확인하고 맞으면 작성된
+  consent screen을 사용자에게 보내주는것이다. 즉 signIn()를 호출하면
+  google이 login화면만 보내주는게 아니라, consent screen을 보내주는데,
+  어떤 consent screen인지는 clientID에 해당하는 consent screen과
+  권한을 세팅해 놓는다.
+
+** google은 consent screen을 먼저 보낸다.
+- app개발자는 GCP에서 이미 consent screen을 작성했다. login이
+  성공하면, 사용자의 profile, email,contact같은 login정보를 app이
+  사용할수 있게 해달라는 권한(scope)를 명시한 동의서화면을 이미
+  만들었다.google은 이것부터 먼저 보낸다. 
+
+** 사용자는 동의 여부를 결정한다.
+
+** google은 login form을 사용자에게 보낸다.
+
+** 사용자는 id,pw를 넣어서 login한다.
+
+** google은 사용자의 login이 validate한지 인증 한 후에, signIn()의 return값을 돌려준다.
+- 이 signIn()의 return값으로 IdToken, accessToken, ServerAuthCode를
+return받는다. ID token은 사용자의 ID와 같다. 이 token은 JWT(Json Web
+Token)형태며, header, payload, signature로 구성되었다고 한다. 중요한게
+3가지 있다. 사용자 정보(email같은거), token 유효기간, token의
+validation을 확인할 수 있는 공개키가 포함되어 있다고 한다. 아래는
+payload에 있는값인데 참조하면된다.
+ #+begin_example
+aud (Audience): ID 토큰의 대상(예: 클라이언트 ID)을 식별합니다.
+sub (Subject): 사용자를 고유하게 식별하는 ID입니다.
+iss (Issuer): 토큰 발급자를 식별합니다.
+exp (Expiration Time): 토큰의 만료 시간을 나타냅니다.
+iat (Issued At): 토큰 발급 시간을 나타냅니다.
+scope: 토큰에 부여된 권한 범위를 나타냅니다.
+email: 사용자 이메일 주소입니다.
+email_verified: 사용자의 이메일이 검증되었는지 여부를 나타냅니다.
+roles (역할): 사용자의 역할이나 권한 그룹을 나타내는 정보일 수 있습니다.
+ #+end_example
+- 우리같은 경우, "https://oauth2.googleapis.com/tokeninfo" 이 주소에서
+  토큰의 유효성 검사를 한다. 그런데 이것은 횟수의 제한이 있다. 그래서
+  이방법을 사용하지 않고 보통은 google의 공개키를 이용해서 유효성
+  검사를 한다.
+- google access token은 사용자가 login되어 있는 동안 app도 사용자를
+  대신해서 api를 요청할수 있게 해준다. 예를 들어 사용자를 대신해서
+  google calendar정보를 얻어오거나, gmail, google drive에 접근할 수
+  있습니다.
+
+
+* Oauth Screen 설정
+** project 생성1
+#+CAPTION: oauth1
+#+NAME: oauth1
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/oauth1.png]]
+
+** project 생성2
+#+CAPTION: oauth2
+#+NAME: oauth2
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/oauth2.png]]
+
+** project 생성3
+#+CAPTION: oauth3
+#+NAME: oauth3
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/oauth3.png]]
+
+** oauth consent screen
+#+CAPTION: consent screen1
+#+NAME: consent screen1
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/consent1.png]]
+
+여기서 난 external을 선택했다. 모든 app사용자를 대상으로 하기
+때문이다.
+
+** oauth consent screen2
+#+CAPTION: consent screen2
+#+NAME: consent screen2
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/consent2.png]]
+
+app의 name, email, logo를 기술한다. app의 이름은 pubspec.yaml에서
+name으로 정해져 있다.
+** oauth consent screen3
+#+CAPTION: consent screen3
+#+NAME: consent screen2
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/consent3.png]]
+
+app domain과 authorized domain을 설정한다.
+
+** oauth scope설정
+#+CAPTION: scope설정
+#+NAME: scope설정
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/consent4.png]]
+
+scope를 설정한다.
+
+** oauth scope설정 결과
+#+CAPTION: scope설정 결과
+#+NAME: scope설정 결과
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/consent5.png]]
+
+scope를 설정 결과다.
+
+** oauth testing설정
+#+CAPTION: testing설정
+#+NAME: testing설정
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/consent6.png]]
+
+testing 설정합니다.
+
+* Android Credentials 설정
+android app이 clientID를 발급받는 과정이다. oauth를 사용하거나 Google
+Cloud의 api를 사용 하려면 등록을 해야만 한다. 여기서 등록을 한다.
+
+** credential 등록1
+#+CAPTION: credentials1
+#+NAME: credentials1
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/credential1.png]]
+** credential 등록2
+#+CAPTION: credentials2
+#+NAME: credentials2
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/credential2.png]]
+
+** credential 등록3
+#+CAPTION: credentials3
+#+NAME: credentials3
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/oauth/credential3.png]]
+
+*** 참고1: 
+여기서 설명해야 하는게 package이름과 app name의 구분이다. flutter로
+project를 만들면, flutter의 package명은 pubspec.yaml에
+com.example.package로 기술되고, app name이란건 사용자에게 보여주는
+이름이라서 코드로 작성된다.
+ #+begin_example
+void main() {
+  runApp(MaterialApp(
+    title: 'Name Check', // 이 부분이 앱의 이름을 나타냅니다.
+    home: MyHomePage(),
+  ));
+}
+ #+end_example
+flutter의 package명은 android, ios별로 동일하게 갖게 되는데, android의
+경우, AndroidManifest.xml에 기술된다. 반면에 ios는 xcode에서 설정한다.
+
+물론 android, ios별로 다른 package명을 기술할 수 있다.
+
+*** 참고2: sha1에 대해서
+위에서 sha1이란 hash값을 기술해야 한다. 이것은 keystore와
+관련있다. flutter에서 android를 실행이나 디버깅을 하는 과정을 살펴보면
+다음과 같다. flutter project를 열어서 코딩을 한다음에 build를 해서
+apk를 만든다. 그 다음에 debug keystore로 sigining해서 emulator나
+device에서 실행한다. 만일 release를 한다면 release용 keystore를 만들고
+apk를 sigining해서 release한다. google play로 전달해서 배포를 하는것도
+마찬가지다. release나 debug용 keystore를 만드는것은 개발자가 해야
+한다. android studio를 설치하면 keytool이 설치되는데, 이것을 이용해서
+keystore를 만들어서 사용하면 된다. debug나 개발과정에서는 별도의
+keystore를 만들거나 하지 않았던거 같다. 그런데, 만일 google play나
+gcp에서 앱을 등록한다면 keystore의 sha1을 같이 제출하기 때문에 별도로
+만들어야 한다. ios에서의 처리는 또 다르다. 이것은 android의 처리과정일
+뿐이다.
+
+keystore에서 sha1을 뽑아내는것은 설명이 주어진다.
+ #+begin_example
+keytool -keystore path-to-debug-or-production-keystore -list -vㅠ
+ #+end_example
+
+
+

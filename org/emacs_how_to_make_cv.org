@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       2BECB31F-9FD6-4924-BE86-FC7A32AF7280
+:mtime:    20231217035304
+:ctime:    20231217035304
+:END:
+#+title: [emacs] how to make cv
+

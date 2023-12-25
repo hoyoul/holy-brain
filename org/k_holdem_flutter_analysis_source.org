@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       D3549740-FEC9-4D25-82D6-DFA894F7E3B3
-:mtime:    20231012133505 20231012113749
+:mtime:    20231030134144 20231030123529 20231030113337 20231030103009 20231012133505 20231012113749
 :ctime:    20231012113749
 :END:
 #+title: [k-holdem-flutter] analysis source- import
@@ -9,28 +9,152 @@
 #+DATE: <2023-10-12 Thu>
 #+DESCRIPTION: flutter import문
 #+HUGO_DRAFT: true
-* flutter import문
-소스코드를 처음 보면 import문이 나온다. import문이 무엇이고 어떻게
-사용하는지 보자. import는 package나 library를 가져와서 사용하는
-것이다. 그래야 거기에 있는 함수나 변수를 사용할 수 있기
-때문이다. dart언어의 관점에서 기본적인 함수를 빼놓고는 package에
-정의된 함수를 사용하기 때문이다. 그래서 program을 작성할때 package를
-import하는것이 반드시 들어간다.
-* package에 대해서 (내부 package와 외부 package)
-package는 내부 package와 외부 package가 있다. dart언어의 package는
-내부 package로 볼 수 있고, flutter나, github 혹은 다른 사람이 만든
-package는 외부 package로 볼 수 있다. 내부 package냐? 외부 package냐?에
-따라서 처리방법이 다르다.
-** 내부 package
-내부 package는 dart package고 android studio를 설치하고 dart sdk를
-plugin으로 설치하면 내부 package를 사용할 수 있다. dart package가
-어디에 있는지는 잘모른다. android studio 내부에 있다고 한다. 별도로
-설치한 경우가 아니면 그렇다고 한다. 예를 들어 다음과 같이 import만
-하면 가져온다.
+
+* k-holdem main.dart
+main.dart의 첫 부분엔 다음과 같은 import문이 나온다. 좀 익숙하지
+않아서 정리해 본다.
+
 #+BEGIN_SRC dart
-  import 'dart:convert';
-  import 'dart:async';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:kholdem/config/app_color.dart';
+import 'package:kholdem/controller/game_controller.dart';
+import 'package:kholdem/controller/setting_controller.dart';
+import 'package:kholdem/view/main_screen.dart';
+
 #+END_SRC
-** 외부 package
-외부 package는 flutter도 외부 package이고 github에서 다운 받은
-package나 sdk도 외부 package다. 이것들은
+
+* dart의 import문
+dart의 소스코드를 처음 보면 import문이 나온다. 안나오는 dart code는
+찾기 힘들다. dart에서 import문을 이해하기 위해선 package system의 동작
+원리를 알아야 하지만, 우선 import문을 사용하면, runtime시 package나
+library혹은 file을 load할 수 있다로 넘어가자. import문의 구조는 다음과
+같다.
+** uri 구조
+#+BEGIN_SRC dart
+import 'uri';
+#+END_SRC
+uri는 resource의 위치를 기술하는데 사용된다. 예를 들어서 다음과 같이
+uri를 표시할 수 있다.
+#+BEGIN_SRC shell
+  (1) file://path/to/file
+  (2) http://www.temp.test/file
+  (3) package:package/temp/test.dart
+  (4) dart:package/temp/dtest.dart
+#+END_SRC
+uri로 표기할 때는 uri의 앞부분에 file,http,package,dart같은게 붙는데,
+이것을 scheme라고 한다. scheme은 resource의 위치를 기술하는건데,
+scheme마다 다르다. http와 file을 보면 차이를 알 수 있다. dart나
+package는 file처럼 resource를 기술하지만, 정확한 위치는 scheme에
+영향을 받는다. package는 package system인 pub package manager가
+package를 저장하는 위치가 있다. 그 위치는 pub-cache라고 하는데 다음과
+같다.
+#+BEGIN_SRC shell
+  /Users/hoyoul/.pub-cache/
+#+END_SRC
+
+dart scheme을 사용하면 dart sdk에 위치한 library를 가리킨다. 위치는
+다음과 같다.
+#+BEGIN_SRC shell
+  /Users/hoyoul/Development/Libraries/flutter/bin/cache/dart-sdk
+#+END_SRC
+
+** 상대경로 절대경로
+dart에서 import할때 상대경로와 절대경로가 있다. 예를
+들어보자. main.dart는 lib폴더 아래에 있다. lib/a.dart가 있을때 이를
+import한다고 하면, 상대경로로 다음과 같이 할 수 있다.
+#+BEGIN_SRC dart
+import '../a.dart';
+#+END_SRC
+
+그러면 a.dart의 절대경로는 무엇일까? flutter로 project를 만들면
+project는 하나의 package다. 따라서 package안의 lib폴더에 a.dart는
+package scheme으로 표시할 수 있다. 그리고 package는 pubspec(pub
+specification).yaml이란 파일에서 package명이 기술되어 있다.
+
+#+CAPTION: pubspec
+#+NAME: pubspec
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/k-holdem/pubspec1.png]]
+
+요약하면, project는 package다. project가 package인것은, package에만
+존재하는 pubspec.yaml이 project root에 있다. 모든 dart package는
+package의 specification을 기술하는 pubspec.yaml이 있어야 한다. 이 말은
+project가 package라는 것을 암시한다. uri의 scheme은 resource의 위치를
+나타내는 법을 설명한다고 했다. package라는 scheme은 따라서 package의
+/lib폴더에 있는 파일을 나타내는데, 다음과 같은 식으로 나타낸다.
+
+#+BEGIN_SRC dart
+import 'package:package명/path/file';
+#+END_SRC
+
+package명은 pubspec.yaml에 name으로 기술되어 있다. 만일 우리가
+kholdem이란 name의 package명을 사용한다면, 위의 a.dart는 다음과 같이
+절대경로로 표시할 수 있다.
+#+BEGIN_SRC dart
+import 'package:kholdem/a.dart'
+#+END_SRC
+
+주의할것이 있다.
+ #+begin_example
+ dart에서는 import할 파일에 대해서 상대경로보다 절대경로를 추천한다.
+ #+end_example
+
+* dart의 import문의 종류
+dart code에서 보는 import문은 보통 아래와 같이 두 종류가 보인다.
+** import dart library
+  #+BEGIN_SRC dart
+    import 'dart:async';
+  #+END_SRC
+  이 경우는 위에서 말했듯이 dart scheme을 사용하기 때문에, dart의
+  sdk위치에 있는 resource를 load한다. async는 .dart로 끝나지 않기
+  때문에 library다. library는 dart파일들이 모여있는 폴더라고 보면 된다.
+
+  dart sdk는 다음 위치에 있다.
+  #+BEGIN_SRC shell
+  /Users/hoyoul/Development/Libraries/flutter/bin/cache/dart-sdk
+  #+END_SRC
+  
+  dart sdk는 flutter sdk를 설치하면 내부에 포함되어 있기 때문에 별도로
+  dart sdk를 설치할 필요는 없다. async library는 다음 위치에 있다.
+  #+BEGIN_SRC shell
+  /Users/hoyoul/Development/Libraries/flutter/bin/cache/dart-sdk/lib/async
+  #+END_SRC
+** import package
+import로 package를 사용하는 건 두가지가 있을 수 있다. 외부 package를
+사용하거나, 현재 project를 사용하는 것이다. 둘다, 공통적으로 해당되는
+prerequisite이 하나 있다.  package scheme으로 표시된 import구문을
+사용하기 위해선 아래와 같이 해야 한다는 것이다.
+#+BEGIN_SRC shell
+flutter pub get
+#+END_SRC
+이것은 pubspec.yaml에 기술된 package들을 아래에 설치한다.  외부
+package던 현재 project던 모두 해당되는 것이다. 그래야 load할 수
+있다. 설치 위치는 다음과 같다.
+#+BEGIN_SRC shell
+  /Users/hoyoul/.pub-cache/
+#+END_SRC
+*** import 현재 project
+현재 project는 다음과 같은 모양이다.
+#+BEGIN_SRC dart
+import 'package:kholdem/controller/game_controller.dart';
+#+END_SRC
+package명이 kholdem이란것을 알수 있다. 이것은 pubspec.yaml에 name으로
+기술되어 있기 때문에 현재 project라는것을 알 수 있다. 현재 project의
+lib폴더에 보면 controller폴더가 있다. 그리고 그 안에
+gamecontroller.dart가 있고, 이것을 load하는 것이다.
+*** import 외부 package
+두번째는 외부 package다.
+#+BEGIN_SRC dart
+import 'package:get/get.dart';
+#+END_SRC
+
+package명이 get이다. pubspec.yml에 보면 dependency에 get이라는
+package를 사용한다는 것을 알 수 있다. 따라서 현재 project가 아닌 외부
+package라는 것을 알 수 있다. 아마도 이 외부 package의 lib폴더에는
+get.dart라는 파일이 있을 것이다. 이것을 load할 것이다.
+
+  
+
+  

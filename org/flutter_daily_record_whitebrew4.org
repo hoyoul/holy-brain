@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       3EE923B3-E7F3-4725-999E-BB4D32229E27
+:mtime:    20231212151401
+:ctime:    20231212151401
+:END:
+#+title: [flutter] daily record-whitebrew4
+* 

@@ -1,0 +1,165 @@
+:PROPERTIES:
+:ID:       E64D14D7-3D4D-43D6-BC29-5067D13CDAE1
+:mtime:    20231220130529 20231220031646 20231218004829
+:ctime:    20231218004829
+:END:
+#+title: [emacs] how to use tex on emacs tutorial2-pagelayout
+* letter
+page의 size나 margin을 조절하는 가장 간단한 방법은 letter로 설정하는 것이다.
+
+ #+begin_example
+\documentclass[letter]{article}
+ #+end_example
+위와 같이 설정하면 변화가 없다. 왜냐면 article의 default option이
+letter이기 때문이다. 약간의 변화를 느끼려면, a4paper를 option으로
+하는것이다.
+
+ #+begin_example
+\documentclass[a4paper]{article}
+ #+end_example
+ 이렇게 하면 약간의 변화를 느낄 수 있다.
+* geometry package
+geometry package를 사용하면, margin을 조절 할 수 있다.
+ #+begin_example
+\usepackage[margin=2cm]{geometry}
+ #+end_example
+좀 더 세부적으로는 top,bottom,left,right로 설정할 수도 있다.
+ #+begin_example
+\usepackage[top=2cm,bottom=3cm,left=1cm,right=5cm]{geometry}
+ #+end_example
+* 문서의 글자 size
+글자 size는 documentclass에서 option으로 설정한다. 아래는 12point로
+설정한다. 그런데 여기서 설정하는 글자크기는 10,11,12밖에 없다. 그래서
+좀더 font크기를 제어할려면 package가 필요하다.
+ #+begin_example
+\documentclass[a4paper,12pt]{article}
+ #+end_example
+* comment 주석
+주석은 %로 표시한다.
+* line break
+ #+begin_example
+this is line1
+this is line2
+ #+end_example
+이렇게 입력하면 하나의 line으로 표시된다. 두줄로 표현하는 방식은
+double back slash를 사용한다.
+ #+begin_example
+this is line1 \\
+this is line2
+ #+end_example
+ 아니면 명시적으로 \newline으로 표시해도 된다.
+ #+begin_example
+this is line1 \newline
+this is line2
+ #+end_example
+* paragraph
+paragraph는 문장이 indent크기만큼 떨어져서 시작한다. 그렇게 할려면
+문장과 문장사이에 newline이 있어야 한다. 비교를 하는 예를 들어보자.
+
+ #+begin_example
+\blindtext
+\blindtext
+ #+end_example
+ 이것과 다음의 것을 비교해보자. 후자는 한라인을 건너뛰었기 때문에
+ paragraph가 된다.
+ #+begin_example
+\blindtext
+
+\blindtext
+ #+end_example
+paragraph를 만드는 또다른 keyword가 있다. \par란건데, 다음과 같이
+사용한다.
+ #+begin_example
+\blindtext\par
+\blindtext
+ #+end_example
+
+ 이렇게 하면 paragraph가 만들어진다.
+* paragraph와 paragraph 간격 띄우기
+대단히 유용한 기능인데, 아래와 같이 하면 paragraph와 paragraph가 2cm
+떨어져서 보여진다.
+ #+begin_example
+\blindtext[2cm]
+\blindtext
+ #+end_example
+* bold처리 (textbf), italic(textit)
+text를 사용하다 보면, bold처리를 할때가 있다. 이때 textbf(text bold
+face)라는 명령어를 사용한다.
+ #+begin_example
+\textbf{This} is only random text.
+ #+end_example
+ 이렇게 하면 this가 굵게 나온다. italic처리도 할수 있다. textit(text
+ italic)이란 명령을 사용하면 된다.
+ 
+ #+begin_example
+\textbf{This} is \textit{only} random text.
+ #+end_example
+* underline처리
+underline은 \underline이란 명령이 있다.
+ #+begin_example
+\textbf{This} is \textit{only} random \underline{text}.
+ #+end_example
+* center(중앙정렬)
+page에서 중앙에 text를 놓고 싶을때는 center block을 사용한다. block은
+begin~end로 구성된다.
+ #+begin_example
+\begin{center}
+this is centered text.
+\end{center}
+ #+end_example
+* flushright(우측정렬)
+ #+begin_example
+\begin{flushleft}
+this is left text.
+\end{flushleft}
+ #+end_example
+* flushleft(좌측정렬)
+  #+begin_example
+\begin{flushright}
+this is right text.
+\end{flushright}
+ #+end_example
+* text size
+text의 크기는 수치로 설정하지 않는다. 명령어로 설정하기 때문에 특정
+요소에 따른 크기가 있는듯하다. 물론 documentclass의 [12pt]처럼 수치로
+문서에 설정했지만, 문서에 적용되는 전체 글자 크기는 10,11,12의 3가지만
+있을 뿐이다. 문서안의 text에 적용되는 글자크기 명령어는 다음과 같은
+것이 있다.
+ #+begin_example
+{\tiny tiny}\\
+{\scriptsize scriptsize}\\
+{\footnotesize footnotesize}\\
+{\normalsize normalsize}\\
+{\large large}\\
+{\Large Large}\\
+{\LARGE LARGE}\\
+{\huge huge}\\
+{\Huge Huge}\\
+ #+end_example
+* 문장사이의 가로 공백 설정(hspace)
+아래와 같이 hspace라는 명령을 내리면 
+ #+begin_example
+this is another \hspace{3cm} sample text.
+ #+end_example
+3cm만큼 떨어지게 된다.
+* 공백 채우기 설정(hfill)
+hfill은 단어와 단어사이의 공간을 공백으로 채운다.
+ #+begin_example
+left \hfill right
+ #+end_example
+ 이렇게 하면 left와 right사이는 공백으로 채워진다. 즉 1칸의
+ whitespace가 아니라, 공백으로 꽉찬다.
+ #+begin_example
+left \hfill center \hfill right
+ #+end_example
+
+ 이렇게 하면, left center right가 균등분할된다.
+* 공백채우기 설정 (vfill)
+ #+begin_example
+ \newpage
+top \vfill center \hfill bottom
+ #+end_example
+ 먼저 newpage라는 명령이 있다. 새로운 page를 만든다. 그리고 vfill을
+ 이용해서 3개의 단어를 vertical방향으로 균등 분할 할 수 있다.
+
+ 

@@ -1,0 +1,174 @@
+:PROPERTIES:
+:ID:       E05EA53D-07DE-4D84-93F9-6CFC1184F133
+:mtime:    20231218030501 20231218002203 20231217230608 20231217220342 20231217181424 20231217170031 20231217050132
+:ctime:    20231217050132
+:END:
+#+title: [emacs] how to use tex on emacs
+* auctex mode
+emacs에서 tex로 끝나는 파일을 열면 tex mode이거나 latex mode로
+열린다. fundamental mode로 열릴수도 있다. 이것은 emacs에서 latex관련
+기능을 거의 못사용한다. 단축키도 제공하지 않기 때문이다. auctex를
+설정하면, 그런 불편함이 없어진다. 우선 tex파일을 열면 Latex/p mode로
+잡힌다. 이게 AucTex mode가 적용된 것이다. Auctex mode가 아닌것에
+당황하지 말자. AucTex는 emacs package다. 따라서 Auctex package를
+설치했다고 해서 tex파일이 pdf로 바로 변환되지 않는다. tex파일은
+emacs에서 만들고 편집하지만, 만들어진 tex를 pdf로 변환하는 Tex
+engine은 system에 깔려있어야 하기 때문이다. 그래서 texLive같은 tex
+배포본을 system에서 깔아야 한다. 깔면 pdflatex, xelatex와 같은
+TexEngine이 설치된다.
+
+#+BEGIN_SRC text
+  (use-package tex
+    :ensure auctex
+    :config
+    (setq TeX-auto-save t)
+    (setq TeX-parse-self t)
+    (setq TeX-save-query nil)
+    (setq TeX-PDF-mode t) ; default to PDFLaTeX
+    (setq-default TeX-master nil) ; Ask for master file
+    )
+#+END_SRC
+위와 같이 설치하면, auctex의 feature인 tex.el을 설치한다. 
+ #+begin_example
+- setq TeX-auto-save t : tex가 변경시 자동저장
+- tex-parse-self t: tex engine이 처리시 필요한 정보가 있을때 사용자에게 물어보지 않고 자동 처리
+- tex-save-query: tex파일 저장시 사용자에게 물어봄
+- tex-pdf-mode: pdflatex를 사용해서 compile
+- tex-master: master file 사용여부, 여러개의 tex파일을 사용할경우 master file이 있다.
+ #+end_example
+이렇게 하고 test로, 다음과 같은 내용을 입력하고, C-c c를 입력하고
+Latex를 실행해보자.
+
+ #+begin_example
+\documentclass{article}
+\begin{document}
+My first \LaTeX~document!
+\end{document}
+ #+end_example
+
+그러면, 아래와 같은 에러가 발생한다.
+ #+begin_example
+TeX-command: ERROR: AUCTeX cannot find a working TeX distribution.
+Make sure you have one and that TeX binaries are in PATH environment variable.
+If you are using OS X El Capitan or later
+remember to add /Library/TeX/texbin/ to your PATH
+ #+end_example
+tex engine이 system에 없다는 에러다.
+* mactex 설치
+mactex는 googling해서 설치하면 된다. 설치한 후에 path를 바꿔줘야 한다.
+ #+begin_example
+echo 'export PATH=/Library/TeX/texbin:"$PATH"' >> ~/.zshrc
+ #+end_example
+source .zshrc로 다시 재시작 한후에, terminal에서 pdflatex를
+type했을때, 인식을 하면 된다. 그리고 다시 테스트를 해보자.
+
+ #+begin_example
+\documentclass{article}
+\begin{document}
+My first \LaTeX~document!
+\end{document}
+ #+end_example
+동작이 되어야 한다.
+* 한글 문제
+한글은 tex engine을 바꿔주어야 한다. pdflatex가 아닌 xetex를 사용해서
+unicode처리가 가능한 engine을 사용하게 하면된다. mactex배포본을
+설치하면 여러개의 tex engine이 설치되기 때문에 emacs에서 compile할 tex
+engine을 설정해주면 된다.
+
+ #+begin_example
+    (use-package tex
+      :ensure auctex
+      :config
+      (setq TeX-auto-save t)
+      (setq TeX-parse-self t)
+      (setq TeX-save-query nil)
+      (setq TeX-PDF-mode t) ; default to PDFLaTeX
+      (setq-default TeX-master nil) ; Ask for master file
+      (setq TeX-engine 'xetex) ; xelatex를 기본 컴파일러로 설정
+      )
+ #+end_example
+* 한글 사용
+한글 사용은 tex를 조판할때 usepackage를 사용하면 된다. documentclass와
+document사이에 usepackage를 사용한다.
+ #+begin_example
+\documentclass{article}
+\usepackage{kotex}
+\begin{document}
+My first \LaTeX~document!
+한글
+\end{document}
+ #+end_example
+* org모드에서 한글 pdf출력
+C-c e l o를 누르면 pdf출력이 된다. 주의할 것은 마찬가지로 pdflatex가
+기본 tex engine이라서 한글은 처리가 안된다. 한글 tex문서를 pdf로
+만들기 위해서 두가지 작업을 했었다.
+1. pdflatex => xelatex로 엔진 변경
+2. usepackage(kotex)추가
+
+나중에 안 사실이지만, kotex만 추가해줘도 unicode출력이 된다고
+한다. 그래서 kotex만 추가하면 한글을 사용할 수 있다고 한다. 여튼
+아래처럼 org파일에 다음과 같이 해주면 한글 pdf를 출력할 수 있다.
+
+ #+begin_example
+#+LATEX_CMD: xelatex
+#+LATEX_HEADER: \usepackage{kotex}
+ #+end_example
+ 
+* compile후 pdf로 보기
+emacs서 pdf-tools를 설치해야 한다. pdf-tools는 local에서 pdf를
+볼수있는 program까지 모두 설치해준다. 그런데 가끔 에러가 난다. m1이나
+m2의 brew path문제다. brew의 설치경로가 m1,m2에선
+ #+begin_example
+/opt/homebrew/Cellar/
+ #+end_example
+폴더에 저장되기 때문이다.
+** error들
+emacs설정파일에서 path를 설정할 수도 있고, mac의 .zshrc에서 할수도
+있다. 나는 emacs로 옮겼다.
+*** libpng error
+libpng를 brew로 설치해도 이미 설치되었다고 한다. 그것은 m1에서
+사용하는 brew의 path가 intel과 다르기 때문이다. 그래서 .zshrc에서
+libpng의 path를 다시 설정해주어야 한다.
+ #+begin_example
+export PKG_CONFIG_PATH="/opt/homebrew/Cellar/libpng/1.6.40/lib/pkgconfig:$PKG_CONFIG_PATH"
+ #+end_example
+*** poppler error
+이것도 brew로 다시 설치하려고 하면, 이미 설치되었다고 한다.
+ #+begin_example
+export PKG_CONFIG_PATH="/opt/homebrew/Cellar/poppler/23.12.0/lib/pkgconfig:$PKG_CONFIG_PATH"
+ #+end_example
+*** cairo and poppler-glib error
+이것도 이미 설치되었다고 한다.
+
+*** fontconfig error
+
+*** freetype2 error
+
+*** x11 error
+
+*** xproto
+find ./ --name xproto.pc로 찾았다. 
+
+* pdf viewer on emacs
+pdf tools를 설치했으면, emacs에서 pdf를 볼 수 있다. 아래 skim을
+사용하지 않아도 된다. 그런데 tex를 수정하고 C-c C-c를 해서 compile하면
+pdfview에서 update가 되지 않는다.
+
+#+BEGIN_SRC emacs-lisp
+  (setq TeX-command-after-specified-output
+        (lambda (output)
+          (TeX-view (format "%s.pdf" (TeX-master-file-plain-name)))))
+
+#+END_SRC
+위의 코드를 추가하면 update가 된다.
+* pdf viewer skim
+
+pdf viewer로 skim을 사용할 수 있다. 이것은 외부 pdfviewer를 사용한다.
+
+ #+begin_example
+brew install --cask skim
+ #+end_example
+
+skim을 설치하고 설정한다. C-c c로 compile하고 C-c C-v를 누르면 skim이
+실행된다.
+

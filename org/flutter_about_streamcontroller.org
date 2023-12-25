@@ -1,0 +1,82 @@
+:PROPERTIES:
+:ID:       23E3FC5F-761F-477C-891E-E3AEB5B673D2
+:mtime:    20231218094005 20231218070759 20231218060756
+:ctime:    20231218060756
+:END:
+#+title: [flutter] about streamController.
+* streamController란
+publish/subscribe 모델이라고 부른다. 흔히 말하길, 데이터 공급자와
+데이터 소비자의 통신을 뜻한다. 그런데 이해하기 쉽게 하려면 보통 우체국
+직원과 고객들로 비유하기도 한다. 우체국 직원들이 우체통에서 우편을
+수거해서 고객들한테 전달해주는걸로 비유한다. StreamController.add(5),
+streamController.add("start")는 우체국 직원이 우편을 수거하는 것이고,
+고객들은 stream이고, stream.listen()로 우편물이 오길 기다린다. event를
+발생시키고 발생된 event를 처리하는것으로 생각해도
+된다. 
+
+* StreamController의 생성
+streamController를 생성할때 고객이 여러명인 경우와 고객이 한명인 quick
+service가 있다. 이것을 multi-subscription과 single-subscription으로
+표현하기도 한다. 코드는 다음과 같다.
+#+BEGIN_SRC dart
+StreamController<int> streamController = StreamController<int>.broadcast();
+StreamController<int> streamController = StreamController<int>();
+#+END_SRC
+우체부를 만들때, 우체부들이 수거하는 data를 명시할 수 있다. 위에는
+int로 된 우편물이다. 우체부들은 int 우편물을 수거할 수 있다. 
+우체부들이 수거하는 int우편물을 수거하는 코드는 다음과 같다.
+#+BEGIN_SRC dart
+streamController.add(42);
+#+END_SRC
+이것은 event를 발생한다고 생각해도 된다.
+
+* Stream의 생성
+고객들은 우체부들이 이미 알고 있기 때문에 StreamController로부터
+꺼내올 수 있다. 예를 들면, 다음과 같이 나타낼 수 있다.
+
+#+BEGIN_SRC dart
+Stream<int> stream = streamController.stream;
+#+END_SRC
+
+* stream에서 우편물 받기
+고객들은 우편물을 받기 위해서 다음과 같이 listen한다.
+#+BEGIN_SRC dart
+gameActionStream.listen((data) {
+  print('Received data: $data');
+});
+#+END_SRC
+
+* stream의 동기화
+#+BEGIN_SRC dart
+void main() {
+  // sync 옵션을 사용하여 StreamController 생성
+  StreamController<int> controller = StreamController<int>.broadcast(sync: true);
+
+  // 스트림에 데이터 추가
+  controller.add(1);
+  controller.add(2);
+  controller.add(3);
+
+  // 스트림을 구독하고 데이터를 처리
+  controller.stream.listen((data) {
+    print('Received data: $data');
+  });
+
+  // StreamController를 닫음
+  controller.close();
+}
+
+#+END_SRC
+
+위 코드를 실행하면 다음과 같이 보낸 순서대로 받는다.
+ #+begin_example
+Received data: 1
+Received data: 2
+Received data: 3
+ #+end_example
+
+* 실제 사용예
+websocket으로 rails서버와 통신을 한다. channel을 subscribe,
+start하는것은 GameRoomController에서 GameRoomService의 함수를 호출해서
+한다. 그리고 나머지 action은 GamePlayController에서 GamePlayService의
+함수를 호출해서 진행될 것이다. 이런 구조에서 

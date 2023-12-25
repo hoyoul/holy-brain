@@ -1,0 +1,59 @@
+:PROPERTIES:
+:ID:       268CF33E-24F7-419A-879E-B302F447E014
+:mtime:    20231101141502 20231101121646 20231101111448 20231101091531 20231031190104 20231031141649
+:ctime:    20231031141649
+:END:
+#+title: [flutter] emacs for develop flutter
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-31 Tue>
+#+DESCRIPTION: emacs setting for flutter
+#+HUGO_DRAFT: true
+
+* flutter에 emacs keybindngs
+다음과 같이 key binding을 추가한다.
+
+#+BEGIN_SRC emacs-lisp
+  (use-package flutter
+    :after dart-mode
+    ;; :bind (:map dart-mode-map
+    ;;             ("C-M-x" . #'flutter-run-or-hot-reload))
+      :bind (:map dart-mode-map
+            ("C-c 1" . #'flutter-run)
+            ("C-c 2" . #'flutter-hot-reload)
+            ("C-c 3" . #'flutter-hot-restart)
+            ("C-<return>" . #'lsp-execute-code-action)
+            ("M-<return>" . #'company-capf))
+    :custom
+    (flutter-sdk-path "~/Development/Libraries/flutter/"))
+#+END_SRC
+* company-capf
+객체의 member를 popup menu로 보이게 한다.
+
+* lsp-execute-code-actions
+wrap with context같은 것을 사용할 수 있다.
+C-ret으로 키바인딩을 했다.
+#+BEGIN_SRC emacs-lisp
+(with-eval-after-load 'lsp-dart
+  (define-key lsp-dart-mode-map (kbd "C-RET") 'lsp-execute-code-actions))
+
+#+END_SRC
+* lsp-ui-peek-find-definitions
+definition으로 이동한다.
+* lsp-dart-show-outline-flutter, lsp-dart-hide-outline
+tree가 나오면서 wrap with widget, wrap with container같은 context
+action menu같은 것을 실행할 수 있다.
+* treemacs
+외쪽 window에 treemacs가 보이게 할 수 있다. 이것은 M-x treemacs를
+하면된다. treemacs는 buffer가 아니라 window라서 이동할때 불편하다. M-x
+treemacs-select-window를 해야 buffer에서 window로 이동하기
+때문이다. treemacs window에서 buffer를 이동하는건 buffer간의 이동
+명령어인 C-x o를 하면 된다. ace-window의
+other-window명령어이다. 그래서 C-c o로 키매핑을 했다. 닫을때는 Q를
+누르면 된다.
+* dap-debug
+dap(Debug Adapter Protocol)은 debug server와의 protocol이다. lsp와
+비슷하다. client와 server 구조로 되어 있다. code debugging을 할수
+있는게 dap-debug다. dap-debug는 entry point다. 실행할 device나
+machine을 선택한다. dap-hydra는 dap client에서 debug할 수 있는
+명령어를 나타낸다.

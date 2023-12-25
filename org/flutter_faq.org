@@ -1,6 +1,6 @@
 :PROPERTIES:
 :ID:       7B4F1354-F06D-4C26-8377-BE54809DB7C5
-:mtime:    20231025121510 20231025102546 20231024134043
+:mtime:    20231101090017 20231031185713 20231031172320 20231031161212 20231031150951 20231025121510 20231025102546 20231024134043
 :ctime:    20231024134043
 :END:
 #+title: [flutter] FAQ
@@ -85,3 +85,85 @@ git push
   set to 11.0, but the range of supported deployment target versions is
   12.0 to 17.0.99.
 #+END_SRC
+* flutter package명
+flutter로 package를 만들때, 명명 규칙이 있다. 소문자로 지어야 하고,
+-나 _를 사용한다. [[https://dart.dev/tools/pub/pubspec#name][다음]]을 참조하자. 명명규칙이 다르면 다음과 같은
+에러가 난다.
+
+#+CAPTION: package name
+#+NAME: package name
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/name1.png]]
+* color index 사용시 에러
+Colors.grey[200]같은 표현을 사용할때 에러를 만났다.
+#+CAPTION: colors error
+#+NAME: colors error
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/colors.png]]
+
+invalid constant
+value error였는데, error의 정확한 표현은 다음과 같다.
+#+BEGIN_SRC text
+[]를 사용하는 방법은 constant expression내에서 사용할 수 없다.
+#+END_SRC
+즉, 나는 const expression로 const Scaffold()를 사용했고
+backgroundColor:라는 named parameter로 Colors.grey[200]이란 값을
+사용했다. 여기서 문제가 되는것은 const로 객체를 생성하면 compile때
+객체가 만들어져서 메모리에 올라가야 한다. 그런데 인자로 받는
+Colors.grey[200]은 compile때 값이 결정되지 않고, runtime때 값이
+만들어진다. 즉 Colors.grey[1000]이라고 하면 1000번 index에 해당하는
+값이 미리 정해진게 아니라, runtime때 정해진다. 내가 궁금했던것은
+materialColor값은 이미 전역적으로 const로 선언되어 있기 때문에, const
+expression에서 사용할 수 있고, 아무 문제가 없다고 생각했던 것이다.
+
+#+CAPTION: const color
+#+NAME: const color
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/colors2.png]]
+
+
+하지만, 배열에 의한 참조는 runtime에 결정되기 때문에 const로 설정되어
+있어도 runtime때 결정된다고 한다. 나는 이부분이 이해가 안간다. 여튼
+결론은 Colors.red나 Color(0x1E1E1E1E)같은 경우는 compile때 결정되고,
+Colors.red[200]은 runtime때 결정된다고 해야 이해가 된다.
+
+이것에 대한 gpt답은 다음과 같다.
+
+#+CAPTION: const color
+#+NAME: const color
+#+attr_html: :width 400px
+#+attr_latex: :width 400px
+[[../static/img/faq/gpt1.png]]
+
+system적으로 보면, flutter에서 표현하는 color값(Colors.red,
+Color(0x1e1e1e1e))의 경우에는 그 값을 사용해서 system이 color를 만들어
+적용하는 반면에, Colors.red[200]의 경우에는 system color palette의
+200번째 항목을 runtime때 찾아가야 한다고 한다. 그래서 runtime때 그
+값이 결정된다.
+
+const와 final의 차이를 이해해야 할 필요도 있다. const expression에선
+compile때 그 계산이 완료되어야 하기 때문에, runtime때 완료되는
+expression이 올수 없기 때문이다. flutter에선 가장 흔한 const
+expression의 예로, const 생성자가 있다. 이 생성자에서는 final
+expression이 올 수없다. const와 final의 차이의 예를 들면, const sum =
+3+4는 compile때 완료된다면, final sum = 3+4는 runtime때 완료
+된다. 여기서 3+4라는 expression만 본다면, 이것은 원래 compile때
+완료되서, 명확한 const expression이다. 하지만, 그냥 예를 들어서 final
+sum = 3+4로 다뤘을 뿐이다. 위에서 colors.red[200]의 경우에는 system의
+color palette를 이용한다. compile때는 그 값을 알수없다. runtime때
+system에서 그값을 꺼내기 때문이다.
+
+* sonoma bug
+m1에서 simulator가 가끔 버벅이거나 멈추는 현상, 한글 쓰는데 문제가
+있다. sonoma 버그라고 한다. 다시 깔기로 한다. ventura로
+다운그레이드했다. 
+
+
+
+
+
+
+

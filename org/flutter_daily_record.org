@@ -1,0 +1,6 @@
+:PROPERTIES:
+:ID:       5410D555-545F-4A6E-8BD0-62C284DB4DF1
+:mtime:    20231210113602
+:ctime:    20231210113602
+:END:
+#+title: [flutter] daily record

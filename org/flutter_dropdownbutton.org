@@ -1,0 +1,56 @@
+:PROPERTIES:
+:ID:       10C29219-AA13-4909-9E66-51329DFE25D2
+:mtime:    20231121022613
+:ctime:    20231121022613
+:END:
+#+title: [flutter] dropdownButton
+* DropDownButton
+ #+begin_example
+DropdownButton<T> class
+A Material Design button for selecting from a list of items.
+
+A dropdown button lets the user select from a number of items. The
+button shows the currently selected item as well as an arrow that
+opens a menu for selecting another item.
+
+ #+end_example
+Material로 design된 button이라고 한다. list에서 item을 선택하는거라고
+한다. dropdown button은 사용자가 list의 item을 선택할 수 있게
+해준다. button은 현재 선택된 item을 보여주고, 뿐만아니라 화살표도
+보여준다고 한다. 화살표는 menu를 열어서 다른 item을 선택할 수 있게
+해준다고 한다.
+
+ #+begin_quote
+Updating to DropdownMenu There is a Material 3 version of this
+component, DropdownMenu that is preferred for applications that are
+configured for Material 3 (see ThemeData.useMaterial3). The
+DropdownMenu widget's visuals are a little bit different, see the
+Material 3 spec at m3.material.io/components/menus/guidelines for more
+details.
+
+The DropdownMenu widget's API is also slightly different. To update
+from DropdownButton to DropdownMenu, you will need to make the
+following changes:
+
+Instead of using DropdownButton.items, which takes a list of
+DropdownMenuItems, use DropdownMenu.dropdownMenuEntries, which takes a
+list of DropdownMenuEntry's.
+
+Instead of using DropdownButton.onChanged, use
+DropdownMenu.onSelected, which is also a callback that is called when
+the user selects an entry.
+
+In DropdownMenu it is not required to track the current selection in
+your app's state. So, instead of tracking the current selection in the
+DropdownButton.value property, you can set the
+DropdownMenu.initialSelection property to the item that should be
+selected before there is any user action.
+
+You may also need to make changes to the styling of the DropdownMenu,
+see the properties in the DropdownMenu constructor for more details.
+
+See the sample below for an example of migrating from DropdownButton
+ to DropdownMenu. 
+
+ #+end_quote
+

@@ -1,0 +1,23 @@
+:PROPERTIES:
+:ID:       79DC02B6-9A88-46A1-83D2-222502C2ED65
+:mtime:    20231101102049
+:ctime:    20231101102049
+:END:
+#+title: [discord] make channel
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-11-01 Wed>
+#+DESCRIPTION: make channel on discord.
+#+HUGO_DRAFT: true
+
+* discord와 slack
+discord에 대한 thread가 없어서, 아마도 이 문서에서 discord관련 내용을
+다 적을 듯 하다. discord와 slack같은것은 예전 irc, newsgroup과
+비슷하다. 이번에 discord를 사용하게 되었다.
+
+* discord의 구조
+discord에는 server가 있고 server내에 category와 channel로 구성되어 있다. 
+* server
+
+* channel과 category
+

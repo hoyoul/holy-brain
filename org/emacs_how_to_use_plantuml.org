@@ -1,0 +1,24 @@
+:PROPERTIES:
+:ID:       10BE8541-BD87-400C-8C9D-21889649B8DC
+:mtime:    20231030233152
+:ctime:    20231030233152
+:END:
+#+title: [emacs] how to use plantuml
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul@whitebrew.com
+#+DATE: <2023-10-30 Mon>
+#+DESCRIPTION: use plantuml
+#+HUGO_DRAFT: true
+* plantuml requisite
+- plantuml
+  #+BEGIN_SRC shell
+    brew install plantuml
+  #+END_SRC
+- graphviz
+  #+BEGIN_SRC shell
+    brew install graphviz
+  #+END_SRC
+- java
+  #+BEGIN_SRC shell
+    brew install openjdk
+  #+END_SRC

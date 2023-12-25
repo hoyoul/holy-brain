@@ -1,7 +1,7 @@
 +++
 title = "[design] beginning figma"
 author = ["holy"]
-description = "디자인에 대한 생각"
+description = "figma 공부"
 date = 2023-08-12T00:00:00+09:00
 draft = true
 +++
@@ -14,12 +14,6 @@ draft = true
 공부하기로 한다.
 
 
-## figma 자료를 받았을때 {#figma-자료를-받았을때}
+## 참고 {#참고}
 
-웹이나 앱으로 구현을 해야한다. 필요한 테크닉을 써보자.
-
-
-### 배경 이미지 다운로드 {#배경-이미지-다운로드}
-
-
-### 배경 color {#배경-color}
+-   [figma]({{< relref "design_first_seeing_figma_design" >}}) 디자인을 처음받았을 때 어떻게 해야하는가는 링크에 걸어놨다.

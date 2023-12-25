@@ -1,0 +1,10 @@
+:PROPERTIES:
+:ID:       33F73152-7530-4CBE-A2FF-C8E24B295DC3
+:mtime:    20231216111915
+:ctime:    20231216111915
+:END:
+#+title: [flutter] animation
+* animation 종류
+** drawing animation
+** widget animation
+

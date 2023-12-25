@@ -1,0 +1,37 @@
+:PROPERTIES:
+:ID:       87A3C2A6-88E4-4B3F-AB4C-3E03EDA7F666
+:mtime:    20231225021619 20231224225411
+:ctime:    20231224225411
+:END:
+#+title: [emacs] how to use tex on emacs tutorial5-table
+* table block
+#+BEGIN_SRC latex
+  \begin{table}
+    \begin{tabular}{lll}
+      a & b & c
+    \end{tablular}
+  \end{table}
+#+END_SRC
+위와 같이 table안에 tabular라는 block을 넣는다. tablular에선 column의
+개수를 정하는데, 그 방식이 특이하다. option에 column의 개수와
+column에서 contents의 alignment도 설정한다.
+
+아래는 3개의 column을 정의하고 각각의 column은 left align을 의미한다.
+ #+begin_src latex
+\begin{tabluar}{lll}
+\end{tabular}
+ #+end_src
+
+아래는 3개의 column을 정의하고 각각의 column은 center align되었음을
+의미한다.
+ #+begin_src latex
+\begin{tabluar}{ccc}
+\end{tabular}
+ #+end_src
+
+아래는 3개의 column으 정의하고 right align을 의미한다.
+ #+begin_src latex
+\begin{tabluar}{rrr}
+\end{tabular}
+ #+end_src
+

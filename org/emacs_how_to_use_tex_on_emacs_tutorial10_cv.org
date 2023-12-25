@@ -1,0 +1,7 @@
+:PROPERTIES:
+:ID:       5E9838BC-508E-4DF0-9057-E1A5B39D4621
+:mtime:    20231225144840
+:ctime:    20231225144840
+:END:
+#+title: [emacs] how to use tex on emacs tutorial10 cv
+* 
