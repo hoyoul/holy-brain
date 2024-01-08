@@ -1,0 +1,78 @@
+:PROPERTIES:
+:ID:       296BDD6B-F828-452A-8520-FF1DCF596F33
+:mtime:    20240101212739 20240101193542 20240101182943 20240101172924
+:ctime:    20240101172924
+:END:
+#+title: [cv] make cv on github-pages
+#+AUTHOR: hoyoul
+#+EMAIL: hoyoul.park@gmail.com
+#+DATE: <2024-01-01 Mon>
+#+DESCRIPTION: make cv pages
+#+HUGO_DRAFT: true
+* create email account
+우선 email을 만들기로 했다. email이 있어야만 github계정을 만들수 있기
+때문이다.
+ #+begin_example
+hoyoulcv@gmail.com
+ #+end_example
+* create github account
+email주소가 있으면, github계정을 만들 수 있다.
+* create repo
+hoyoulcv.github.io라는 github repo를 만들자. 여기에 html과 css,js를
+올리면 page를 hosting해준다. 이렇게 하기 위해선 몇가지 local에서
+작업이 필요하다.
+* clone repo
+위에서 만든 repo를 clone해야 한다. 그런데 clone해서 사용할때 고려해야
+할께 있다. multiple github계정을 local에서 사용한다면, 바로 clone해서
+사용할 수 없다. 아래를 참고하자.
+[[file:github_multiple_account_and_cooperate_team.org][참고]]
+** ssh key 생성
+multiple account github계정을 local에서 이미 사용하고 있던, 사용할
+계획이라면 ssh를 사용해서 public key와 private key를 만들어야
+한다. 다음과 같이 ssh key를 만들자.
+
+ #+begin_example
+ssh-keygen -t ed25519 -C "hoyoulcv@gmail.com" -f ~/.ssh/id_hoyoulcv
+ #+end_example
+
+ 위와 같은 명령어를 치고 enter enter를 누르면, .ssh/폴더에 public
+ key와 private key가 만들어진다. 여기서 public key를 github에 등록해야
+ 한다.
+** public key 등록
+#+CAPTION: register public key
+#+NAME: register public key
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/register_publickey1.png]]
+** config 설정
+~/.ssh/config를 열어서 계정을 등록한다.
+#+CAPTION: config
+#+NAME: config
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/config.png]]
+** clone
+이제서야 clone할 수 있게 되었다. github에 연결한다. clone할려는
+repo에서 ssh를 선택한다.
+#+CAPTION: clone1
+#+NAME: clone1
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/gitclone1.png]]
+
+여기서 한가지 더 처리해야 한다. 위에서도 말했지만, 아래처럼 해야 한다.
+#+CAPTION: postfix
+#+NAME: postfix
+#+attr_html: :width 400px
+#+attr_latex: :width 100px
+[[../static/img/github/gitclone-postfix.png]]
+** .gitconfig설정
+위와 같이 하면 clone은 문제없이 되지만, commit을 만들고 push할때
+사용되는 email과 user name정보가 default값을 갖게 된다. 이것을
+변경하려면 ~/.gitconfig에서 수정해야 한다. 하지만, 내경우는 그냥
+cv하나 만드는거라서 default를 사용하려고 한다.
+
+* 작업 시작
+clone한 폴더로 들어가서 html과 css를 만들고 commit을 만들고 push하면
+된다.
+

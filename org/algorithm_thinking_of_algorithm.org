@@ -1,0 +1,87 @@
+:PROPERTIES:
+:ID:       F109481F-7C30-4DEF-AFE6-BD8336DC9AB5
+:mtime:    20240106101112 20240105110448 20240104203943 20240104135628 20240104124723 20240103183826 20240103164557 20240103141051 20240103112731
+:ctime:    20240103112731
+:END:
+#+title: [algorithm] thinking of algorithm
+
+* problem and solving
+what is problem and what is solving? what is algorithm? problem과
+solution 그리고 algorithm은 turing이 나오기전까진 모호한
+단어였다. turing은 computation으로 이 term들을 새롭게 정의한다.
+* what is computation?
+computation은 mapping이라고 말할 수 있다. 수학적으로 mapping은
+relation과 function의 두 종류로 표현할 수 있다. 그리고 입력과 출력을
+갖는다. function은 determined하고, relation은 non-determined하다. 예를
+들어보자. f(x) = 2x라는 function이 있다면, 이 function은 table로
+나타낼 수 있다.
+| x    | 1 | 2 | 3 | 4 | ... |
+| f(x) | 2 | 4 | 6 | 8 | ... |
+
+
+* what is algorithm
+우리는 매번 문제와 직면한다.그런 문제를 푸는 것은 수학적,논리적으로
+푼다. 이 푸는 방식을 알고리즘이라고 한다. 알고리즘은 단일한 하나의
+계산으로 이루어지지 않는다. 즉,수학에서 primitive한 calculation인
+사칙연산이나, logic에서 and or not 으로 된 atomic한 computation unit
+rule(axiom)으로 문제를 해결할 수 없다. 생각을 해봐라. 우리는 단순한
+문제도 computations를 해야 한다. 한번의 computation을 하지
+않는다. 예를 들어보자. 아주 간단한 rule이 있다고 하자. +다. 여기에 1과
+같은 number를 집어넣어서 우리가 마주치는 문제를 해결하는 경우는 거의
+없다.
+
+ #+begin_example
+ x+3
+ #+end_example
+즉 위와같은 계산 한번으로 문제가 해결되지 않는다.  우리가 마주치는
+ 문제는 대부분은 computations다. 즉 여러번의 computation이 동원된다.
+
+ #+begin_example
+ x*(x+3)
+ #+end_example
+이런식이다.
+절차형으로 쓰면 다음과 같다.
+
+ #+begin_example
+ y = x+3;
+ z = x*y;
+ #+end_example
+
+이렇게 step by step으로 문제를 해결한다. 이것은 turing의 논문에서
+유래된 automata theory로도 설명이 가능하다. computability를 설명하는
+과정에서 나온 automata에서는 y,z는 일종의 노드가 된다. 뭐 여튼 lambda
+function하나가 하나의 machine으로 볼수 있기 때문에 이런계산을 위와
+같이 절차형으로 기술하지 않고 함수형으로 기술해도 동일한
+것이다. 맨처음 수학식이 함수형방식이다. lisp으로 표현한다면, 다음과
+같이 쓸수도 있다.
+
+ #+begin_example
+(* x (+ x 3))
+ #+end_example
+중요한건 algorithm은 단일 계산이 아니라 여러개의 계산이고, 각각의
+계산은 순서가 있다는 것이다. 순서에 따라 이전 계산결과가 지금의 계산에
+영향을 줄 수 있다.
+
+
+
+여러번의 computation을 통해서 답을 얻는다. 알고리즘은 그런 여러번의
+computation을 step by step으로 진행하는 것을 의미한다. 또한 위에서도
+얘기했듯이, 알고리즘을 기술하는것은 절차지향적으로도 함수형으로도 기술
+할 수 있다.
+* computability
+tractability라는 말이 있다. 우리가 어떤 알고리즘에 의해서 결과를
+도출했다면, 그 결과가 true임을 확인하는 과정이 필요하다. 그것은 역으로
+tracking해서 도달하는 시작점이 true임을 밝히면 된다. 그것이
+proof이다. 그런데 intractability라는 말이 있다. 참인지 거짓인지 알수
+없는 결과가 있다.
+
+we can
+solve problem using algorithm. what is algorithm? one of my friends
+think of algorithm as arithmatic calculation. However, it has a little
+difference. Arithematic calculation is determined function and only
+one calculation. Algorithm is not only one computation like
+arithematic calculation and also has undetermined situation. It
+depends on type of problem. Anyway, Algorithm usually use computations step by step. At every step it can come across undetermined
+situation. so it uses case statement as like if, switch, etc. and also
+use for-loop.
+
